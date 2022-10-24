@@ -26,7 +26,19 @@ public class Check
     }
     return false;
   }
-
-
-
+  
+  /**
+   * Frank Step 37.
+   * @param it Iterable<String>
+   * @param s String 
+   * @return true or false
+   */
+  public static boolean forContains(final Iterable<String> it, final String s) {
+	  for (String word : it) {
+		  if (word.equals(s)) {
+			  return true;
+		  }
+	  }
+	  return false;
+  }
 }
