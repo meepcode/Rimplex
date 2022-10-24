@@ -12,12 +12,11 @@ class CheckTest
   @Test
   void forContainsTest()
   {
-    String[] haystack = {"Horse","Cow","Dog","Cat"};
+    String[] haystack = {"Horse", "Cow", "Dog", "Cat"};
     assertTrue(Check.forContains(haystack, "Horse"));
     assertTrue(Check.forContains(haystack, "Cow"));
     assertTrue(Check.forContains(haystack, "Dog"));
     assertTrue(Check.forContains(haystack, "Cat"));
-    
     assertFalse(Check.forContains(haystack, "Aardvark"));
 
     assertFalse(Check.forContains(haystack, "HORSE"));
@@ -35,5 +34,6 @@ class CheckTest
   void forContainsTest_null()
   {
     assertFalse(Check.forContains(null, "Aardvark"));
+    assertNull(Check.forContains(null, null));
   }
 }
