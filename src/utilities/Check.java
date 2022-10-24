@@ -1,5 +1,7 @@
 package utilities;
 
+import java.util.List;
+
 /**
  * A utility class that performs checks of various kinds.
  * 
@@ -25,5 +27,23 @@ public class Check
       if (haystack[i].equals(needle)) return true;
     }
     return false;
+  }
+  
+  /**
+   * Check to see if an list of String objects contains a particular
+   * String.
+   * 
+   * @param haystack  The array of String objects to search through
+   * @param s The String object to search for
+   * @return true if haystack contains needle; false otherwise
+   */
+  public static boolean forContainsIgnoresCase(List<String> haystack, String s) {
+	  if (haystack == null) return false;
+
+	    for (int i=0; i<haystack.size(); i++)
+	    {
+	      if (haystack.get(i).equalsIgnoreCase(s)) return true;
+	    }
+	    return false;
   }
 }
