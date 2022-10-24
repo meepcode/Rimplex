@@ -30,8 +30,12 @@ public class Check
   }
   
   /**
+   * Step 36
+   * 
+<<<<<<< HEAD* 
    * Check to see if an list of String objects contains a particular
    * String.
+   * 
    * 
    * @param haystack  The array of String objects to search through
    * @param s The String object to search for
@@ -45,5 +49,20 @@ public class Check
 	      if (haystack.get(i).equalsIgnoreCase(s)) return true;
 	    }
 	    return false;
+  }
+  /*
+   * Frank Step 37.
+   * @param it Iterable<String>
+   * @param s String 
+   * @return true or false
+   */
+  public static boolean forContains(final Iterable<String> it, final String s) {
+	  for (String word : it) {
+		  if (word.equals(s)) {
+			  return true;
+		  }
+	  }
+	  return false;
+//>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
   }
 }
