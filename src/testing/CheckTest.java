@@ -33,7 +33,8 @@ class CheckTest
   @Test
   void forContainsTest_null()
   {
-    assertEquals(Check.forContains(null, "Aardvark"));
-    assertEquals(Check.forContains(null, null));
+    assertFalse(Check.forContains((String[]) null, "Aardvark"));
+    assertNull(Check.forContains((String[]) null, null));
+//>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
   }
 }

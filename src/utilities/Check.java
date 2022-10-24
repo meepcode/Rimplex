@@ -4,32 +4,36 @@ import java.util.List;
 
 /**
  * A utility class that performs checks of various kinds.
- * 
+ *
  * @author Prof. David Bernstein, James Madison University
  * @version 1.0
  */
 public class Check
 {
   /**
-   * Check to see if an array of String objects contains a particular
-   * String.
-   * 
-   * @param haystack  The array of String objects to search through
-   * @param needle The String object to search for
+   * Check to see if an array of String objects contains a particular String.
+   *
+   * @param haystack
+   *     The array of String objects to search through
+   * @param needle
+   *     The String object to search for
    * @return true if haystack contains needle; false otherwise
    */
   public static boolean forContains(final String[] haystack, final String needle)
   {
-    if (haystack == null) return false;
+    if (haystack == null)
+      return false;
 
-    for (int i=0; i<haystack.length; i++)
+    for (int i = 0; i < haystack.length; i++)
     {
-      if (haystack[i].equals(needle)) return true;
+      if (haystack[i].equals(needle))
+        return true;
     }
     return false;
   }
-  
+
   /**
+<<<<<<< HEAD
 <<<<<<< HEAD
    * Step 36
    * 
@@ -58,33 +62,50 @@ public class Check
    * 
    * @param haystack  The array of String objects to search through
    * @param needle The String object to search for
+=======
+   * Check to see if an array of String objects contains a particular String.
+   *
+   * @param haystack
+   *     The array of String objects to search through
+   * @param needle
+   *     The String object to search for
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return true if haystack contains needle; false otherwise
    */
   public static boolean forContainsIgnoreCase(final String[] haystack, final String needle)
   {
-    if (haystack == null) return false;
+    if (haystack == null)
+      return false;
 
-    for (int i=0; i<haystack.length; i++)
+    for (int i = 0; i < haystack.length; i++)
     {
-      if (haystack[i].equalsIgnoreCase(needle)) return true;
+      if (haystack[i].equalsIgnoreCase(needle))
+        return true;
     }
     return false;
   }
-  
+
   /**
 >>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * Frank Step 37.
-   * @param it Iterable<String>
-   * @param s String 
+   *
+   * @param it
+   *     Iterable<String>
+   * @param s
+   *     String
    * @return true or false
    */
-  public static boolean forContains(final Iterable<String> it, final String s) {
-	  for (String word : it) {
-		  if (word.equals(s)) {
-			  return true;
-		  }
-	  }
-	  return false;
+
+  public static boolean forContains(final Iterable<String> it, final String s)
+  {
+    for (String word : it)
+    {
+      if (word.equals(s))
+      {
+        return true;
+      }
+    }
+    return false;
 //>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
   }
 }
