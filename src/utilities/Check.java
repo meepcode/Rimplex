@@ -34,7 +34,7 @@ public class Check
    * Check to see if an array of String objects contains a particular String.
    *
    * @param haystack
-   *     The array of String objects to search through
+   *     The array of String objects to search through fdsa
    * @param needle
    *     The String object to search for
    * @return true if haystack contains needle; false otherwise
