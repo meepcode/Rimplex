@@ -1,5 +1,7 @@
 package utilities;
 
+import java.util.List;
+
 /**
  * A utility class that performs checks of various kinds.
  *
@@ -31,12 +33,43 @@ public class Check
   }
 
   /**
+<<<<<<< HEAD
+<<<<<<< HEAD
+   * Step 36
+   * 
+<<<<<<< HEAD* 
+   * Check to see if an list of String objects contains a particular
+   * String.
+   * 
+   * 
+   * @param haystack  The array of String objects to search through
+   * @param s The String object to search for
+   * @return true if haystack contains needle; false otherwise
+   */
+  public static boolean forContainsIgnoresCase(List<String> haystack, String s) {
+	  if (haystack == null) return false;
+
+	    for (int i=0; i<haystack.size(); i++)
+	    {
+	      if (haystack.get(i).equalsIgnoreCase(s)) return true;
+	    }
+	    return false;
+  }
+  /*
+=======
+   * Check to see if an array of String objects contains a particular
+   * String.
+   * 
+   * @param haystack  The array of String objects to search through
+   * @param needle The String object to search for
+=======
    * Check to see if an array of String objects contains a particular String.
    *
    * @param haystack
    *     The array of String objects to search through
    * @param needle
    *     The String object to search for
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return true if haystack contains needle; false otherwise
    */
   public static boolean forContainsIgnoreCase(final String[] haystack, final String needle)
@@ -53,6 +86,7 @@ public class Check
   }
 
   /**
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * Frank Step 37.
    *
    * @param it
@@ -61,6 +95,7 @@ public class Check
    *     String
    * @return true or false
    */
+
   public static boolean forContains(final Iterable<String> it, final String s)
   {
     for (String word : it)
@@ -71,5 +106,6 @@ public class Check
       }
     }
     return false;
+//>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
   }
 }
