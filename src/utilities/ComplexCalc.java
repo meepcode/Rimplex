@@ -61,7 +61,10 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(ActionEvent e)
       {
-        // TODO
+        if (e.getSource() == resetButton)
+        {
+          textField.setText("");
+        }
       }
     });
 
@@ -70,11 +73,13 @@ public class ComplexCalc extends JFrame implements ActionListener
     buttonPanel.add(clearButton);
 
     // reset button action listener
-    resetButton.addActionListener(new ActionListener()
+    clearButton.addActionListener(new ActionListener()
     {
       public void actionPerformed(ActionEvent e)
       {
-        // TODO
+        if (e.getSource() == clearButton)
+        {
+        }
       }
     });
 
