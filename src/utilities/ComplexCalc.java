@@ -46,6 +46,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     textField.setFont(new Font("Tahoma", Font.PLAIN, 11));
     inputPanel.add(textField);
     textField.setColumns(45);
+    textField.setEditable(true);
 
     // buttons 
     JPanel buttonPanel = new JPanel();
