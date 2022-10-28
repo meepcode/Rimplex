@@ -13,6 +13,9 @@ import java.awt.event.ActionListener;
  */
 public class ComplexCalc extends JFrame implements ActionListener
 {
+  private static final long serialVersionUID = 1L;
+  // protected Shell shell;
+  private JTextField textField;
 
   /**
    * constructor.
@@ -142,15 +145,8 @@ public class ComplexCalc extends JFrame implements ActionListener
   }
 
   /**
-   * 
-   */
-  private static final long serialVersionUID = 1L;
-  // protected Shell shell;
-  private JTextField textField;
-
-  /**
    * Launch the application.
-   * 
+   *
    * @param args
    */
   public static void main(String[] args)
@@ -168,7 +164,7 @@ public class ComplexCalc extends JFrame implements ActionListener
 
   /**
    * Getter method for text field input.
-   * 
+   *
    * @return String input
    */
   public String getTextField()
