@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Scanner;
 
 /**
  * Calculator GUI.
@@ -77,9 +78,6 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(ActionEvent e)
       {
-        if (e.getSource() == clearButton)
-        {
-        }
       }
     });
 
@@ -92,7 +90,10 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(ActionEvent e)
       {
-        // TODO
+        if (e.getSource() == addButton)
+        {
+          textField.setText(textField.getText().concat("+"));
+        }
       }
     });
 
@@ -105,7 +106,10 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(ActionEvent e)
       {
-        // TODO
+        if (e.getSource() == subtractionButton)
+        {
+          textField.setText(textField.getText().concat("-"));
+        }
       }
     });
 
@@ -118,7 +122,10 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(ActionEvent e)
       {
-        // TODO
+        if (e.getSource() == multButton)
+        {
+          textField.setText(textField.getText().concat("*"));
+        }
       }
     });
 
@@ -131,7 +138,10 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(ActionEvent e)
       {
-        // TODO
+        if (e.getSource() == divideButton)
+        {
+          textField.setText(textField.getText().concat("/"));
+        }
       }
     });
 
