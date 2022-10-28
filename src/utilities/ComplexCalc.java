@@ -15,7 +15,7 @@ public class ComplexCalc extends JFrame implements ActionListener
 {
 
   /**
-   * constructor
+   * constructor.
    */
   public ComplexCalc()
   {
@@ -44,6 +44,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     inputPanel.add(textField);
     textField.setColumns(45);
 
+    // buttons 
     JPanel buttonPanel = new JPanel();
     getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
@@ -51,29 +52,92 @@ public class ComplexCalc extends JFrame implements ActionListener
     resetButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(resetButton);
 
+    // reset button action listener
+    resetButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
+
     JButton clearButton = new JButton("C");
     clearButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(clearButton);
+
+    // reset button action listener
+    resetButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
 
     JButton addButton = new JButton("+");
     addButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(addButton);
 
+    // add button action listener
+    addButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
+
     JButton subtractionButton = new JButton("-");
     subtractionButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(subtractionButton);
+
+    // subtraction button action listener
+    subtractionButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
 
     JButton multButton = new JButton("x");
     multButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(multButton);
 
+    // multiplication button action listener
+    multButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
+
     JButton divideButton = new JButton("/");
     divideButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(divideButton);
 
+    // divide button action listener
+    divideButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
+
     JButton equalsButton = new JButton("=");
     equalsButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(equalsButton);
+
+    // equals button action listener
+    equalsButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
 
   }
 
@@ -101,8 +165,14 @@ public class ComplexCalc extends JFrame implements ActionListener
     // TODO Auto-generated method stub
 
   }
-  
-  public String getTextField() {
-	  return this.textField.getText();
+
+  /**
+   * Getter method for text field input.
+   * 
+   * @return String input
+   */
+  public String getTextField()
+  {
+    return this.textField.getText();
   }
 }
