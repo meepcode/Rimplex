@@ -14,6 +14,9 @@ import java.awt.event.ActionListener;
 public class ComplexCalc extends JFrame implements ActionListener
 {
 
+  // attributes
+  private String input;
+
   /**
    * constructor
    */
@@ -44,28 +47,77 @@ public class ComplexCalc extends JFrame implements ActionListener
     inputPanel.add(textField);
     textField.setColumns(45);
 
+    // input
+    input = textField.getText();
+
     JPanel buttonPanel = new JPanel();
     getContentPane().add(buttonPanel, BorderLayout.SOUTH);
+
+    // ----------------------------------
 
     JButton resetButton = new JButton("R");
     resetButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(resetButton);
 
+    // reset button action listener
+    resetButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
+
+    // ----------------------------------
+
     JButton clearButton = new JButton("C");
     clearButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(clearButton);
+
+    // clear button action listener
+    clearButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
+
+    // -----------------------------------
 
     JButton addButton = new JButton("+");
     addButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(addButton);
 
+    // add button action listener
+    addButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
+    
+    // -----------------------------------
+
     JButton subtractionButton = new JButton("-");
     subtractionButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(subtractionButton);
+    
+ // subtract button action listener
+    subtractionButton.addActionListener(new ActionListener() { 
+      public void actionPerformed(ActionEvent e) { 
+        // TODO
+      } 
+    } );
+    
+    // ------------------------------------
 
     JButton multButton = new JButton("x");
     multButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(multButton);
+    
+    
 
     JButton divideButton = new JButton("/");
     divideButton.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -75,6 +127,16 @@ public class ComplexCalc extends JFrame implements ActionListener
     equalsButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(equalsButton);
 
+  }
+
+  /**
+   * Getter for input.
+   * 
+   * @return String
+   */
+  public String getInput()
+  {
+    return input;
   }
 
   /**
