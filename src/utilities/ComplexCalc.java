@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.util.Scanner;
 
 /**
@@ -49,6 +51,34 @@ public class ComplexCalc extends JFrame implements ActionListener
     textField.setColumns(45);
     textField.setEditable(true);
 
+    textField.addKeyListener(new KeyListener()
+    {
+
+      String text = textField.getText();
+
+      @Override
+      public void keyTyped(KeyEvent e)
+      {
+        if (e.getKeyChar() == 'i')
+        {
+          text = text.replace("i", "I");
+          textField.setText(text);
+        }
+      }
+
+      @Override
+      public void keyPressed(KeyEvent e)
+      {
+
+      }
+
+      @Override
+      public void keyReleased(KeyEvent e)
+      {
+
+      }
+    });
+
     // buttons 
     JPanel buttonPanel = new JPanel();
     getContentPane().add(buttonPanel, BorderLayout.SOUTH);
@@ -73,9 +103,46 @@ public class ComplexCalc extends JFrame implements ActionListener
     clearButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(clearButton);
 
+    clearButton.addKeyListener(new KeyListener()
+    {
+      String nums = "0123456789";
+
+      @Override
+      public void keyTyped(KeyEvent e)
+      {
+        String text = textField.getText();
+        if (nums.contains(Character.toString(e.getKeyChar())))
+        {
+          clearButton.setEnabled(true);
+        }
+      }
+
+      @Override
+      public void keyPressed(KeyEvent e)
+      {
+
+      }
+
+      @Override
+      public void keyReleased(KeyEvent e)
+      {
+
+      }
+    });
+
     // reset button action listener
     clearButton.addActionListener(new ActionListener()
     {
+      String nums = "0123456789";
+
+      public void keyTyped(KeyEvent e)
+      {
+        String text = textField.getText();
+        if (nums.contains(Character.toString(e.getKeyChar())))
+        {
+          clearButton.setEnabled(true);
+        }
+      }
       public void actionPerformed(ActionEvent e)
       {
         if (e.getSource() == clearButton)
@@ -91,6 +158,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           }
           str = str.replace(operand, "");
           textField.setText(str);
+          clearButton.setEnabled(false);
         }
       }
     });
@@ -200,5 +268,20 @@ public class ComplexCalc extends JFrame implements ActionListener
   public String getTextField()
   {
     return this.textField.getText();
+  }
+
+  public void keyTyped(KeyEvent e)
+  {
+
+  }
+
+  public void keyPressed(KeyEvent e)
+  {
+
+  }
+
+  public void keyReleased(KeyEvent e)
+  {
+
   }
 }
