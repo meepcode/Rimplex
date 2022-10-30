@@ -78,6 +78,17 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(ActionEvent e)
       {
+        if (e.getSource() == clearButton)
+        {
+          String str = textField.getText();
+          Scanner scan = new Scanner(str);
+          while (scan.hasNext())
+          {
+            str = scan.next();
+          }
+          str = str.replace(str, "");
+          textField.setText(str);
+        }
       }
     });
 
