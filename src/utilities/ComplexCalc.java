@@ -80,13 +80,16 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         if (e.getSource() == clearButton)
         {
+          String operand = "";
           String str = textField.getText();
           Scanner scan = new Scanner(str);
+          scan.useDelimiter("[/*+-]");
           while (scan.hasNext())
           {
-            str = scan.next();
+            operand = scan.next();
+
           }
-          str = str.replace(str, "");
+          str = str.replace(operand, "");
           textField.setText(str);
         }
       }
