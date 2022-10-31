@@ -63,7 +63,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(ActionEvent e)
       {
         // TODO
-        
+    	  textField.setText("");
       }
     });
 
@@ -77,7 +77,6 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(ActionEvent e)
       {
         // TODO
-        textField.setText("");
       }
     });
 
@@ -91,7 +90,8 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(ActionEvent e)
       {
         // TODO
-        
+    	  finalExpression.concat("(" + getTextField() + ") +");
+          textArea.setText(finalExpression);
       }
     });
 
@@ -105,6 +105,8 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(ActionEvent e)
       {
         // TODO
+    	  finalExpression.concat("(" + getTextField() + ") -");
+          textArea.setText(finalExpression);
       }
     });
 
@@ -135,7 +137,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(ActionEvent e)
       {
         // TODO
-        finalExpression.concat("(" + getTextField() + ") \"");
+        finalExpression.concat("(" + getTextField() + ") /");
         textArea.setText(finalExpression);
       }
     });
@@ -158,7 +160,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   /**
    * Launch the application.
    *
-   * @param args
+   * @param args String array
    */
   public static void main(String[] args)
   {
@@ -184,8 +186,8 @@ public class ComplexCalc extends JFrame implements ActionListener
   }
   
   /**
-   * getter method for final expression.
-   * @return string expression
+   * Getter method for final expression.
+   * @return String expression
    */
   public String getExpression() {
     return finalExpression;
