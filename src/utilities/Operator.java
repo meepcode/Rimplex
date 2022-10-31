@@ -52,7 +52,7 @@ public enum Operator implements Evaluatable
    *     the given token
    * @return the operator
    */
-  public Operator fromString(final String token)
+  public static Operator fromString(final String token)
   {
     return null;
   }
