@@ -8,7 +8,6 @@ package utilities;
  */
 public class Calculate
 {
-  private static final String PLUS = " + ";
   
   /**
    * Adds two complex numbers.
@@ -16,11 +15,11 @@ public class Calculate
    * @param op2 Second operand.
    * @return The resulting complex number.
    */
-  public static String add(final ComplexNumber op1, final ComplexNumber op2)
+  public static ComplexNumber add(final ComplexNumber op1, final ComplexNumber op2)
   {
     Double realResult = op1.getReal() + op2.getReal();
     Double imaginaryResult = op1.getImaginary() + op2.getImaginary();
-    return realResult + PLUS + imaginaryResult;
+    return new ComplexNumber(realResult, imaginaryResult);  
   }
   
   /**
@@ -29,11 +28,11 @@ public class Calculate
    * @param op2 Second operand.
    * @return The resulting complex number.
    */
-  public static String subtract(final ComplexNumber op1, final ComplexNumber op2)
+  public static ComplexNumber subtract(final ComplexNumber op1, final ComplexNumber op2)
   {
     Double realResult = op1.getReal() - op2.getReal();
     Double imaginaryResult = op1.getImaginary() - op2.getImaginary();
-    return realResult + PLUS + imaginaryResult;
+    return new ComplexNumber(realResult, imaginaryResult);
   }
   
   /**
@@ -42,9 +41,13 @@ public class Calculate
    * @param op2 Second operand.
    * @return The resulting complex number.
    */
-  public static String multiply(final ComplexNumber op1, final ComplexNumber op2)
-  {
-    return null;
+  public static ComplexNumber multiply(final ComplexNumber op1, final ComplexNumber op2)
+  {    
+    Double realResult = op1.getReal() * op2.getReal() - op1.getReal() * op2.getReal();
+    Double imaginaryResult = op1.getReal() * op2.getImaginary() 
+        + op1.getImaginary() * op2.getReal();
+
+    return new ComplexNumber(realResult, imaginaryResult);
   }
   
   /**
@@ -53,8 +56,15 @@ public class Calculate
    * @param op2 Second operand.
    * @return The resulting complex number.
    */
-  public static String divide(final ComplexNumber op1, final ComplexNumber op2)
+  public static ComplexNumber divide(final ComplexNumber op1, final ComplexNumber op2)
   {
-    return null;
+    // For op1 / op2
+    // Both numerator and divisor have to be multiplied by divisior
+    ComplexNumber numerator = multiply(op1, op2);
+    ComplexNumber denominator = multiply(op2, op2);
+    // This should result in a complex number of the form a + bi / a + bi
+    Double realResult = numerator.getReal() / denominator.getReal();
+    Double imaginaryResult = numerator.getImaginary() / denominator.getImaginary();
+    return new ComplexNumber(realResult, imaginaryResult);
   }
 }

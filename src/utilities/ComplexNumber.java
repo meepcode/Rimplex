@@ -19,10 +19,10 @@ public class ComplexNumber
    * Default constructor.
    * @param input String from user input.
    */
-  public ComplexNumber(final String input) 
+  public ComplexNumber(Double realPart, Double imaginaryPart) 
   {
-    realPart = 0.0;
-    imaginaryPart = 0.0;
+    this.realPart = realPart;
+    this.imaginaryPart = imaginaryPart;
   }
   
   /**
@@ -50,7 +50,7 @@ public class ComplexNumber
   public String toString()
   {
     if (imaginaryPart < 0) 
-      return realPart + " - " + imaginaryPart + I;
+      return realPart + " - " + Math.abs(imaginaryPart) + I;
     else
       return realPart + " + " + imaginaryPart + I;
   }
