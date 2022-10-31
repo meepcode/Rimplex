@@ -28,6 +28,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     setResizable(false);
     setTitle("Complex Calculator");
     getContentPane().setLayout(new BorderLayout(0, 0));
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     JPanel displayPanel = new JPanel();
     getContentPane().add(displayPanel, BorderLayout.NORTH);
