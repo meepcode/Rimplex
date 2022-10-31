@@ -13,12 +13,12 @@ import java.awt.event.ActionListener;
  */
 public class ComplexCalc extends JFrame implements ActionListener
 {
-
-  // attributes
-  private String input;
+  private static final long serialVersionUID = 1L;
+  // protected Shell shell;
+  private JTextField textField;
 
   /**
-   * constructor
+   * constructor.
    */
   public ComplexCalc()
   {
@@ -47,13 +47,9 @@ public class ComplexCalc extends JFrame implements ActionListener
     inputPanel.add(textField);
     textField.setColumns(45);
 
-    // input
-    input = textField.getText();
-
+    // buttons 
     JPanel buttonPanel = new JPanel();
     getContentPane().add(buttonPanel, BorderLayout.SOUTH);
-
-    // ----------------------------------
 
     JButton resetButton = new JButton("R");
     resetButton.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -68,22 +64,18 @@ public class ComplexCalc extends JFrame implements ActionListener
       }
     });
 
-    // ----------------------------------
-
     JButton clearButton = new JButton("C");
     clearButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(clearButton);
 
-    // clear button action listener
-    clearButton.addActionListener(new ActionListener()
+    // reset button action listener
+    resetButton.addActionListener(new ActionListener()
     {
       public void actionPerformed(ActionEvent e)
       {
         // TODO
       }
     });
-
-    // -----------------------------------
 
     JButton addButton = new JButton("+");
     addButton.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -98,13 +90,11 @@ public class ComplexCalc extends JFrame implements ActionListener
       }
     });
 
-    // -----------------------------------
-
     JButton subtractionButton = new JButton("-");
     subtractionButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(subtractionButton);
 
-    // subtract button action listener
+    // subtraction button action listener
     subtractionButton.addActionListener(new ActionListener()
     {
       public void actionPerformed(ActionEvent e)
@@ -113,13 +103,11 @@ public class ComplexCalc extends JFrame implements ActionListener
       }
     });
 
-    // ------------------------------------
-
     JButton multButton = new JButton("x");
     multButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(multButton);
 
-    // mult button action listener
+    // multiplication button action listener
     multButton.addActionListener(new ActionListener()
     {
       public void actionPerformed(ActionEvent e)
@@ -127,8 +115,6 @@ public class ComplexCalc extends JFrame implements ActionListener
         // TODO
       }
     });
-
-    // ------------------------------------
 
     JButton divideButton = new JButton("/");
     divideButton.setFont(new Font("Tahoma", Font.BOLD, 20));
@@ -143,8 +129,6 @@ public class ComplexCalc extends JFrame implements ActionListener
       }
     });
 
-    // ------------------------------------
-
     JButton equalsButton = new JButton("=");
     equalsButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(equalsButton);
@@ -158,20 +142,11 @@ public class ComplexCalc extends JFrame implements ActionListener
       }
     });
 
-    // ------------------------------------
-
   }
 
   /**
-   * 
-   */
-  private static final long serialVersionUID = 1L;
-  // protected Shell shell;
-  private JTextField textField;
-
-  /**
    * Launch the application.
-   * 
+   *
    * @param args
    */
   public static void main(String[] args)
@@ -188,9 +163,9 @@ public class ComplexCalc extends JFrame implements ActionListener
   }
 
   /**
-   * Getter for text field input.
-   * 
-   * @return String
+   * Getter method for text field input.
+   *
+   * @return String input
    */
   public String getTextField()
   {

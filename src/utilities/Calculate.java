@@ -16,11 +16,11 @@ public class Calculate
    * @param op2
    * @return string.
    */
-  public static String add(final ComplexNumber op1, final ComplexNumber op2)
+  public static ComplexNumber add(final ComplexNumber op1, final ComplexNumber op2)
   {
     int realResult = op1.getReal() + op2.getReal();
     int imaginaryResult = op1.getImaginary() + op2.getImaginary();
-    return realResult + PLUS + imaginaryResult;
+    return new ComplexNumber(realResult, imaginaryResult);
   }
   
   /**
@@ -29,11 +29,11 @@ public class Calculate
    * @param op2
    * @return string
    */
-  public static String subtract(final ComplexNumber op1, final ComplexNumber op2)
+  public static ComplexNumber subtract(final ComplexNumber op1, final ComplexNumber op2)
   {
     int realResult = op1.getReal() - op2.getReal();
     int imaginaryResult = op1.getImaginary() - op2.getImaginary();
-    return realResult + PLUS + imaginaryResult;
+    return new ComplexNumber(realResult, imaginaryResult);
   }
   
   /**
@@ -42,7 +42,7 @@ public class Calculate
    * @param op2
    * @return a string
    */
-  public static String multiply(final ComplexNumber op1, final ComplexNumber op2)
+  public static ComplexNumber multiply(final ComplexNumber op1, final ComplexNumber op2)
   {
     return null;
   }
@@ -51,7 +51,7 @@ public class Calculate
    * Divide.
    * @return a string
    */
-  public static String divide()
+  public static ComplexNumber divide(final ComplexNumber op1, final ComplexNumber op2)
   {
     return null;
   }
