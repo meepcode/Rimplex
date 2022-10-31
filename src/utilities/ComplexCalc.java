@@ -97,46 +97,69 @@ public class ComplexCalc extends JFrame implements ActionListener
         // TODO
       }
     });
-    
+
     // -----------------------------------
 
     JButton subtractionButton = new JButton("-");
     subtractionButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(subtractionButton);
-    
- // subtract button action listener
-    subtractionButton.addActionListener(new ActionListener() { 
-      public void actionPerformed(ActionEvent e) { 
+
+    // subtract button action listener
+    subtractionButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
         // TODO
-      } 
-    } );
-    
+      }
+    });
+
     // ------------------------------------
 
     JButton multButton = new JButton("x");
     multButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(multButton);
-    
-    
+
+    // mult button action listener
+    multButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
+
+    // ------------------------------------
 
     JButton divideButton = new JButton("/");
     divideButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(divideButton);
 
+    // divide button action listener
+    divideButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
+
+    // ------------------------------------
+
     JButton equalsButton = new JButton("=");
     equalsButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(equalsButton);
 
-  }
+    // equals button action listener
+    equalsButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
 
-  /**
-   * Getter for input.
-   * 
-   * @return String
-   */
-  public String getInput()
-  {
-    return input;
+    // ------------------------------------
+
   }
 
   /**
@@ -163,8 +186,14 @@ public class ComplexCalc extends JFrame implements ActionListener
     // TODO Auto-generated method stub
 
   }
-  
-  public String getTextField() {
-	  return this.textField.getText();
+
+  /**
+   * Getter for text field input.
+   * 
+   * @return String
+   */
+  public String getTextField()
+  {
+    return this.textField.getText();
   }
 }
