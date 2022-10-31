@@ -16,6 +16,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   private static final long serialVersionUID = 1L;
   // protected Shell shell;
   private JTextField textField;
+  private String finalExpression = "";
 
   /**
    * constructor.
@@ -61,6 +62,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(ActionEvent e)
       {
         // TODO
+        
       }
     });
 
@@ -68,12 +70,13 @@ public class ComplexCalc extends JFrame implements ActionListener
     clearButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(clearButton);
 
-    // reset button action listener
-    resetButton.addActionListener(new ActionListener()
+    // clear button action listener
+    clearButton.addActionListener(new ActionListener()
     {
       public void actionPerformed(ActionEvent e)
       {
         // TODO
+        textField.setText("");
       }
     });
 
@@ -87,6 +90,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(ActionEvent e)
       {
         // TODO
+        
       }
     });
 
@@ -113,6 +117,9 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(ActionEvent e)
       {
         // TODO
+        // textArea.setText("(" + getTextField() + ") x");
+        
+        //textArea.setFont(new Font("Tohoma", Font.BOLD, 15));
       }
     });
 
@@ -170,5 +177,13 @@ public class ComplexCalc extends JFrame implements ActionListener
   public String getTextField()
   {
     return this.textField.getText();
+  }
+  
+  /**
+   * getter method for final expression.
+   * @return string expression
+   */
+  public String getExpression() {
+    return finalExpression;
   }
 }
