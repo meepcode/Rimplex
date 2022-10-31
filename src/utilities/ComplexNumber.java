@@ -1,12 +1,14 @@
 package utilities;
 
+import java.util.Deque;
+
 /**
  * Complex number.
  *
  * @author TeamD
  * @version 11/4/22 This work complies with the JMU Honor Code.
  */
-public class ComplexNumber
+public class ComplexNumber implements Evaluatable
 {
   private static String I = "i";
   
@@ -14,37 +16,44 @@ public class ComplexNumber
   // Ex. 3 + 2i would save 3 to realPart and 2 to imaginaryPart.
   private Double realPart;
   private Double imaginaryPart;
-  
+
   /**
-   * Default constructor.
-   * @param input String from user input.
+   * Constructor from floating point numbers.
+   *
+   * @param real
+   *     the real part of the complex number
+   * @param imaginary
+   *     the imaginary part of the complex number
    */
-  public ComplexNumber(Double realPart, Double imaginaryPart) 
+  public ComplexNumber(final Double realPart, final Double imaginaryPart) 
   {
     this.realPart = realPart;
     this.imaginaryPart = imaginaryPart;
   }
-  
+
   /**
    * Gets the real number part of a complex number.
+   *
    * @return real number.
    */
   public Double getReal()
   {
     return realPart;
   }
-  
+
   /**
    * Gets the imaginary number part of a complex number.
+   *
    * @return real number.
    */
   public Double getImaginary()
   {
     return imaginaryPart;
   }
-  
+
   /**
    * To String.
+   *
    * @return String representation of complex number.
    */
   public String toString()
@@ -53,5 +62,10 @@ public class ComplexNumber
       return realPart + " - " + Math.abs(imaginaryPart) + I;
     else
       return realPart + " + " + imaginaryPart + I;
+  }
+
+  @Override public ComplexNumber evaluate(final Deque<Evaluatable> expression)
+  {
+    return null;
   }
 }

@@ -13,9 +13,12 @@ import java.awt.event.ActionListener;
  */
 public class ComplexCalc extends JFrame implements ActionListener
 {
+  private static final long serialVersionUID = 1L;
+  // protected Shell shell;
+  private JTextField textField;
 
   /**
-   * constructor
+   * constructor.
    */
   public ComplexCalc()
   {
@@ -44,6 +47,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     inputPanel.add(textField);
     textField.setColumns(45);
 
+    // buttons 
     JPanel buttonPanel = new JPanel();
     getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
@@ -51,42 +55,98 @@ public class ComplexCalc extends JFrame implements ActionListener
     resetButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(resetButton);
 
+    // reset button action listener
+    resetButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
+
     JButton clearButton = new JButton("C");
     clearButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(clearButton);
+
+    // reset button action listener
+    resetButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
 
     JButton addButton = new JButton("+");
     addButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(addButton);
 
+    // add button action listener
+    addButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
+
     JButton subtractionButton = new JButton("-");
     subtractionButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(subtractionButton);
+
+    // subtraction button action listener
+    subtractionButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
 
     JButton multButton = new JButton("x");
     multButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(multButton);
 
+    // multiplication button action listener
+    multButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
+
     JButton divideButton = new JButton("/");
     divideButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(divideButton);
+
+    // divide button action listener
+    divideButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
 
     JButton equalsButton = new JButton("=");
     equalsButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(equalsButton);
 
+    // equals button action listener
+    equalsButton.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+        // TODO
+      }
+    });
+
   }
 
   /**
-   * 
-   */
-  private static final long serialVersionUID = 1L;
-  // protected Shell shell;
-  private JTextField textField;
-
-  /**
    * Launch the application.
-   * 
+   *
    * @param args
    */
   public static void main(String[] args)
@@ -102,57 +162,13 @@ public class ComplexCalc extends JFrame implements ActionListener
 
   }
 
-  // public class ComplexCalc extends JDialog
-  // {
-  //
-  // /**
-  // * Constructor.
-  // */
-  // public ComplexCalc()
-  // {
-  // super();
-  // setupLayout();
-  // }
-  //
-  // /**
-  // * @param args
-  // * String array
-  // */
-  // public static void main(final String[] args)
-  // {
-  // ComplexCalc gui = new ComplexCalc();
-  // }
-  //
-  // /**
-  // * Helper method.
-  // */
-  // public void setupLayout()
-  // {
-  //
-  // // size of calculator
-  // setSize(350, 200);
-  //
-  // Container contentPane;
-  // contentPane = getContentPane();
-  // contentPane.setLayout(new BorderLayout());
-  //
-  // // make panel to hold operator buttons
-  // JPanel p = new JPanel();
-  // p.setLayout(new GridLayout(1, 2));
-  // add(p, BorderLayout.SOUTH);
-  // JPanel operators = new JPanel();
-  //
-  // // adding buttons to panel
-  // operators.add(new JButton("R")); // reset
-  // operators.add(new JButton("C")); // clear
-  // operators.add(new JButton("+")); // addition
-  // operators.add(new JButton("-")); // subtraction
-  // operators.add(new JButton("x")); // multiplication
-  // operators.add(new JButton("/")); // division
-  // operators.add(new JButton("=")); // equals
-  // operators.setLayout((new FlowLayout(FlowLayout.TRAILING)));
-  // p.add(operators);
-  //
-  // setVisible(true);
-  // }
+  /**
+   * Getter method for text field input.
+   *
+   * @return String input
+   */
+  public String getTextField()
+  {
+    return this.textField.getText();
+  }
 }
