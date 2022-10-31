@@ -1,12 +1,14 @@
 package utilities;
 
+import java.util.Deque;
+
 /**
  * Complex number.
  *
  * @author TeamD
  * @version 11/4/22 This work complies with the JMU Honor Code.
  */
-public class ComplexNumber
+public class ComplexNumber implements Evaluatable
 {
   int real;
   int imaginary;
@@ -51,6 +53,11 @@ public class ComplexNumber
    * @return String representation of complex number.
    */
   public String toString()
+  {
+    return null;
+  }
+
+  @Override public ComplexNumber evaluate(final Deque<Evaluatable> expression)
   {
     return null;
   }
