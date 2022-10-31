@@ -1,6 +1,5 @@
 package utilities;
 
-import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.regex.Pattern;
 
@@ -40,22 +39,14 @@ public class Parse
       throw new IllegalFormatExpressionException(expressionStr + " is not properly formatted");
     }
 
-    String[] tokens = expressionStr.split("[(\\\\)]");
-    Deque<Evaluatable> expression = new ArrayDeque<>();
-
-    for (int i = 0; i < tokens.length; i++)
-    {
-      if (i % 2 == 0)
-      {
-        expression.push(parseComplexNumber(tokens[i]));
-      }
-      else
-      {
-        expression.push(Operator.fromString(tokens[i]));
-      }
-    }
+    Deque<Evaluatable> expression = parseExpressionString(expressionStr);
 
     return expression.pop().evaluate(expression);
+  }
+
+  private static Deque<Evaluatable> parseExpressionString(final String expressionStr)
+  {
+    return null;
   }
 
   private static ComplexNumber parseComplexNumber(final String token)
