@@ -16,6 +16,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   private static final long serialVersionUID = 1L;
   // protected Shell shell;
   private JTextField textField;
+  private String finalExpression = "";
 
   /**
    * constructor.
@@ -27,6 +28,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     setResizable(false);
     setTitle("Complex Calculator");
     getContentPane().setLayout(new BorderLayout(0, 0));
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     JPanel displayPanel = new JPanel();
     getContentPane().add(displayPanel, BorderLayout.NORTH);
@@ -61,6 +63,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(ActionEvent e)
       {
         // TODO
+        
       }
     });
 
@@ -68,12 +71,13 @@ public class ComplexCalc extends JFrame implements ActionListener
     clearButton.setFont(new Font("Tahoma", Font.BOLD, 20));
     buttonPanel.add(clearButton);
 
-    // reset button action listener
-    resetButton.addActionListener(new ActionListener()
+    // clear button action listener
+    clearButton.addActionListener(new ActionListener()
     {
       public void actionPerformed(ActionEvent e)
       {
         // TODO
+        textField.setText("");
       }
     });
 
@@ -87,6 +91,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(ActionEvent e)
       {
         // TODO
+        
       }
     });
 
@@ -113,6 +118,10 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(ActionEvent e)
       {
         // TODO
+        finalExpression.concat("(" + getTextField() + ") x");
+        textArea.setText(finalExpression);
+        
+        //textArea.setFont(new Font("Tohoma", Font.BOLD, 15));
       }
     });
 
@@ -126,6 +135,8 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(ActionEvent e)
       {
         // TODO
+        finalExpression.concat("(" + getTextField() + ") \"");
+        textArea.setText(finalExpression);
       }
     });
 
@@ -170,5 +181,13 @@ public class ComplexCalc extends JFrame implements ActionListener
   public String getTextField()
   {
     return this.textField.getText();
+  }
+  
+  /**
+   * getter method for final expression.
+   * @return string expression
+   */
+  public String getExpression() {
+    return finalExpression;
   }
 }
