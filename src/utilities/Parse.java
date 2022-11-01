@@ -38,7 +38,8 @@ public class Parse
   {
     String newExpressionStr = expressionStr.replaceAll(WHITESPACE_REGEX, "");
 
-    StringBuilder regex = new StringBuilder("(\\((-?[0-9]+\\.?[0-9]*([+\\-])[0-9]+\\.?[0-9]*i)\\)*([");
+    StringBuilder regex = new StringBuilder(
+        "(\\((-?[0-9]+\\.?[0-9]*([+\\-])[0-9]+\\.?[0-9]*i)\\)*([");
     Operator[] operators = Operator.operators();
     for (int i = 0; i < operators.length; i++)
     {
@@ -97,7 +98,7 @@ public class Parse
 
   private static Evaluatable parseToken(final String token)
   {
-    Evaluatable result = null;
+    Evaluatable result;
     if (Operator.fromString(token) != null)
     {
       result = Operator.fromString(token);
