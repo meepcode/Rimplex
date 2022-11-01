@@ -41,6 +41,10 @@ public enum Operator implements Evaluatable
     return null;
   }
 
+  /**
+   * Gets an array of all the operators.
+   * @return an array of all the operators
+   */
   public static Operator[] operators()
   {
     return new Operator[] {ADD, SUBTRACT, MULTIPLY, DIVIDE};
