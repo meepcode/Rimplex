@@ -43,7 +43,7 @@ public class Calculate
    */
   public static ComplexNumber multiply(final ComplexNumber op1, final ComplexNumber op2)
   {    
-    Double realResult = op1.getReal() * op2.getReal() - op1.getReal() * op2.getReal();
+    Double realResult = op1.getReal() * op2.getReal() - op1.getImaginary() * op2.getImaginary();
     Double imaginaryResult = op1.getReal() * op2.getImaginary() 
         + op1.getImaginary() * op2.getReal();
 
