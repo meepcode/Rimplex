@@ -20,7 +20,8 @@ public class Parse
    */
   public static boolean isValidOperand(final String operand)
   {
-    return Pattern.matches("-?[0-9]+([+\\-])[0-9]+i", operand);
+    String newOperand = operand.replaceAll(WHITESPACE_REGEX, "");
+    return Pattern.matches("-?[0-9]+\\.?[0-9]*([+\\-])[0-9]+\\.?[0-9]*i", newOperand);
   }
 
   /**
@@ -35,7 +36,10 @@ public class Parse
   public static ComplexNumber evaluateExpression(final String expressionStr)
       throws IllegalFormatExpressionException
   {
-    StringBuilder regex = new StringBuilder("(\\((-?[0-9]+([+\\-])[0-9]+i)\\)\\s*([");
+    String newExpressionStr = expressionStr.replaceAll(WHITESPACE_REGEX, "");
+
+    StringBuilder regex = new StringBuilder(
+        "(\\((-?[0-9]+\\.?[0-9]*([+\\-])[0-9]+\\.?[0-9]*i)\\)*([");
     Operator[] operators = Operator.operators();
     for (int i = 0; i < operators.length; i++)
     {
@@ -45,14 +49,14 @@ public class Parse
         regex.append("\\");
       }
     }
-    regex.append("]))*\\s*(\\(-?[0-9]+([+\\-])[0-9]+i\\))");
+    regex.append("]))(\\(-?[0-9]+\\.?[0-9]*([+\\-])[0-9]+\\.?[0-9]*i\\))");
 
-    if (!Pattern.matches(regex.toString(), expressionStr))
+    if (!Pattern.matches(regex.toString(), newExpressionStr))
     {
       throw new IllegalFormatExpressionException(expressionStr + " is not properly formatted");
     }
 
-    Deque<Evaluatable> expression = parseExpression(expressionStr);
+    Deque<Evaluatable> expression = parseExpression(newExpressionStr);
 
     return expression.pop().evaluate(expression);
   }
@@ -94,7 +98,7 @@ public class Parse
 
   private static Evaluatable parseToken(final String token)
   {
-    Evaluatable result = null;
+    Evaluatable result;
     if (Operator.fromString(token) != null)
     {
       result = Operator.fromString(token);
@@ -102,10 +106,8 @@ public class Parse
     else if (isValidOperand(token))
     {
       String[] complexNumber = token.split("(?=[+\\-])");
-      result = new ComplexNumber(
-          Double.parseDouble(complexNumber[0].replaceAll(WHITESPACE_REGEX, "")), Double.parseDouble(
-          complexNumber[1].substring(0, complexNumber[1].length() - 1)
-              .replaceAll(WHITESPACE_REGEX, "")));
+      result = new ComplexNumber(Double.parseDouble(complexNumber[0]),
+          Double.parseDouble(complexNumber[1].substring(0, complexNumber[1].length() - 1)));
     }
     else
     {
