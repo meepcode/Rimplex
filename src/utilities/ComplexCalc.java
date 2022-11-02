@@ -10,6 +10,7 @@ import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * Calculator GUI.
@@ -22,7 +23,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   private static final long serialVersionUID = 1L;
   // protected Shell shell;
   private final JTextField textField;
-  private final String finalExpression = "";
+  private String finalExpression = "";
   private final String tahoma = "Tahoma";
 
   /**
@@ -97,8 +98,9 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(final ActionEvent e)
       {
         // TODO
-        finalExpression.concat('(' + getTextField() + ") +");
+        finalExpression += ('(' + getTextField() + ") + ");
         textArea.setText(finalExpression);
+        textField.setText("");
       }
     });
 
@@ -114,6 +116,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         // TODO
         finalExpression.concat('(' + getTextField() + ") -");
         textArea.setText(finalExpression);
+        textField.setText("");
       }
     });
 
@@ -129,6 +132,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         // TODO
         finalExpression.concat('(' + getTextField() + ") x");
         textArea.setText(finalExpression);
+        textField.setText("");
 
         //textArea.setFont(new Font("Tohoma", Font.BOLD, 15));
       }
@@ -146,6 +150,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         // TODO
         finalExpression.concat("(" + getTextField() + ") /");
         textArea.setText(finalExpression);
+        textField.setText("");
       }
     });
 
@@ -159,8 +164,11 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(final ActionEvent e)
       {
         // TODO
-    	  finalExpression.concat("=");
-          textArea.setText(finalExpression);
+        finalExpression += ("(" + getTextField() + ")");
+        ComplexNumber result = Parse.evaluateExpression(finalExpression);
+    	  finalExpression += " = " + result.toString();
+        textArea.setText(finalExpression);
+        textField.setText("");
       }
     });
 
