@@ -3,10 +3,8 @@ package testing;
 import org.junit.jupiter.api.Test;
 import utilities.Calculate;
 import utilities.ComplexNumber;
-import utilities.Parse;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static utilities.Parse.evaluateExpression;
 
 /**
@@ -20,8 +18,14 @@ public class ParseTest
         Calculate.multiply(new ComplexNumber(5.0, 6.0), new ComplexNumber(3.0, -7.0)).toString());
   }
 
+  @Test void divideTest()
+  {
+    assertEquals(new ComplexNumber(1.0, 0.0),
+        Calculate.divide(new ComplexNumber(1.0, 1.0), new ComplexNumber(1.0, 1.0)));
+  }
+
   @Test void parsePemdasTest()
   {
-    assertNull(evaluateExpression("(5+2i)+(6+3i)*(7+4i)"));
+    assertEquals(new ComplexNumber(35.0, 47.0), evaluateExpression("(5+2i)+(6+3i)*(7+4i)"));
   }
 }
