@@ -68,4 +68,11 @@ public class ComplexNumber implements Evaluatable
   {
     return this;
   }
+  
+  public boolean equals(final ComplexNumber other)
+  {
+    return (this.getReal() == other.getReal() 
+        && this.getImaginary() == other.getImaginary());
+  }
+
 }
