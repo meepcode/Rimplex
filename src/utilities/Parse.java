@@ -49,7 +49,7 @@ public class Parse
         regex.append("\\");
       }
     }
-    regex.append("]))(\\(-?[0-9]+\\.?[0-9]*([+\\-])[0-9]+\\.?[0-9]*i\\))");
+    regex.append("]))*(\\(-?[0-9]+\\.?[0-9]*([+\\-])[0-9]+\\.?[0-9]*i\\))");
 
     if (!Pattern.matches(regex.toString(), newExpressionStr))
     {
