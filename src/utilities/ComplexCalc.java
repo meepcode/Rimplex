@@ -166,7 +166,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         // TODO
         finalExpression += ("(" + getTextField() + ")");
         ComplexNumber result = Parse.evaluateExpression(finalExpression);
-    	  finalExpression += " = " + result.toString();
+    	  finalExpression += "= " + result.toString();
         textArea.setText(finalExpression);
         textField.setText("");
       }
