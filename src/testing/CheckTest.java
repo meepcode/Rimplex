@@ -1,16 +1,16 @@
 package testing;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
-
 import utilities.Check;
+
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class CheckTest
 {
 
-  @Test
-  void forContainsTest()
+  @Test void forContainsTest()
   {
     String[] haystack = {"Horse", "Cow", "Dog", "Cat"};
     assertTrue(Check.forContains(haystack, "Horse"));
@@ -23,18 +23,15 @@ class CheckTest
     assertFalse(Check.forContains(haystack, "COW"));
   }
 
-  @Test
-  void forContainsTest_empty()
+  @Test void forContainsTest_empty()
   {
     String[] haystack = {};
     assertFalse(Check.forContains(haystack, "Aardvark"));
   }
 
-  @Test
-  void forContainsTest_null()
+  @Test void forContainsTest_null()
   {
     assertFalse(Check.forContains((String[]) null, "Aardvark"));
     assertNull(Check.forContains((String[]) null, null));
-//>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
   }
 }
