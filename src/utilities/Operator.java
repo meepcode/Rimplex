@@ -21,14 +21,45 @@ public enum Operator implements Evaluatable
     this.calculation = calculation;
   }
 
+  /**
+   * Returns the operator associated with the given token.
+   *
+   * @param token
+   *     the given token
+   * @return the operator
+   */
+  public static Operator fromString(final String token)
+  {
+    for (Operator operator : operators())
+    {
+      if (token.equals(operator.token))
+      {
+        return operator;
+      }
+    }
+
+    return null;
+  }
+
+  /**
+   * Gets an array of all the operators.
+   * @return an array of all the operators
+   */
+  public static Operator[] operators()
+  {
+    return new Operator[] {ADD, SUBTRACT, MULTIPLY, DIVIDE};
+  }
+
   @Override public ComplexNumber evaluate(final Deque<Evaluatable> expression)
   {
-    return calculation.calculate(expression.pop().evaluate(expression),
-        expression.pop().evaluate(expression));
+    ComplexNumber right = expression.pop().evaluate(expression);
+    ComplexNumber left = expression.pop().evaluate(expression);
+    return calculation.calculate(left, right);
   }
 
   /**
    * Returns the string representation of this operator.
+   *
    * @return the string representation of this operator
    */
   public String toString()
@@ -38,22 +69,11 @@ public enum Operator implements Evaluatable
 
   /**
    * Returns the precedence of this operator.
+   *
    * @return the precedence
    */
   public int getPrecedence()
   {
     return precedence;
-  }
-
-  /**
-   * Returns the operator associated with the given token.
-   *
-   * @param token
-   *     the given token
-   * @return the operator
-   */
-  public Operator fromString(final String token)
-  {
-    return null;
   }
 }

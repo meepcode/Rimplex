@@ -1,12 +1,15 @@
 package utilities;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.util.Scanner;
 
 /**
  * Calculator GUI.
@@ -18,7 +21,9 @@ public class ComplexCalc extends JFrame implements ActionListener
 {
   private static final long serialVersionUID = 1L;
   // protected Shell shell;
-  private JTextField textField;
+  private final JTextField textField;
+  private final String finalExpression = "";
+  private final String tahoma = "Tahoma";
 
   /**
    * constructor.
@@ -30,6 +35,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     setResizable(false);
     setTitle("Complex Calculator");
     getContentPane().setLayout(new BorderLayout(0, 0));
+    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
     JPanel displayPanel = new JPanel();
     getContentPane().add(displayPanel, BorderLayout.NORTH);
@@ -46,195 +52,111 @@ public class ComplexCalc extends JFrame implements ActionListener
 
     textField = new JTextField();
     textField.setHorizontalAlignment(SwingConstants.RIGHT);
-    textField.setFont(new Font("Tahoma", Font.PLAIN, 11));
+    textField.setFont(new Font(tahoma, Font.PLAIN, 11));
     inputPanel.add(textField);
     textField.setColumns(45);
-    textField.setEditable(true);
-
-    textField.addKeyListener(new KeyListener()
-    {
-
-      String text = textField.getText();
-
-      @Override
-      public void keyTyped(KeyEvent e)
-      {
-        if (e.getKeyChar() == 'i')
-        {
-          text = text.replace("i", "I");
-          textField.setText(text);
-        }
-      }
-
-      @Override
-      public void keyPressed(KeyEvent e)
-      {
-
-      }
-
-      @Override
-      public void keyReleased(KeyEvent e)
-      {
-
-      }
-    });
 
     // buttons 
     JPanel buttonPanel = new JPanel();
     getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
     JButton resetButton = new JButton("R");
-    resetButton.setFont(new Font("Tahoma", Font.BOLD, 20));
+    resetButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(resetButton);
 
     // reset button action listener
     resetButton.addActionListener(new ActionListener()
     {
-      public void actionPerformed(ActionEvent e)
+      public void actionPerformed(final ActionEvent e)
       {
-        if (e.getSource() == resetButton)
-        {
-          textField.setText("");
-        }
+        // TODO
+        textField.setText("");
       }
     });
 
     JButton clearButton = new JButton("C");
-    clearButton.setFont(new Font("Tahoma", Font.BOLD, 20));
+    clearButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(clearButton);
 
-    clearButton.addKeyListener(new KeyListener()
-    {
-      String nums = "0123456789";
-
-      @Override
-      public void keyTyped(KeyEvent e)
-      {
-        String text = textField.getText();
-        if (nums.contains(Character.toString(e.getKeyChar())))
-        {
-          clearButton.setEnabled(true);
-        }
-      }
-
-      @Override
-      public void keyPressed(KeyEvent e)
-      {
-
-      }
-
-      @Override
-      public void keyReleased(KeyEvent e)
-      {
-
-      }
-    });
-
-    // reset button action listener
+    // clear button action listener
     clearButton.addActionListener(new ActionListener()
     {
-      String nums = "0123456789";
-
-      public void keyTyped(KeyEvent e)
+      public void actionPerformed(final ActionEvent e)
       {
-        String text = textField.getText();
-        if (nums.contains(Character.toString(e.getKeyChar())))
-        {
-          clearButton.setEnabled(true);
-        }
-      }
-      public void actionPerformed(ActionEvent e)
-      {
-        if (e.getSource() == clearButton)
-        {
-          String operand = "";
-          String str = textField.getText();
-          Scanner scan = new Scanner(str);
-          scan.useDelimiter("[/*+-]");
-          while (scan.hasNext())
-          {
-            operand = scan.next();
-
-          }
-          str = str.replace(operand, "");
-          textField.setText(str);
-          clearButton.setEnabled(false);
-        }
+        // TODO
       }
     });
 
     JButton addButton = new JButton("+");
-    addButton.setFont(new Font("Tahoma", Font.BOLD, 20));
+    addButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(addButton);
 
     // add button action listener
     addButton.addActionListener(new ActionListener()
     {
-      public void actionPerformed(ActionEvent e)
+      public void actionPerformed(final ActionEvent e)
       {
-        if (e.getSource() == addButton)
-        {
-          textField.setText(textField.getText().concat("+"));
-        }
+        // TODO
+        finalExpression.concat('(' + getTextField() + ") +");
+        textArea.setText(finalExpression);
       }
     });
 
     JButton subtractionButton = new JButton("-");
-    subtractionButton.setFont(new Font("Tahoma", Font.BOLD, 20));
+    subtractionButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(subtractionButton);
 
     // subtraction button action listener
     subtractionButton.addActionListener(new ActionListener()
     {
-      public void actionPerformed(ActionEvent e)
+      public void actionPerformed(final ActionEvent e)
       {
-        if (e.getSource() == subtractionButton)
-        {
-          textField.setText(textField.getText().concat("-"));
-        }
+        // TODO
+        finalExpression.concat('(' + getTextField() + ") -");
+        textArea.setText(finalExpression);
       }
     });
 
     JButton multButton = new JButton("x");
-    multButton.setFont(new Font("Tahoma", Font.BOLD, 20));
+    multButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(multButton);
 
     // multiplication button action listener
     multButton.addActionListener(new ActionListener()
     {
-      public void actionPerformed(ActionEvent e)
+      public void actionPerformed(final ActionEvent e)
       {
-        if (e.getSource() == multButton)
-        {
-          textField.setText(textField.getText().concat("*"));
-        }
+        // TODO
+        finalExpression.concat('(' + getTextField() + ") x");
+        textArea.setText(finalExpression);
+
+        //textArea.setFont(new Font("Tohoma", Font.BOLD, 15));
       }
     });
 
     JButton divideButton = new JButton("/");
-    divideButton.setFont(new Font("Tahoma", Font.BOLD, 20));
+    divideButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(divideButton);
 
     // divide button action listener
     divideButton.addActionListener(new ActionListener()
     {
-      public void actionPerformed(ActionEvent e)
+      public void actionPerformed(final ActionEvent e)
       {
-        if (e.getSource() == divideButton)
-        {
-          textField.setText(textField.getText().concat("/"));
-        }
+        // TODO
+        finalExpression.concat("(" + getTextField() + ") /");
+        textArea.setText(finalExpression);
       }
     });
 
     JButton equalsButton = new JButton("=");
-    equalsButton.setFont(new Font("Tahoma", Font.BOLD, 20));
+    equalsButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(equalsButton);
 
     // equals button action listener
     equalsButton.addActionListener(new ActionListener()
     {
-      public void actionPerformed(ActionEvent e)
+      public void actionPerformed(final ActionEvent e)
       {
         // TODO
       }
@@ -246,15 +168,15 @@ public class ComplexCalc extends JFrame implements ActionListener
    * Launch the application.
    *
    * @param args
+   *     String array
    */
-  public static void main(String[] args)
+  public static void main(final String[] args)
   {
     ComplexCalc window = new ComplexCalc();
     window.setVisible(true);
   }
 
-  @Override
-  public void actionPerformed(ActionEvent e)
+  @Override public void actionPerformed(final ActionEvent e)
   {
     // TODO Auto-generated method stub
 
@@ -270,18 +192,13 @@ public class ComplexCalc extends JFrame implements ActionListener
     return this.textField.getText();
   }
 
-  public void keyTyped(KeyEvent e)
+  /**
+   * Getter method for final expression.
+   *
+   * @return String expression
+   */
+  public String getExpression()
   {
-
-  }
-
-  public void keyPressed(KeyEvent e)
-  {
-
-  }
-
-  public void keyReleased(KeyEvent e)
-  {
-
+    return finalExpression;
   }
 }

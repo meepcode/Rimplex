@@ -10,21 +10,25 @@ import java.util.Deque;
  */
 public class ComplexNumber implements Evaluatable
 {
-  int real;
-  int imaginary;
+  private static String I = "i";
+
+  // These will be integers representing the parts of a complex number.
+  // Ex. 3 + 2i would save 3 to realPart and 2 to imaginaryPart.
+  private Double realPart;
+  private Double imaginaryPart;
 
   /**
    * Constructor from floating point numbers.
    *
-   * @param real
+   * @param realPart
    *     the real part of the complex number
-   * @param imaginary
+   * @param imaginaryPart
    *     the imaginary part of the complex number
    */
-  public ComplexNumber(final int real, final int imaginary)
+  public ComplexNumber(final Double realPart, final Double imaginaryPart)
   {
-    this.real = real;
-    this.imaginary = imaginary;
+    this.realPart = realPart;
+    this.imaginaryPart = imaginaryPart;
   }
 
   /**
@@ -32,9 +36,9 @@ public class ComplexNumber implements Evaluatable
    *
    * @return real number.
    */
-  public int getReal()
+  public Double getReal()
   {
-    return real;
+    return realPart;
   }
 
   /**
@@ -42,9 +46,9 @@ public class ComplexNumber implements Evaluatable
    *
    * @return real number.
    */
-  public int getImaginary()
+  public Double getImaginary()
   {
-    return imaginary;
+    return imaginaryPart;
   }
 
   /**
@@ -54,11 +58,14 @@ public class ComplexNumber implements Evaluatable
    */
   public String toString()
   {
-    return null;
+    if (imaginaryPart < 0)
+      return realPart + "-" + Math.abs(imaginaryPart) + I;
+    else
+      return realPart + "+" + imaginaryPart + I;
   }
 
   @Override public ComplexNumber evaluate(final Deque<Evaluatable> expression)
   {
-    return null;
+    return this;
   }
 }
