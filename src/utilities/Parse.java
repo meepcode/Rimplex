@@ -20,8 +20,7 @@ public class Parse
    */
   public static boolean isValidOperand(final String operand)
   {
-    String newOperand = operand.replaceAll(WHITESPACE_REGEX, "");
-    return Pattern.matches("-?[0-9]+\\.?[0-9]*([+\\-])[0-9]+\\.?[0-9]*i", newOperand);
+    return Pattern.matches("-?[0-9]+\\.?[0-9]*\\s*([+\\-])\\s*[0-9]+\\.?[0-9]*i", operand);
   }
 
   /**
