@@ -59,9 +59,10 @@ public class Calculate
   public static ComplexNumber divide(final ComplexNumber op1, final ComplexNumber op2)
   {
     // For op1 / op2
-    // Both numerator and divisor have to be multiplied by divisior
-    ComplexNumber numerator = multiply(op1, op2);
-    ComplexNumber denominator = multiply(op2, op2);
+    // Both numerator and divisor have to be multiplied by the divisior's reciprocal
+    ComplexNumber reciprocal = new ComplexNumber(op2.getReal(), op2.getImaginary() * -1);
+    ComplexNumber numerator = multiply(op1, reciprocal);
+    ComplexNumber denominator = multiply(op2, reciprocal);
     // This should result in a complex number of the form a + bi / a + bi
     Double realResult = numerator.getReal() / denominator.getReal();
     Double imaginaryResult = numerator.getImaginary() / denominator.getImaginary();
