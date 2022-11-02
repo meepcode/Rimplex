@@ -71,6 +71,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(final ActionEvent e)
       {
         // TODO
+        textArea.setText("");
         textField.setText("");
       }
     });
@@ -85,6 +86,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(final ActionEvent e)
       {
         // TODO
+        textField.setText("");
       }
     });
 
@@ -133,8 +135,6 @@ public class ComplexCalc extends JFrame implements ActionListener
         finalExpression.concat('(' + getTextField() + ") x");
         textArea.setText(finalExpression);
         textField.setText("");
-
-        //textArea.setFont(new Font("Tohoma", Font.BOLD, 15));
       }
     });
 
