@@ -12,7 +12,7 @@ public class ComplexNumber implements Evaluatable
 {
   private static String I = "i";
 
-  // These will be integers representing the parts of a complex number.
+  // These will be doubles representing the parts of a complex number.
   // Ex. 3 + 2i would save 3 to realPart and 2 to imaginaryPart.
   private Double realPart;
   private Double imaginaryPart;
@@ -68,4 +68,17 @@ public class ComplexNumber implements Evaluatable
   {
     return this;
   }
+  
+  public boolean equals(final Object other)
+  {
+    ComplexNumber op2 = null;
+    if (other instanceof ComplexNumber) {
+      op2 = (ComplexNumber) other;
+      return (this.getReal() == op2.getReal() 
+          && this.getImaginary() == op2.getImaginary());
+    }
+    return false;
+    
+  }
+
 }

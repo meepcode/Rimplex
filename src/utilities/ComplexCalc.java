@@ -159,6 +159,8 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(final ActionEvent e)
       {
         // TODO
+    	  finalExpression.concat("=");
+          textArea.setText(finalExpression);
       }
     });
 
