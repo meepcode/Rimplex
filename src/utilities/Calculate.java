@@ -65,17 +65,21 @@ public class Calculate
     ComplexNumber denominator = multiply(op2, reciprocal);
     // This should result in a complex number of the form a + bi / a + bi
     Double realResult = null;
-    if (denominator.getReal() == 0.0) { // Avoid zero division error
+    if (denominator.getReal() == 0.0) // Avoid zero division error
+    { 
       realResult = numerator.getReal();
-    } else {
+    } else 
+    {
       realResult = numerator.getReal() / denominator.getReal();
     }
     
     Double imaginaryResult = null;
 
-    if (denominator.getImaginary() == 0.0) { // Avoid zero division error
+    if (denominator.getImaginary() == 0.0) // Avoid zero division error
+    { 
       imaginaryResult = numerator.getImaginary();
-    } else {
+    } else 
+    {
       imaginaryResult = numerator.getImaginary() / denominator.getImaginary();
     }
     return new ComplexNumber(realResult, imaginaryResult);

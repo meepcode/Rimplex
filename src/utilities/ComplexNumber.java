@@ -68,13 +68,23 @@ public class ComplexNumber implements Evaluatable
       return realPart + "+" + imaginaryPart + I;
     }
   }
-
+  
+  /**
+   * Evaluates a complex number.
+   * @param expression an Expression
+   * @return this complex number
+   */
   @Override public ComplexNumber evaluate(final Deque<Evaluatable> expression)
   {
     return this;
   }
 
-  public boolean equals(final Object other)
+  /**
+   * Compares two complex numbers.
+   * @param other complex number to compare.
+   * @return true if same complex numbers.
+   */
+  @Override public boolean equals(final Object other)
   {
     ComplexNumber op2 = null;
     if (other instanceof ComplexNumber)
@@ -84,7 +94,17 @@ public class ComplexNumber implements Evaluatable
           op2.getImaginary()));
     }
     return false;
-
   }
+  
+  /**
+   * Gets the hashcode.
+   * @return hashcode.
+   */
+  @Override
+  public int hashCode() 
+  {
+    return this.hashCode();
+  }
+  
 
 }
