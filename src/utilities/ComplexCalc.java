@@ -1,16 +1,9 @@
 package utilities;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import java.awt.BorderLayout;
-import java.awt.Font;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
 
 /**
  * Calculator GUI.
@@ -23,8 +16,8 @@ public class ComplexCalc extends JFrame implements ActionListener
   private static final long serialVersionUID = 1L;
   // protected Shell shell;
   private final JTextField textField;
-  private String finalExpression = "";
   private final String tahoma = "Tahoma";
+  private String finalExpression = "";
 
   /**
    * constructor.
@@ -71,8 +64,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(final ActionEvent e)
       {
         // TODO
-    	finalExpression = "";
-        textArea.setText(finalExpression);
+        textArea.setText("");
         textField.setText("");
       }
     });
@@ -85,9 +77,8 @@ public class ComplexCalc extends JFrame implements ActionListener
     clearButton.addActionListener(new ActionListener()
     {
       public void actionPerformed(final ActionEvent e)
-      {
-        // TODO
-          textField.setText("");
+      {// TODO
+        textField.setText("");
       }
     });
 
@@ -164,12 +155,19 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
-        // TODO
-        finalExpression += ("(" + getTextField() + ")");
-        ComplexNumber result = Parse.evaluateExpression(finalExpression);
-    	  finalExpression += " = " + result.toString();
-        textArea.setText(finalExpression);
-        textField.setText("");
+        try
+        {
+          finalExpression += ("(" + getTextField() + ")");
+          ComplexNumber result = Parse.evaluateExpression(finalExpression);
+          finalExpression += " = " + result.toString();
+          textArea.setText(finalExpression);
+          textField.setText("");
+        }
+        catch (Exception exception)
+        {
+          JOptionPane.showMessageDialog(null, "Invalid expression");
+        }
+
       }
     });
 
@@ -187,7 +185,8 @@ public class ComplexCalc extends JFrame implements ActionListener
     window.setVisible(true);
   }
 
-  @Override public void actionPerformed(final ActionEvent e)
+  @Override
+  public void actionPerformed(final ActionEvent e)
   {
     // TODO Auto-generated method stub
 
