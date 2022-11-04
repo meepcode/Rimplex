@@ -1,7 +1,14 @@
 package utilities;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.SwingConstants;
+import java.awt.BorderLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -157,13 +164,21 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         try
         {
-          finalExpression += ("(" + getTextField() + ")");
-          ComplexNumber result = Parse.evaluateExpression(finalExpression);
-          finalExpression += " = " + result.toString();
-          textArea.setText(finalExpression);
-          textField.setText("");
+          String operand = getTextField();
+          if (Parse.isValidOperand(operand))
+          {
+            finalExpression += ("(" + getTextField() + ")");
+            ComplexNumber result = Parse.evaluateExpression(finalExpression);
+            finalExpression += " = " + result.toString();
+            textArea.setText(finalExpression);
+            textField.setText("");
+          }
+          else
+          {
+            JOptionPane.showMessageDialog(null, "Invalid operand");
+          }
         }
-        catch (Exception exception)
+        catch (IllegalFormatExpressionException exception)
         {
           JOptionPane.showMessageDialog(null, "Invalid expression");
         }
@@ -185,8 +200,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     window.setVisible(true);
   }
 
-  @Override
-  public void actionPerformed(final ActionEvent e)
+  @Override public void actionPerformed(final ActionEvent e)
   {
     // TODO Auto-generated method stub
 
