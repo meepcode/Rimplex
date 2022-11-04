@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 package testing;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -27,3 +28,36 @@ class CalculateTest
   }
 
 }
+=======
+package testing;
+
+import org.junit.jupiter.api.Test;
+
+class CalculateTest
+{
+
+  @Test
+  void addTest()
+  {
+
+  }
+
+  @Test
+  void subtractTest()
+  {
+
+  }
+
+  @Test
+  void multiplyTest()
+  {
+
+  }
+
+  @Test
+  void divideTest()
+  {
+
+  }
+}
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD

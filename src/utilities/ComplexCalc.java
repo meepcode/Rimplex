@@ -69,7 +69,13 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
+<<<<<<< HEAD
         // TODO
+=======
+        equalsPressed = false;
+        finalExpression = "";
+        textArea.setText("");
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         textField.setText("");
       }
     });
