@@ -73,6 +73,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
+        // update
         equalsPressed = false;
         finalExpression = "";
         textArea.setText("");
