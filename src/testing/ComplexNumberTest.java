@@ -54,7 +54,7 @@ class ComplexNumberTest
     assertEquals(sTest, test.toString());
     String sTest1 = String.format("%f+%fi", real1, imag1);
     assertEquals(sTest1, test1.toString());
-    // shouldnt be accounting for negative imaginary parts and should throw an error but doesnt
+    // should not be accounting for negative imaginary parts and should throw an error but doesnt
     // String sNegI = String.format("%.1f-%.1fi", real1, imagN);
     // assertEquals(sNegI, negI.toString());
   }
