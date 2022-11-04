@@ -9,7 +9,7 @@ import utilities.ComplexNumber;
 class ComplexNumberTest
 {
   // even odd
-  // test
+  
   private final double real = 3.0;
   private final double imag = 2.0;
   // odd odd
