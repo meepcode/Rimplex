@@ -25,6 +25,8 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final JTextField textField;
   private final String tahoma = "Tahoma";
   private String finalExpression = "";
+  private boolean equalsPressed = false;
+  private ComplexNumber result = null;
 
   /**
    * constructor.
@@ -100,9 +102,16 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         if (Parse.isValidOperand(getTextField()))
         {
-          finalExpression += ('(' + getTextField() + ") + ");
+        if (equalsPressed) {
+          finalExpression = "(" + result.toString() + ") + ";
           textArea.setText(finalExpression);
           textField.setText("");
+          equalsPressed = false;
+        } else {
+          finalExpression += ("(" + getTextField() + ") + ");
+          textArea.setText(finalExpression);
+          textField.setText("");
+        }
         }
         else
         {
@@ -122,9 +131,16 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         if (Parse.isValidOperand(getTextField()))
         {
-          finalExpression += ('(' + getTextField() + ") - ");
-          textArea.setText(finalExpression);
-          textField.setText("");
+          if (equalsPressed) {
+            finalExpression = "(" + result.toString() + ") - ";
+            textArea.setText(finalExpression);
+            textField.setText("");
+            equalsPressed = false;
+          } else {
+            finalExpression += ("(" + getTextField() + ") - ");
+            textArea.setText(finalExpression);
+            textField.setText("");
+          }
         }
         else
         {
@@ -133,7 +149,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       }
     });
 
-    JButton multButton = new JButton("x");
+    JButton multButton = new JButton("*");
     multButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(multButton);
 
@@ -144,9 +160,16 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         if (Parse.isValidOperand(getTextField()))
         {
-          finalExpression += ('(' + getTextField() + ") * ");
-          textArea.setText(finalExpression);
-          textField.setText("");
+          if (equalsPressed) {
+            finalExpression = "(" + result.toString() + ") * ";
+            textArea.setText(finalExpression);
+            textField.setText("");
+            equalsPressed = false;
+          } else {
+            finalExpression += ("(" + getTextField() + ") * ");
+            textArea.setText(finalExpression);
+            textField.setText("");
+          }
         }
         else
         {
@@ -166,9 +189,18 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         if (Parse.isValidOperand(getTextField()))
         {
-          finalExpression += ("(" + getTextField() + ") / ");
-          textArea.setText(finalExpression);
-          textField.setText("");
+          
+          // running expression
+          if (equalsPressed) {
+            finalExpression = "(" + result.toString() + ") / ";
+            textArea.setText(finalExpression);
+            textField.setText("");
+            equalsPressed = false;
+          } else {
+            finalExpression += ("(" + getTextField() + ") / ");
+            textArea.setText(finalExpression);
+            textField.setText("");
+          }
         }
         else
         {
@@ -192,10 +224,11 @@ public class ComplexCalc extends JFrame implements ActionListener
           if (Parse.isValidOperand(operand))
           {
             finalExpression += ("(" + getTextField() + ")");
-            ComplexNumber result = Parse.evaluateExpression(finalExpression);
+            result = Parse.evaluateExpression(finalExpression);
             finalExpression += " = " + result.toString();
             textArea.setText(finalExpression);
             textField.setText("");
+            equalsPressed = true;
           }
           else
           {
