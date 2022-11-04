@@ -9,6 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import java.awt.BorderLayout;
 import java.awt.Font;
+import java.awt.TextArea;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -100,8 +101,8 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
-        // if (Parse.isValidOperand(getTextField()))
-        // {
+        
+        // running calculations
         if (equalsPressed)
         {
           finalExpression = "(" + result.toString() + ") + ";
@@ -111,15 +112,19 @@ public class ComplexCalc extends JFrame implements ActionListener
         }
         else
         {
+          if (Parse.isValidOperand(getTextField()))
+          {
+          // start calculation
           finalExpression += ("(" + getTextField() + ") + ");
           textArea.setText(finalExpression);
           textField.setText("");
+          }
+          else
+          {
+          JOptionPane.showMessageDialog(null, "Invalid operand");
+          }
         }
-        // }
-        // else
-        // {
-        // JOptionPane.showMessageDialog(null, "Invalid operand");
-        // }
+        
       }
     });
 
@@ -295,4 +300,5 @@ public class ComplexCalc extends JFrame implements ActionListener
   {
     return finalExpression;
   }
+  
 }
