@@ -69,7 +69,7 @@ public class ComplexNumber implements Evaluatable
   {
     return this;
   }
-
+  
   public boolean equals(final Object other)
   {
     ComplexNumber op2 = null;
