@@ -96,7 +96,7 @@ public class Parse
   }
 
   /**
-   * Parses the given token into an Evaluatable that can be acted on
+   * Parses the given token into an Evaluatable that can be acted on.
    *
    * @param token the token to parse
    * @return the Evaluatable representation of this token
