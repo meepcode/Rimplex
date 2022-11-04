@@ -2,6 +2,7 @@ package utilities;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -22,8 +23,10 @@ public class ComplexCalc extends JFrame implements ActionListener
   private static final long serialVersionUID = 1L;
   // protected Shell shell;
   private final JTextField textField;
-  private final String finalExpression = "";
+  private String finalExpression = "";
   private final String tahoma = "Tahoma";
+  private boolean equalsPressed = false;
+  private ComplexNumber result = null;
 
   /**
    * constructor.
@@ -69,13 +72,9 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
-<<<<<<< HEAD
-        // TODO
-=======
         equalsPressed = false;
         finalExpression = "";
         textArea.setText("");
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         textField.setText("");
       }
     });
