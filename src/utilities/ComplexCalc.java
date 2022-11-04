@@ -59,7 +59,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     inputPanel.add(textField);
     textField.setColumns(45);
 
-    // buttons 
+    // buttons
     JPanel buttonPanel = new JPanel();
     getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
@@ -100,23 +100,26 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
-        if (Parse.isValidOperand(getTextField()))
+        // if (Parse.isValidOperand(getTextField()))
+        // {
+        if (equalsPressed)
         {
-        if (equalsPressed) {
           finalExpression = "(" + result.toString() + ") + ";
           textArea.setText(finalExpression);
           textField.setText("");
           equalsPressed = false;
-        } else {
+        }
+        else
+        {
           finalExpression += ("(" + getTextField() + ") + ");
           textArea.setText(finalExpression);
           textField.setText("");
         }
-        }
-        else
-        {
-          JOptionPane.showMessageDialog(null, "Invalid operand");
-        }
+        // }
+        // else
+        // {
+        // JOptionPane.showMessageDialog(null, "Invalid operand");
+        // }
       }
     });
 
@@ -129,23 +132,26 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
-        if (Parse.isValidOperand(getTextField()))
+        // if (Parse.isValidOperand(getTextField()))
+        // {
+        if (equalsPressed)
         {
-          if (equalsPressed) {
-            finalExpression = "(" + result.toString() + ") - ";
-            textArea.setText(finalExpression);
-            textField.setText("");
-            equalsPressed = false;
-          } else {
-            finalExpression += ("(" + getTextField() + ") - ");
-            textArea.setText(finalExpression);
-            textField.setText("");
-          }
+          finalExpression = "(" + result.toString() + ") - ";
+          textArea.setText(finalExpression);
+          textField.setText("");
+          equalsPressed = false;
         }
         else
         {
-          JOptionPane.showMessageDialog(null, "Invalid operand");
+          finalExpression += ("(" + getTextField() + ") - ");
+          textArea.setText(finalExpression);
+          textField.setText("");
         }
+        // }
+        // else
+        // {
+        // JOptionPane.showMessageDialog(null, "Invalid operand");
+        // }
       }
     });
 
@@ -158,23 +164,26 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
-        if (Parse.isValidOperand(getTextField()))
+        // if (Parse.isValidOperand(getTextField()))
+        // {
+        if (equalsPressed)
         {
-          if (equalsPressed) {
-            finalExpression = "(" + result.toString() + ") * ";
-            textArea.setText(finalExpression);
-            textField.setText("");
-            equalsPressed = false;
-          } else {
-            finalExpression += ("(" + getTextField() + ") * ");
-            textArea.setText(finalExpression);
-            textField.setText("");
-          }
+          finalExpression = "(" + result.toString() + ") * ";
+          textArea.setText(finalExpression);
+          textField.setText("");
+          equalsPressed = false;
         }
         else
         {
-          JOptionPane.showMessageDialog(null, "Invalid operand");
+          finalExpression += ("(" + getTextField() + ") * ");
+          textArea.setText(finalExpression);
+          textField.setText("");
         }
+        // }
+        // else
+        // {
+        // JOptionPane.showMessageDialog(null, "Invalid operand");
+        // }
       }
     });
 
@@ -187,25 +196,28 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
-        if (Parse.isValidOperand(getTextField()))
+        // if (Parse.isValidOperand(getTextField()))
+        // {
+
+        // running expression
+        if (equalsPressed)
         {
-          
-          // running expression
-          if (equalsPressed) {
-            finalExpression = "(" + result.toString() + ") / ";
-            textArea.setText(finalExpression);
-            textField.setText("");
-            equalsPressed = false;
-          } else {
-            finalExpression += ("(" + getTextField() + ") / ");
-            textArea.setText(finalExpression);
-            textField.setText("");
-          }
+          finalExpression = "(" + result.toString() + ") / ";
+          textArea.setText(finalExpression);
+          textField.setText("");
+          equalsPressed = false;
         }
         else
         {
-          JOptionPane.showMessageDialog(null, "Invalid operand");
+          finalExpression += ("(" + getTextField() + ") / ");
+          textArea.setText(finalExpression);
+          textField.setText("");
         }
+        // }
+        // else
+        // {
+        // JOptionPane.showMessageDialog(null, "Invalid operand");
+        // }
       }
     });
 
@@ -240,7 +252,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           JOptionPane.showMessageDialog(null, "Invalid expression");
         }
 
-        }
+      }
     });
 
   }
@@ -249,7 +261,7 @@ public class ComplexCalc extends JFrame implements ActionListener
    * Launch the application.
    *
    * @param args
-   *     String array
+   *          String array
    */
   public static void main(final String[] args)
   {
@@ -257,7 +269,8 @@ public class ComplexCalc extends JFrame implements ActionListener
     window.setVisible(true);
   }
 
-  @Override public void actionPerformed(final ActionEvent e)
+  @Override
+  public void actionPerformed(final ActionEvent e)
   {
     // TODO Auto-generated method stub
 
