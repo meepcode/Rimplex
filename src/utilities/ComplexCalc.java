@@ -144,7 +144,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         if (Parse.isValidOperand(getTextField()))
         {
-          finalExpression += ('(' + getTextField() + ") x ");
+          finalExpression += ('(' + getTextField() + ") * ");
           textArea.setText(finalExpression);
           textField.setText("");
         }
@@ -207,7 +207,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           JOptionPane.showMessageDialog(null, "Invalid expression");
         }
 
-      }
+        }
     });
 
   }
