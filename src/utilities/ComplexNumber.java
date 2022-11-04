@@ -61,11 +61,11 @@ public class ComplexNumber implements Evaluatable
   {
     if (imaginaryPart < 0)
     {
-      return realPart + "-" + Math.abs(imaginaryPart) + I;
+      return realPart + "-" + String.format("%.1f", Math.abs(imaginaryPart)) + I;
     }
     else
     {
-      return realPart + "+" + imaginaryPart + I;
+      return realPart + "+" + String.format("%.1f", imaginaryPart) + I;
     }
   }
   
