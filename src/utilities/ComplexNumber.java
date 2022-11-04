@@ -11,7 +11,7 @@ import java.util.Objects;
  */
 public class ComplexNumber implements Evaluatable
 {
-  private static final String I = "i";
+  private static final String I = "𝘪";
 
   // These will be doubles representing the parts of a complex number.
   // Ex. 3 + 2i would save 3 to realPart and 2 to imaginaryPart.
