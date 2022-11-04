@@ -113,7 +113,6 @@ public class Parse
     {
       newToken = newToken.replaceAll("\uD835\uDE2A", "");
       String[] complexNumber = newToken.split("(?=[+\\-])");
-      System.out.println(complexNumber[1].substring(0, complexNumber[1].length() - 1));
       result = new ComplexNumber(Double.parseDouble(complexNumber[0]),
           Double.parseDouble(complexNumber[1].substring(0, complexNumber[1].length() - 1)));
     }
