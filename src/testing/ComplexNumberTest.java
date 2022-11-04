@@ -49,9 +49,10 @@ class ComplexNumberTest
     assertEquals(7.0, test1.getImaginary());
     assertEquals(8.0, test2.getImaginary());
     // toString()
-    String sTest = String.format("%.1f+%.1fi", real, imag);
+    // when testing the decimal should naturally round up 
+    String sTest = String.format("%f+%fi", real, imag);
     assertEquals(sTest, test.toString());
-    String sTest1 = String.format("%.1f+%.1fi", real1, imag1);
+    String sTest1 = String.format("%f+%fi", real1, imag1);
     assertEquals(sTest1, test1.toString());
     // shouldnt be accounting for negative imaginary parts and should throw an error but doesnt
     // String sNegI = String.format("%.1f-%.1fi", real1, imagN);

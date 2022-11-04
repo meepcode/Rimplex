@@ -96,9 +96,29 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
+<<<<<<< HEAD
         // TODO
         finalExpression.concat('(' + getTextField() + ") +");
         textArea.setText(finalExpression);
+=======
+        if (equalsPressed)
+        {
+          finalExpression = '(' + result.toString() + ") + ";
+          textArea.setText(finalExpression);
+          textField.setText("");
+          equalsPressed = false;
+        }
+        else if (Parse.isValidOperand(getTextField()))
+        {
+          finalExpression += ('(' + getTextField() + ") + ");
+          textArea.setText(finalExpression);
+          textField.setText("");
+        }
+        else
+        {
+          JOptionPane.showMessageDialog(null, "Invalid operand");
+        }
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
       }
     });
 
@@ -111,9 +131,29 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
+<<<<<<< HEAD
         // TODO
         finalExpression.concat('(' + getTextField() + ") -");
         textArea.setText(finalExpression);
+=======
+        if (equalsPressed)
+        {
+          finalExpression = '(' + result.toString() + ") - ";
+          textArea.setText(finalExpression);
+          textField.setText("");
+          equalsPressed = false;
+        }
+        else if (Parse.isValidOperand(getTextField()))
+        {
+          finalExpression += ('(' + getTextField() + ") - ");
+          textArea.setText(finalExpression);
+          textField.setText("");
+        }
+        else
+        {
+          JOptionPane.showMessageDialog(null, "Invalid operand");
+        }
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
       }
     });
 
@@ -126,11 +166,31 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
+<<<<<<< HEAD
         // TODO
         finalExpression.concat('(' + getTextField() + ") x");
         textArea.setText(finalExpression);
 
         //textArea.setFont(new Font("Tohoma", Font.BOLD, 15));
+=======
+        if (equalsPressed)
+        {
+          finalExpression = '(' + result.toString() + ") * ";
+          textArea.setText(finalExpression);
+          textField.setText("");
+          equalsPressed = false;
+        }
+        else if (Parse.isValidOperand(getTextField()))
+        {
+          finalExpression += ('(' + getTextField() + ") * ");
+          textArea.setText(finalExpression);
+          textField.setText("");
+        }
+        else
+        {
+          JOptionPane.showMessageDialog(null, "Invalid operand");
+        }
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
       }
     });
 
@@ -143,9 +203,30 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
+<<<<<<< HEAD
         // TODO
         finalExpression.concat("(" + getTextField() + ") /");
         textArea.setText(finalExpression);
+=======
+        // running expression
+        if (equalsPressed)
+        {
+          finalExpression = '(' + result.toString() + ") / ";
+          textArea.setText(finalExpression);
+          textField.setText("");
+          equalsPressed = false;
+        }
+        else if (Parse.isValidOperand(getTextField()))
+        {
+          finalExpression += ('(' + getTextField() + ") / ");
+          textArea.setText(finalExpression);
+          textField.setText("");
+        }
+        else
+        {
+          JOptionPane.showMessageDialog(null, "Invalid operand");
+        }
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
       }
     });
 
