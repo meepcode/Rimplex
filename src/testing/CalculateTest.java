@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 package testing;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -28,7 +27,6 @@ class CalculateTest
   }
 
 }
-=======
 package testing;
 
 import org.junit.jupiter.api.Test;
