@@ -10,8 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class CheckTest
 {
 
-  @Test
-  void forContainsTest()
+  @Test void forContainsTest()
   {
     String[] haystack = {"Horse", "Cow", "Dog", "Cat"};
     assertTrue(Check.forContains(haystack, "Horse"));
@@ -24,15 +23,13 @@ class CheckTest
     assertFalse(Check.forContains(haystack, "COW"));
   }
 
-  @Test
-  void forContainsTest_empty()
+  @Test void forContainsTest_empty()
   {
     String[] haystack = {};
     assertFalse(Check.forContains(haystack, "Aardvark"));
   }
 
-  @Test
-  void forContainsTest_null()
+  @Test void forContainsTest_null()
   {
     assertFalse(Check.forContains((String[]) null, "Aardvark"));
     assertNull(Check.forContains((String[]) null, null));

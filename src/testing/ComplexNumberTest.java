@@ -9,7 +9,7 @@ import utilities.ComplexNumber;
 class ComplexNumberTest
 {
   // even odd
-  
+
   private final double real = 3.0;
   private final double imag = 2.0;
   // odd odd
@@ -18,21 +18,20 @@ class ComplexNumberTest
   // even even
   private final double real2 = 10.0;
   private final double imag2 = 8.0;
-  
-  // negatives 
+
+  // negatives
   private final double realN = -4.0;
   private final double imagN = -11.0;
 
   private ComplexNumber test = new ComplexNumber(real, imag);
   private ComplexNumber test1 = new ComplexNumber(real1, imag1);
   private ComplexNumber test2 = new ComplexNumber(real2, imag2);
-  
-  // negative imaginary part 
-  private ComplexNumber negI = new ComplexNumber(real, imagN);
-  // both negative real and imaginary 
 
-  // trying to make one incorrectly
-  // zeros???
+  // negative imaginary part
+  private ComplexNumber negI = new ComplexNumber(real, imagN);
+  // both negative real and imaginary
+  private ComplexNumber bothNeg = new ComplexNumber(realN, imagN);
+
   /**
    * complexNumberTest.
    *
@@ -50,8 +49,13 @@ class ComplexNumberTest
     assertEquals(7.0, test1.getImaginary());
     assertEquals(8.0, test2.getImaginary());
     // toString()
-    String sTest = String.format("");
-    // assertEquals("", );
+    String sTest = String.format("%.1f+%.1fi", real, imag);
+    assertEquals(sTest, test.toString());
+    String sTest1 = String.format("%.1f+%.1fi", real1, imag1);
+    assertEquals(sTest1, test1.toString());
+    // shouldnt be accounting for negative imaginary parts and should throw an error but doesnt
+    // String sNegI = String.format("%.1f-%.1fi", real1, imagN);
+    // assertEquals(sNegI, negI.toString());
   }
 
 }
