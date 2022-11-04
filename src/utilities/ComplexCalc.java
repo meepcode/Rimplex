@@ -109,7 +109,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         }
         else if (Parse.isValidOperand(getTextField()))
         {
-          finalExpression += ('(' + getTextField() + ") + ");
+          finalExpression += ('(' + Parse.parseToken(getTextField()).toString() + ") + ");
           textArea.setText(finalExpression);
           textField.setText("");
         }
@@ -138,7 +138,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         }
         else if (Parse.isValidOperand(getTextField()))
         {
-          finalExpression += ('(' + getTextField() + ") - ");
+          finalExpression += ('(' + Parse.parseToken(getTextField()).toString() + ") - ");
           textArea.setText(finalExpression);
           textField.setText("");
         }
@@ -167,7 +167,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         }
         else if (Parse.isValidOperand(getTextField()))
         {
-          finalExpression += ('(' + getTextField() + ") * ");
+          finalExpression += ('(' + Parse.parseToken(getTextField()).toString() + ") * ");
           textArea.setText(finalExpression);
           textField.setText("");
         }
@@ -197,7 +197,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         }
         else if (Parse.isValidOperand(getTextField()))
         {
-          finalExpression += ('(' + getTextField() + ") / ");
+          finalExpression += ('(' + Parse.parseToken(getTextField()).toString() + ") / ");
           textArea.setText(finalExpression);
           textField.setText("");
         }
@@ -222,11 +222,12 @@ public class ComplexCalc extends JFrame implements ActionListener
           String operand = getTextField();
           if (Parse.isValidOperand(operand))
           {
-            finalExpression += ("(" + getTextField() + ")");
+            finalExpression += ("(" + Parse.parseToken(getTextField()).toString() + ")");
             result = Parse.evaluateExpression(finalExpression);
             finalExpression += " = " + result.toString();
             textArea.setText(finalExpression);
             textField.setText("");
+            finalExpression = "";
             equalsPressed = true;
           }
           else
@@ -237,6 +238,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         catch (IllegalFormatExpressionException exception)
         {
           JOptionPane.showMessageDialog(null, "Invalid expression");
+          exception.printStackTrace();
         }
 
       }

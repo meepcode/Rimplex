@@ -20,7 +20,7 @@ public class Parse
    */
   public static boolean isValidOperand(final String operand)
   {
-    return Pattern.matches("-?[0-9]+\\.?[0-9]*\\s*([+\\-])\\s*[0-9]+\\.?[0-9]*i", operand);
+    return Pattern.matches("-?[0-9]+\\.?[0-9]*\\s*([+\\-])\\s*[0-9]+\\.?[0-9]*([i\uD835\uDE2A])", operand);
   }
 
   /**
@@ -38,7 +38,7 @@ public class Parse
     String newExpressionStr = expressionStr.replaceAll(WHITESPACE_REGEX, "");
 
     StringBuilder regex = new StringBuilder(
-        "(\\((-?[0-9]+\\.?[0-9]*([+\\-])[0-9]+\\.?[0-9]*i)\\)*([");
+        "(\\((-?[0-9]+\\.?[0-9]*([+\\-])[0-9]+\\.?[0-9]*𝘪)\\)*([");
     Operator[] operators = Operator.operators();
     for (int i = 0; i < operators.length; i++)
     {
@@ -48,7 +48,7 @@ public class Parse
         regex.append("\\");
       }
     }
-    regex.append("]))*(\\(-?[0-9]+\\.?[0-9]*([+\\-])[0-9]+\\.?[0-9]*i\\))");
+    regex.append("]))*(\\(-?[0-9]+\\.?[0-9]*([+\\-])[0-9]+\\.?[0-9]*𝘪\\))");
 
     if (!Pattern.matches(regex.toString(), newExpressionStr))
     {
@@ -95,16 +95,25 @@ public class Parse
     return expression;
   }
 
-  private static Evaluatable parseToken(final String token)
+  /**
+   * Parses the given token into an Evaluatable that can be acted on
+   *
+   * @param token the token to parse
+   * @return the Evaluatable representation of this token
+   */
+  public static Evaluatable parseToken(final String token)
   {
+    String newToken = token.replaceAll("\\s", "");
     Evaluatable result;
-    if (Operator.fromString(token) != null)
+    if (Operator.fromString(newToken) != null)
     {
-      result = Operator.fromString(token);
+      result = Operator.fromString(newToken);
     }
-    else if (isValidOperand(token))
+    else if (isValidOperand(newToken))
     {
-      String[] complexNumber = token.split("(?=[+\\-])");
+      newToken = newToken.replaceAll("\uD835\uDE2A", "");
+      String[] complexNumber = newToken.split("(?=[+\\-])");
+      System.out.println(complexNumber[1].substring(0, complexNumber[1].length() - 1));
       result = new ComplexNumber(Double.parseDouble(complexNumber[0]),
           Double.parseDouble(complexNumber[1].substring(0, complexNumber[1].length() - 1)));
     }
