@@ -24,6 +24,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   // protected Shell shell;
   private final JTextField textField;
   private final String tahoma = "Tahoma";
+  private ComplexNumber previousResult = null;
   private String finalExpression = "";
 
   /**
@@ -84,7 +85,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     clearButton.addActionListener(new ActionListener()
     {
       public void actionPerformed(final ActionEvent e)
-      {// TODO
+      {
         textField.setText("");
       }
     });
@@ -98,9 +99,15 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
-        if (Parse.isValidOperand(getTextField()))
+        if (Parse.isValidOperand(getTextField()) || (getTextField().isEmpty()
+            && previousResult != null && finalExpression.isEmpty()))
         {
-          finalExpression += ('(' + getTextField() + ") + ");
+          String operand = getTextField();
+          if (getTextField().isEmpty())
+          {
+            operand = previousResult.toString();
+          }
+          finalExpression += ('(' + operand + ") + ");
           textArea.setText(finalExpression);
           textField.setText("");
         }
@@ -120,9 +127,15 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
-        if (Parse.isValidOperand(getTextField()))
+        if (Parse.isValidOperand(getTextField()) || (getTextField().isEmpty()
+            && previousResult != null && finalExpression.isEmpty()))
         {
-          finalExpression += ('(' + getTextField() + ") - ");
+          String operand = getTextField();
+          if (getTextField().isEmpty())
+          {
+            operand = previousResult.toString();
+          }
+          finalExpression += ('(' + operand + ") - ");
           textArea.setText(finalExpression);
           textField.setText("");
         }
@@ -142,9 +155,15 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
-        if (Parse.isValidOperand(getTextField()))
+        if (Parse.isValidOperand(getTextField()) || (getTextField().isEmpty()
+            && previousResult != null && finalExpression.isEmpty()))
         {
-          finalExpression += ('(' + getTextField() + ") * ");
+          String operand = getTextField();
+          if (getTextField().isEmpty())
+          {
+            operand = previousResult.toString();
+          }
+          finalExpression += ('(' + operand + ") x ");
           textArea.setText(finalExpression);
           textField.setText("");
         }
@@ -164,9 +183,15 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
-        if (Parse.isValidOperand(getTextField()))
+        if (Parse.isValidOperand(getTextField()) || (getTextField().isEmpty()
+            && previousResult != null && finalExpression.isEmpty()))
         {
-          finalExpression += ("(" + getTextField() + ") / ");
+          String operand = getTextField();
+          if (getTextField().isEmpty())
+          {
+            operand = previousResult.toString();
+          }
+          finalExpression += ('(' + operand + ") / ");
           textArea.setText(finalExpression);
           textField.setText("");
         }
@@ -193,9 +218,11 @@ public class ComplexCalc extends JFrame implements ActionListener
           {
             finalExpression += ("(" + getTextField() + ")");
             ComplexNumber result = Parse.evaluateExpression(finalExpression);
+            previousResult = result;
             finalExpression += " = " + result.toString();
             textArea.setText(finalExpression);
             textField.setText("");
+            finalExpression = "";
           }
           else
           {
@@ -207,7 +234,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           JOptionPane.showMessageDialog(null, "Invalid expression");
         }
 
-        }
+      }
     });
 
   }
