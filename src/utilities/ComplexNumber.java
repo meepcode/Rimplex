@@ -10,7 +10,11 @@ import java.util.Deque;
  */
 public class ComplexNumber implements Evaluatable
 {
+<<<<<<< HEAD
   private static String I = "i";
+=======
+  private static final String I = "\uD835\uDE2A";
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
   // These will be doubles representing the parts of a complex number.
   // Ex. 3 + 2i would save 3 to realPart and 2 to imaginaryPart.
