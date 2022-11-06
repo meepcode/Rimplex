@@ -59,7 +59,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     inputPanel.add(textField);
     textField.setColumns(45);
 
-    // buttons
+    // buttons 
     JPanel buttonPanel = new JPanel();
     getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
@@ -87,7 +87,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     clearButton.addActionListener(new ActionListener()
     {
       public void actionPerformed(final ActionEvent e)
-      {// TODO
+      {
         textField.setText("");
       }
     });
@@ -150,7 +150,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       }
     });
 
-    JButton multButton = new JButton("*");
+    JButton multButton = new JButton("x");
     multButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(multButton);
 
