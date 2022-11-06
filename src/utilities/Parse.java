@@ -38,7 +38,7 @@ public class Parse
     String newExpressionStr = expressionStr.replaceAll(WHITESPACE_REGEX, "");
 
     StringBuilder regex = new StringBuilder(
-        "(\\((-?[0-9]+\\.?[0-9]*([+\\-])[0-9]+\\.?[0-9]*𝘪)\\)*([");
+        "(\\((-?[0-9]+\\.?[0-9]*([+\\-])[0-9]+\\.?[0-9]*[i𝘪])\\)*([");
     Operator[] operators = Operator.operators();
     for (int i = 0; i < operators.length; i++)
     {
@@ -48,7 +48,7 @@ public class Parse
         regex.append("\\");
       }
     }
-    regex.append("]))*(\\(-?[0-9]+\\.?[0-9]*([+\\-])[0-9]+\\.?[0-9]*𝘪\\))");
+    regex.append("]))*(\\(-?[0-9]+\\.?[0-9]*([+\\-])[0-9]+\\.?[0-9]*[i𝘪]\\))");
 
     if (!Pattern.matches(regex.toString(), newExpressionStr))
     {
