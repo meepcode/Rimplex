@@ -1,4 +1,4 @@
-package utilities;
+package gui;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -7,6 +7,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import utilities.ComplexNumber;
+import utilities.IllegalFormatExpressionException;
+import utilities.Operator;
+import utilities.Parse;
+
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
