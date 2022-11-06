@@ -2,11 +2,10 @@ package testing;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import org.junit.jupiter.api.Test;
 
 import utilities.ComplexNumber;
-import java.util.Deque;
-import utilities.Evaluatable;
 class ComplexNumberTest
 {
   // even odd
