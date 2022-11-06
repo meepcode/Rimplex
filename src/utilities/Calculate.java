@@ -58,6 +58,11 @@ public class Calculate
    */
   public static ComplexNumber divide(final ComplexNumber op1, final ComplexNumber op2)
   {
+    
+    if (op2.getReal() == 0.0 && op2.getImaginary() == 0.0) 
+    {
+      throw new IllegalFormatExpressionException();
+    }
     // For op1 / op2
     // Both numerator and divisor have to be multiplied by the divisior's reciprocal
     ComplexNumber reciprocal = new ComplexNumber(op2.getReal(), op2.getImaginary() * -1);
@@ -77,7 +82,7 @@ public class Calculate
 
     if (denominator.getImaginary() == 0.0) // Avoid zero division error
     { 
-      imaginaryResult = numerator.getImaginary();
+      imaginaryResult = numerator.getImaginary() / denominator.getReal();
     } else 
     {
       imaginaryResult = numerator.getImaginary() / denominator.getImaginary();

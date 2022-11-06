@@ -62,11 +62,13 @@ public class ComplexNumber implements Evaluatable
   {
     if (imaginaryPart < 0)
     {
-      return realPart + "-" + String.format(FORMAT_TEXT, Math.abs(imaginaryPart)) + I;
+      return String.format(FORMAT_TEXT, realPart) 
+          + "-" + String.format(FORMAT_TEXT, Math.abs(imaginaryPart)) + I;
     }
     else
     {
-      return realPart + "+" + String.format(FORMAT_TEXT, imaginaryPart) + I;
+      return String.format(FORMAT_TEXT, realPart) 
+          + "+" + String.format(FORMAT_TEXT, imaginaryPart) + I;
     }
   }
   

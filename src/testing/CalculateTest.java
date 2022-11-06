@@ -6,24 +6,125 @@ import org.junit.jupiter.api.Test;
 
 import utilities.Calculate;
 import utilities.ComplexNumber;
+import utilities.IllegalFormatExpressionException;
 
 class CalculateTest
 {
   private final ComplexNumber comp1 = new ComplexNumber(6.0, 4.0);
   private final ComplexNumber comp2 = new ComplexNumber(3.0, 2.0);
+  private final ComplexNumber comp3 = new ComplexNumber(0.0, 2.0);
+  private final ComplexNumber comp4 = new ComplexNumber(2.0, 0.0);
+  private final ComplexNumber comp5 = new ComplexNumber(0.0, 0.0);
   
+  /**
+   * Test subtract.
+   */
   @Test
-  void calculateTest()
+  void testSubtract()
   {
-    // subtract
     assertEquals(new ComplexNumber(3.0, 2.0), Calculate.subtract(comp1, comp2));
-    // add
-    assertEquals(new ComplexNumber(9.0, 6.0), Calculate.add(comp1, comp2));
-    // divide  
-    assertEquals(new ComplexNumber(2.0, 2.0), Calculate.divide(comp1, comp2));
-    // multiply
-    assertEquals(new ComplexNumber(18.0, 8.0), Calculate.multiply(comp1, comp2));
     
   }
+  
+  /**
+   * Test add.
+   */
+  @Test
+  void testAdd()
+  {
+    assertEquals(new ComplexNumber(9.0, 6.0), Calculate.add(comp1, comp2));
+  }
+  
+  /**
+   * Test divide.
+   */
+  @Test
+  void testDivide()
+  {
+    assertEquals(new ComplexNumber(2.0, 0.0), Calculate.divide(comp1, comp2));
+  }
+  
+  /**
+   * Test multiply.
+   */
+  @Test
+  void testMultiply()
+  {
+    assertEquals(new ComplexNumber(10.0, 24.0), Calculate.multiply(comp1, comp2));
+  }
+  
+  /**
+   * Test multiply with a 0 real value.
+   */
+  @Test
+  void testMultiplyZeroReal()
+  {
+    assertEquals(new ComplexNumber(-8.0, 12.0), Calculate.multiply(comp1, comp3));
+  }
+  
+  /**
+   * Test multiply with a 0 imaginary value.
+   */
+  @Test
+  void testMultiplyZeroImaginary()
+  {
+    assertEquals(new ComplexNumber(12.0, 8.0), Calculate.multiply(comp1, comp4));
+  }
+  
+  /**
+   * Test divide with a 0 real value in divisor.
+   */
+  @Test
+  void testDivideZeroRealDivisor()
+  {
+    assertEquals(new ComplexNumber(2.0, -3.0), Calculate.divide(comp1, comp3));
+  }
+  
+  /**
+   * Test divide with a 0 imaginary value in divisor.
+   */
+  @Test
+  void testDivideZeroImaginaryDivisor()
+  {
+    assertEquals(new ComplexNumber(3.0, 2.0), Calculate.divide(comp1, comp4));
+  }
+  
+  /**
+   * Test divide with a 0 real value in numerator.
+   */
+  @Test
+  void testDivideZeroRealNumerator()
+  {
+    assertEquals(new ComplexNumber(2.0/13, 3.0/13), Calculate.divide(comp3, comp1));
+  }
+  
+  /**
+   * Test divide with a 0 imaginary value in numerator.
+   */
+  @Test
+  void testDivideZeroImaginaryNumerator()
+  {
+    assertEquals(new ComplexNumber(3.0/13, -2.0/13), Calculate.divide(comp4, comp1));
+  }
+  
+  /**
+   * Test divide with by 0 + 0i.
+   */
+  @Test
+  void testDivideByZero()
+  {
+    try 
+    {
+      Calculate.divide(comp4, comp5);
+      fail();
+    } catch (IllegalFormatExpressionException e) 
+    {
+      // ok
+    }
+  }
+  
+  
+  
+  
 
 }
