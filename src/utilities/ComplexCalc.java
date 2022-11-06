@@ -23,10 +23,10 @@ public class ComplexCalc extends JFrame implements ActionListener
   private static final long serialVersionUID = 1L;
   // protected Shell shell;
   private final JTextField textField;
-  private String finalExpression = "";
   private final String tahoma = "Tahoma";
   private boolean equalsPressed = false;
   private ComplexNumber result = null;
+  private final String invalidOperand = "Invalid Operand";
 
   /**
    * constructor.
@@ -73,7 +73,6 @@ public class ComplexCalc extends JFrame implements ActionListener
       public void actionPerformed(final ActionEvent e)
       {
         equalsPressed = false;
-        finalExpression = "";
         textArea.setText("");
         textField.setText("");
       }
@@ -88,11 +87,11 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
-        // TODO
+        textField.setText("");
       }
     });
 
-    JButton addButton = new JButton("+");
+    JButton addButton = new JButton(Operator.ADD.toString());
     addButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(addButton);
 
@@ -101,32 +100,11 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
-
-        // TODO
-        finalExpression.concat('(' + getTextField() + ") +");
-        textArea.setText(finalExpression);
-
-        if (equalsPressed)
-        {
-          finalExpression = '(' + result.toString() + ") + ";
-          textArea.setText(finalExpression);
-          textField.setText("");
-          equalsPressed = false;
-        }
-        else if (Parse.isValidOperand(getTextField()))
-        {
-          finalExpression += ('(' + Parse.parseToken(getTextField()).toString() + ") + ");
-          textArea.setText(finalExpression);
-          textField.setText("");
-        }
-        else
-        {
-          JOptionPane.showMessageDialog(null, "Invalid operand");
-        }
+        appendOperand(textArea, Operator.ADD.toString());
       }
     });
 
-    JButton subtractionButton = new JButton("-");
+    JButton subtractionButton = new JButton(Operator.SUBTRACT.toString());
     subtractionButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(subtractionButton);
 
@@ -135,30 +113,11 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
-        // TODO
-        finalExpression.concat('(' + getTextField() + ") -");
-        textArea.setText(finalExpression);
-        if (equalsPressed)
-        {
-          finalExpression = '(' + result.toString() + ") - ";
-          textArea.setText(finalExpression);
-          textField.setText("");
-          equalsPressed = false;
-        }
-        else if (Parse.isValidOperand(getTextField()))
-        {
-          finalExpression += ('(' + Parse.parseToken(getTextField()).toString() + ") - ");
-          textArea.setText(finalExpression);
-          textField.setText("");
-        }
-        else
-        {
-          JOptionPane.showMessageDialog(null, "Invalid operand");
-        }
+        appendOperand(textArea, Operator.SUBTRACT.toString());
       }
     });
 
-    JButton multButton = new JButton("x");
+    JButton multButton = new JButton(Operator.MULTIPLY.toString());
     multButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(multButton);
 
@@ -167,35 +126,11 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
-
-        // TODO
-        finalExpression.concat('(' + getTextField() + ") x");
-        textArea.setText(finalExpression);
-
-        //textArea.setFont(new Font("Tohoma", Font.BOLD, 15));
-
-        if (equalsPressed)
-        {
-          finalExpression = '(' + result.toString() + ") * ";
-          textArea.setText(finalExpression);
-          textField.setText("");
-          equalsPressed = false;
-        }
-        else if (Parse.isValidOperand(getTextField()))
-        {
-          finalExpression += ('(' + Parse.parseToken(getTextField()).toString() + ") * ");
-          textArea.setText(finalExpression);
-          textField.setText("");
-        }
-        else
-        {
-          JOptionPane.showMessageDialog(null, "Invalid operand");
-        }
-
+        appendOperand(textArea, Operator.MULTIPLY.toString());
       }
     });
 
-    JButton divideButton = new JButton("/");
+    JButton divideButton = new JButton(Operator.DIVIDE.toString());
     divideButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(divideButton);
 
@@ -204,30 +139,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
-
-        // TODO
-        finalExpression.concat("(" + getTextField() + ") /");
-        textArea.setText(finalExpression);
-
-        // running expression
-        if (equalsPressed)
-        {
-          finalExpression = '(' + result.toString() + ") / ";
-          textArea.setText(finalExpression);
-          textField.setText("");
-          equalsPressed = false;
-        }
-        else if (Parse.isValidOperand(getTextField()))
-        {
-          finalExpression += ('(' + Parse.parseToken(getTextField()).toString() + ") / ");
-          textArea.setText(finalExpression);
-          textField.setText("");
-        }
-        else
-        {
-          JOptionPane.showMessageDialog(null, "Invalid operand");
-        }
-
+        appendOperand(textArea, Operator.DIVIDE.toString());
       }
     });
 
@@ -240,27 +152,20 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       public void actionPerformed(final ActionEvent e)
       {
-
-        // TODO
-    	  finalExpression.concat("=");
-          textArea.setText(finalExpression);
-
         try
         {
           String operand = getTextField();
           if (Parse.isValidOperand(operand))
           {
-            finalExpression += ("(" + Parse.parseToken(getTextField()).toString() + ")");
-            result = Parse.evaluateExpression(finalExpression);
-            finalExpression += " = " + result.toString();
-            textArea.setText(finalExpression);
+            textArea.append('(' + Parse.parseToken(getTextField()).toString() + ')');
+            result = Parse.evaluateExpression(textArea.getText());
+            textArea.append(" = " + result.toString());
             textField.setText("");
-            finalExpression = "";
             equalsPressed = true;
           }
           else
           {
-            JOptionPane.showMessageDialog(null, "Invalid operand");
+            JOptionPane.showMessageDialog(null, invalidOperand);
           }
         }
         catch (IllegalFormatExpressionException exception)
@@ -268,7 +173,6 @@ public class ComplexCalc extends JFrame implements ActionListener
           JOptionPane.showMessageDialog(null, "Invalid expression");
           exception.printStackTrace();
         }
-
 
       }
     });
@@ -287,10 +191,29 @@ public class ComplexCalc extends JFrame implements ActionListener
     window.setVisible(true);
   }
 
+  private void appendOperand(final JTextArea textArea, final String operand)
+  {
+    if (equalsPressed && textArea.getText().isEmpty())
+    {
+      textArea.setText('(' + result.toString() + ')' + ' ' + operand + ' ');
+      textField.setText("");
+      equalsPressed = false;
+    }
+    else if (Parse.isValidOperand(getTextField()))
+    {
+      textArea.setText(
+          '(' + Parse.parseToken(getTextField()).toString() + ')' + ' ' + operand + ' ');
+      textField.setText("");
+    }
+    else
+    {
+      JOptionPane.showMessageDialog(null, invalidOperand);
+    }
+  }
+
   @Override public void actionPerformed(final ActionEvent e)
   {
     // TODO Auto-generated method stub
-
   }
 
   /**
@@ -301,15 +224,5 @@ public class ComplexCalc extends JFrame implements ActionListener
   public String getTextField()
   {
     return this.textField.getText();
-  }
-
-  /**
-   * Getter method for final expression.
-   *
-   * @return String expression
-   */
-  public String getExpression()
-  {
-    return finalExpression;
   }
 }
