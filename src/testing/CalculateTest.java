@@ -15,6 +15,8 @@ class CalculateTest
   private final ComplexNumber comp3 = new ComplexNumber(0.0, 2.0);
   private final ComplexNumber comp4 = new ComplexNumber(2.0, 0.0);
   private final ComplexNumber comp5 = new ComplexNumber(0.0, 0.0);
+  private final ComplexNumber comp6 = new ComplexNumber(0.0, -1.0);
+
   
   /**
    * Test subtract.
@@ -121,6 +123,24 @@ class CalculateTest
     {
       // ok
     }
+  }
+  
+  /**
+   * Test divide with a 0 values in numerator and denominator.
+   */
+  @Test
+  void testDivideMultipleZero()
+  {
+    assertEquals(new ComplexNumber(0.0, 2.0), Calculate.divide(comp4, comp6));
+  }
+  
+  /**
+   * Test constructor.
+   */
+  @Test
+  void testConstructor()
+  {
+    new Calculate();
   }
   
   

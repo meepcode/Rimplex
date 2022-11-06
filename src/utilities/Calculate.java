@@ -70,7 +70,8 @@ public class Calculate
     ComplexNumber denominator = multiply(op2, reciprocal);
     // This should result in a complex number of the form a + bi / a + bi
     Double realResult = null;
-    if (denominator.getReal() == 0.0) // Avoid zero division error
+    
+    if (numerator.getReal() == 0.0) // Avoid zero division error
     { 
       realResult = numerator.getReal();
     } else 
@@ -78,15 +79,9 @@ public class Calculate
       realResult = numerator.getReal() / denominator.getReal();
     }
     
-    Double imaginaryResult = null;
-
-    if (denominator.getImaginary() == 0.0) // Avoid zero division error
-    { 
-      imaginaryResult = numerator.getImaginary() / denominator.getReal();
-    } else 
-    {
-      imaginaryResult = numerator.getImaginary() / denominator.getImaginary();
-    }
+    // Because you have to multiply by conjugate, the denominator will always end up as a real num
+    Double imaginaryResult = numerator.getImaginary() / denominator.getReal();
+    
     return new ComplexNumber(realResult, imaginaryResult);
   }
 }
