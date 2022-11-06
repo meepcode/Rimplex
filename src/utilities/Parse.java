@@ -114,10 +114,9 @@ public class Parse
     else if (isValidOperand(newToken))
     {
       newToken = newToken.replaceAll("\uD835\uDE2A", "");
-      newToken = newToken.replaceAll("i", "");
       String[] complexNumber = newToken.split("(?=[+\\-])");
       result = new ComplexNumber(Double.parseDouble(complexNumber[0]),
-          Double.parseDouble(complexNumber[1]));
+          Double.parseDouble(complexNumber[1].substring(0, complexNumber[1].length() - 1)));
     }
     else
     {
