@@ -12,6 +12,7 @@ import java.util.Objects;
 public class ComplexNumber implements Evaluatable
 {
   public static final String I = "\uD835\uDE2A";
+  private static final String FORMAT_TEXT = "%.1f";
 
   // These will be doubles representing the parts of a complex number.
   // Ex. 3 + 2i would save 3 to realPart and 2 to imaginaryPart.
@@ -61,11 +62,11 @@ public class ComplexNumber implements Evaluatable
   {
     if (imaginaryPart < 0)
     {
-      return realPart + "-" + String.format("%.1f", Math.abs(imaginaryPart)) + I;
+      return realPart + "-" + String.format(FORMAT_TEXT, Math.abs(imaginaryPart)) + I;
     }
     else
     {
-      return realPart + "+" + String.format("%.1f", imaginaryPart) + I;
+      return realPart + "+" + String.format(FORMAT_TEXT, imaginaryPart) + I;
     }
   }
   
@@ -103,7 +104,7 @@ public class ComplexNumber implements Evaluatable
   @Override
   public int hashCode() 
   {
-    return this.hashCode();
+    return super.hashCode();
   }
   
 
