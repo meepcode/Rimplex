@@ -26,7 +26,6 @@ class ComplexNumberTest
   private final double realN = -4.0;
   private final double imagN = -11.0;
   
-  private final String formatText = "%.1f+%.1f𝘪";
 
   private ComplexNumber test = new ComplexNumber(real, imag);
   private ComplexNumber test1 = new ComplexNumber(real1, imag1);
@@ -66,10 +65,11 @@ class ComplexNumberTest
   @Test
   void testToString() 
   {
-    // when testing the decimal should naturally round up 
-    String sTest = String.format(formatText, real, imag);
+    String complexNumberString = "%.1f+%.1f𝘪";
+
+    String sTest = String.format(complexNumberString, real, imag);
     assertEquals(sTest, test.toString());
-    String sTest1 = String.format(formatText, real1, imag1);
+    String sTest1 = String.format(complexNumberString, real1, imag1);
     assertEquals(sTest1, test1.toString());
     String sNegI = String.format("%.1f-%.1f𝘪", real, Math.abs(imagN));
     assertEquals(sNegI, negI.toString());
@@ -139,4 +139,3 @@ class ComplexNumberTest
   }
 
 }
-
