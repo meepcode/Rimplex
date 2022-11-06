@@ -1,6 +1,7 @@
 package utilities;
 
 import java.util.Deque;
+import java.util.Objects;
 
 /**
  * Complex number.
@@ -69,17 +70,20 @@ public class ComplexNumber implements Evaluatable
   {
     return this;
   }
-
+  @Override
   public boolean equals(final Object other)
   {
-    ComplexNumber op2 = null;
     if (other instanceof ComplexNumber)
     {
-      op2 = (ComplexNumber) other;
-      return (this.getReal() == op2.getReal() && this.getImaginary() == op2.getImaginary());
+      ComplexNumber op2 = (ComplexNumber) other;
+      return (Objects.equals(this.getReal(), op2.getReal()) && Objects.equals(this.getImaginary(),
+          op2.getImaginary()));
     }
     return false;
-
   }
 
+  @Override public int hashCode()
+  {
+    return super.hashCode();
+  }
 }

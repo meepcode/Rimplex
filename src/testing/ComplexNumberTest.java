@@ -48,11 +48,14 @@ class ComplexNumberTest
     assertEquals(2.0, test.getImaginary());
     assertEquals(7.0, test1.getImaginary());
     assertEquals(8.0, test2.getImaginary());
+
+    String complexNumberString = "%f+%fi";
+
     // toString()
     // when testing the decimal should naturally round up 
-    String sTest = String.format("%f+%fi", real, imag);
+    String sTest = String.format(complexNumberString, real, imag);
     assertEquals(sTest, test.toString());
-    String sTest1 = String.format("%f+%fi", real1, imag1);
+    String sTest1 = String.format(complexNumberString, real1, imag1);
     assertEquals(sTest1, test1.toString());
     // should not be accounting for negative imaginary parts and should throw an error but doesnt
     // String sNegI = String.format("%.1f-%.1fi", real1, imagN);
@@ -60,3 +63,4 @@ class ComplexNumberTest
   }
 
 }
+
