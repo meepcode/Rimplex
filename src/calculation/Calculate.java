@@ -1,4 +1,4 @@
-package utilities;
+package calculation;
 
 /**
  * Complex number methods for calculations.

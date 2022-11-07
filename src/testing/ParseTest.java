@@ -1,10 +1,10 @@
 package testing;
 
 import org.junit.jupiter.api.Test;
-import utilities.ComplexNumber;
+import calculation.ComplexNumber;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static utilities.Parse.evaluateExpression;
+import static calculation.Parse.evaluateExpression;
 
 /**
  * Tests the Parse class.

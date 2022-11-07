@@ -1,8 +1,8 @@
 package testing;
 
 import org.junit.jupiter.api.Test;
-import utilities.Calculate;
-import utilities.ComplexNumber;
+import calculation.Calculate;
+import calculation.ComplexNumber;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;

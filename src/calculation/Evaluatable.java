@@ -1,4 +1,4 @@
-package utilities;
+package calculation;
 
 import java.util.Deque;
 
