@@ -61,7 +61,7 @@ public class Calculate
     
     if (op2.getReal() == 0.0 && op2.getImaginary() == 0.0) 
     {
-      throw new IllegalFormatExpressionException();
+      throw new ArithmeticException();
     }
     // For op1 / op2
     // Both numerator and divisor have to be multiplied by the divisior's reciprocal
@@ -69,7 +69,7 @@ public class Calculate
     ComplexNumber numerator = multiply(op1, reciprocal);
     ComplexNumber denominator = multiply(op2, reciprocal);
     // This should result in a complex number of the form a + bi / a + bi
-    Double realResult = null;
+    Double realResult;
     
     if (numerator.getReal() == 0.0) // Avoid zero division error
     { 
