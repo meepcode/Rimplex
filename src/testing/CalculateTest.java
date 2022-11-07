@@ -1,12 +1,12 @@
 package testing;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 import org.junit.jupiter.api.Test;
-
 import utilities.Calculate;
 import utilities.ComplexNumber;
 import utilities.IllegalFormatExpressionException;
+
+import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class CalculateTest
 {
@@ -25,7 +25,6 @@ class CalculateTest
   void testSubtract()
   {
     assertEquals(new ComplexNumber(3.0, 2.0), Calculate.subtract(comp1, comp2));
-    
   }
   
   /**
@@ -147,4 +146,18 @@ class CalculateTest
   
   
 
+  @Test void subtractTest()
+  {
+    assertEquals(new ComplexNumber(3.0, 2.0), Calculate.subtract(comp1, comp2));
+  }
+
+  @Test void divideTest()
+  {
+    assertEquals(new ComplexNumber(2.0, 0.0), Calculate.divide(comp1, comp2));
+  }
+
+  @Test void multiplyTest()
+  {
+    assertEquals(new ComplexNumber(10.0, 24.0), Calculate.multiply(comp1, comp2));
+  }
 }
