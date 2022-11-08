@@ -69,23 +69,29 @@ public class ComplexNumber implements Evaluatable
       return realPart + "+" + String.format(FORMAT_TEXT, imaginaryPart) + I;
     }
   }
-  
+
   /**
    * Evaluates a complex number.
-   * @param expression an Expression
+   *
+   * @param expression
+   *     an Expression
    * @return this complex number
    */
-  @Override public ComplexNumber evaluate(final Deque<Evaluatable> expression)
+  @Override
+  public ComplexNumber evaluate(final Deque<Evaluatable> expression)
   {
     return this;
   }
 
   /**
    * Compares two complex numbers.
-   * @param other complex number to compare.
+   *
+   * @param other
+   *     complex number to compare.
    * @return true if same complex numbers.
    */
-  @Override public boolean equals(final Object other)
+  @Override
+  public boolean equals(final Object other)
   {
     ComplexNumber op2 = null;
     if (other instanceof ComplexNumber)
@@ -96,16 +102,16 @@ public class ComplexNumber implements Evaluatable
     }
     return false;
   }
-  
+
   /**
    * Gets the hashcode.
+   *
    * @return hashcode.
    */
   @Override
-  public int hashCode() 
+  public int hashCode()
   {
     return super.hashCode();
   }
-  
 
 }
