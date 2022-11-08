@@ -1,4 +1,4 @@
-package utilities;
+package calculation;
 
 /**
  * Throws when an expression is formatted improperly.
@@ -19,6 +19,7 @@ public class IllegalFormatExpressionException extends RuntimeException
   /**
    * Throws the exception.
    */
+  @SuppressWarnings("unused")
   public IllegalFormatExpressionException()
   {
     super();

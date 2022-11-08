@@ -1,4 +1,4 @@
-package utilities;
+package gui;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -7,10 +7,17 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+
+import calculation.ComplexNumber;
+import calculation.IllegalFormatExpressionException;
+import calculation.Operator;
+import calculation.Parse;
+
 import java.awt.BorderLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.Serial;
 
 /**
  * Calculator GUI.
@@ -20,10 +27,9 @@ import java.awt.event.ActionListener;
  */
 public class ComplexCalc extends JFrame implements ActionListener
 {
-  private static final long serialVersionUID = 1L;
+  @Serial private static final long serialVersionUID = 1L;
   // protected Shell shell;
   private final JTextField textField;
-  private final String tahoma = "Tahoma";
   private boolean equalsPressed = false;
   private ComplexNumber result = null;
   private final String invalidOperand = "Invalid Operand";
@@ -55,6 +61,7 @@ public class ComplexCalc extends JFrame implements ActionListener
 
     textField = new JTextField();
     textField.setHorizontalAlignment(SwingConstants.RIGHT);
+    String tahoma = "Tahoma";
     textField.setFont(new Font(tahoma, Font.PLAIN, 11));
     inputPanel.add(textField);
     textField.setColumns(45);
@@ -68,14 +75,11 @@ public class ComplexCalc extends JFrame implements ActionListener
     buttonPanel.add(resetButton);
 
     // reset button action listener
-    resetButton.addActionListener(new ActionListener()
+    resetButton.addActionListener(e ->
     {
-      public void actionPerformed(final ActionEvent e)
-      {
-        equalsPressed = false;
-        textArea.setText("");
-        textField.setText("");
-      }
+      equalsPressed = false;
+      textArea.setText("");
+      textField.setText("");
     });
 
     JButton clearButton = new JButton("C");
@@ -83,98 +87,65 @@ public class ComplexCalc extends JFrame implements ActionListener
     buttonPanel.add(clearButton);
 
     // clear button action listener
-    clearButton.addActionListener(new ActionListener()
-    {
-      public void actionPerformed(final ActionEvent e)
-      {
-        textField.setText("");
-      }
-    });
+    clearButton.addActionListener(e -> textField.setText(""));
 
     JButton addButton = new JButton(Operator.ADD.toString());
     addButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(addButton);
 
     // add button action listener
-    addButton.addActionListener(new ActionListener()
-    {
-      public void actionPerformed(final ActionEvent e)
-      {
-        appendOperand(textArea, Operator.ADD.toString());
-      }
-    });
+    addButton.addActionListener(e -> appendOperand(textArea, Operator.ADD.toString()));
 
     JButton subtractionButton = new JButton(Operator.SUBTRACT.toString());
     subtractionButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(subtractionButton);
 
     // subtraction button action listener
-    subtractionButton.addActionListener(new ActionListener()
-    {
-      public void actionPerformed(final ActionEvent e)
-      {
-        appendOperand(textArea, Operator.SUBTRACT.toString());
-      }
-    });
+    subtractionButton.addActionListener(e -> appendOperand(textArea, Operator.SUBTRACT.toString()));
 
     JButton multButton = new JButton(Operator.MULTIPLY.toString());
     multButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(multButton);
 
     // multiplication button action listener
-    multButton.addActionListener(new ActionListener()
-    {
-      public void actionPerformed(final ActionEvent e)
-      {
-        appendOperand(textArea, Operator.MULTIPLY.toString());
-      }
-    });
+    multButton.addActionListener(e -> appendOperand(textArea, Operator.MULTIPLY.toString()));
 
     JButton divideButton = new JButton(Operator.DIVIDE.toString());
     divideButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(divideButton);
 
     // divide button action listener
-    divideButton.addActionListener(new ActionListener()
-    {
-      public void actionPerformed(final ActionEvent e)
-      {
-        appendOperand(textArea, Operator.DIVIDE.toString());
-      }
-    });
+    divideButton.addActionListener(e -> appendOperand(textArea, Operator.DIVIDE.toString()));
 
     JButton equalsButton = new JButton("=");
     equalsButton.setFont(new Font(tahoma, Font.BOLD, 20));
     buttonPanel.add(equalsButton);
 
     // equals button action listener
-    equalsButton.addActionListener(new ActionListener()
+    equalsButton.addActionListener(e ->
     {
-      public void actionPerformed(final ActionEvent e)
+      try
       {
-        try
+        String operand = getTextField();
+        if (Parse.isValidOperand(operand))
         {
-          String operand = getTextField();
-          if (Parse.isValidOperand(operand))
-          {
-            textArea.append('(' + Parse.parseToken(getTextField()).toString() + ')');
-            result = Parse.evaluateExpression(textArea.getText());
-            textArea.append(" = " + result.toString());
-            textField.setText("");
-            equalsPressed = true;
-          }
-          else
-          {
-            JOptionPane.showMessageDialog(null, invalidOperand);
-          }
+          textArea.append('(' + Parse.parseToken(getTextField()).toString() + ')');
+          result = Parse.evaluateExpression(textArea.getText());
+          textArea.append(" = " + result.toString());
+          textField.setText("");
+          equalsPressed = true;
         }
-        catch (IllegalFormatExpressionException exception)
+        else
         {
-          JOptionPane.showMessageDialog(null, "Invalid expression");
-          exception.printStackTrace();
+          JOptionPane.showMessageDialog(null, invalidOperand);
         }
-
       }
+      catch (IllegalFormatExpressionException exception)
+      {
+        JOptionPane.showMessageDialog(null, "Invalid expression");
+        exception.printStackTrace();
+      }
+
     });
 
   }

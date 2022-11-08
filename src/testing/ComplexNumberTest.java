@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import utilities.ComplexNumber;
+import calculation.ComplexNumber;
 class ComplexNumberTest
 {
   // even odd
@@ -22,20 +22,16 @@ class ComplexNumberTest
   private final double real3 = 10.0;
   private final double imag3 = 4.0;
 
-  // negatives
-  private final double realN = -4.0;
   private final double imagN = -11.0;
-  
 
-  private ComplexNumber test = new ComplexNumber(real, imag);
-  private ComplexNumber test1 = new ComplexNumber(real1, imag1);
-  private ComplexNumber test2 = new ComplexNumber(real2, imag2);
-  private ComplexNumber test3 = new ComplexNumber(real3, imag3);
+  private final ComplexNumber test = new ComplexNumber(real, imag);
+  private final ComplexNumber test1 = new ComplexNumber(real1, imag1);
+  private final ComplexNumber test2 = new ComplexNumber(real2, imag2);
+  private final ComplexNumber test3 = new ComplexNumber(real3, imag3);
 
   // negative imaginary part
-  private ComplexNumber negI = new ComplexNumber(real, imagN);
+  private final ComplexNumber negI = new ComplexNumber(real, imagN);
   // both negative real and imaginary
-  private ComplexNumber bothNeg = new ComplexNumber(realN, imagN);
 
   /**
    *  Test getReal.
@@ -99,7 +95,7 @@ class ComplexNumberTest
   @Test
   void testEqualsFalse() 
   {
-    assertEquals(false, test2.equals(test));
+    assertNotEquals(test2, test);
   }
   
   /**
@@ -108,7 +104,7 @@ class ComplexNumberTest
   @Test
   void testEqualsNotComplex() 
   {
-    assertEquals(false, test2.equals(real));
+    assertNotEquals(real, test2, String.valueOf(0.0));
   }
   
   /**
@@ -117,7 +113,7 @@ class ComplexNumberTest
   @Test
   void testEqualsDiffReal() 
   {
-    assertEquals(false, test2.equals(test1));
+    assertNotEquals(test2, test1);
   }
   
   /**
@@ -126,7 +122,7 @@ class ComplexNumberTest
   @Test
   void testEqualsDiffImaginary() 
   {
-    assertEquals(false, test2.equals(test3));
+    assertNotEquals(test2, test3);
   }
   
   /**
@@ -135,7 +131,7 @@ class ComplexNumberTest
   @Test
   void testHashcode()
   {
-    test.hashCode();
+    assertEquals(32, new ComplexNumber(1.0, 1.0).hashCode());
   }
 
 }
