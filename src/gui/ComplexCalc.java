@@ -121,7 +121,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     panel.add(numberButtons[2]);
     panel.add(numberButtons[3]);
     panel.add(mulButton);
-    // panel.add(decButton);
+    panel.add(decButton);
     panel.add(numberButtons[0]);
     panel.add(equButton);
     panel.add(divButton);
