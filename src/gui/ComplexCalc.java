@@ -13,8 +13,7 @@ import calculation.IllegalFormatExpressionException;
 import calculation.Operator;
 import calculation.Parse;
 
-import java.awt.BorderLayout;
-import java.awt.Font;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.Serial;
@@ -27,173 +26,199 @@ import java.io.Serial;
  */
 public class ComplexCalc extends JFrame implements ActionListener
 {
-  @Serial private static final long serialVersionUID = 1L;
-  // protected Shell shell;
-  private final JTextField textField;
-  private boolean equalsPressed = false;
-  private ComplexNumber result = null;
-  private final String invalidOperand = "Invalid Operand";
+  JFrame frame;
+  JTextField textfield;
+  JButton[] numberButtons = new JButton[10];
+  JButton[] functionButtons = new JButton[14];
+  JButton addButton, subButton, mulButton, divButton;
+  JButton decButton, equButton, resetButton, clrButton, negButton, invButton, leftParenth, rightParenth, leftArrow, imaginaryNum;
+  JPanel panel;
 
-  /**
-   * constructor.
-   */
-  public ComplexCalc()
+  Font myFont = new Font("Serif", Font.BOLD, 30);
+
+  double num1 = 0, num2 = 0, result = 0;
+  char operator;
+
+  ComplexCalc()
   {
-    setSize(500, 210);
-    setAlwaysOnTop(true);
-    setResizable(false);
-    setTitle("Complex Calculator");
-    getContentPane().setLayout(new BorderLayout(0, 0));
-    this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-    JPanel displayPanel = new JPanel();
-    getContentPane().add(displayPanel, BorderLayout.NORTH);
+    frame = new JFrame("Calculator");
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setSize(420, 550);
+    frame.setLayout(null);
 
-    JTextArea textArea = new JTextArea();
-    textArea.setRows(5);
-    textArea.setColumns(50);
-    textArea.setEditable(false);
-    textArea.setTabSize(50);
-    displayPanel.add(textArea);
+    textfield = new JTextField();
+    textfield.setBounds(50, 25, 300, 50);
+    textfield.setFont(myFont);
+    textfield.setEditable(false);
 
-    JPanel inputPanel = new JPanel();
-    getContentPane().add(inputPanel, BorderLayout.CENTER);
+    resetButton = new JButton("R");
+    subButton = new JButton("-");
+    addButton = new JButton("+");
+    mulButton = new JButton("*");
+    divButton = new JButton("/");
+    decButton = new JButton(".");
+    equButton = new JButton("=");
+    clrButton = new JButton("Clr");
+    negButton = new JButton("(-)");
+    leftParenth = new JButton("(");
+    rightParenth = new JButton(")");
+    leftArrow = new JButton("<");
+    invButton = new JButton("Inv");
+    imaginaryNum = new JButton("i");
 
-    textField = new JTextField();
-    textField.setHorizontalAlignment(SwingConstants.RIGHT);
-    String tahoma = "Tahoma";
-    textField.setFont(new Font(tahoma, Font.PLAIN, 11));
-    inputPanel.add(textField);
-    textField.setColumns(45);
+    functionButtons[0] = addButton;
+    functionButtons[1] = subButton;
+    functionButtons[2] = mulButton;
+    functionButtons[3] = divButton;
+    functionButtons[4] = decButton;
+    functionButtons[5] = equButton;
+    functionButtons[6] = resetButton;
+    functionButtons[7] = clrButton;
+    functionButtons[8] = negButton;
+    functionButtons[9] = invButton;
+    functionButtons[10] = leftParenth;
+    functionButtons[11] = rightParenth;
+    functionButtons[12] = leftArrow;
+    functionButtons[13] = imaginaryNum;
 
-    // buttons 
-    JPanel buttonPanel = new JPanel();
-    getContentPane().add(buttonPanel, BorderLayout.SOUTH);
-
-    JButton resetButton = new JButton("R");
-    resetButton.setFont(new Font(tahoma, Font.BOLD, 20));
-    buttonPanel.add(resetButton);
-
-    // reset button action listener
-    resetButton.addActionListener(e ->
+    for (int i = 0; i < 13; i++)
     {
-      equalsPressed = false;
-      textArea.setText("");
-      textField.setText("");
-    });
+      functionButtons[i].addActionListener(this);
+      functionButtons[i].setFont(myFont);
+      functionButtons[i].setFocusable(false);
+    }
 
-    JButton clearButton = new JButton("C");
-    clearButton.setFont(new Font(tahoma, Font.BOLD, 20));
-    buttonPanel.add(clearButton);
-
-    // clear button action listener
-    clearButton.addActionListener(e -> textField.setText(""));
-
-    JButton addButton = new JButton(Operator.ADD.toString());
-    addButton.setFont(new Font(tahoma, Font.BOLD, 20));
-    buttonPanel.add(addButton);
-
-    // add button action listener
-    addButton.addActionListener(e -> appendOperand(textArea, Operator.ADD.toString()));
-
-    JButton subtractionButton = new JButton(Operator.SUBTRACT.toString());
-    subtractionButton.setFont(new Font(tahoma, Font.BOLD, 20));
-    buttonPanel.add(subtractionButton);
-
-    // subtraction button action listener
-    subtractionButton.addActionListener(e -> appendOperand(textArea, Operator.SUBTRACT.toString()));
-
-    JButton multButton = new JButton(Operator.MULTIPLY.toString());
-    multButton.setFont(new Font(tahoma, Font.BOLD, 20));
-    buttonPanel.add(multButton);
-
-    // multiplication button action listener
-    multButton.addActionListener(e -> appendOperand(textArea, Operator.MULTIPLY.toString()));
-
-    JButton divideButton = new JButton(Operator.DIVIDE.toString());
-    divideButton.setFont(new Font(tahoma, Font.BOLD, 20));
-    buttonPanel.add(divideButton);
-
-    // divide button action listener
-    divideButton.addActionListener(e -> appendOperand(textArea, Operator.DIVIDE.toString()));
-
-    JButton equalsButton = new JButton("=");
-    equalsButton.setFont(new Font(tahoma, Font.BOLD, 20));
-    buttonPanel.add(equalsButton);
-
-    // equals button action listener
-    equalsButton.addActionListener(e ->
+    for (int i = 0; i < 10; i++)
     {
-      try
+      numberButtons[i] = new JButton(String.valueOf(i));
+      numberButtons[i].addActionListener(this);
+      numberButtons[i].setFont(myFont);
+      numberButtons[i].setFocusable(false);
+    }
+
+    negButton.setBounds(50, 430, 100, 50);
+    resetButton.setBounds(150, 430, 100, 50);
+    clrButton.setBounds(250, 430, 100, 50);
+    numberButtons[0].setBounds(250, 430, 100, 50);
+
+    panel = new JPanel();
+    panel.setBounds(50, 100, 300, 300);
+    panel.setLayout(new GridLayout(5, 5, 11, 11));
+    panel.add(leftParenth);
+    panel.add(rightParenth);
+    panel.add(leftArrow);
+    panel.add(imaginaryNum);
+    panel.add(numberButtons[7]);
+    panel.add(numberButtons[8]);
+    panel.add(numberButtons[9]);
+    panel.add(addButton);
+    panel.add(numberButtons[4]);
+    panel.add(numberButtons[5]);
+    panel.add(numberButtons[6]);
+    panel.add(subButton);
+    panel.add(numberButtons[1]);
+    panel.add(numberButtons[2]);
+    panel.add(numberButtons[3]);
+    panel.add(mulButton);
+    // panel.add(decButton);
+    panel.add(numberButtons[0]);
+    panel.add(equButton);
+    panel.add(divButton);
+    frame.add(panel);
+    frame.add(negButton);
+    frame.add(resetButton);
+    frame.add(clrButton);
+    frame.add(textfield);
+    frame.setVisible(true);
+  }
+
+  public static void main(String[] args)
+  {
+
+    ComplexCalc calc = new ComplexCalc();
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e)
+  {
+
+    for (int i = 0; i < 10; i++)
+    {
+      if (e.getSource() == numberButtons[i])
       {
-        String operand = getTextField();
-        if (Parse.isValidOperand(operand))
-        {
-          textArea.append('(' + Parse.parseToken(getTextField()).toString() + ')');
-          result = Parse.evaluateExpression(textArea.getText());
-          textArea.append(" = " + result.toString());
-          textField.setText("");
-          equalsPressed = true;
-        }
-        else
-        {
-          JOptionPane.showMessageDialog(null, invalidOperand);
-        }
+        textfield.setText(textfield.getText().concat(String.valueOf(i)));
       }
-      catch (IllegalFormatExpressionException exception)
+    }
+    if (e.getSource() == decButton)
+    {
+      textfield.setText(textfield.getText().concat("."));
+    }
+    if (e.getSource() == addButton)
+    {
+      num1 = Double.parseDouble(textfield.getText());
+      operator = '+';
+      textfield.setText("");
+    }
+    if (e.getSource() == subButton)
+    {
+      num1 = Double.parseDouble(textfield.getText());
+      operator = '-';
+      textfield.setText("");
+    }
+    if (e.getSource() == mulButton)
+    {
+      num1 = Double.parseDouble(textfield.getText());
+      operator = '*';
+      textfield.setText("");
+    }
+    if (e.getSource() == divButton)
+    {
+      num1 = Double.parseDouble(textfield.getText());
+      operator = '/';
+      textfield.setText("");
+    }
+    if (e.getSource() == equButton)
+    {
+      num2 = Double.parseDouble(textfield.getText());
+
+      switch (operator)
       {
-        JOptionPane.showMessageDialog(null, "Invalid expression");
-        exception.printStackTrace();
+        case '+':
+          result = num1 + num2;
+          break;
+        case '-':
+          result = num1 - num2;
+          break;
+        case '*':
+          result = num1 * num2;
+          break;
+        case '/':
+          result = num1 / num2;
+          break;
       }
-
-    });
-
-  }
-
-  /**
-   * Launch the application.
-   *
-   * @param args
-   *     String array
-   */
-  public static void main(final String[] args)
-  {
-    ComplexCalc window = new ComplexCalc();
-    window.setVisible(true);
-  }
-
-  private void appendOperand(final JTextArea textArea, final String operand)
-  {
-    if (equalsPressed && textArea.getText().isEmpty())
-    {
-      textArea.setText('(' + result.toString() + ')' + ' ' + operand + ' ');
-      textField.setText("");
-      equalsPressed = false;
+      textfield.setText(String.valueOf(result));
+      num1 = result;
     }
-    else if (Parse.isValidOperand(getTextField()))
+    if (e.getSource() == clrButton)
     {
-      textArea.setText(
-          '(' + Parse.parseToken(getTextField()).toString() + ')' + ' ' + operand + ' ');
-      textField.setText("");
+      textfield.setText("");
     }
-    else
+    if (e.getSource() == resetButton)
     {
-      JOptionPane.showMessageDialog(null, invalidOperand);
+      String string = textfield.getText();
+      textfield.setText("");
+      for (int i = 0; i < string.length() - 1; i++)
+      {
+        textfield.setText(textfield.getText() + string.charAt(i));
+      }
     }
-  }
-
-  @Override public void actionPerformed(final ActionEvent e)
-  {
-    // TODO Auto-generated method stub
-  }
-
-  /**
-   * Getter method for text field input.
-   *
-   * @return String input
-   */
-  public String getTextField()
-  {
-    return this.textField.getText();
+    if (e.getSource() == negButton)
+    {
+      double temp = Double.parseDouble(textfield.getText());
+      temp *= -1;
+      textfield.setText(String.valueOf(temp));
+    }
   }
 }
+
