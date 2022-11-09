@@ -16,5 +16,5 @@ public interface Evaluatable
    * @param expression the current expression
    * @return the ComplexNumber based on this nodes value and the state of the expression.
    */
-  utilities.ComplexNumber evaluate(final Deque<Evaluatable> expression);
+  ComplexNumber evaluate(final Deque<Evaluatable> expression);
 }
