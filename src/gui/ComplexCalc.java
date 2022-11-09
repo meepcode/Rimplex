@@ -89,6 +89,8 @@ public class ComplexCalc extends JFrame implements ActionListener
       functionButtons[i].setFocusable(false);
     }
 
+    imaginaryNum.setFont(new Font("Serif", Font.ITALIC, 30));
+
     for (int i = 0; i < 10; i++)
     {
       numberButtons[i] = new JButton(String.valueOf(i));
