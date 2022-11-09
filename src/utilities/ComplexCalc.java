@@ -59,7 +59,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     inputPanel.add(textField);
     textField.setColumns(45);
 
-    // buttons 
+    // buttons
     JPanel buttonPanel = new JPanel();
     getContentPane().add(buttonPanel, BorderLayout.SOUTH);
 
@@ -172,7 +172,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         finalExpression.concat('(' + getTextField() + ") x");
         textArea.setText(finalExpression);
 
-        //textArea.setFont(new Font("Tohoma", Font.BOLD, 15));
+        // textArea.setFont(new Font("Tohoma", Font.BOLD, 15));
 
         if (equalsPressed)
         {
@@ -242,8 +242,8 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
 
         // TODO
-    	  finalExpression.concat("=");
-          textArea.setText(finalExpression);
+        finalExpression.concat("=");
+        textArea.setText(finalExpression);
 
         try
         {
@@ -269,7 +269,6 @@ public class ComplexCalc extends JFrame implements ActionListener
           exception.printStackTrace();
         }
 
-
       }
     });
 
@@ -279,7 +278,7 @@ public class ComplexCalc extends JFrame implements ActionListener
    * Launch the application.
    *
    * @param args
-   *     String array
+   *          String array
    */
   public static void main(final String[] args)
   {
@@ -287,7 +286,8 @@ public class ComplexCalc extends JFrame implements ActionListener
     window.setVisible(true);
   }
 
-  @Override public void actionPerformed(final ActionEvent e)
+  @Override
+  public void actionPerformed(final ActionEvent e)
   {
     // TODO Auto-generated method stub
 
