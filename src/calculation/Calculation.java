@@ -1,4 +1,4 @@
-package utilities;
+package calculation;
 
 /**
  * Represents a calculation of two complex numbers.

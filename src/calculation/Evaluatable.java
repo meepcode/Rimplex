@@ -1,4 +1,4 @@
-package utilities;
+package calculation;
 
 import java.util.Deque;
 
@@ -16,5 +16,5 @@ public interface Evaluatable
    * @param expression the current expression
    * @return the ComplexNumber based on this nodes value and the state of the expression.
    */
-  ComplexNumber evaluate(final Deque<Evaluatable> expression);
+  utilities.ComplexNumber evaluate(final Deque<Evaluatable> expression);
 }

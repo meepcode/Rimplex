@@ -1,4 +1,4 @@
-package utilities;
+package calculation;
 
 /**
  * Complex number methods for calculations.
@@ -58,14 +58,20 @@ public class Calculate
    */
   public static ComplexNumber divide(final ComplexNumber op1, final ComplexNumber op2)
   {
+    
+    if (op2.getReal() == 0.0 && op2.getImaginary() == 0.0) 
+    {
+      throw new ArithmeticException();
+    }
     // For op1 / op2
     // Both numerator and divisor have to be multiplied by the divisior's reciprocal
     ComplexNumber reciprocal = new ComplexNumber(op2.getReal(), op2.getImaginary() * -1);
     ComplexNumber numerator = multiply(op1, reciprocal);
     ComplexNumber denominator = multiply(op2, reciprocal);
     // This should result in a complex number of the form a + bi / a + bi
-    Double realResult = null;
-    if (denominator.getReal() == 0.0) // Avoid zero division error
+    Double realResult;
+    
+    if (numerator.getReal() == 0.0) // Avoid zero division error
     { 
       realResult = numerator.getReal();
     } else 
@@ -73,15 +79,9 @@ public class Calculate
       realResult = numerator.getReal() / denominator.getReal();
     }
     
-    Double imaginaryResult = null;
-
-    if (denominator.getImaginary() == 0.0) // Avoid zero division error
-    { 
-      imaginaryResult = numerator.getImaginary();
-    } else 
-    {
-      imaginaryResult = numerator.getImaginary() / denominator.getImaginary();
-    }
+    // Because you have to multiply by conjugate, the denominator will always end up as a real num
+    Double imaginaryResult = numerator.getImaginary() / denominator.getReal();
+    
     return new ComplexNumber(realResult, imaginaryResult);
   }
 }
