@@ -137,6 +137,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   {
 
     ComplexCalc calc = new ComplexCalc();
+    System.out.println();
   }
 
   @Override
