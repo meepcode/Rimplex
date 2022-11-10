@@ -26,6 +26,11 @@ import java.io.Serial;
  */
 public class ComplexCalc extends JFrame implements ActionListener
 {
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
+  
   JFrame frame;
   JTextField textfield;
   JButton[] numberButtons = new JButton[10];
