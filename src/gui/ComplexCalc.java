@@ -29,9 +29,9 @@ public class ComplexCalc extends JFrame implements ActionListener
   JFrame frame;
   JTextField textfield;
   JButton[] numberButtons = new JButton[10];
-  JButton[] functionButtons = new JButton[14];
+  JButton[] functionButtons = new JButton[15];
   JButton addButton, subButton, mulButton, divButton;
-  JButton decButton, equButton, resetButton, clrButton, negButton, invButton, leftParenth, rightParenth, leftArrow, imaginaryNum;
+  JButton decButton, equButton, resetButton, clrButton, negButton, invButton, leftParenth, rightParenth, leftArrow, imaginaryNum, logButton;
   JPanel panel;
 
   Font myFont = new Font("Serif", Font.BOLD, 30);
@@ -44,7 +44,7 @@ public class ComplexCalc extends JFrame implements ActionListener
 
     frame = new JFrame("Calculator");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setSize(420, 550);
+    frame.setSize(420, 460);
     frame.setLayout(null);
 
     textfield = new JTextField();
@@ -66,6 +66,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     leftArrow = new JButton("<");
     invButton = new JButton("Inv");
     imaginaryNum = new JButton("i");
+    logButton = new JButton("Log");
 
     functionButtons[0] = addButton;
     functionButtons[1] = subButton;
@@ -81,8 +82,9 @@ public class ComplexCalc extends JFrame implements ActionListener
     functionButtons[11] = rightParenth;
     functionButtons[12] = leftArrow;
     functionButtons[13] = imaginaryNum;
+    functionButtons[14] = logButton;
 
-    for (int i = 0; i < 13; i++)
+    for (int i = 0; i < 14; i++)
     {
       functionButtons[i].addActionListener(this);
       functionButtons[i].setFont(myFont);
@@ -90,6 +92,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     }
 
     imaginaryNum.setFont(new Font("Serif", Font.ITALIC, 30));
+    logButton.setFont(new Font("Serif", Font.ITALIC, 30));
 
     for (int i = 0; i < 10; i++)
     {
@@ -99,39 +102,38 @@ public class ComplexCalc extends JFrame implements ActionListener
       numberButtons[i].setFocusable(false);
     }
 
-    negButton.setBounds(50, 430, 100, 50);
-    resetButton.setBounds(150, 430, 100, 50);
-    clrButton.setBounds(250, 430, 100, 50);
-    numberButtons[0].setBounds(250, 430, 100, 50);
-
     panel = new JPanel();
     panel.setBounds(50, 100, 300, 300);
-    panel.setLayout(new GridLayout(5, 5, 11, 11));
-    panel.add(leftParenth);
-    panel.add(rightParenth);
-    panel.add(leftArrow);
-    panel.add(imaginaryNum);
-    panel.add(numberButtons[7]);
-    panel.add(numberButtons[8]);
-    panel.add(numberButtons[9]);
-    panel.add(addButton);
-    panel.add(numberButtons[4]);
-    panel.add(numberButtons[5]);
-    panel.add(numberButtons[6]);
-    panel.add(subButton);
+    panel.setLayout(new GridLayout(5, 4, 10, 10));
+
     panel.add(numberButtons[1]);
     panel.add(numberButtons[2]);
     panel.add(numberButtons[3]);
+    panel.add(addButton);
+    panel.add(subButton);
+
+    panel.add(numberButtons[4]);
+    panel.add(numberButtons[5]);
+    panel.add(numberButtons[6]);
     panel.add(mulButton);
+    panel.add(divButton);
+
+    panel.add(numberButtons[7]);
+    panel.add(numberButtons[8]);
+    panel.add(numberButtons[9]);
+    panel.add(leftParenth);
+    panel.add(rightParenth);
     panel.add(decButton);
     panel.add(numberButtons[0]);
     panel.add(equButton);
-    panel.add(divButton);
-    frame.add(panel);
-    frame.add(negButton);
-    frame.add(resetButton);
-    frame.add(clrButton);
+    panel.add(negButton);
+    panel.add(resetButton);
+    panel.add(clrButton);
+    panel.add(logButton);
+    panel.add(invButton);
     frame.add(textfield);
+    frame.add(panel);
+
     frame.setVisible(true);
   }
 
@@ -160,25 +162,25 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       num1 = Double.parseDouble(textfield.getText());
       operator = '+';
-      textfield.setText("");
+      textfield.setText(num1 + "+");
     }
     if (e.getSource() == subButton)
     {
       num1 = Double.parseDouble(textfield.getText());
       operator = '-';
-      textfield.setText("");
+      textfield.setText(num1 + "-");
     }
     if (e.getSource() == mulButton)
     {
       num1 = Double.parseDouble(textfield.getText());
       operator = '*';
-      textfield.setText("");
+      textfield.setText(num1 + "*");
     }
     if (e.getSource() == divButton)
     {
       num1 = Double.parseDouble(textfield.getText());
       operator = '/';
-      textfield.setText("");
+      textfield.setText(num1 + "/");
     }
     if (e.getSource() == equButton)
     {
