@@ -59,7 +59,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     divButton = new JButton("/");
     decButton = new JButton(".");
     equButton = new JButton("=");
-    clrButton = new JButton("Clr");
+    clrButton = new JButton("C");
     negButton = new JButton("(-)");
     leftParenth = new JButton("(");
     rightParenth = new JButton(")");
@@ -92,7 +92,12 @@ public class ComplexCalc extends JFrame implements ActionListener
     }
 
     imaginaryNum.setFont(new Font("Serif", Font.ITALIC, 30));
-    logButton.setFont(new Font("Serif", Font.ITALIC, 30));
+    logButton.setFont(new Font("Serif", Font.BOLD, 10));
+    invButton.setFont(new Font("Serif", Font.BOLD, 10));
+    negButton.setFont(new Font("Serif", Font.BOLD, 10));
+    resetButton.setFont(new Font("Serif", Font.BOLD, 20));
+    clrButton.setFont(new Font("Serif", Font.BOLD, 20));
+
 
     for (int i = 0; i < 10; i++)
     {
@@ -101,6 +106,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       numberButtons[i].setFont(myFont);
       numberButtons[i].setFocusable(false);
     }
+
 
     panel = new JPanel();
     panel.setBounds(50, 100, 300, 300);
@@ -127,10 +133,11 @@ public class ComplexCalc extends JFrame implements ActionListener
     panel.add(numberButtons[0]);
     panel.add(equButton);
     panel.add(negButton);
+    panel.add(invButton);
     panel.add(resetButton);
     panel.add(clrButton);
     panel.add(logButton);
-    panel.add(invButton);
+    panel.add(imaginaryNum);
     frame.add(textfield);
     frame.add(panel);
 
@@ -139,7 +146,6 @@ public class ComplexCalc extends JFrame implements ActionListener
 
   public static void main(String[] args)
   {
-
     ComplexCalc calc = new ComplexCalc();
   }
 
