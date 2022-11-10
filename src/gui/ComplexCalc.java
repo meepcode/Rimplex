@@ -36,7 +36,7 @@ public class ComplexCalc extends JFrame implements ActionListener
 
   Font myFont = new Font("Serif", Font.BOLD, 30);
 
-  double num1 = 0, num2 = 0, result = 0;
+  double num = 0;
   char operator;
 
   ComplexCalc()
@@ -98,7 +98,6 @@ public class ComplexCalc extends JFrame implements ActionListener
     resetButton.setFont(new Font("Serif", Font.BOLD, 20));
     clrButton.setFont(new Font("Serif", Font.BOLD, 20));
 
-
     for (int i = 0; i < 10; i++)
     {
       numberButtons[i] = new JButton(String.valueOf(i));
@@ -106,7 +105,6 @@ public class ComplexCalc extends JFrame implements ActionListener
       numberButtons[i].setFont(myFont);
       numberButtons[i].setFocusable(false);
     }
-
 
     panel = new JPanel();
     panel.setBounds(50, 100, 300, 300);
@@ -166,50 +164,21 @@ public class ComplexCalc extends JFrame implements ActionListener
     }
     if (e.getSource() == addButton)
     {
-      num1 = Double.parseDouble(textfield.getText());
-      operator = '+';
-      textfield.setText(num1 + "+");
+      textfield.setText(textfield.getText() + "+");
     }
     if (e.getSource() == subButton)
     {
-      num1 = Double.parseDouble(textfield.getText());
-      operator = '-';
-      textfield.setText(num1 + "-");
+      textfield.setText(textfield.getText() + "-");
     }
     if (e.getSource() == mulButton)
     {
-      num1 = Double.parseDouble(textfield.getText());
-      operator = '*';
-      textfield.setText(num1 + "*");
+      textfield.setText(textfield.getText() + "*");
     }
     if (e.getSource() == divButton)
     {
-      num1 = Double.parseDouble(textfield.getText());
-      operator = '/';
-      textfield.setText(num1 + "/");
+      textfield.setText(textfield.getText() + "/");
     }
-    if (e.getSource() == equButton)
-    {
-      num2 = Double.parseDouble(textfield.getText());
 
-      switch (operator)
-      {
-        case '+':
-          result = num1 + num2;
-          break;
-        case '-':
-          result = num1 - num2;
-          break;
-        case '*':
-          result = num1 * num2;
-          break;
-        case '/':
-          result = num1 / num2;
-          break;
-      }
-      textfield.setText(String.valueOf(result));
-      num1 = result;
-    }
     if (e.getSource() == clrButton)
     {
       textfield.setText("");
