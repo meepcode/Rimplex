@@ -179,11 +179,11 @@ public class ComplexCalc extends JFrame implements ActionListener
       textfield.setText(textfield.getText() + "/");
     }
 
-    if (e.getSource() == clrButton)
+    if (e.getSource() == resetButton)
     {
       textfield.setText("");
     }
-    if (e.getSource() == resetButton)
+    if (e.getSource() == clrButton)
     {
       String string = textfield.getText();
       textfield.setText("");
