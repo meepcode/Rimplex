@@ -1,37 +1,88 @@
 package gui;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 
-public class MenuBar extends JFrame
+public class MenuBar implements ActionListener
 {
  
-  JMenuBar menuBar;
-  JMenu file, edit, help;
-  JMenuItem print, exit, lang, mode, about;
   
-  public MenuBar() {
+  public JMenuBar createMenuBar() {
+    
+    JMenuBar menuBar;
+    JMenu file, edit, help;
+    JMenuItem print, exit, lang, mode, about;
     
     menuBar = new JMenuBar();
     
     // file menu along menubar
     file = new JMenu("File");
-    print = new JMenuItem("Print");
-    exit = new JMenuItem("Exit");
     menuBar.add(file);
+    
+    print = new JMenuItem("Print");
+    file.add(print);
+    file.addActionListener(this);
+    print.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        MenuItemWindow p = new MenuItemWindow();
+      }
+    });
+    
+    exit = new JMenuItem("Exit");
+    file.add(exit);
+    exit.addActionListener(this);
+    exit.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+       System.exit(0);
+      }
+    });
     
     // edit menu along menubar
     edit = new JMenu("Edit");
-    lang = new JMenuItem("Language");
-    mode = new JMenuItem("Mode");
     menuBar.add(edit);
+    
+    lang = new JMenuItem("Language");
+    edit.add(lang);
+    lang.addActionListener(this);
+    lang.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        MenuItemWindow l = new MenuItemWindow();
+      }
+    });
+    mode = new JMenuItem("Mode");
+    edit.add(mode);
+    mode.addActionListener(this);
+    mode.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        MenuItemWindow m = new MenuItemWindow();
+      }
+    });
     
     // help menu along menubar
     help = new JMenu("Help");
-    about = new JMenuItem("About");
     menuBar.add(help);
     
-    menuBar.setVisible(true);
+    about = new JMenuItem("About");
+    help.add(about);
+    about.addActionListener(this);
+    help.addActionListener(new ActionListener() {
+      public void actionPerformed(ActionEvent e) {
+        MenuItemWindow a = new MenuItemWindow();
+      }
+    });
+    
+    return menuBar;
+  }
+
+  @Override
+  public void actionPerformed(ActionEvent e)
+  {
+    // TODO Auto-generated method stub
+    
   }
 }
