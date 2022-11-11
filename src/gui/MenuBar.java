@@ -75,7 +75,7 @@ public class MenuBar implements ActionListener
     help.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         MenuItemWindow a = new MenuItemWindow();
-        Font myFont = new Font("Serif", Font.BOLD, 10);
+        Font myFont = new Font("Serif", Font.BOLD, 15);
         JTextField text = new JTextField("This calculator performs operations on the given complex number operands."
             + " A history of results from previous calculations are stored in the history panel.");
         a.add(text);
