@@ -1,35 +1,4 @@
-<<<<<<< HEAD
-package testing;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import org.junit.jupiter.api.Test;
-
-import utilities.Calculate;
-import utilities.ComplexNumber;
-
-class CalculateTest
-{
-  private final ComplexNumber comp1 = new ComplexNumber(6.0, 4.0);
-  private final ComplexNumber comp2 = new ComplexNumber(3.0, 2.0);
-  
-  @Test
-  void calculateTest()
-  {
-    // subtract
-    assertEquals(new ComplexNumber(3.0, 2.0), Calculate.subtract(comp1, comp2));
-    // add
-    assertEquals(new ComplexNumber(9.0, 6.0), Calculate.add(comp1, comp2));
-    // divide  
-    assertEquals(new ComplexNumber(2.0, 2.0), Calculate.divide(comp1, comp2));
-    // multiply
-    assertEquals(new ComplexNumber(18.0, 8.0), Calculate.multiply(comp1, comp2));
-    
-  }
-
-}
-
-=======
 package testing;
 
 import org.junit.jupiter.api.Test;
@@ -51,7 +20,8 @@ class CalculateTest
   /**
    * Test subtract.
    */
-  @Test void testSubtract()
+  @Test
+  void testSubtract()
   {
     assertEquals(new ComplexNumber(3.0, 2.0), Calculate.subtract(comp1, comp2));
   }
@@ -59,7 +29,8 @@ class CalculateTest
   /**
    * Test add.
    */
-  @Test void testAdd()
+  @Test
+  void testAdd()
   {
     assertEquals(new ComplexNumber(9.0, 6.0), Calculate.add(comp1, comp2));
   }
@@ -67,7 +38,8 @@ class CalculateTest
   /**
    * Test divide.
    */
-  @Test void testDivide()
+  @Test
+  void testDivide()
   {
     assertEquals(new ComplexNumber(2.0, 0.0), Calculate.divide(comp1, comp2));
   }
@@ -75,7 +47,8 @@ class CalculateTest
   /**
    * Test multiply.
    */
-  @Test void testMultiply()
+  @Test
+  void testMultiply()
   {
     assertEquals(new ComplexNumber(10.0, 24.0), Calculate.multiply(comp1, comp2));
   }
@@ -83,7 +56,8 @@ class CalculateTest
   /**
    * Test multiply with a 0 real value.
    */
-  @Test void testMultiplyZeroReal()
+  @Test
+  void testMultiplyZeroReal()
   {
     assertEquals(new ComplexNumber(-8.0, 12.0), Calculate.multiply(comp1, comp3));
   }
@@ -91,7 +65,8 @@ class CalculateTest
   /**
    * Test multiply with a 0 imaginary value.
    */
-  @Test void testMultiplyZeroImaginary()
+  @Test
+  void testMultiplyZeroImaginary()
   {
     assertEquals(new ComplexNumber(12.0, 8.0), Calculate.multiply(comp1, comp4));
   }
@@ -99,7 +74,8 @@ class CalculateTest
   /**
    * Test divide with a 0 real value in divisor.
    */
-  @Test void testDivideZeroRealDivisor()
+  @Test
+  void testDivideZeroRealDivisor()
   {
     assertEquals(new ComplexNumber(2.0, -3.0), Calculate.divide(comp1, comp3));
   }
@@ -107,7 +83,8 @@ class CalculateTest
   /**
    * Test divide with a 0 imaginary value in divisor.
    */
-  @Test void testDivideZeroImaginaryDivisor()
+  @Test
+  void testDivideZeroImaginaryDivisor()
   {
     assertEquals(new ComplexNumber(3.0, 2.0), Calculate.divide(comp1, comp4));
   }
@@ -115,7 +92,8 @@ class CalculateTest
   /**
    * Test divide with a 0 real value in numerator.
    */
-  @Test void testDivideZeroRealNumerator()
+  @Test
+  void testDivideZeroRealNumerator()
   {
     assertEquals(new ComplexNumber(2.0 / 13, 3.0 / 13), Calculate.divide(comp3, comp1));
   }
@@ -123,7 +101,8 @@ class CalculateTest
   /**
    * Test divide with a 0 imaginary value in numerator.
    */
-  @Test void testDivideZeroImaginaryNumerator()
+  @Test
+  void testDivideZeroImaginaryNumerator()
   {
     assertEquals(new ComplexNumber(3.0 / 13, -2.0 / 13), Calculate.divide(comp4, comp1));
   }
@@ -131,7 +110,8 @@ class CalculateTest
   /**
    * Test divide with by 0 + 0i.
    */
-  @Test void testDivideByZero()
+  @Test
+  void testDivideByZero()
   {
     assertThrows(ArithmeticException.class, () -> Calculate.divide(comp1, comp5));
   }
@@ -139,7 +119,8 @@ class CalculateTest
   /**
    * Test divide with a 0 values in numerator and denominator.
    */
-  @Test void testDivideMultipleZero()
+  @Test
+  void testDivideMultipleZero()
   {
     assertEquals(new ComplexNumber(0.0, 2.0), Calculate.divide(comp4, comp6));
   }
@@ -147,24 +128,28 @@ class CalculateTest
   /**
    * Test constructor.
    */
-  @SuppressWarnings("InstantiationOfUtilityClass") @Test void testConstructor()
+  @SuppressWarnings("InstantiationOfUtilityClass")
+  @Test
+  void testConstructor()
   {
     new Calculate();
   }
 
-  @Test void subtractTest()
+  @Test
+  void subtractTest()
   {
     assertEquals(new ComplexNumber(3.0, 2.0), Calculate.subtract(comp1, comp2));
   }
 
-  @Test void divideTest()
+  @Test
+  void divideTest()
   {
     assertEquals(new ComplexNumber(2.0, 0.0), Calculate.divide(comp1, comp2));
   }
 
-  @Test void multiplyTest()
+  @Test
+  void multiplyTest()
   {
     assertEquals(new ComplexNumber(10.0, 24.0), Calculate.multiply(comp1, comp2));
   }
 }
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
