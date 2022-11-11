@@ -43,6 +43,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setSize(420, 460);
     frame.setLayout(null);
+    frame.setResizable(false);
 
     textfield = new JTextField();
     textfield.setBounds(50, 25, 300, 50);
