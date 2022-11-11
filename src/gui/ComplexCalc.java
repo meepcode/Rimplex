@@ -46,11 +46,11 @@ public class ComplexCalc extends JFrame implements ActionListener
 
   ComplexCalc()
   {
-
     frame = new JFrame("Calculator");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setSize(420, 460);
     frame.setLayout(null);
+    frame.setResizable(false);
 
     textfield = new JTextField();
     textfield.setBounds(50, 25, 300, 50);
@@ -203,6 +203,22 @@ public class ComplexCalc extends JFrame implements ActionListener
       double temp = Double.parseDouble(textfield.getText());
       temp *= -1;
       textfield.setText(String.valueOf(temp));
+    }
+    if (e.getSource() == imaginaryNum)
+    {
+      textfield.setText(textfield.getText() + "i");
+    }
+    if (e.getSource() == leftParenth)
+    {
+      textfield.setText(textfield.getText() + "(");
+    }
+    if (e.getSource() == rightParenth)
+    {
+      textfield.setText(textfield.getText() + ")");
+    }
+    if (e.getSource() == logButton)
+    {
+      textfield.setText(textfield.getText() + "log");
     }
   }
 }
