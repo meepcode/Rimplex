@@ -202,6 +202,14 @@ public class ComplexCalc extends JFrame implements ActionListener
     if(e.getSource() == imaginaryNum){
       textfield.setText(textfield.getText() + "i");
     }
+    if(e.getSource() == leftParenth){
+      textfield.setText(textfield.getText() + "(");
+
+    }
+    if(e.getSource() == rightParenth){
+      textfield.setText(textfield.getText() + ")");
+
+    }
   }
 }
 
