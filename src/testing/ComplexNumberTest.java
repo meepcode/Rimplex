@@ -17,11 +17,12 @@ class ComplexNumberTest
   // even even
   private final double real2 = 10.0;
   private final double imag2 = 8.0;
-  
-  private final double real3 = 10.0;
+
+  private final double real3 = 6.0;
   private final double imag3 = 4.0;
 
   private final double imagN = -11.0;
+  // private final double realN = -9.0;
 
   private final ComplexNumber test = new ComplexNumber(real, imag);
   private final ComplexNumber test1 = new ComplexNumber(real1, imag1);
@@ -31,9 +32,10 @@ class ComplexNumberTest
   // negative imaginary part
   private final ComplexNumber negI = new ComplexNumber(real, imagN);
   // both negative real and imaginary
+  // private final ComplexNumber bothNeg = new ComplexNumber(realN, imagN);
 
   /**
-   *  Test getReal.
+   * Test getReal.
    */
   @Test
   void testGetReal()
@@ -42,9 +44,9 @@ class ComplexNumberTest
     assertEquals(5.0, test1.getReal());
     assertEquals(10.0, test2.getReal());
   }
-  
+
   /**
-   *  Test getImaginary.
+   * Test getImaginary.
    */
   @Test
   void testGetImaginary()
@@ -53,85 +55,82 @@ class ComplexNumberTest
     assertEquals(7.0, test1.getImaginary());
     assertEquals(8.0, test2.getImaginary());
   }
-  
+
   /**
    * Test toString.
    */
   @Test
-  void testToString() 
+  void testToString()
   {
-<<<<<<< HEAD
-    String complexNumberString = "%.1f+%.1fð�˜ª";
-=======
-    String complexNumberString = "%.1f+%.1fi";
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
+    String complexNumberString = "%.1f+%.1fi";
     String sTest = String.format(complexNumberString, real, imag);
     assertEquals(sTest, test.toString());
     String sTest1 = String.format(complexNumberString, real1, imag1);
     assertEquals(sTest1, test1.toString());
-<<<<<<< HEAD
-    String sNegI = String.format("%.1f-%.1fð�˜ª", real, Math.abs(imagN));
-=======
     String sNegI = String.format("%.1f-%.1fi", real, Math.abs(imagN));
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
     assertEquals(sNegI, negI.toString());
   }
-  
+
   /**
    * Test evaluate.
    */
   @Test
-  void testEvaluate() 
+  void testEvaluate()
   {
     assertEquals(test, test.evaluate(null));
   }
-  
+
   /**
    * Test equals with two equal complex number.
    */
   @Test
-  void testEqualsTrue() 
+  void testEqualsTrue()
   {
     assertEquals(test, test);
+    assertEquals(test, new ComplexNumber(real, imag));
   }
-  
+
   /**
    * Test equals with different complex numbers.
    */
   @Test
-  void testEqualsFalse() 
+  void testEqualsFalse()
   {
     assertNotEquals(test2, test);
+    assertNotEquals(test3, test);
   }
-  
+
   /**
    * Test equals with an object other than a complex number.
    */
   @Test
-  void testEqualsNotComplex() 
+  void testEqualsNotComplex()
   {
     assertNotEquals(real, test2, String.valueOf(0.0));
+    // without this return false isn't covered
+    assertNotEquals(test2, 0);
+    // assertNotEquals(test2, null);
   }
-  
+
   /**
-   * Test equals with when real part differs.
+   * Test equals when real part differs.
    */
   @Test
-  void testEqualsDiffReal() 
+  void testEqualsDiffReal()
   {
-    assertNotEquals(test2, test1);
+    assertNotEquals(test2, new ComplexNumber(real3, imag2));
   }
-  
+
   /**
-   * Test equals with when imaginary part differs.
+   * Test equals when imaginary part differs.
    */
   @Test
-  void testEqualsDiffImaginary() 
+  void testEqualsDiffImaginary()
   {
-    assertNotEquals(test2, test3);
+    assertNotEquals(test2, new ComplexNumber(real2, imag3));
   }
-  
+
   /**
    * Test hashcode.
    */
@@ -142,4 +141,3 @@ class ComplexNumberTest
   }
 
 }
-
