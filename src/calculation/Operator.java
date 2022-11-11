@@ -7,17 +7,20 @@ import java.util.Deque;
  */
 public enum Operator implements Evaluatable
 {
-  ADD("+", 0, Calculate::add), SUBTRACT("-", 0, Calculate::subtract), MULTIPLY("*", 1,
-    Calculate::multiply), DIVIDE("/", 1, Calculate::divide);
+  ADD("+", 0, 2, Calculate::add), SUBTRACT("-", 0, 2, Calculate::subtract), MULTIPLY("*", 1, 2,
+    Calculate::multiply), DIVIDE("/", 1, 2, Calculate::divide);
 
   private final String token;
   private final int precedence;
+  private final int operandCount;
   private final Calculation calculation;
 
-  Operator(final String token, final int precedence, final Calculation calculation)
+  Operator(final String token, final int precedence, final int operandCount,
+      final Calculation calculation)
   {
     this.token = token;
     this.precedence = precedence;
+    this.operandCount = operandCount;
     this.calculation = calculation;
   }
 
@@ -43,6 +46,7 @@ public enum Operator implements Evaluatable
 
   /**
    * Gets an array of all the operators.
+   *
    * @return an array of all the operators
    */
   public static Operator[] operators()
@@ -52,9 +56,14 @@ public enum Operator implements Evaluatable
 
   @Override public ComplexNumber evaluate(final Deque<Evaluatable> expression)
   {
-    ComplexNumber right = expression.pop().evaluate(expression);
-    ComplexNumber left = expression.pop().evaluate(expression);
-    return calculation.calculate(left, right);
+    ComplexNumber[] operands = new ComplexNumber[operandCount];
+
+    for (int i = operandCount - 1; i >= 0; i--)
+    {
+      operands[i] = expression.pop().evaluate(expression);
+    }
+
+    return calculation.calculate(operands);
   }
 
   /**

@@ -8,60 +8,104 @@ package calculation;
  */
 public class Calculate
 {
-  
+
+  private static final String BAD_ARGUMENT_COUNT_STRING = "Argument Count: Expected %d, Actual %d";
+
   /**
    * Adds two complex numbers.
-   * @param op1 First operand.
-   * @param op2 Second operand.
-   * @return The resulting complex number.
+   *
+   * @param operands
+   *     the operands to be added
+   * @return The resulting complex number
+   * @throws IllegalArgumentException
+   *     if the number of arguments is not equal to 2
    */
-  public static ComplexNumber add(final ComplexNumber op1, final ComplexNumber op2)
+  public static ComplexNumber add(final ComplexNumber... operands)
   {
+    if (operands.length != 2)
+    {
+      throw new IllegalArgumentException(
+          String.format(BAD_ARGUMENT_COUNT_STRING, 2, operands.length));
+    }
+
+    ComplexNumber op1 = operands[0];
+    ComplexNumber op2 = operands[1];
     Double realResult = op1.getReal() + op2.getReal();
     Double imaginaryResult = op1.getImaginary() + op2.getImaginary();
-    return new ComplexNumber(realResult, imaginaryResult);  
+    return new ComplexNumber(realResult, imaginaryResult);
   }
-  
+
   /**
    * Subtracts two complex numbers.
-   * @param op1 First operand.
-   * @param op2 Second operand.
-   * @return The resulting complex number.
+   *
+   * @param operands
+   *     the operands to be subtracted
+   * @return The resulting complex number
+   * @throws IllegalArgumentException
+   *     if the number of operands is not equal to 2
    */
-  public static ComplexNumber subtract(final ComplexNumber op1, final ComplexNumber op2)
+  public static ComplexNumber subtract(final ComplexNumber... operands)
   {
+    if (operands.length != 2)
+    {
+      throw new IllegalArgumentException(
+          String.format(BAD_ARGUMENT_COUNT_STRING, 2, operands.length));
+    }
+
+    ComplexNumber op1 = operands[0];
+    ComplexNumber op2 = operands[1];
     Double realResult = op1.getReal() - op2.getReal();
     Double imaginaryResult = op1.getImaginary() - op2.getImaginary();
     return new ComplexNumber(realResult, imaginaryResult);
   }
-  
+
   /**
    * Multiplies two complex numbers.
-   * @param op1 First operand.
-   * @param op2 Second operand.
-   * @return The resulting complex number.
+   *
+   * @param operands
+   *     the operands to be multiplied
+   * @return The resulting complex number
+   * @throws IllegalArgumentException
+   *     if the number of arguments is not equal to 2
    */
-  public static ComplexNumber multiply(final ComplexNumber op1, final ComplexNumber op2)
-  {    
+  public static ComplexNumber multiply(final ComplexNumber... operands)
+  {
+    if (operands.length != 2)
+    {
+      throw new IllegalArgumentException(
+          String.format(BAD_ARGUMENT_COUNT_STRING, 2, operands.length));
+    }
+
+    ComplexNumber op1 = operands[0];
+    ComplexNumber op2 = operands[1];
     Double realResult = op1.getReal() * op2.getReal() - op1.getImaginary() * op2.getImaginary();
-    Double imaginaryResult = op1.getReal() * op2.getImaginary() 
-        + op1.getImaginary() * op2.getReal();
+    Double imaginaryResult =
+        op1.getReal() * op2.getImaginary() + op1.getImaginary() * op2.getReal();
 
     return new ComplexNumber(realResult, imaginaryResult);
   }
-  
+
   /**
    * Divides two complex numbers.
-   * @param op1 First operand.
-   * @param op2 Second operand.
+   *
+   * @param operands
+   *     the operands to divide together
    * @return The resulting complex number.
    */
-  public static ComplexNumber divide(final ComplexNumber op1, final ComplexNumber op2)
+  public static ComplexNumber divide(final ComplexNumber... operands)
   {
-    
-    if (op2.getReal() == 0.0 && op2.getImaginary() == 0.0) 
+    if (operands.length != 2)
     {
-      throw new ArithmeticException();
+      throw new IllegalArgumentException(
+          String.format(BAD_ARGUMENT_COUNT_STRING, 2, operands.length));
+    }
+
+    ComplexNumber op1 = operands[0];
+    ComplexNumber op2 = operands[1];
+
+    if (op2.getReal() == 0.0 && op2.getImaginary() == 0.0)
+    {
+      throw new ArithmeticException("Divide by 0");
     }
     // For op1 / op2
     // Both numerator and divisor have to be multiplied by the divisior's reciprocal
@@ -70,18 +114,29 @@ public class Calculate
     ComplexNumber denominator = multiply(op2, reciprocal);
     // This should result in a complex number of the form a + bi / a + bi
     Double realResult;
-    
+
     if (numerator.getReal() == 0.0) // Avoid zero division error
-    { 
+    {
       realResult = numerator.getReal();
-    } else 
+    }
+    else
     {
       realResult = numerator.getReal() / denominator.getReal();
     }
-    
+
     // Because you have to multiply by conjugate, the denominator will always end up as a real num
     Double imaginaryResult = numerator.getImaginary() / denominator.getReal();
-    
+
     return new ComplexNumber(realResult, imaginaryResult);
+  }
+  
+  /**
+   * Calculate the log of a number.
+   * @param op a ComplexNumber
+   * @return the log
+   */
+  public ComplexNumber log(ComplexNumber op) 
+  {
+    return null;
   }
 }
