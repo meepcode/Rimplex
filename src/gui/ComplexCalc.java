@@ -38,7 +38,6 @@ public class ComplexCalc extends JFrame implements ActionListener
 
   ComplexCalc()
   {
-
     frame = new JFrame("Calculator");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setSize(420, 460);
@@ -216,7 +215,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     }
     if (e.getSource() == logButton)
     {
-      textfield.setText(textfield.getText() + "log()");
+      textfield.setText(textfield.getText() + "log");
     }
   }
 }
