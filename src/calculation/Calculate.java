@@ -132,10 +132,30 @@ public class Calculate
   
   /**
    * Calculate the log of a number.
-   * @param op a ComplexNumber
-   * @return the log
+   * @param operands the operands to calculate log for
+   * @return the log as a complex number
    */
-  public ComplexNumber log(ComplexNumber op) 
+  public ComplexNumber log(final ComplexNumber... operands) 
+  {
+     ComplexNumber op1 = operands[0];
+     if (op1.getReal() == 0) {
+       // If only imaginary part is valid
+       return new ComplexNumber(Math.log(op1.getImaginary()), Math.PI / 2);
+     } else if (op1.getImaginary() == 0) {
+       // If only real part is valid
+       return new ComplexNumber(Math.log(op1.getReal()), 0.0);
+     } else {
+       // If operand is full complex number
+       return new ComplexNumber(Math.log(op1.getImaginary() + Math.log(op1.getReal())), Math.PI / 2);
+     }
+  }
+  
+  /**
+   * Calculate the exponentiation of a number.
+   * @param operands the operands to use
+   * @return the exponentiation as a complex number
+   */
+  public ComplexNumber exponent(final ComplexNumber... operands) 
   {
     return null;
   }
