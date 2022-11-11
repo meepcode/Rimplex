@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -7,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JTextField;
 
 public class MenuBar implements ActionListener
 {
@@ -73,6 +75,12 @@ public class MenuBar implements ActionListener
     help.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         MenuItemWindow a = new MenuItemWindow();
+        Font myFont = new Font("Serif", Font.BOLD, 10);
+        JTextField text = new JTextField("This calculator performs operations on the given complex number operands."
+            + " A history of results from previous calculations are stored in the history panel.");
+        a.add(text);
+        text.setFont(myFont);
+        text.setEditable(false);
       }
     });
     
