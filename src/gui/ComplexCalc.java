@@ -28,8 +28,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final JButton[] numberButtons = new JButton[10];
   private final JButton[] functionButtons = new JButton[15];
   private final JButton addButton, subButton, mulButton, divButton;
-  private final JButton decButton, equButton, resetButton, clrButton, negButton, invButton,
-      leftParenth, rightParenth, leftArrow, imaginaryNum, logButton;
+  private final JButton decButton, equButton, resetButton, clrButton, negButton, invButton, leftParenth, rightParenth, leftArrow, imaginaryNum, logButton;
   private final JPanel panel;
 
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
@@ -39,16 +38,16 @@ public class ComplexCalc extends JFrame implements ActionListener
 
   ComplexCalc()
   {
-
     frame = new JFrame("Calculator");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setSize(420, 460);
     frame.setLayout(null);
+    frame.setResizable(false);
 
     textfield = new JTextField();
     textfield.setBounds(50, 25, 300, 50);
     textfield.setFont(myFont);
-    textfield.setEditable(false);
+    textfield.setEditable(true);
 
     resetButton = new JButton("R");
     subButton = new JButton(MINUS);
@@ -82,7 +81,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     functionButtons[13] = imaginaryNum;
     functionButtons[14] = logButton;
 
-    for (int i = 0; i < 14; i++)
+    for (int i = 0; i < 15; i++)
     {
       functionButtons[i].addActionListener(this);
       functionButtons[i].setFont(myFont);
@@ -142,14 +141,17 @@ public class ComplexCalc extends JFrame implements ActionListener
 
   /**
    * Main method.
-   * @param args cmd line args
+   *
+   * @param args
+   *     cmd line args
    */
   public static void main(final String[] args)
   {
     ComplexCalc calc = new ComplexCalc();
   }
 
-  @Override public void actionPerformed(final ActionEvent e)
+  @Override
+  public void actionPerformed(final ActionEvent e)
   {
 
     for (int i = 0; i < 10; i++)
@@ -198,6 +200,22 @@ public class ComplexCalc extends JFrame implements ActionListener
       double temp = Double.parseDouble(textfield.getText());
       temp *= -1;
       textfield.setText(String.valueOf(temp));
+    }
+    if (e.getSource() == imaginaryNum)
+    {
+      textfield.setText(textfield.getText() + "i");
+    }
+    if (e.getSource() == leftParenth)
+    {
+      textfield.setText(textfield.getText() + "(");
+    }
+    if (e.getSource() == rightParenth)
+    {
+      textfield.setText(textfield.getText() + ")");
+    }
+    if (e.getSource() == logButton)
+    {
+      textfield.setText(textfield.getText() + "log");
     }
   }
 }
