@@ -60,13 +60,21 @@ class ComplexNumberTest
   @Test
   void testToString() 
   {
+<<<<<<< HEAD
     String complexNumberString = "%.1f+%.1fð�˜ª";
+=======
+    String complexNumberString = "%.1f+%.1fi";
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
     String sTest = String.format(complexNumberString, real, imag);
     assertEquals(sTest, test.toString());
     String sTest1 = String.format(complexNumberString, real1, imag1);
     assertEquals(sTest1, test1.toString());
+<<<<<<< HEAD
     String sNegI = String.format("%.1f-%.1fð�˜ª", real, Math.abs(imagN));
+=======
+    String sNegI = String.format("%.1f-%.1fi", real, Math.abs(imagN));
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
     assertEquals(sNegI, negI.toString());
   }
   

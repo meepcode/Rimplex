@@ -129,4 +129,14 @@ public class Calculate
 
     return new ComplexNumber(realResult, imaginaryResult);
   }
+  
+  /**
+   * Calculate the log of a number.
+   * @param op a ComplexNumber
+   * @return the log
+   */
+  public ComplexNumber log(ComplexNumber op) 
+  {
+    return null;
+  }
 }

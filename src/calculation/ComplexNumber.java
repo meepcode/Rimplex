@@ -11,7 +11,8 @@ import java.util.Objects;
  */
 public class ComplexNumber implements Evaluatable
 {
-  public static final String I = "\uD835\uDE2A";
+  // public static final String I = "\uD835\uDE2A";
+  public static final String I = "i";
   private static final String FORMAT_TEXT = "%.1f";
 
   // These will be doubles representing the parts of a complex number.
