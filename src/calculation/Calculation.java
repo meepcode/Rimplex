@@ -7,10 +7,9 @@ package calculation;
 public interface Calculation
 {
   /**
-   * Returns the evaluation of this calculation given the two complex numbers.
-   * @param c1 the left operand
-   * @param c2 the right operand
+   * Returns the evaluation of this calculation.
+   * @param operands the operands this expression takes
    * @return the evaluation
    */
-  ComplexNumber calculate(ComplexNumber c1, ComplexNumber c2);
+  ComplexNumber calculate(ComplexNumber... operands);
 }
