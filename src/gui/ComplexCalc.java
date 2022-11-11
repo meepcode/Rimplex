@@ -81,7 +81,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     functionButtons[13] = imaginaryNum;
     functionButtons[14] = logButton;
 
-    for (int i = 0; i < 14; i++)
+    for (int i = 0; i < 15; i++)
     {
       functionButtons[i].addActionListener(this);
       functionButtons[i].setFont(myFont);
@@ -212,6 +212,10 @@ public class ComplexCalc extends JFrame implements ActionListener
     if (e.getSource() == rightParenth)
     {
       textfield.setText(textfield.getText() + ")");
+    }
+    if (e.getSource() == logButton)
+    {
+      textfield.setText(textfield.getText() + "log()");
     }
   }
 }
