@@ -2,21 +2,12 @@ package gui;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
 import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-
-import calculation.ComplexNumber;
-import calculation.IllegalFormatExpressionException;
-import calculation.Operator;
-import calculation.Parse;
-
-import java.awt.*;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.Serial;
 
 /**
  * Calculator GUI.
@@ -26,18 +17,25 @@ import java.io.Serial;
  */
 public class ComplexCalc extends JFrame implements ActionListener
 {
-  JFrame frame;
-  JTextField textfield;
-  JButton[] numberButtons = new JButton[10];
-  JButton[] functionButtons = new JButton[15];
-  JButton addButton, subButton, mulButton, divButton;
-  JButton decButton, equButton, resetButton, clrButton, negButton, invButton, leftParenth, rightParenth, leftArrow, imaginaryNum, logButton;
-  JPanel panel;
+  private static final String SERIF = "Serif";
+  private static final String MINUS = "-";
+  private static final String PLUS = "+";
+  private static final String ASTERISK = "*";
+  private static final String SLASH = "/";
+  private static final String DOT = ".";
+  private final JFrame frame;
+  private final JTextField textfield;
+  private final JButton[] numberButtons = new JButton[10];
+  private final JButton[] functionButtons = new JButton[15];
+  private final JButton addButton, subButton, mulButton, divButton;
+  private final JButton decButton, equButton, resetButton, clrButton, negButton, invButton,
+      leftParenth, rightParenth, leftArrow, imaginaryNum, logButton;
+  private final JPanel panel;
 
-  Font myFont = new Font("Serif", Font.BOLD, 30);
+  private final Font myFont = new Font(SERIF, Font.BOLD, 30);
 
-  double num = 0;
-  char operator;
+  private final double num = 0;
+  private char operator;
 
   ComplexCalc()
   {
@@ -53,11 +51,11 @@ public class ComplexCalc extends JFrame implements ActionListener
     textfield.setEditable(false);
 
     resetButton = new JButton("R");
-    subButton = new JButton("-");
-    addButton = new JButton("+");
-    mulButton = new JButton("*");
-    divButton = new JButton("/");
-    decButton = new JButton(".");
+    subButton = new JButton(MINUS);
+    addButton = new JButton(PLUS);
+    mulButton = new JButton(ASTERISK);
+    divButton = new JButton(SLASH);
+    decButton = new JButton(DOT);
     equButton = new JButton("=");
     clrButton = new JButton("C");
     negButton = new JButton("(-)");
@@ -91,12 +89,12 @@ public class ComplexCalc extends JFrame implements ActionListener
       functionButtons[i].setFocusable(false);
     }
 
-    imaginaryNum.setFont(new Font("Serif", Font.ITALIC, 30));
-    logButton.setFont(new Font("Serif", Font.BOLD, 10));
-    invButton.setFont(new Font("Serif", Font.BOLD, 10));
-    negButton.setFont(new Font("Serif", Font.BOLD, 10));
-    resetButton.setFont(new Font("Serif", Font.BOLD, 20));
-    clrButton.setFont(new Font("Serif", Font.BOLD, 20));
+    imaginaryNum.setFont(new Font(SERIF, Font.ITALIC, 30));
+    logButton.setFont(new Font(SERIF, Font.BOLD, 10));
+    invButton.setFont(new Font(SERIF, Font.BOLD, 10));
+    negButton.setFont(new Font(SERIF, Font.BOLD, 10));
+    resetButton.setFont(new Font(SERIF, Font.BOLD, 20));
+    clrButton.setFont(new Font(SERIF, Font.BOLD, 20));
 
     for (int i = 0; i < 10; i++)
     {
@@ -142,13 +140,16 @@ public class ComplexCalc extends JFrame implements ActionListener
     frame.setVisible(true);
   }
 
-  public static void main(String[] args)
+  /**
+   * Main method.
+   * @param args cmd line args
+   */
+  public static void main(final String[] args)
   {
     ComplexCalc calc = new ComplexCalc();
   }
 
-  @Override
-  public void actionPerformed(ActionEvent e)
+  @Override public void actionPerformed(final ActionEvent e)
   {
 
     for (int i = 0; i < 10; i++)
@@ -160,23 +161,23 @@ public class ComplexCalc extends JFrame implements ActionListener
     }
     if (e.getSource() == decButton)
     {
-      textfield.setText(textfield.getText().concat("."));
+      textfield.setText(textfield.getText().concat(DOT));
     }
     if (e.getSource() == addButton)
     {
-      textfield.setText(textfield.getText() + "+");
+      textfield.setText(textfield.getText() + PLUS);
     }
     if (e.getSource() == subButton)
     {
-      textfield.setText(textfield.getText() + "-");
+      textfield.setText(textfield.getText() + MINUS);
     }
     if (e.getSource() == mulButton)
     {
-      textfield.setText(textfield.getText() + "*");
+      textfield.setText(textfield.getText() + ASTERISK);
     }
     if (e.getSource() == divButton)
     {
-      textfield.setText(textfield.getText() + "/");
+      textfield.setText(textfield.getText() + SLASH);
     }
 
     if (e.getSource() == resetButton)

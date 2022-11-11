@@ -20,7 +20,7 @@ public class Parse
    */
   public static boolean isValidOperand(final String operand)
   {
-    return Pattern.matches("-?[0-9]+\\.?[0-9]*\\s*([+\\-])\\s*[0-9]+\\.?[0-9]*([i\uD835\uDE2A])",
+    return Pattern.matches("^-?[0-9]+\\.?[0-9]*\\s*([+\\-])\\s*[0-9]+\\.?[0-9]*([i\uD835\uDE2A])$",
         operand);
   }
 
@@ -103,7 +103,7 @@ public class Parse
    *     the token to parse
    * @return the Evaluatable representation of this token
    */
-  public static Evaluatable parseToken(final String token)
+  private static Evaluatable parseToken(final String token)
   {
     String newToken = token.replaceAll(WHITESPACE_REGEX, "");
     Evaluatable result;
