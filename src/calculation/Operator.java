@@ -58,7 +58,7 @@ public enum Operator implements Evaluatable
   {
     ComplexNumber[] operands = new ComplexNumber[operandCount];
 
-    for (int i = 0; i < operandCount; i++)
+    for (int i = operandCount - 1; i >= 0; i--)
     {
       operands[i] = expression.pop().evaluate(expression);
     }

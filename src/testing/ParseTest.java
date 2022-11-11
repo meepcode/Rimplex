@@ -15,4 +15,9 @@ public class ParseTest
   {
     assertEquals(new ComplexNumber(35.0, 47.0), evaluateExpression("(5+2i)+(6+3i)*(7+4i)"));
   }
+
+  @Test void parseDivision()
+  {
+    assertEquals(new ComplexNumber(2.0, 0.0), evaluateExpression("(6+4i)/(3+2i)"));
+  }
 }
