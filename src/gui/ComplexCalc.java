@@ -41,7 +41,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   {
     frame = new JFrame("Calculator");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setSize(420, 460);
+    frame.setSize(420, 480);
     frame.setLayout(null);
     frame.setResizable(false);
 
@@ -158,7 +158,6 @@ public class ComplexCalc extends JFrame implements ActionListener
   @Override
   public void actionPerformed(final ActionEvent e)
   {
-
     for (int i = 0; i < 10; i++)
     {
       if (e.getSource() == numberButtons[i])
@@ -186,7 +185,6 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       textfield.setText(textfield.getText() + SLASH);
     }
-
     if (e.getSource() == resetButton)
     {
       textfield.setText("");
