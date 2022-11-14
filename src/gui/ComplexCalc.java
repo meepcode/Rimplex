@@ -26,10 +26,9 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final JFrame frame;
   private final JTextField textfield;
   private final JButton[] numberButtons = new JButton[10];
-  private final JButton[] functionButtons = new JButton[15];
+  private final JButton[] functionButtons = new JButton[16];
   private final JButton addButton, subButton, mulButton, divButton;
-  private final JButton decButton, equButton, resetButton, clrButton, negButton, invButton,
-      leftParenth, rightParenth, leftArrow, imaginaryNum, logButton;
+  private final JButton decButton, equButton, resetButton, clrButton, negButton, invButton, leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton;
   private final JPanel panel;
 
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
@@ -69,6 +68,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     invButton = new JButton("Inv");
     imaginaryNum = new JButton("i");
     logButton = new JButton("Log");
+    sqrtButton = new JButton("\u221A");
 
     functionButtons[0] = addButton;
     functionButtons[1] = subButton;
@@ -85,8 +85,9 @@ public class ComplexCalc extends JFrame implements ActionListener
     functionButtons[12] = leftArrow;
     functionButtons[13] = imaginaryNum;
     functionButtons[14] = logButton;
+    functionButtons[15] = sqrtButton;
 
-    for (int i = 0; i < 15; i++)
+    for (int i = 0; i < 16; i++)
     {
       functionButtons[i].addActionListener(this);
       functionButtons[i].setFont(myFont);
@@ -99,6 +100,8 @@ public class ComplexCalc extends JFrame implements ActionListener
     negButton.setFont(new Font(SERIF, Font.BOLD, 10));
     resetButton.setFont(new Font(SERIF, Font.BOLD, 20));
     clrButton.setFont(new Font(SERIF, Font.BOLD, 20));
+    sqrtButton.setFont(new Font(SERIF, Font.BOLD, 20));
+
 
     for (int i = 0; i < 10; i++)
     {
@@ -138,6 +141,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     panel.add(clrButton);
     panel.add(logButton);
     panel.add(imaginaryNum);
+    panel.add(sqrtButton);
     frame.add(textfield);
     frame.add(panel);
 
@@ -148,11 +152,12 @@ public class ComplexCalc extends JFrame implements ActionListener
    * Main method.
    *
    * @param args
-   *          cmd line args
+   *     cmd line args
    */
   public static void main(final String[] args)
   {
-    ComplexCalc calc = new ComplexCalc();
+   ComplexCalc calc = new ComplexCalc();
+
   }
 
   @Override
