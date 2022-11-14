@@ -37,7 +37,7 @@ public class MenuBar implements ActionListener
     {
       public void actionPerformed(ActionEvent e)
       {
-        MenuItemWindow p = new MenuItemWindow();
+        MenuItemWindow p = new MenuItemWindow("Print", 300, 300);
         // final print button 
         JPanel panel = new JPanel();
         JButton printButton = new JButton("Print");
@@ -69,7 +69,7 @@ public class MenuBar implements ActionListener
     {
       public void actionPerformed(ActionEvent e)
       {
-        MenuItemWindow l = new MenuItemWindow();
+        MenuItemWindow l = new MenuItemWindow("Language Selection", 300, 110);
         // drop down menu for language selection
         String[] langs = new String[]{"English", "Spanish", "German"};
         JPanel comboBoxPanel = new JPanel();
@@ -77,6 +77,12 @@ public class MenuBar implements ActionListener
         JComboBox<String> dropDown = new JComboBox<String>(langs);
         dropDown.setVisible(true);
         comboBoxPanel.add(dropDown);
+        // OK button to select language
+        JPanel panel = new JPanel();
+        JButton OK = new JButton("OK");
+        l.add(panel, BorderLayout.SOUTH);
+        panel.setLayout((new FlowLayout(FlowLayout.TRAILING)));
+        panel.add(OK);
       }
     });
     mode = new JMenuItem("Mode");
@@ -86,7 +92,7 @@ public class MenuBar implements ActionListener
     {
       public void actionPerformed(ActionEvent e)
       {
-        MenuItemWindow m = new MenuItemWindow();
+        MenuItemWindow m = new MenuItemWindow("Mode", 250, 200);
       }
     });
 
@@ -101,7 +107,7 @@ public class MenuBar implements ActionListener
     {
       public void actionPerformed(ActionEvent e)
       {
-        MenuItemWindow a = new MenuItemWindow();
+        MenuItemWindow a = new MenuItemWindow("About: Calculator", 300, 300);
         Font myFont = new Font("Serif", Font.BOLD, 15);
         JTextField text = new JTextField(
             "This calculator performs operations on the given complex number operands." + " A history of results from previous calculations are stored in the history panel.");
