@@ -5,11 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
-=======
-
 import javax.swing.JButton;
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
