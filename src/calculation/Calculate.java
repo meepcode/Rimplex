@@ -243,7 +243,7 @@ public class Calculate
    * @param operands polar complex number
    * @return a complex number
    */
-  public ComplexNumber convertPolarToImaginary(final PolarComplexNumber... operands)
+  public ComplexNumber convertPolarToRectangular(final PolarComplexNumber... operands)
   {
     PolarComplexNumber op1 = operands[0];
     Double realPart = op1.getPolarMagnitude() * Math.cos(op1.getReal());
