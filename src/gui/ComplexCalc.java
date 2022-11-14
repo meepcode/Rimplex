@@ -52,11 +52,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     frame.setSize(420, 460);
     frame.setLayout(null);
     frame.setResizable(false);
-    
-    // menu bar
-    MenuBar bar = new MenuBar();
-    frame.add(bar.get());
-    
+   
 
     textfield = new JTextField();
     textfield.setBounds(50, 25, 300, 50);
