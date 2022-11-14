@@ -1,12 +1,20 @@
 package gui;
 
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+<<<<<<< HEAD
+=======
+
+import javax.swing.JButton;
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 public class MenuBar implements ActionListener
@@ -31,6 +39,11 @@ public class MenuBar implements ActionListener
     print.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         MenuItemWindow p = new MenuItemWindow();
+        JPanel panel = new JPanel();
+        JButton printButton = new JButton("Print");
+        p.add(panel, BorderLayout.SOUTH);
+        panel.setLayout((new FlowLayout(FlowLayout.TRAILING)));
+        panel.add(printButton);
       }
     });
     
