@@ -237,4 +237,31 @@ public class Calculate
     ComplexNumber op1 = operands[0];
     return divide(new ComplexNumber(1.0, 0.0), op1);
   }
+  
+  /**
+   * Converts a polar complex number to rectangular complex number
+   * @param operands polar complex number
+   * @return a complex number
+   */
+  public ComplexNumber convertPolarToImaginary(final PolarComplexNumber... operands)
+  {
+    PolarComplexNumber op1 = operands[0];
+    Double realPart = op1.getPolarMagnitude() * Math.cos(op1.getReal());
+    Double imaginaryPart = op1.getPolarMagnitude() * Math.sin(op1.getImaginary());
+    return new ComplexNumber(realPart, imaginaryPart);
+  }
+  
+  /**
+   * Converts a rectangular complex number to polar complex number
+   * @param operands rectangular complex number
+   * @return a complex number
+   */
+  public ComplexNumber convertRectangularToPolar(final ComplexNumber... operands)
+  {
+    ComplexNumber op1 = operands[0];
+    Double polarMagnitude = Math.sqrt(Math.pow(op1.getReal(), 2) 
+        + Math.pow(op1.getImaginary(), 2));
+    Double polarAngle = Math.atan(op1.getReal()/op1.getImaginary());
+    return new PolarComplexNumber(polarMagnitude, polarMagnitude, polarAngle);
+  }
 }

@@ -9,18 +9,27 @@ package calculation;
 public class PolarComplexNumber extends ComplexNumber
 {
 
-  private Double r;
+  private Double r; // The polar magnitude
   
   /**
    * Constructor.
    * @param realPart real
    * @param imaginaryPart imaginary
-   * @param r new part used for polar form
+   * @param r polar magnitude: a new part used for polar form
    */
   public PolarComplexNumber(final Double realPart, final Double imaginaryPart, final Double r)
   {
     super(realPart, imaginaryPart);
     this.r = r;
+  }
+  
+  /**
+   * Get the polar magnitude r.
+   * @return r.
+   */
+  public Double getPolarMagnitude()
+  {
+    return r;
   }
   
   /**
