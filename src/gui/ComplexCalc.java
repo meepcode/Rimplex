@@ -2,6 +2,7 @@ package gui;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JMenuBar;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -51,6 +52,11 @@ public class ComplexCalc extends JFrame implements ActionListener
     frame.setSize(420, 460);
     frame.setLayout(null);
     frame.setResizable(false);
+    
+    // menu bar
+    MenuBar bar = new MenuBar();
+    frame.add(bar.get());
+    
 
     textfield = new JTextField();
     textfield.setBounds(50, 25, 300, 50);
@@ -114,7 +120,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     panel = new JPanel();
     panel.setBounds(50, 100, 300, 300);
     panel.setLayout(new GridLayout(5, 4, 10, 10));
-
+    
     panel.add(numberButtons[1]);
     panel.add(numberButtons[2]);
     panel.add(numberButtons[3]);
