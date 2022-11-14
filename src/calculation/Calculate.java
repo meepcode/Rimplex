@@ -4,7 +4,7 @@ package calculation;
  * Complex number methods for calculations.
  *
  * @author TeamD
- * @version 11/4/22 This work complies with the JMU Honor Code.
+ * @version 11/18/22 This work complies with the JMU Honor Code.
  */
 public class Calculate
 {
@@ -182,24 +182,48 @@ public class Calculate
       }
     } else
     {
-      // If operand is full complex number.
-      
-      // If power is even, just return a realNumber
-      if (exp % 2 == 0)
-      {
-        
-        // TO DO
-        return null;
-        
-      } else 
-      { // Otherwise return an imaginary part
-        
-        
-        //TO DO
-        return null;
-        
-        
+      ComplexNumber temp = op1;
+      for (int i = 0; i < exp; i++) {
+        temp = multiply(temp, temp);
       }
+      return temp;
     }
+  }
+  
+  /**
+   * Calculate the square root of a number.
+   * @param operands the operands to use.
+   * @return the square root as a complex number.
+   */
+  public ComplexNumber squareRoot(final ComplexNumber...operands)
+  {
+    ComplexNumber op1 = operands[0];
+    if (op1.getImaginary() == 0) // If only real part is valid.
+    {
+      return new ComplexNumber(Math.sqrt(op1.getReal()), 0.0);
+    } else if (op1.getReal() == 0) // If only imaginary part is valid.
+    {
+      return new ComplexNumber(0.0, Math.sqrt(op1.getImaginary()));
+    } else { // If operand is a full complex number.
+      //√(a + ib) = ± (√{[√(a^2 + b^2) + a]/2} + ib/|b| √{[√(a^2 + b^2) - a]/2})
+      Double a = op1.getReal();
+      Double b = op1.getImaginary();
+      
+      Double temp1 = Math.sqrt(Math.sqrt(Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2)) + a) / 2);
+      Double temp2 = Math.sqrt(Math.sqrt(Math.sqrt(Math.pow(a, 2) - Math.pow(b, 2)) + a) / 2);
+      
+      return new ComplexNumber(temp1, temp2 * (b / Math.abs(b)));
+    }
+  }
+  
+  /**
+   * Calculate the conjugate of a number.
+   * @param operands the operands to use
+   * @return the conjugate as a complex number.
+   */
+  public ComplexNumber conjugate(final ComplexNumber... operands)
+  {
+    ComplexNumber op1 = operands[0];
+    return new ComplexNumber(op1.getReal(), op1.getImaginary() * -1);
   }
 }
