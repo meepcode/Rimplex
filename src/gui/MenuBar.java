@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JComboBox;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -36,6 +36,7 @@ public class MenuBar implements ActionListener
     print.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         MenuItemWindow p = new MenuItemWindow();
+        // final print button 
         JPanel panel = new JPanel();
         JButton printButton = new JButton("Print");
         p.add(panel, BorderLayout.SOUTH);
@@ -63,6 +64,13 @@ public class MenuBar implements ActionListener
     lang.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) {
         MenuItemWindow l = new MenuItemWindow();
+        // drop down menu for language selection
+        String[] langs = new String[]{"English", "Spanish", "German"};
+        JPanel comboBoxPanel = new JPanel();
+        l.add(comboBoxPanel, BorderLayout.CENTER);
+        JComboBox<String> dropDown = new JComboBox<String>(langs);
+        dropDown.setVisible(true);
+        comboBoxPanel.add(dropDown);
       }
     });
     mode = new JMenuItem("Mode");
