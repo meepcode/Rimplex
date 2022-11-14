@@ -32,6 +32,7 @@ out/
 *.iml
 *.ipr
 *.iws
+META-INF/*
 
 # Log Files #
 *.log
