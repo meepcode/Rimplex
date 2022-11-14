@@ -157,7 +157,6 @@ public class ComplexCalc extends JFrame implements ActionListener
   public static void main(final String[] args)
   {
    ComplexCalc calc = new ComplexCalc();
-
   }
 
   @Override
@@ -224,6 +223,10 @@ public class ComplexCalc extends JFrame implements ActionListener
     if (e.getSource() == logButton)
     {
       textfield.setText(textfield.getText() + "log");
+    }
+    if (e.getSource() == sqrtButton)
+    {
+      textfield.setText(textfield.getText() + "sqrt()");
     }
   }
 }
