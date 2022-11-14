@@ -138,13 +138,16 @@ public class Calculate
   public ComplexNumber log(final ComplexNumber... operands) 
   {
      ComplexNumber op1 = operands[0];
-     if (op1.getReal() == 0) {
+     if (op1.getReal() == 0) 
+     {
        // If only imaginary part is valid
        return new ComplexNumber(Math.log(op1.getImaginary()), Math.PI / 2);
-     } else if (op1.getImaginary() == 0) {
+     } else if (op1.getImaginary() == 0) 
+     {
        // If only real part is valid
        return new ComplexNumber(Math.log(op1.getReal()), 0.0);
-     } else {
+     } else 
+     {
        // If operand is full complex number
        return new ComplexNumber(Math.log(op1.getImaginary() + Math.log(op1.getReal())), Math.PI / 2);
      }
@@ -153,10 +156,50 @@ public class Calculate
   /**
    * Calculate the exponentiation of a number.
    * @param operands the operands to use
+   * @param exp power to use
    * @return the exponentiation as a complex number
    */
-  public ComplexNumber exponent(final ComplexNumber... operands) 
+  public ComplexNumber exponent(Double exp, final ComplexNumber... operands) 
   {
-    return null;
+    ComplexNumber op1 = operands[0];
+    
+    if (op1.getImaginary() == 0)
+    {
+      // If only real part is valid.
+      return new ComplexNumber(Math.pow(op1.getReal(), exp), 0.0);
+    } else if (op1.getReal() == 0)
+    {
+      // If only imaginary part is valid.
+      
+      
+      // If power is even, just return a realNumber
+      if (exp % 2 == 0)
+      {
+        return new ComplexNumber(Math.pow(op1.getImaginary(), exp), 0.0);
+      } else 
+      { // Otherwise return an imaginary part
+        return new ComplexNumber(0.0, Math.pow(op1.getImaginary(), exp) * -1);
+      }
+    } else
+    {
+      // If operand is full complex number.
+      
+      // If power is even, just return a realNumber
+      if (exp % 2 == 0)
+      {
+        
+        // TO DO
+        return null;
+        
+      } else 
+      { // Otherwise return an imaginary part
+        
+        
+        //TO DO
+        return null;
+        
+        
+      }
+    }
   }
 }
