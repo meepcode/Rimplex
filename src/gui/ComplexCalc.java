@@ -227,5 +227,9 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       textfield.setText(textfield.getText() + "sqrt()");
     }
+    if (e.getSource() == invButton)
+    {
+      textfield.setText(textfield.getText() + "Inv()");
+    }
   }
 }
