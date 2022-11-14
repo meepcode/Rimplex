@@ -226,4 +226,15 @@ public class Calculate
     ComplexNumber op1 = operands[0];
     return new ComplexNumber(op1.getReal(), op1.getImaginary() * -1);
   }
+  
+  /**
+   * Calculate the inverse of a number.
+   * @param operands
+   * @return the inverse as a complex number.
+   */
+  public ComplexNumber invert(final ComplexNumber... operands)
+  {
+    ComplexNumber op1 = operands[0];
+    return divide(new ComplexNumber(1.0, 0.0), op1);
+  }
 }
