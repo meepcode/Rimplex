@@ -62,32 +62,6 @@ public class MenuBar implements ActionListener
     edit = new JMenu("Edit");
     menuBar.add(edit);
 
-    lang = new JMenuItem("Language");
-    edit.add(lang);
-    lang.addActionListener(this);
-    lang.addActionListener(new ActionListener()
-    {
-      public void actionPerformed(ActionEvent e)
-      {
-        MenuItemWindow l = new MenuItemWindow("Language Selection", 300, 110);
-        // drop down menu for language selection
-        String[] langs = new String[] {"English", "Spanish", "German"};
-
-        JPanel comboBoxPanel = new JPanel();
-        l.add(comboBoxPanel, BorderLayout.CENTER);
-        JComboBox<String> dropDown = new JComboBox<String>(langs);
-
-        dropDown.setVisible(true);
-        comboBoxPanel.add(dropDown);
-
-        // OK button to select language
-        JPanel panel = new JPanel();
-        JButton OK = new JButton("OK");
-        l.add(panel, BorderLayout.SOUTH);
-        panel.setLayout((new FlowLayout(FlowLayout.TRAILING)));
-        panel.add(OK);
-      }
-    });
     mode = new JMenuItem("Mode");
     edit.add(mode);
     mode.addActionListener(this);
@@ -120,7 +94,94 @@ public class MenuBar implements ActionListener
       }
     });
 
+    JMenu langs = new JMenu("Language");
+    menuBar.add(langs);
+
+    JMenuItem span = new JMenuItem("Spanish");
+    langs.add(span);
+    span.addActionListener(this);
+
+    span.addActionListener(new ActionListener()
+    {
+      @Override
+      public void actionPerformed(ActionEvent e)
+      {
+        langs.setText("Idioma");
+        file.setText("Expediente");
+        edit.setText("Editar");
+        help.setText("Ayuda");
+        about.setText("Sobre");
+        mode.setText("Modo");
+        print.setText("Impresión");
+        exit.setText("Salida");
+      }
+    });
+
+    JMenuItem german = new JMenuItem("German");
+    langs.add(german);
+    german.addActionListener(this);
+
+    german.addActionListener(new ActionListener()
+    {
+      @Override
+      public void actionPerformed(ActionEvent e)
+      {
+        langs.setText("Sprachen");
+        file.setText("Datei");
+        edit.setText("Bearbeiten");
+        help.setText("Hilfe");
+        about.setText("Um");
+        mode.setText("Modus");
+        print.setText("Drucken");
+        exit.setText("Ausfahrt");
+      }
+    });
+
+
+    JMenuItem french = new JMenuItem("French");
+    langs.add(french);
+    french.addActionListener(this);
+
+    french.addActionListener(new ActionListener()
+    {
+      @Override
+      public void actionPerformed(ActionEvent e)
+      {
+        langs.setText("Langue");
+        file.setText("Dossier");
+        edit.setText("Éditer");
+        help.setText("Aider");
+        about.setText("Sur");
+        mode.setText("Mode");
+        print.setText("Imprimer");
+        exit.setText("Sortir");
+      }
+    });
+
+    JMenuItem english = new JMenuItem("English");
+    langs.add(english);
+    english.addActionListener(this);
+
+    english.addActionListener(new ActionListener()
+    {
+      @Override
+      public void actionPerformed(ActionEvent e)
+      {
+        langs.setText("Language");
+        file.setText("File");
+        edit.setText("Edit");
+        help.setText("Help");
+        about.setText("About");
+        mode.setText("Mode");
+        print.setText("Print");
+        exit.setText("Exit");
+      }
+    });
+
+
+
     return menuBar;
+
   }
 
   @Override
