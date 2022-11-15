@@ -4,9 +4,10 @@ import javax.swing.JFrame;
 
 public class MenuItemWindow extends JFrame
 {
-  public MenuItemWindow()
+  public MenuItemWindow(String title, int width, int height)
   {
-    setSize(300, 300);
+    setTitle(title);
+    setSize(width, height);
     setLocation(600, 300);
     setVisible(true);
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);

@@ -102,7 +102,6 @@ public class ComplexCalc extends JFrame implements ActionListener
     clrButton.setFont(new Font(SERIF, Font.BOLD, 20));
     sqrtButton.setFont(new Font(SERIF, Font.BOLD, 20));
 
-
     for (int i = 0; i < 10; i++)
     {
       numberButtons[i] = new JButton(String.valueOf(i));
@@ -156,7 +155,7 @@ public class ComplexCalc extends JFrame implements ActionListener
    */
   public static void main(final String[] args)
   {
-   ComplexCalc calc = new ComplexCalc();
+    ComplexCalc calc = new ComplexCalc();
   }
 
   @Override
@@ -227,6 +226,10 @@ public class ComplexCalc extends JFrame implements ActionListener
     if (e.getSource() == sqrtButton)
     {
       textfield.setText(textfield.getText() + "sqrt()");
+    }
+    if (e.getSource() == invButton)
+    {
+      textfield.setText(textfield.getText() + "Inv()");
     }
   }
 }
