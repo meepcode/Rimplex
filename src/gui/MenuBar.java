@@ -71,12 +71,15 @@ public class MenuBar implements ActionListener
       {
         MenuItemWindow l = new MenuItemWindow("Language Selection", 300, 110);
         // drop down menu for language selection
-        String[] langs = new String[]{"English", "Spanish", "German"};
+        String[] langs = new String[] {"English", "Spanish", "German"};
+
         JPanel comboBoxPanel = new JPanel();
         l.add(comboBoxPanel, BorderLayout.CENTER);
         JComboBox<String> dropDown = new JComboBox<String>(langs);
+
         dropDown.setVisible(true);
         comboBoxPanel.add(dropDown);
+
         // OK button to select language
         JPanel panel = new JPanel();
         JButton OK = new JButton("OK");
