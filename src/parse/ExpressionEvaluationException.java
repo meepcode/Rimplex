@@ -1,4 +1,4 @@
-package calculation.parse;
+package parse;
 
 /**
  * Throws when an expression is formatted improperly.

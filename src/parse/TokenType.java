@@ -1,4 +1,4 @@
-package calculation.parse;
+package parse;
 
 import java.util.regex.Pattern;
 

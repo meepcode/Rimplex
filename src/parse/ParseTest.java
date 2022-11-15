@@ -1,4 +1,4 @@
-package calculation.parse;
+package parse;
 
 import org.junit.jupiter.api.Test;
 
