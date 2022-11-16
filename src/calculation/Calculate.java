@@ -233,13 +233,7 @@ public class Calculate
 
   /**
    * Calculate the log of a number.
-<<<<<<< HEAD
    * @param operator the operand to calculate log for
-=======
-   * 
-   * @param operands
-   *          the operands to calculate log for
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the log as a complex number
    */
   public static ComplexNumber log(final ComplexNumber operator) 
@@ -290,15 +284,15 @@ public class Calculate
   /**
    * Calculate the exponentiation of a number.
    * 
-   * @param operands
+   * @param operand
    *          the operands to use
    * @param exp
    *          power to use
    * @return the exponentiation as a complex number
    */
-  public static ComplexNumber exponent(Double exp, final ComplexNumber... operands)
+  public static ComplexNumber exponent(final Double exp, final ComplexNumber operand)
   {
-    ComplexNumber op1 = operands[0];
+    ComplexNumber op1 = operand;
     if (op1 instanceof PolarComplexNumber)
     {
       op1 = convertPolarToRectangular((PolarComplexNumber) op1);
@@ -361,7 +355,7 @@ public class Calculate
         }
         return temp;
       }
-    return op1;
+      return op1;
     }
   }
 
@@ -424,13 +418,7 @@ public class Calculate
 
   /**
    * Calculate the conjugate of a number.
-<<<<<<< HEAD
    * @param operand the operand to use
-=======
-   * 
-   * @param operands
-   *          the operands to use
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the conjugate as a complex number.
    */
   public static ComplexNumber conjugate(final ComplexNumber operand)
@@ -447,12 +435,7 @@ public class Calculate
 
   /**
    * Calculate the inverse of a number.
-<<<<<<< HEAD
    * @param operand complex number
-=======
-   * 
-   * @param operands
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the inverse as a complex number.
    */
   public static ComplexNumber invert(final ComplexNumber operand)
@@ -468,15 +451,8 @@ public class Calculate
   }
 
   /**
-<<<<<<< HEAD
    * Converts a polar complex number to rectangular complex number.
    * @param operand polar complex number
-=======
-   * Converts a polar complex number to rectangular complex number
-   * 
-   * @param operands
-   *          polar complex number
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return a complex number
    */
   public static ComplexNumber convertPolarToRectangular(final PolarComplexNumber operand)
@@ -488,15 +464,8 @@ public class Calculate
   }
 
   /**
-<<<<<<< HEAD
    * Converts a rectangular complex number to polar complex number.
    * @param operand rectangular complex number
-=======
-   * Converts a rectangular complex number to polar complex number
-   * 
-   * @param operands
-   *          rectangular complex number
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return a complex number
    */
   public static ComplexNumber convertRectangularToPolar(final ComplexNumber operand)
