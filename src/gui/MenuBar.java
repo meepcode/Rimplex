@@ -4,6 +4,7 @@ import javax.swing.JButton;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
@@ -92,15 +93,9 @@ public class MenuBar implements ActionListener
     {
       public void actionPerformed(ActionEvent e)
       {
-        MenuItemWindow a = new MenuItemWindow("About: Calculator", 300, 300);
-        Font myFont = new Font("Serif", Font.BOLD, 15);
-        JTextField text = new JTextField(
-            "This calculator performs operations on the given complex number operands."
-                + " A history of results from previous calculations are stored in the history "
-                + "panel.");
-        a.add(text);
-        text.setFont(myFont);
-        text.setEditable(false);
+        JOptionPane.showMessageDialog(null, "This calculator performs operations on the given complex number operands. " 
+            + "A history of results from previosu calculations are stored in the history panel.","About",
+            JOptionPane.INFORMATION_MESSAGE);
       }
     });
 
