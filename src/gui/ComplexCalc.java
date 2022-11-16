@@ -237,7 +237,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
 
       JMenuBar menuBar;
-      JMenu file, edit, help, history;
+      JMenu file, edit, help;
       JMenuItem print, exit, mode, about;
       MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
       modeWindow.setVisible(false);
@@ -399,9 +399,9 @@ public class ComplexCalc extends JFrame implements ActionListener
         }
       });
 
-      history = new JMenu("History");
-      menuBar.add(history);
-      history.addActionListener(new ActionListener()
+      JButton hist = new JButton("History");
+      menuBar.add(hist);
+      hist.addActionListener(new ActionListener()
       {
         @Override
         public void actionPerformed(ActionEvent e)
