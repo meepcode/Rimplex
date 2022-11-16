@@ -233,10 +233,11 @@ public class Calculate
 
   /**
    * Calculate the log of a number.
+   * @param base base to use for log calculation
    * @param operand the operand to calculate log for
    * @return the log as a complex number
    */
-  public static ComplexNumber log(final double base, final ComplexNumber operand)
+  public static ComplexNumber log(final Double base, final ComplexNumber operand)
   {
     ComplexNumber op1 = operand;
     if (op1 instanceof PolarComplexNumber)
@@ -245,18 +246,19 @@ public class Calculate
       if (op1.getReal() == 0) 
       {
          // If only imaginary part is valid
-        ComplexNumber result = new ComplexNumber(Math.log(op1.getImaginary()), Math.PI / 2);
+        ComplexNumber result = new ComplexNumber(Math.log(op1.getImaginary()) 
+            / Math.log(base), Math.PI / 2);
         op1 = convertRectangularToPolar(result);
       } else if (op1.getImaginary() == 0) 
       {
          // If only real part is valid
-        ComplexNumber result = new ComplexNumber(Math.log(op1.getReal()), 0.0);
+        ComplexNumber result = new ComplexNumber(Math.log(op1.getReal()) / Math.log(base), 0.0);
         op1 = convertRectangularToPolar(result);
       } else 
       {
          // If operand is full complex number
-        ComplexNumber result = new ComplexNumber(Math.log(op1.getImaginary() 
-             + Math.log(op1.getReal())), Math.PI / 2);
+        ComplexNumber result = new ComplexNumber(Math.log(op1.getImaginary()) / Math.log(base) 
+             + Math.log(op1.getReal()) / Math.log(base), Math.PI / 2);
         op1 = result;
          
       }
@@ -267,16 +269,16 @@ public class Calculate
       if (op1.getReal() == 0) 
       {
          // If only imaginary part is valid
-        return new ComplexNumber(Math.log(op1.getImaginary()), Math.PI / 2);
+        return new ComplexNumber(Math.log(op1.getImaginary()) / Math.log(base), Math.PI / 2);
       } else if (op1.getImaginary() == 0) 
       {
          // If only real part is valid
-        return new ComplexNumber(Math.log(op1.getReal()), 0.0);
+        return new ComplexNumber(Math.log(op1.getReal()) / Math.log(base), 0.0);
       } else 
       {
          // If operand is full complex number
-        return new ComplexNumber(Math.log(op1.getImaginary() 
-            + Math.log(op1.getReal())), Math.PI / 2);
+        return new ComplexNumber(Math.log(op1.getImaginary()) / Math.log(base) 
+            + Math.log(op1.getReal()) / Math.log(base), Math.PI / 2);
       }
     }
   }
