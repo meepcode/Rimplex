@@ -13,7 +13,7 @@ public class ComplexNumber implements Evaluatable
 {
   // public static final String I = "\uD835\uDE2A";
   public static final String I = "i";
-  private static final String FORMAT_TEXT = "%.1f";
+  public static final String FORMAT_TEXT = "%.1f";
 
   // These will be doubles representing the parts of a complex number.
   // Ex. 3 + 2i would save 3 to realPart and 2 to imaginaryPart.
@@ -24,9 +24,9 @@ public class ComplexNumber implements Evaluatable
    * Constructor from floating point numbers.
    *
    * @param realPart
-   *     the real part of the complex number
+   *          the real part of the complex number
    * @param imaginaryPart
-   *     the imaginary part of the complex number
+   *          the imaginary part of the complex number
    */
   public ComplexNumber(final Double realPart, final Double imaginaryPart)
   {
@@ -63,13 +63,13 @@ public class ComplexNumber implements Evaluatable
   {
     if (imaginaryPart < 0)
     {
-      return String.format(FORMAT_TEXT, realPart) 
-          + "-" + String.format(FORMAT_TEXT, Math.abs(imaginaryPart)) + I;
+      return String.format(FORMAT_TEXT, realPart) + "-"
+          + String.format(FORMAT_TEXT, Math.abs(imaginaryPart)) + I;
     }
     else
     {
-      return String.format(FORMAT_TEXT, realPart) 
-          + "+" + String.format(FORMAT_TEXT, imaginaryPart) + I;
+      return String.format(FORMAT_TEXT, realPart) + "+" + String.format(FORMAT_TEXT, imaginaryPart)
+          + I;
     }
   }
 
@@ -77,7 +77,7 @@ public class ComplexNumber implements Evaluatable
    * Evaluates a complex number.
    *
    * @param expression
-   *     an Expression
+   *          an Expression
    * @return this complex number
    */
   @Override
@@ -90,7 +90,7 @@ public class ComplexNumber implements Evaluatable
    * Compares two complex numbers.
    *
    * @param other
-   *     complex number to compare.
+   *          complex number to compare.
    * @return true if same complex numbers.
    */
   @Override
@@ -98,8 +98,8 @@ public class ComplexNumber implements Evaluatable
   {
     if (other instanceof ComplexNumber op2)
     {
-      return (Objects.equals(this.getReal(), op2.getReal()) && Objects.equals(this.getImaginary(),
-          op2.getImaginary()));
+      return (Objects.equals(this.getReal(), op2.getReal())
+          && Objects.equals(this.getImaginary(), op2.getImaginary()));
     }
     return false;
   }
