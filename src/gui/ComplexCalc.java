@@ -229,6 +229,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     }
   }
 
+  // Menu Bar Code
   class MenuBar implements ActionListener
   {
 
@@ -237,7 +238,7 @@ public class ComplexCalc extends JFrame implements ActionListener
 
       JMenuBar menuBar;
       JMenu file, edit, help;
-      JMenuItem print, exit, lang, mode, about;
+      JMenuItem print, exit, mode, about;
       MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
       modeWindow.setVisible(false);
 
@@ -397,6 +398,19 @@ public class ComplexCalc extends JFrame implements ActionListener
           exit.setText("Exit");
         }
       });
+
+      JButton hist = new JButton("History");
+      menuBar.add(hist);
+      hist.addActionListener(new ActionListener()
+      {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+
+        }
+      });
+
+
       return menuBar;
     }
 
