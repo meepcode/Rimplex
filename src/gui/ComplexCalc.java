@@ -237,10 +237,11 @@ public class ComplexCalc extends JFrame implements ActionListener
     JMenuBar menuBar;
     JMenu file, edit, help;
     JMenuItem print, exit, mode, about;
-    MenuItemWindow modeWindow;
+    MenuItemWindow modeWindow = new MenuItemWindow(modeWindowText, 250, 200);
 
     public JMenuBar createMenuBar()
     {
+      modeWindow.setVisible(false);
 
       menuBar = new JMenuBar();
 
@@ -287,7 +288,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         public void actionPerformed(ActionEvent e)
         {
-          modeWindow = new MenuItemWindow(modeWindowText, 250, 200);
+          modeWindow.setVisible(true);
         }
       });
 
@@ -357,7 +358,6 @@ public class ComplexCalc extends JFrame implements ActionListener
         public void actionPerformed(ActionEvent e)
         {
           modeWindowText = "Modus";
-
           aboutMessage = "Dieser Rechner führt Operationen an den gegebenen Operanden für komplexe Zahlen aus. Ein Verlauf der Ergebnisse früherer Berechnungen wird im Verlaufsfeld gespeichert.";
           aboutTitle = "Um";
           hist.setText("Geschichte");
