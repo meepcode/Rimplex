@@ -24,8 +24,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final JButton[] numberButtons = new JButton[10];
   private final JButton[] functionButtons = new JButton[16];
   private final JButton addButton, subButton, mulButton, divButton;
-  private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton,
-      leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton;
+  private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton, leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton;
   private final JPanel panel;
 
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
@@ -149,7 +148,7 @@ public class ComplexCalc extends JFrame implements ActionListener
    * Main method.
    *
    * @param args
-   *          cmd line args
+   *     cmd line args
    */
   public static void main(final String[] args)
   {
@@ -311,6 +310,17 @@ public class ComplexCalc extends JFrame implements ActionListener
       JMenu langs = new JMenu("Language");
       menuBar.add(langs);
 
+      JButton hist = new JButton("History");
+      menuBar.add(hist);
+      hist.addActionListener(new ActionListener()
+      {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+
+        }
+      });
+
       JMenuItem span = new JMenuItem("Spanish");
       langs.add(span);
       span.addActionListener(this);
@@ -320,6 +330,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
+          hist.setText("Historia");
           modeWindow.setTitle("Moda");
           frame.setTitle("Calculadora");
           langs.setText("Idioma");
@@ -342,6 +353,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
+          hist.setText("Geschichte");
           modeWindow.setTitle("Modus");
           frame.setTitle("Taschenrechner");
           langs.setText("Sprachen");
@@ -364,6 +376,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
+          hist.setText("Histoire");
           modeWindow.setTitle("Mode");
           frame.setTitle("Calculatrice");
           langs.setText("Langue");
@@ -386,6 +399,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
+          hist.setText("History");
           modeWindow.setTitle("Mode");
           frame.setTitle("Calculator");
           langs.setText("Language");
@@ -398,18 +412,6 @@ public class ComplexCalc extends JFrame implements ActionListener
           exit.setText("Exit");
         }
       });
-
-      JButton hist = new JButton("History");
-      menuBar.add(hist);
-      hist.addActionListener(new ActionListener()
-      {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-
-        }
-      });
-
 
       return menuBar;
     }
