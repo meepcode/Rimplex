@@ -18,6 +18,26 @@ class CalculateTest
   private final ComplexNumber comp6 = new ComplexNumber(0.0, -1.0);
 
   /**
+   * Test IllegalArgumentException for - add, subtract, multiply and divide
+   */
+  @Test
+  void testIllegalArgumentException()
+  {
+    assertThrows(IllegalArgumentException.class, () -> {
+      Calculate.add(comp1);
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      Calculate.divide(comp1);
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      Calculate.multiply(comp1);
+    });
+    assertThrows(IllegalArgumentException.class, () -> {
+      Calculate.divide(comp1);
+    });
+  }
+
+  /**
    * Test subtract.
    */
   @Test

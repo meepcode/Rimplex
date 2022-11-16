@@ -110,7 +110,9 @@ class ComplexNumberTest
     assertNotEquals(real, test2, String.valueOf(0.0));
     // without this return false isn't covered
     assertNotEquals(test2, 0);
-    // assertNotEquals(test2, null);
+    // assertFalse(test2.equals(null));
+    // assertNotEquals(null, test2);
+    // one branch is still missing but Berstein said not to worry about it 
   }
 
   /**
