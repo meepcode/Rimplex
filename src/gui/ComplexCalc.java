@@ -234,7 +234,6 @@ public class ComplexCalc extends JFrame implements ActionListener
     String aboutMessage = "This calculator performs operations on the given complex number operands. " + "A history of results from previosu calculations are stored in the history " + "panel.";
     String aboutTitle = "About";
     String printTitle = "Print";
-
     JMenuBar menuBar;
     JMenu file, edit, help;
     JMenuItem print, exit, mode, about;
