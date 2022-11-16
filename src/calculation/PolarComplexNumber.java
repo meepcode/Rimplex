@@ -42,13 +42,13 @@ public class PolarComplexNumber extends ComplexNumber
     {
       return String.format(FORMAT_TEXT, r) + "(cos(" + 
           String.format(FORMAT_TEXT, getReal()) 
-          + "Â°) - " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "Â°))";
+          + "°) - " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "°))";
     }
     else
     {
       return String.format(FORMAT_TEXT, r) + "(cos(" + 
           String.format(FORMAT_TEXT, getReal()) 
-          + "Â°) + " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "Â°))";
+          + "°) + " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "°))";
     }
   }
 
