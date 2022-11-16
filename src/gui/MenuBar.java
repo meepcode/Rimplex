@@ -1,18 +1,16 @@
 package gui;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class MenuBar implements ActionListener
 {
@@ -80,14 +78,16 @@ public class MenuBar implements ActionListener
     about = new JMenuItem("About");
     help.add(about);
     about.addActionListener(this);
-    help.addActionListener(new ActionListener()
+    about.addActionListener(new ActionListener()
     {
       public void actionPerformed(ActionEvent e)
       {
         MenuItemWindow a = new MenuItemWindow("About: Calculator", 300, 300);
         Font myFont = new Font("Serif", Font.BOLD, 15);
         JTextField text = new JTextField(
-            "This calculator performs operations on the given complex number operands." + " A history of results from previous calculations are stored in the history panel.");
+            "This calculator performs operations on the given complex number operands."
+                + " A history of results from previous calculations are stored in the history "
+                + "panel.");
         a.add(text);
         text.setFont(myFont);
         text.setEditable(false);
@@ -103,8 +103,7 @@ public class MenuBar implements ActionListener
 
     span.addActionListener(new ActionListener()
     {
-      @Override
-      public void actionPerformed(ActionEvent e)
+      @Override public void actionPerformed(ActionEvent e)
       {
         langs.setText("Idioma");
         file.setText("Expediente");
@@ -123,8 +122,7 @@ public class MenuBar implements ActionListener
 
     german.addActionListener(new ActionListener()
     {
-      @Override
-      public void actionPerformed(ActionEvent e)
+      @Override public void actionPerformed(ActionEvent e)
       {
         langs.setText("Sprachen");
         file.setText("Datei");
@@ -137,15 +135,13 @@ public class MenuBar implements ActionListener
       }
     });
 
-
     JMenuItem french = new JMenuItem("French");
     langs.add(french);
     french.addActionListener(this);
 
     french.addActionListener(new ActionListener()
     {
-      @Override
-      public void actionPerformed(ActionEvent e)
+      @Override public void actionPerformed(ActionEvent e)
       {
         langs.setText("Langue");
         file.setText("Dossier");
@@ -164,8 +160,7 @@ public class MenuBar implements ActionListener
 
     english.addActionListener(new ActionListener()
     {
-      @Override
-      public void actionPerformed(ActionEvent e)
+      @Override public void actionPerformed(ActionEvent e)
       {
         langs.setText("Language");
         file.setText("File");
@@ -178,14 +173,11 @@ public class MenuBar implements ActionListener
       }
     });
 
-
-
     return menuBar;
 
   }
 
-  @Override
-  public void actionPerformed(ActionEvent e)
+  @Override public void actionPerformed(ActionEvent e)
   {
     // TODO Auto-generated method stub
 
