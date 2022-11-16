@@ -233,12 +233,12 @@ public class Calculate
 
   /**
    * Calculate the log of a number.
-   * @param operator the operand to calculate log for
+   * @param operand the operand to calculate log for
    * @return the log as a complex number
    */
-  public static ComplexNumber log(final ComplexNumber operator) 
+  public static ComplexNumber log(final double base, final ComplexNumber operand)
   {
-    ComplexNumber op1 = operator;
+    ComplexNumber op1 = operand;
     if (op1 instanceof PolarComplexNumber)
     {
       op1 = convertPolarToRectangular((PolarComplexNumber) op1);
@@ -457,9 +457,8 @@ public class Calculate
    */
   public static ComplexNumber convertPolarToRectangular(final PolarComplexNumber operand)
   {
-    PolarComplexNumber op1 = operand;
-    Double realPart = op1.getPolarMagnitude() * Math.cos(op1.getReal());
-    Double imaginaryPart = op1.getPolarMagnitude() * Math.sin(op1.getImaginary());
+    Double realPart = operand.getPolarMagnitude() * Math.cos(operand.getReal());
+    Double imaginaryPart = operand.getPolarMagnitude() * Math.sin(operand.getImaginary());
     return new ComplexNumber(realPart, imaginaryPart);
   }
 

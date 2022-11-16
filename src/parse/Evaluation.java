@@ -1,9 +1,11 @@
 package parse;
 
+import calculation.Calculate;
 import calculation.ComplexNumber;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -29,14 +31,103 @@ public class Evaluation
   public static ComplexNumber evaluateExpression(final String expressionStr)
       throws ExpressionEvaluationException
   {
+    System.out.println("\n============\nEVALUATING NEW EXPRESSION: " + expressionStr);
+
     Token[] tokens = tokenize(expressionStr);
 
-    Deque<Token> expression = parse(tokens);
+    for (Token token : tokens)
+    {
+      System.out.println(token);
+    }
 
-    return null;
+    Deque<Token> expression = order(tokens);
+
+    System.out.println("\n After ordering: ");
+
+    for (Token token : expression)
+    {
+      System.out.println(token);
+    }
+
+    return evaluate(expression);
   }
 
-  private static Deque<Token> parse(final Token[] tokens) throws ExpressionEvaluationException
+  private static ComplexNumber evaluate(final Deque<Token> expression)
+      throws ExpressionEvaluationException
+  {
+    Token token = expression.pop();
+    TokenType type = token.type;
+    ComplexNumber result = null;
+
+    if (type == TokenType.INV)
+    {
+      result = Calculate.invert(evaluate(expression));
+    }
+    else if (type == TokenType.SQRT)
+    {
+      result = Calculate.squareRoot(evaluate(expression));
+    }
+    else if (type == TokenType.CONJ)
+    {
+      result = Calculate.conjugate(evaluate(expression));
+    }
+    else if (type == TokenType.RE)
+    {
+      result = new ComplexNumber(evaluate(expression).getReal(), 0.0);
+    }
+    else if (type == TokenType.IM)
+    {
+      result = new ComplexNumber(0.0, evaluate(expression).getImaginary());
+    }
+    else if (type == TokenType.LOG)
+    {
+      ComplexNumber operand = evaluate(expression);
+      ComplexNumber base = evaluate(expression);
+
+      if (base.getImaginary() != 0)
+      {
+        throw new ExpressionEvaluationException("Base must be real number");
+      }
+
+      result = Calculate.log(base.getReal(), operand);
+    }
+    else if (type == TokenType.NUMBER)
+    {
+      String[] parts = token.sequence.substring(1, token.sequence.length() - 1).split("[+-]");
+      double realPart = 0.0;
+      double imaginaryPart = 0.0;
+
+      System.out.println(Arrays.toString(parts));
+
+      if (parts.length == 1)
+      {
+        if (parts[0].charAt(parts[0].length() - 1) == 'i')
+        {
+          imaginaryPart = Double.parseDouble(parts[0].substring(0, parts[0].length() - 1));
+        }
+        else
+        {
+          realPart = Double.parseDouble(parts[0]);
+        }
+      }
+      else
+      {
+        imaginaryPart = Double.parseDouble(parts[1].substring(0, parts[1].length() - 1));
+        realPart = Double.parseDouble(parts[0]);
+      }
+
+      result = new ComplexNumber(realPart, imaginaryPart);
+    }
+    else if (type == TokenType.POLAR_NUMBER)
+    {
+      String sequence = token.sequence.substring(1, token.sequence.length() - 1);
+      System.out.print(sequence);
+    }
+
+    return result;
+  }
+
+  private static Deque<Token> order(final Token[] tokens) throws ExpressionEvaluationException
   {
     Deque<Token> output = new ArrayDeque<>();
     Deque<Token> operators = new ArrayDeque<>();
@@ -47,7 +138,7 @@ public class Evaluation
       {
         output.push(token);
       }
-      else if (token.type == TokenType.UNARY_FUNCTION)
+      else if (token.type.isFunction())
       {
         operators.push(token);
       }
@@ -61,16 +152,40 @@ public class Evaluation
         {
           if (operators.isEmpty())
           {
-            throw new ExpressionEvaluationException("Mismatching parenthesis");
+            throw new ExpressionEvaluationException("Unmatched close parenthesis");
           }
           output.push(operators.pop());
         }
+
+        operators.pop();
+
+        if (!operators.isEmpty() && operators.peek().type.isFunction())
+        {
+          output.push(operators.pop());
+        }
+      }
+      else
+      {
+        while (!operators.isEmpty()
+            && token.type.getPrecedence() > operators.peek().type.getPrecedence())
+        {
+          output.push(operators.pop());
+        }
+
+        operators.push(token);
       }
     }
 
-    for (Token token : output)
+    while (!operators.isEmpty())
     {
-      System.out.println(token);
+      Token token = operators.pop();
+
+      if (token.type == TokenType.OPEN_PAREN)
+      {
+        throw new ExpressionEvaluationException("Unmatched open parenthesis");
+      }
+
+      output.push(token);
     }
 
     return output;
@@ -106,13 +221,13 @@ public class Evaluation
     }
 
     // Parse first element to see if it is a plus or minus and changing the type
-    if (tokens.get(0).type == TokenType.PLUS)
+    if (tokens.get(0).type == TokenType.ADD)
     {
-      tokens.set(0, new Token(TokenType.UNARY_FUNCTION, tokens.get(0).sequence));
+      tokens.set(0, new Token(TokenType.POSITIVE, tokens.get(0).sequence));
     }
-    else if (tokens.get(0).type == TokenType.MINUS)
+    else if (tokens.get(0).type == TokenType.SUBTRACT)
     {
-      tokens.set(0, new Token(TokenType.UNARY_FUNCTION, tokens.get(0).sequence));
+      tokens.set(0, new Token(TokenType.NEGATIVE, tokens.get(0).sequence));
     }
 
     // preprocessing to allow for certain syntax that can't be parsed by the shunting yard algorithm
@@ -122,10 +237,17 @@ public class Evaluation
 
       // Parse + or - to be a positive or negative number
       if (curType != TokenType.NUMBER && curType != TokenType.POLAR_NUMBER
-          && curType != TokenType.CLOSE_PAREN && (tokens.get(i + 1).type == TokenType.PLUS
-          || tokens.get(i + 1).type == TokenType.MINUS))
+          && curType != TokenType.CLOSE_PAREN && (tokens.get(i + 1).type == TokenType.ADD
+          || tokens.get(i + 1).type == TokenType.SUBTRACT))
       {
-        tokens.set(i + 1, new Token(TokenType.UNARY_FUNCTION, tokens.get(i + 1).sequence));
+        if (tokens.get(i + 1).type == TokenType.ADD)
+        {
+          tokens.set(i + 1, new Token(TokenType.POSITIVE, tokens.get(i + 1).sequence));
+        }
+        else if (tokens.get(i + 1).type == TokenType.SUBTRACT)
+        {
+          tokens.set(i + 1, new Token(TokenType.NEGATIVE, tokens.get(i + 1).sequence));
+        }
       }
 
       if (curType == TokenType.CLOSE_PAREN && tokens.get(i + 1).type == TokenType.OPEN_PAREN)
@@ -133,8 +255,8 @@ public class Evaluation
         tokens.add(i + 1, new Token(TokenType.MULTIPLY, "*"));
       }
 
-      if (curType == TokenType.UNARY_FUNCTION && (tokens.get(i + 1).type
-          == TokenType.UNARY_FUNCTION))
+      if (curType.isFunction() && !(tokens.get(i + 1).type.isNumber()
+          && tokens.get(i + 1).type == TokenType.OPEN_PAREN))
       {
         if (i == tokens.size() - 2)
         {
@@ -145,7 +267,7 @@ public class Evaluation
         tokens.add(i + 1, new Token(TokenType.OPEN_PAREN, OPEN_PAREN));
         tokens.add(i + 4, new Token(TokenType.CLOSE_PAREN, CLOSE_PAREN));
       }
-      else if (curType == TokenType.UNARY_FUNCTION && tokens.get(i + 1).type == TokenType.NUMBER)
+      else if (curType.isFunction() && tokens.get(i + 1).type == TokenType.NUMBER)
       {
         tokens.add(i + 1, new Token(TokenType.OPEN_PAREN, OPEN_PAREN));
         tokens.add(i + 3, new Token(TokenType.CLOSE_PAREN, CLOSE_PAREN));
