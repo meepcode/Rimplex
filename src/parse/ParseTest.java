@@ -7,7 +7,8 @@ import static org.junit.jupiter.api.Assertions.*;
 class ParseTest
 {
 
-  @Test void testBasicExpression() throws ExpressionEvaluationException
+  @Test
+  void testBasicExpression() throws ExpressionEvaluationException
   {
     assertNull(Parse.evaluateExpression("(e+2i)"));
   }

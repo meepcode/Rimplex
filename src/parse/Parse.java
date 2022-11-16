@@ -16,10 +16,10 @@ public class Parse
    * Evaluates the given expression.
    *
    * @param expressionStr
-   *     the expression to evaluate
+   *          the expression to evaluate
    * @return the evaluation of this expression
    * @throws ExpressionEvaluationException
-   *     when the expression is not properly formatted
+   *           when the expression is not properly formatted
    */
   public static ComplexNumber evaluateExpression(final String expressionStr)
       throws ExpressionEvaluationException
@@ -34,8 +34,7 @@ public class Parse
     return null;
   }
 
-  private static Token[] tokenize(final String expressionStr)
-      throws ExpressionEvaluationException
+  private static Token[] tokenize(final String expressionStr) throws ExpressionEvaluationException
   {
     String expression = expressionStr;
     Deque<Token> tokenDeque = new ArrayDeque<>();
@@ -69,7 +68,8 @@ public class Parse
 
   private record Token(TokenType type, String sequence)
   {
-    @Override public String toString()
+    @Override
+    public String toString()
     {
       return type + ": " + sequence;
     }
