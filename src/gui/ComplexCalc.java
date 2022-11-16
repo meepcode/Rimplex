@@ -229,6 +229,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     }
   }
 
+  // Menu Bar Code
   class MenuBar implements ActionListener
   {
 
