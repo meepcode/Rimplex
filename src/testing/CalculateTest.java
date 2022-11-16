@@ -33,7 +33,7 @@ class CalculateTest
       Calculate.multiply(comp1);
     });
     assertThrows(IllegalArgumentException.class, () -> {
-      Calculate.divide(comp1);
+      Calculate.subtract(comp1);
     });
   }
 
@@ -148,7 +148,7 @@ class CalculateTest
   /**
    * Test constructor.
    */
-  @SuppressWarnings("InstantiationOfUtilityClass")
+  // @SuppressWarnings("InstantiationOfUtilityClass")
   @Test
   void testConstructor()
   {
