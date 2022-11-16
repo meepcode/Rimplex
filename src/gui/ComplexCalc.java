@@ -401,6 +401,14 @@ public class ComplexCalc extends JFrame implements ActionListener
 
       history = new JMenu("History");
       menuBar.add(history);
+      history.addActionListener(new ActionListener()
+      {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+
+        }
+      });
 
 
       return menuBar;
