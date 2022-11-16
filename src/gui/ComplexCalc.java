@@ -260,7 +260,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           MenuItemWindow p = new MenuItemWindow(printTitle, 300, 300);
           // final print button
           JPanel panel = new JPanel();
-          JButton printButton = new JButton("Print");
+          JButton printButton = new JButton(printTitle);
           p.add(panel, BorderLayout.SOUTH);
           panel.setLayout((new FlowLayout(FlowLayout.TRAILING)));
           panel.add(printButton);
