@@ -6,22 +6,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-=======
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
 public class MenuBar implements ActionListener
 {
@@ -93,9 +81,11 @@ public class MenuBar implements ActionListener
     {
       public void actionPerformed(ActionEvent e)
       {
-        JOptionPane.showMessageDialog(null, "This calculator performs operations on the given complex number operands. " 
-            + "A history of results from previosu calculations are stored in the history panel.","About",
-            JOptionPane.INFORMATION_MESSAGE);
+        JOptionPane.showMessageDialog(null,
+            "This calculator performs operations on the given complex number operands. "
+                + "A history of results from previosu calculations are stored in the history "
+                + "panel.",
+            "About", JOptionPane.INFORMATION_MESSAGE);
       }
     });
 
