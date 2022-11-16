@@ -237,7 +237,8 @@ public class ComplexCalc extends JFrame implements ActionListener
       JMenuBar menuBar;
       JMenu file, edit, help;
       JMenuItem print, exit, lang, mode, about;
-      final MenuItemWindow[] modeWindow = new MenuItemWindow[1];
+      MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
+      modeWindow.setVisible(false);
 
       menuBar = new JMenuBar();
 
@@ -284,7 +285,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         public void actionPerformed(ActionEvent e)
         {
-          modeWindow[0] = new MenuItemWindow("Mode", 250, 200);
+          modeWindow.setVisible(true);
         }
       });
 
@@ -317,7 +318,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
-          modeWindow[0].setTitle("Modaa");
+          modeWindow.setTitle("Moda");
           frame.setTitle("Calculadora");
           langs.setText("Idioma");
           file.setText("Expediente");
@@ -339,6 +340,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
+          modeWindow.setTitle("Modus");
           frame.setTitle("Taschenrechner");
           langs.setText("Sprachen");
           file.setText("Datei");
@@ -360,6 +362,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
+          modeWindow.setTitle("Mode");
           frame.setTitle("Calculatrice");
           langs.setText("Langue");
           file.setText("Dossier");
@@ -381,6 +384,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
+          modeWindow.setTitle("Mode");
           frame.setTitle("Calculator");
           langs.setText("Language");
           file.setText("File");
