@@ -137,7 +137,7 @@ class CalculateTest
   }
 
   /**
-   * Test divide with a 0 values in numerator and denominator.
+   * Test divide with a 0 value in numerator and denominator.
    */
   @Test
   void testDivideMultipleZero()
