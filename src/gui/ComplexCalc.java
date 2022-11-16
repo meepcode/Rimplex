@@ -233,15 +233,14 @@ public class ComplexCalc extends JFrame implements ActionListener
   {
     String aboutMessage = "This calculator performs operations on the given complex number operands. " + "A history of results from previosu calculations are stored in the history " + "panel.";
     String aboutTitle = "About";
+    String modeWindowText = "Mode";
     JMenuBar menuBar;
     JMenu file, edit, help;
     JMenuItem print, exit, mode, about;
-    MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
+    MenuItemWindow modeWindow;
 
     public JMenuBar createMenuBar()
     {
-
-      modeWindow.setVisible(false);
 
       menuBar = new JMenuBar();
 
@@ -288,7 +287,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         public void actionPerformed(ActionEvent e)
         {
-          modeWindow.setVisible(true);
+          modeWindow = new MenuItemWindow(modeWindowText, 250, 200);
         }
       });
 
@@ -331,6 +330,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
+          modeWindowText = "Modo";
           aboutMessage = "Esta calculadora realiza operaciones en los operandos de números complejos dados. Un historial de resultados de cálculos anteriores se almacena en el panel de historial.";
           aboutTitle = "Sobre";
           hist.setText("Historia");
@@ -356,6 +356,8 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
+          modeWindowText = "Modus";
+
           aboutMessage = "Dieser Rechner führt Operationen an den gegebenen Operanden für komplexe Zahlen aus. Ein Verlauf der Ergebnisse früherer Berechnungen wird im Verlaufsfeld gespeichert.";
           aboutTitle = "Um";
           hist.setText("Geschichte");
@@ -381,6 +383,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
+          modeWindowText = "Mode";
           aboutMessage = "Cette calculatrice effectue des opérations sur les opérandes de nombres complexes donnés. Un historique des résultats des calculs précédents est stocké dans le panneau d'historique.";
           aboutTitle = "Sur";
           hist.setText("Histoire");
@@ -406,6 +409,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
+          modeWindowText = "Mode";
           aboutMessage = "This calculator performs operations on the given complex number operands. " + "A history of results from previosu calculations are stored in the history " + "panel.";
           aboutTitle = "About";
           hist.setText("History");
