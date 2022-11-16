@@ -8,9 +8,10 @@ import java.util.regex.Pattern;
 public enum TokenType
 {
   UNARY_FUNCTION("[Ii]nv|[Ii]m|[Rr]e|[Cc]onj|[Ss]qrt", "UNARY_FUNCTION"), BINARY_FUNCTION("^[Ll]og",
-    "BINARY_FUNCTION"), OPEN_PAREN("[(]", "OPEN_PAREN"), CLOSE_PAREN("[)]",
-    "CLOSE_PAREN"), PLUS_MINUS("[+-]", "PLUS_MINUS"), MULT_DIV("[*/]", "MULT_DIV"), NUMBER(
-    "e|([0-9]+([.][0-9]*)?|[.][0-9]+)((\\s*[+-]\\s*([0-9]+([.][0-9]*)?|[.][0-9]+))i|i)?", "NUMBER");
+      "BINARY_FUNCTION"), OPEN_PAREN("[(]", "OPEN_PAREN"), CLOSE_PAREN("[)]",
+          "CLOSE_PAREN"), PLUS_MINUS("[+-]", "PLUS_MINUS"), MULT_DIV("[*/]", "MULT_DIV"), NUMBER(
+              "e|([0-9]+([.][0-9]*)?|[.][0-9]+)((\\s*[+-]\\s*([0-9]+([.][0-9]*)?|[.][0-9]+))i|i)?",
+              "NUMBER");
 
   private final Pattern pattern;
   private final String type;
@@ -31,7 +32,8 @@ public enum TokenType
     return pattern;
   }
 
-  @Override public String toString()
+  @Override
+  public String toString()
   {
     return type;
   }

@@ -35,7 +35,7 @@ public class MenuBar implements ActionListener
       public void actionPerformed(ActionEvent e)
       {
         MenuItemWindow p = new MenuItemWindow("Print", 300, 300);
-        // final print button 
+        // final print button
         JPanel panel = new JPanel();
         JButton printButton = new JButton("Print");
         p.add(panel, BorderLayout.SOUTH);
@@ -98,7 +98,8 @@ public class MenuBar implements ActionListener
 
     span.addActionListener(new ActionListener()
     {
-      @Override public void actionPerformed(ActionEvent e)
+      @Override
+      public void actionPerformed(ActionEvent e)
       {
         langs.setText("Idioma");
         file.setText("Expediente");
@@ -117,7 +118,8 @@ public class MenuBar implements ActionListener
 
     german.addActionListener(new ActionListener()
     {
-      @Override public void actionPerformed(ActionEvent e)
+      @Override
+      public void actionPerformed(ActionEvent e)
       {
         langs.setText("Sprachen");
         file.setText("Datei");
@@ -136,7 +138,8 @@ public class MenuBar implements ActionListener
 
     french.addActionListener(new ActionListener()
     {
-      @Override public void actionPerformed(ActionEvent e)
+      @Override
+      public void actionPerformed(ActionEvent e)
       {
         langs.setText("Langue");
         file.setText("Dossier");
@@ -155,7 +158,8 @@ public class MenuBar implements ActionListener
 
     english.addActionListener(new ActionListener()
     {
-      @Override public void actionPerformed(ActionEvent e)
+      @Override
+      public void actionPerformed(ActionEvent e)
       {
         langs.setText("Language");
         file.setText("File");
@@ -172,7 +176,8 @@ public class MenuBar implements ActionListener
 
   }
 
-  @Override public void actionPerformed(ActionEvent e)
+  @Override
+  public void actionPerformed(ActionEvent e)
   {
     // TODO Auto-generated method stub
 

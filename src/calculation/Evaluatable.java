@@ -13,7 +13,8 @@ public interface Evaluatable
   /**
    * Evaluates the current node given the current expression.
    *
-   * @param expression the current expression
+   * @param expression
+   *          the current expression
    * @return the ComplexNumber based on this nodes value and the state of the expression.
    */
   ComplexNumber evaluate(final Deque<Evaluatable> expression);

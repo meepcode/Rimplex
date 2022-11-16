@@ -112,7 +112,7 @@ class ComplexNumberTest
     assertNotEquals(test2, 0);
     // assertFalse(test2.equals(null));
     // assertNotEquals(null, test2);
-    // one branch is still missing but Berstein said not to worry about it 
+    // one branch is still missing but Berstein said not to worry about it
   }
 
   /**
