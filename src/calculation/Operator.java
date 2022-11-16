@@ -8,7 +8,7 @@ import java.util.Deque;
 public enum Operator implements Evaluatable
 {
   ADD("+", 0, 2, Calculate::add), SUBTRACT("-", 0, 2, Calculate::subtract), MULTIPLY("*", 1, 2,
-    Calculate::multiply), DIVIDE("/", 1, 2, Calculate::divide);
+      Calculate::multiply), DIVIDE("/", 1, 2, Calculate::divide);
 
   private final String token;
   private final int precedence;
@@ -28,7 +28,7 @@ public enum Operator implements Evaluatable
    * Returns the operator associated with the given token.
    *
    * @param token
-   *     the given token
+   *          the given token
    * @return the operator
    */
   public static Operator fromString(final String token)
@@ -54,7 +54,8 @@ public enum Operator implements Evaluatable
     return new Operator[] {ADD, SUBTRACT, MULTIPLY, DIVIDE};
   }
 
-  @Override public ComplexNumber evaluate(final Deque<Evaluatable> expression)
+  @Override
+  public ComplexNumber evaluate(final Deque<Evaluatable> expression)
   {
     ComplexNumber[] operands = new ComplexNumber[operandCount];
 

@@ -7,10 +7,14 @@ import java.util.regex.Pattern;
  */
 public enum TokenType
 {
-  UNARY_FUNCTION("[Ii]nv|[Ii]m|[Rr]e|[Cc]onj|[Ss]qrt", "UNARY_FUNCTION"), BINARY_FUNCTION("^[Ll]og",
-    "BINARY_FUNCTION"), OPEN_PAREN("[(]", "OPEN_PAREN"), CLOSE_PAREN("[)]",
-    "CLOSE_PAREN"), PLUS_MINUS("[+-]", "PLUS_MINUS"), MULT_DIV("[*/]", "MULT_DIV"), NUMBER(
-    "e|([0-9]+([.][0-9]*)?|[.][0-9]+)((\\s*[+-]\\s*([0-9]+([.][0-9]*)?|[.][0-9]+))i|i)?", "NUMBER");
+  UNARY_FUNCTION("[Ii]nv|[Ii]m|[Rr]e|[Cc]onj|[Ss]qrt", "UNARY_FUNCTION"),
+  LOG("[Ll]og", "BINARY_FUNCTION"), NUMBER(
+    "\\([+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)((\\s*[+-]\\s*([0-9]+([.][0-9]*)?|[.][0-9]+))i|i)?\\)",
+    "NUMBER"), POLAR_NUMBER(
+    "\\([+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)\\(cos\\([+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)\\)"
+        + "[+]isin\\([+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)\\)\\)\\)", "POLAR_NUMBER"),
+  OPEN_PAREN("[(]", "OPEN_PAREN"), CLOSE_PAREN("[)]", "CLOSE_PAREN"), PLUS("[+]", "PLUS"),
+  MINUS("[-]", "MINUS"), MULTIPLY("[*]", "MULTIPLY"), DIVIDE("[/]", "DIVIDE"), EXP("\\^", "EXP");
 
   private final Pattern pattern;
   private final String type;

@@ -15,10 +15,10 @@ public class Calculate
    * Adds two complex numbers.
    *
    * @param operands
-   *     the operands to be added
+   *          the operands to be added
    * @return The resulting complex number
    * @throws IllegalArgumentException
-   *     if the number of arguments is not equal to 2
+   *           if the number of arguments is not equal to 2
    */
   public static ComplexNumber add(final ComplexNumber... operands)
   {
@@ -31,13 +31,13 @@ public class Calculate
     ComplexNumber op1 = operands[0];
     ComplexNumber op2 = operands[1];
 
-    if (op1 instanceof PolarComplexNumber || op2 instanceof PolarComplexNumber) 
+    if (op1 instanceof PolarComplexNumber || op2 instanceof PolarComplexNumber)
     {
       if (op1 instanceof PolarComplexNumber)
       {
         op1 = convertPolarToRectangular((PolarComplexNumber) op1);
       }
-      
+
       if (op2 instanceof PolarComplexNumber)
       {
         op2 = convertPolarToRectangular((PolarComplexNumber) op1);
@@ -46,10 +46,9 @@ public class Calculate
       Double imaginaryResult = op1.getImaginary() + op2.getImaginary();
       ComplexNumber result = new ComplexNumber(realResult, imaginaryResult);
       return convertRectangularToPolar(result);
-      
-    } else 
+    }
+    else
     {
-      
       Double realResult = op1.getReal() + op2.getReal();
       Double imaginaryResult = op1.getImaginary() + op2.getImaginary();
       return new ComplexNumber(realResult, imaginaryResult);
@@ -60,10 +59,10 @@ public class Calculate
    * Subtracts two complex numbers.
    *
    * @param operands
-   *     the operands to be subtracted
+   *          the operands to be subtracted
    * @return The resulting complex number
    * @throws IllegalArgumentException
-   *     if the number of operands is not equal to 2
+   *           if the number of operands is not equal to 2
    */
   public static ComplexNumber subtract(final ComplexNumber... operands)
   {
@@ -75,14 +74,14 @@ public class Calculate
 
     ComplexNumber op1 = operands[0];
     ComplexNumber op2 = operands[1];
-    
-    if (op1 instanceof PolarComplexNumber || op2 instanceof PolarComplexNumber) 
+
+    if (op1 instanceof PolarComplexNumber || op2 instanceof PolarComplexNumber)
     {
       if (op1 instanceof PolarComplexNumber)
       {
         op1 = convertPolarToRectangular((PolarComplexNumber) op1);
       }
-      
+
       if (op2 instanceof PolarComplexNumber)
       {
         op2 = convertPolarToRectangular((PolarComplexNumber) op1);
@@ -91,10 +90,9 @@ public class Calculate
       Double imaginaryResult = op1.getImaginary() - op2.getImaginary();
       ComplexNumber result = new ComplexNumber(realResult, imaginaryResult);
       return convertRectangularToPolar(result);
-      
-    } else 
+    }
+    else
     {
-      
       Double realResult = op1.getReal() - op2.getReal();
       Double imaginaryResult = op1.getImaginary() - op2.getImaginary();
       return new ComplexNumber(realResult, imaginaryResult);
@@ -105,10 +103,10 @@ public class Calculate
    * Multiplies two complex numbers.
    *
    * @param operands
-   *     the operands to be multiplied
+   *          the operands to be multiplied
    * @return The resulting complex number
    * @throws IllegalArgumentException
-   *     if the number of arguments is not equal to 2
+   *           if the number of arguments is not equal to 2
    */
   public static ComplexNumber multiply(final ComplexNumber... operands)
   {
@@ -120,30 +118,29 @@ public class Calculate
 
     ComplexNumber op1 = operands[0];
     ComplexNumber op2 = operands[1];
-    
-    if (op1 instanceof PolarComplexNumber || op2 instanceof PolarComplexNumber) 
+
+    if (op1 instanceof PolarComplexNumber || op2 instanceof PolarComplexNumber)
     {
       if (op1 instanceof PolarComplexNumber)
       {
         op1 = convertPolarToRectangular((PolarComplexNumber) op1);
       }
-      
+
       if (op2 instanceof PolarComplexNumber)
       {
         op2 = convertPolarToRectangular((PolarComplexNumber) op1);
       }
       Double realResult = op1.getReal() * op2.getReal() - op1.getImaginary() * op2.getImaginary();
-      Double imaginaryResult =
-          op1.getReal() * op2.getImaginary() + op1.getImaginary() * op2.getReal();
+      Double imaginaryResult = op1.getReal() * op2.getImaginary()
+          + op1.getImaginary() * op2.getReal();
       ComplexNumber result = new ComplexNumber(realResult, imaginaryResult);
       return convertRectangularToPolar(result);
-      
     } else 
     {
       Double realResult = op1.getReal() * op2.getReal() - op1.getImaginary() * op2.getImaginary();
-      Double imaginaryResult =
-          op1.getReal() * op2.getImaginary() + op1.getImaginary() * op2.getReal();
-  
+      Double imaginaryResult = op1.getReal() * op2.getImaginary()
+          + op1.getImaginary() * op2.getReal();
+
       return new ComplexNumber(realResult, imaginaryResult);
     }
   }
@@ -152,7 +149,7 @@ public class Calculate
    * Divides two complex numbers.
    *
    * @param operands
-   *     the operands to divide together
+   *          the operands to divide together
    * @return The resulting complex number.
    */
   public static ComplexNumber divide(final ComplexNumber... operands)
@@ -165,19 +162,19 @@ public class Calculate
 
     ComplexNumber op1 = operands[0];
     ComplexNumber op2 = operands[1];
-    
-    if (op1 instanceof PolarComplexNumber || op2 instanceof PolarComplexNumber) 
+
+    if (op1 instanceof PolarComplexNumber || op2 instanceof PolarComplexNumber)
     {
       if (op1 instanceof PolarComplexNumber)
       {
         op1 = convertPolarToRectangular((PolarComplexNumber) op1);
       }
-      
+
       if (op2 instanceof PolarComplexNumber)
       {
         op2 = convertPolarToRectangular((PolarComplexNumber) op1);
       }
-      
+
       if (op2.getReal() == 0.0 && op2.getImaginary() == 0.0)
       {
         throw new ArithmeticException(DIVIDE_BY_ZERO);
@@ -204,10 +201,8 @@ public class Calculate
 
       ComplexNumber result = new ComplexNumber(realResult, imaginaryResult);
       return convertRectangularToPolar(result);
-      
     } else 
     {
-  
       if (op2.getReal() == 0.0 && op2.getImaginary() == 0.0)
       {
         throw new ArithmeticException(DIVIDE_BY_ZERO);
@@ -219,7 +214,7 @@ public class Calculate
       ComplexNumber denominator = multiply(op2, reciprocal);
       // This should result in a complex number of the form a + bi / a + bi
       Double realResult;
-  
+
       if (numerator.getReal() == 0.0) // Avoid zero division error
       {
         realResult = numerator.getReal();
@@ -228,17 +223,23 @@ public class Calculate
       {
         realResult = numerator.getReal() / denominator.getReal();
       }
-  
+
       // Because you have to multiply by conjugate, the denominator will always end up as a real num
       Double imaginaryResult = numerator.getImaginary() / denominator.getReal();
-  
+
       return new ComplexNumber(realResult, imaginaryResult);
     }
   }
-  
+
   /**
    * Calculate the log of a number.
+<<<<<<< HEAD
    * @param operator the operand to calculate log for
+=======
+   * 
+   * @param operands
+   *          the operands to calculate log for
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the log as a complex number
    */
   public static ComplexNumber log(final ComplexNumber operator) 
@@ -285,20 +286,23 @@ public class Calculate
       }
     }
   }
-  
+
   /**
    * Calculate the exponentiation of a number.
-   * @param operand the operands to use
-   * @param exp power to use
+   * 
+   * @param operands
+   *          the operands to use
+   * @param exp
+   *          power to use
    * @return the exponentiation as a complex number
    */
-  public static ComplexNumber exponent(final Double exp, final ComplexNumber operand) 
+  public static ComplexNumber exponent(Double exp, final ComplexNumber... operands)
   {
-    ComplexNumber op1 = operand;
+    ComplexNumber op1 = operands[0];
     if (op1 instanceof PolarComplexNumber)
     {
       op1 = convertPolarToRectangular((PolarComplexNumber) op1);
-      
+
       if (op1.getImaginary() == 0)
       {
         // If only real part is valid.
@@ -307,8 +311,7 @@ public class Calculate
       } else if (op1.getReal() == 0)
       {
         // If only imaginary part is valid.
-        
-        
+
         // If power is even, just return a realNumber
         if (exp % 2 == 0)
         {
@@ -319,7 +322,8 @@ public class Calculate
           ComplexNumber result = new ComplexNumber(0.0, Math.pow(op1.getImaginary(), exp) * -1);
           op1 = convertRectangularToPolar(result);
         }
-      } else
+      }
+      else
       {
         ComplexNumber temp = op1;
         for (int i = 0; i < exp; i++) 
@@ -327,8 +331,7 @@ public class Calculate
           temp = multiply(temp, temp);
         }
         op1 = convertRectangularToPolar(temp);
-      }
-      
+      }      
       return op1;
     } else 
     {
@@ -339,8 +342,7 @@ public class Calculate
       } else if (op1.getReal() == 0)
       {
         // If only imaginary part is valid.
-        
-        
+
         // If power is even, just return a realNumber
         if (exp % 2 == 0)
         {
@@ -349,7 +351,8 @@ public class Calculate
         { // Otherwise return an imaginary part
           op1 = new ComplexNumber(0.0, Math.pow(op1.getImaginary(), exp) * -1);
         }
-      } else
+      }
+      else
       {
         ComplexNumber temp = op1;
         for (int i = 0; i < exp; i++) 
@@ -358,10 +361,10 @@ public class Calculate
         }
         return temp;
       }
-    }
     return op1;
+    }
   }
-  
+
   /**
    * Calculate the square root of a number.
    * @param operand the operand to use.
@@ -373,7 +376,6 @@ public class Calculate
     if (op1 instanceof PolarComplexNumber)
     {
       op1 = convertPolarToRectangular((PolarComplexNumber) op1);
-      
 
       if (op1.getImaginary() == 0) // If only real part is valid.
       {
@@ -386,20 +388,19 @@ public class Calculate
       } else 
       { // If operand is a full complex number.
         //√(a + ib) = ± (√{[√(a^2 + b^2) + a]/2} + ib/|b| √{[√(a^2 + b^2) - a]/2})
+
         Double a = op1.getReal();
         Double b = op1.getImaginary();
-        
+
         Double temp1 = Math.sqrt(Math.sqrt(Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2)) + a) / 2);
         Double temp2 = Math.sqrt(Math.sqrt(Math.sqrt(Math.pow(a, 2) - Math.pow(b, 2)) + a) / 2);
-        
+
         ComplexNumber result = new ComplexNumber(temp1, temp2 * (b / Math.abs(b)));
         op1 = convertRectangularToPolar(result);
       }
       return op1;
     } else 
     {
-      
-      
       if (op1.getImaginary() == 0) // If only real part is valid.
       {
         op1 = new ComplexNumber(Math.sqrt(op1.getReal()), 0.0);
@@ -409,21 +410,27 @@ public class Calculate
       } else 
       { // If operand is a full complex number.
         //√(a + ib) = ± (√{[√(a^2 + b^2) + a]/2} + ib/|b| √{[√(a^2 + b^2) - a]/2})
+
         Double a = op1.getReal();
         Double b = op1.getImaginary();
-        
+
         Double temp1 = Math.sqrt(Math.sqrt(Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2)) + a) / 2);
-        Double temp2 = Math.sqrt(Math.sqrt(Math.sqrt(Math.pow(a, 2) - Math.pow(b, 2)) + a) / 2);
-        
+        Double temp2 = Math.sqrt(Math.sqrt(Math.sqrt(Math.pow(a, 2) - Math.pow(b, 2)) + a) / 2); 
         op1 = new ComplexNumber(temp1, temp2 * (b / Math.abs(b)));
       }
     }
     return op1;
   }
-  
+
   /**
    * Calculate the conjugate of a number.
+<<<<<<< HEAD
    * @param operand the operand to use
+=======
+   * 
+   * @param operands
+   *          the operands to use
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the conjugate as a complex number.
    */
   public static ComplexNumber conjugate(final ComplexNumber operand)
@@ -437,10 +444,15 @@ public class Calculate
     }
     return new ComplexNumber(op1.getReal(), op1.getImaginary() * -1);
   }
-  
+
   /**
    * Calculate the inverse of a number.
+<<<<<<< HEAD
    * @param operand complex number
+=======
+   * 
+   * @param operands
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the inverse as a complex number.
    */
   public static ComplexNumber invert(final ComplexNumber operand)
@@ -454,10 +466,17 @@ public class Calculate
     }
     return divide(new ComplexNumber(1.0, 0.0), op1);
   }
-  
+
   /**
+<<<<<<< HEAD
    * Converts a polar complex number to rectangular complex number.
    * @param operand polar complex number
+=======
+   * Converts a polar complex number to rectangular complex number
+   * 
+   * @param operands
+   *          polar complex number
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return a complex number
    */
   public static ComplexNumber convertPolarToRectangular(final PolarComplexNumber operand)
@@ -467,10 +486,17 @@ public class Calculate
     Double imaginaryPart = op1.getPolarMagnitude() * Math.sin(op1.getImaginary());
     return new ComplexNumber(realPart, imaginaryPart);
   }
-  
+
   /**
+<<<<<<< HEAD
    * Converts a rectangular complex number to polar complex number.
    * @param operand rectangular complex number
+=======
+   * Converts a rectangular complex number to polar complex number
+   * 
+   * @param operands
+   *          rectangular complex number
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return a complex number
    */
   public static ComplexNumber convertRectangularToPolar(final ComplexNumber operand)
@@ -479,6 +505,7 @@ public class Calculate
     Double polarMagnitude = Math.sqrt(Math.pow(op1.getReal(), 2) 
         + Math.pow(op1.getImaginary(), 2));
     Double polarAngle = Math.atan(op1.getReal()/op1.getImaginary());
+
     return new PolarComplexNumber(polarMagnitude, polarMagnitude, polarAngle);
   }
 }
