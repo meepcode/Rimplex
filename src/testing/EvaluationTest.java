@@ -32,8 +32,8 @@ class EvaluationTest
 
   @Test void testPolarComplexNumber() throws ExpressionEvaluationException
   {
-    assertEquals(new ComplexNumber(-1.0, 0.0).toString(),
-        evaluateExpression("(1(cos(" + Math.PI + ") + isin(" + Math.PI + ")))").toString());
+    assertEquals(new ComplexNumber(-1.0, 0.0),
+        evaluateExpression("(1(cos(" + Math.PI + ") + isin(" + Math.PI + ")))"));
   }
 
   @Test void testAdd() throws ExpressionEvaluationException
@@ -44,5 +44,22 @@ class EvaluationTest
   @Test void testAddNegativeNumber() throws ExpressionEvaluationException
   {
     assertEquals(new ComplexNumber(2.0, 0.0), evaluateExpression("(3.6+1.8i)+(-1.6-1.8i)"));
+  }
+
+  @Test void testAddMultiple() throws ExpressionEvaluationException
+  {
+    assertEquals(new ComplexNumber(-5.1, 2.13),
+        evaluateExpression("(5.0+4i)+(6.3-2i)+(-16.4+0.13i)"));
+  }
+
+  @Test void testSubtract() throws ExpressionEvaluationException
+  {
+    assertEquals(new ComplexNumber(5.6, 2.3), evaluateExpression("(9.5+4.2i)-(3.9+1.9i)"));
+  }
+
+  @Test void testMultipleSubtract() throws ExpressionEvaluationException
+  {
+    assertEquals(new ComplexNumber(15.1, 5.87),
+        evaluateExpression("(5.0+4i)-(6.3-2i)-(-16.4+0.13i)"));
   }
 }
