@@ -34,6 +34,7 @@ public class PolarComplexNumber extends ComplexNumber
    * 
    * @return r.
    */
+  @Override
   public Double getPolarMagnitude()
   {
     return r;

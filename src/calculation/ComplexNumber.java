@@ -52,6 +52,16 @@ public class ComplexNumber
   {
     return imaginaryPart;
   }
+  
+  /**
+   * Get the polar magnitude.
+   * 
+   * @return polar magnitude.
+   */
+  public Double getPolarMagnitude()
+  {
+    return 0.0;
+  }
 
   /**
    * To String.
