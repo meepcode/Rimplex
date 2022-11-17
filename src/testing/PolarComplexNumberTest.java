@@ -19,9 +19,17 @@ public class PolarComplexNumberTest
   public void testToString()
   {
     // covers the else
+<<<<<<< HEAD
     assertEquals("2.0(cos(120.0°) + isin(120.0°))", test.toString());
+=======
+    assertEquals("2.00(cos(120.00Â°) + isin(120.00Â°))", test.toString());
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
     // covers the if
+<<<<<<< HEAD
     assertEquals("4.0(cos(120.0°) - isin(120.0°))", test2.toString());
+=======
+    assertEquals("4.00(cos(120.00Â°) - isin(120.00Â°))", test2.toString());
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
   }
 
   /**

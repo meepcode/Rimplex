@@ -1,5 +1,7 @@
 package calculation;
 
+import java.util.Objects;
+
 /**
  * Polar Complex number.
  *
@@ -32,6 +34,7 @@ public class PolarComplexNumber extends ComplexNumber
    * 
    * @return r.
    */
+  @Override
   public Double getPolarMagnitude()
   {
     return r;
@@ -66,6 +69,36 @@ public class PolarComplexNumber extends ComplexNumber
           + "°) + " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "°))";
 >>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
     }
+  }
+  
+  /**
+   * Compares two complex numbers.
+   *
+   * @param other
+   *          complex number to compare.
+   * @return true if same complex numbers.
+   */
+  @Override
+  public boolean equals(final Object other)
+  {
+    if (other instanceof PolarComplexNumber op2)
+    {
+      return (Objects.equals(this.getReal(), op2.getReal())
+          && Objects.equals(this.getImaginary(), op2.getImaginary())
+          && Objects.equals(this.r,  op2.r));
+    }
+    return false;
+  }
+
+  /**
+   * Gets the hashcode.
+   *
+   * @return hashcode.
+   */
+  @Override
+  public int hashCode()
+  {
+    return (int) (getReal() + 31 * getImaginary());
   }
 
 }

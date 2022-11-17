@@ -1,6 +1,8 @@
 package gui;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -24,9 +26,10 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final JButton[] numberButtons = new JButton[10];
   private final JButton[] functionButtons = new JButton[16];
   private final JButton addButton, subButton, mulButton, divButton;
-  private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton,
-      leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton;
+  private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton, leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton;
   private final JPanel panel;
+  private final HistoryPanel his;
+  private final String result;
 
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
 
@@ -38,12 +41,20 @@ public class ComplexCalc extends JFrame implements ActionListener
     frame = new JFrame("Calculator");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setSize(420, 480);
-    frame.setLayout(null);
+    frame.setLayout(new BorderLayout());
     frame.setResizable(false);
+
+    frame.setLocationRelativeTo(null);
 
     // adding file menu
     MenuBar mb = new MenuBar();
     frame.setJMenuBar(mb.createMenuBar());
+    
+    // adding history panel
+    his = new HistoryPanel();
+    // temp initialization of result
+    result = "";
+    
 
     textfield = new JTextField();
     textfield.setBounds(50, 25, 300, 50);
@@ -111,7 +122,8 @@ public class ComplexCalc extends JFrame implements ActionListener
     panel = new JPanel();
     panel.setBounds(50, 100, 300, 300);
     panel.setLayout(new GridLayout(5, 4, 10, 10));
-
+    
+    
     panel.add(numberButtons[1]);
     panel.add(numberButtons[2]);
     panel.add(numberButtons[3]);
@@ -139,8 +151,9 @@ public class ComplexCalc extends JFrame implements ActionListener
     panel.add(logButton);
     panel.add(imaginaryNum);
     panel.add(sqrtButton);
-    frame.add(textfield);
-    frame.add(panel);
+    frame.add(textfield, BorderLayout.NORTH);
+    frame.add(panel, BorderLayout.CENTER);
+    frame.add(his.getPanel(), BorderLayout.EAST);
 
     frame.setVisible(true);
   }
@@ -149,7 +162,7 @@ public class ComplexCalc extends JFrame implements ActionListener
    * Main method.
    *
    * @param args
-   *          cmd line args
+   *     cmd line args
    */
   public static void main(final String[] args)
   {
@@ -232,14 +245,16 @@ public class ComplexCalc extends JFrame implements ActionListener
   // Menu Bar Code
   class MenuBar implements ActionListener
   {
+    String aboutMessage = "This calculator performs operations on the given complex number operands. " + "A history of results from previosu calculations are stored in the history " + "panel.";
+    String aboutTitle = "About";
+    String printTitle = "Print";
+    JMenuBar menuBar;
+    JMenu file, edit, help;
+    JMenuItem print, exit, mode, about;
+    MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
 
     public JMenuBar createMenuBar()
     {
-
-      JMenuBar menuBar;
-      JMenu file, edit, help;
-      JMenuItem print, exit, mode, about;
-      MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
       modeWindow.setVisible(false);
 
       menuBar = new JMenuBar();
@@ -255,10 +270,10 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         public void actionPerformed(ActionEvent e)
         {
-          MenuItemWindow p = new MenuItemWindow("Print", 300, 300);
+          MenuItemWindow p = new MenuItemWindow(printTitle, 300, 300);
           // final print button
           JPanel panel = new JPanel();
-          JButton printButton = new JButton("Print");
+          JButton printButton = new JButton(printTitle);
           p.add(panel, BorderLayout.SOUTH);
           panel.setLayout((new FlowLayout(FlowLayout.TRAILING)));
           panel.add(printButton);
@@ -302,14 +317,25 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         public void actionPerformed(ActionEvent e)
         {
-          JOptionPane.showMessageDialog(null,
-              "This calculator performs operations on the given complex number operands. " + "A history of results from previosu calculations are stored in the history " + "panel.",
-              "About", JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(null, aboutMessage, aboutTitle,
+              JOptionPane.INFORMATION_MESSAGE);
         }
       });
 
       JMenu langs = new JMenu("Language");
       menuBar.add(langs);
+
+      JButton hist = new JButton("History");
+      menuBar.add(hist);
+      hist.addActionListener(new ActionListener()
+      {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+          his.createAndShowGUI();
+          frame.pack();
+        }
+      });
 
       JMenuItem span = new JMenuItem("Spanish");
       langs.add(span);
@@ -320,7 +346,11 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
-          modeWindow.setTitle("Moda");
+          printTitle = "Impresión";
+          aboutMessage = "Esta calculadora realiza operaciones en los operandos de números complejos dados. Un historial de resultados de cálculos anteriores se almacena en el panel de historial.";
+          aboutTitle = "Sobre";
+          hist.setText("Historia");
+          modeWindow.setTitle("Modo");
           frame.setTitle("Calculadora");
           langs.setText("Idioma");
           file.setText("Expediente");
@@ -342,6 +372,10 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
+          printTitle = "Drucken";
+          aboutMessage = "Dieser Rechner führt Operationen an den gegebenen Operanden für komplexe Zahlen aus. Ein Verlauf der Ergebnisse früherer Berechnungen wird im Verlaufsfeld gespeichert.";
+          aboutTitle = "Um";
+          hist.setText("Geschichte");
           modeWindow.setTitle("Modus");
           frame.setTitle("Taschenrechner");
           langs.setText("Sprachen");
@@ -364,6 +398,10 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
+          printTitle = "Imprimer";
+          aboutMessage = "Cette calculatrice effectue des opérations sur les opérandes de nombres complexes donnés. Un historique des résultats des calculs précédents est stocké dans le panneau d'historique.";
+          aboutTitle = "Sur";
+          hist.setText("Histoire");
           modeWindow.setTitle("Mode");
           frame.setTitle("Calculatrice");
           langs.setText("Langue");
@@ -386,6 +424,10 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
+          printTitle = "Print";
+          aboutMessage = "This calculator performs operations on the given complex number operands. " + "A history of results from previosu calculations are stored in the history " + "panel.";
+          aboutTitle = "About";
+          hist.setText("History");
           modeWindow.setTitle("Mode");
           frame.setTitle("Calculator");
           langs.setText("Language");
@@ -399,19 +441,15 @@ public class ComplexCalc extends JFrame implements ActionListener
         }
       });
 
-      JButton hist = new JButton("History");
-      menuBar.add(hist);
-      hist.addActionListener(new ActionListener()
-      {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-
-        }
-      });
-
-
       return menuBar;
+    }
+    
+    /**
+     * Getter for expression
+     * @return result
+     */
+    public String getResult() {
+      return result;
     }
 
     @Override
