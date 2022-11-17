@@ -410,8 +410,8 @@ public class Calculate
         Double a = op1.getReal();
         Double b = op1.getImaginary();
 
-        Double temp1 = Math.sqrt(Math.sqrt(Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2)) + a) / 2);
-        Double temp2 = Math.sqrt(Math.sqrt(Math.sqrt(Math.pow(a, 2) - Math.pow(b, 2)) + a) / 2); 
+        Double temp1 = Math.sqrt((Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2)) + a) / 2);
+        Double temp2 = Math.sqrt((Math.sqrt(Math.pow(a, 2) - Math.pow(b, 2)) + a) / 2); 
         op1 = new ComplexNumber(temp1, temp2 * (b / Math.abs(b)));
       }
     }
