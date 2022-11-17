@@ -11,13 +11,15 @@ public enum TokenType
   RE("[Rr]e", "RE", -1), IM("[Ii]m", "IM", -1), LOG("[Ll]og", "LOG", 3), NUMBER(
     "\\([+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)((\\s*[+-]\\s*([0-9]+([.][0-9]*)?|[.][0-9]+))i|i)?\\)",
     "NUMBER", -1), POLAR_NUMBER(
-    "\\([+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)\\(cos\\([+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)\\)"
-        + "[+]isin\\([+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)\\)\\)\\)", "POLAR_NUMBER", -1),
+    "\\([+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)\\(cos\\([+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)°?\\)"
+        + "\\s*[+]\\s*isin\\([+-]?([0-9]+([.][0-9]*)?|[.][0-9]+)°?\\)\\)\\)", "POLAR_NUMBER", -1),
   OPEN_PAREN("[(]", "OPEN_PAREN", Integer.MAX_VALUE),
   CLOSE_PAREN("[)]", "CLOSE_PAREN", Integer.MAX_VALUE), ADD("[+]", "ADD", 0),
   SUBTRACT("[-]", "SUBTRACT", 0), MULTIPLY("[*]", "MULTIPLY", 1), DIVIDE("[/]", "DIVIDE", 1),
   EXP("\\^", "EXP", 2), POSITIVE(null, "POSITIVE", -1), NEGATIVE(null, "NEGATIVE", -1);
 
+  //language=RegExp
+  //language=RegExp
   private final Pattern pattern;
   private final String type;
   private final int precedence;
