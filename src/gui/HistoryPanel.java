@@ -12,6 +12,7 @@ public class HistoryPanel extends JFrame
 
   private JPanel mainPanel;
   private JTextArea area;
+  private Point curr;
 
   /**
    * 
@@ -29,9 +30,11 @@ public class HistoryPanel extends JFrame
     mainPanel.setLayout(new BorderLayout(0, 0));
     mainPanel.setBounds(50, 100, 300, 300);
     mainPanel.setVisible(false);
+    
+    curr = mainPanel.getLocation();
 
     Border b1 = BorderFactory.createEmptyBorder(10, 10, 10, 10);
-    mainPanel.setBorder(b1);
+    //mainPanel.setBorder(b1);
 
     area = new JTextArea();
     area.setEditable(false);
@@ -48,9 +51,16 @@ public class HistoryPanel extends JFrame
   public void createAndShowGUI()
   {
 
+    
+    System.out.println(curr.getX() + curr.getY());
     boolean visible = mainPanel.isVisible();
     mainPanel.setVisible(!visible);
+    if (!visible) {
     animate(mainPanel, new Point(308, 35), 15, 10);
+    System.out.println(curr.getX() + curr.getY());
+    } else {
+      mainPanel.setLocation(curr);
+    }
   }
 
   /**
