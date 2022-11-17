@@ -7,9 +7,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.NumberFormat.Style;
 
 import javax.swing.*;
 import javax.swing.border.Border;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.MutableAttributeSet;
+import javax.swing.text.SimpleAttributeSet;
+import javax.swing.text.StyleConstants;
+import javax.swing.text.StyleContext;
+import javax.swing.text.StyledDocument;
 import javax.swing.text.Utilities;
 
 public class HistoryPanel extends JFrame
@@ -17,10 +26,14 @@ public class HistoryPanel extends JFrame
 
   private final JPanel mainPanel;
   private final JScrollPane pane;
-  private final JTextPane area;
+  private final JEditorPane area;
   private final Point curr;
   private static final String SERIF = "Serif";
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
+  private String word;
+  private DefaultStyledDocument document;
+  private int startPoint;
+  private int endPoint;
 
   /**
    * 
@@ -44,7 +57,8 @@ public class HistoryPanel extends JFrame
     Border b1 = BorderFactory.createEmptyBorder(20, 20, 20, 20);
     //mainPanel.setBorder(b1);
 
-    area = new JTextPane();
+    document = new DefaultStyledDocument();
+    area = new JTextPane(document);
     area.setEditable(false);
     pane = new JScrollPane(area);
     mainPanel.add(pane, BorderLayout.CENTER);
@@ -55,6 +69,7 @@ public class HistoryPanel extends JFrame
     area.setBorder(b1);
     area.setFont(myFont);
     
+    word = null;
     copyExpression();
 
   }
@@ -67,11 +82,10 @@ public class HistoryPanel extends JFrame
     area.addMouseListener(new MouseAdapter() {
       public void mouseClicked(MouseEvent e) {
         try {
-          String word = null;
           
           int point = area.viewToModel2D(e.getPoint());
-          int startPoint = Utilities.getWordStart(area, point);
-          int endPoint = Utilities.getWordEnd(area, point);
+          int startPoint = Utilities.getRowStart(area, point);
+          int endPoint = Utilities.getRowEnd(area, point);
           
           word = area.getText(startPoint, endPoint - startPoint);
           System.out.println("word: " + word);
@@ -83,6 +97,11 @@ public class HistoryPanel extends JFrame
         } catch (Exception ex) {
           ex.printStackTrace();
         }
+      }
+      
+      public void mouseEntered(MouseEvent e) {
+        
+       
       }
     });
     
