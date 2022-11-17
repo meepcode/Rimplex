@@ -13,7 +13,7 @@ public class ComplexNumber implements Evaluatable
 {
   // public static final String I = "\uD835\uDE2A";
   public static final String I = "i";
-  public static final String FORMAT_TEXT = "%.1f";
+  public static final String FORMAT_TEXT = "%.2f";
 
   // These will be doubles representing the parts of a complex number.
   // Ex. 3 + 2i would save 3 to realPart and 2 to imaginaryPart.
