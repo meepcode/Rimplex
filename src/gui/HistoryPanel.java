@@ -7,18 +7,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.NumberFormat.Style;
 
 import javax.swing.*;
 import javax.swing.border.Border;
-import javax.swing.text.AttributeSet;
-import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
-import javax.swing.text.MutableAttributeSet;
-import javax.swing.text.SimpleAttributeSet;
-import javax.swing.text.StyleConstants;
-import javax.swing.text.StyleContext;
-import javax.swing.text.StyledDocument;
 import javax.swing.text.Utilities;
 
 public class HistoryPanel extends JFrame
@@ -32,8 +24,6 @@ public class HistoryPanel extends JFrame
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
   private String word;
   private DefaultStyledDocument document;
-  private int startPoint;
-  private int endPoint;
 
   /**
    * 
@@ -51,60 +41,72 @@ public class HistoryPanel extends JFrame
     mainPanel.setLayout(new BorderLayout());
     mainPanel.setBounds(50, 100, 300, 300);
     mainPanel.setVisible(false);
-    
+
     curr = mainPanel.getLocation();
 
     Border b1 = BorderFactory.createEmptyBorder(20, 20, 20, 20);
-    //mainPanel.setBorder(b1);
+    // mainPanel.setBorder(b1);
 
     document = new DefaultStyledDocument();
     area = new JTextPane(document);
     area.setEditable(false);
     pane = new JScrollPane(area);
     mainPanel.add(pane, BorderLayout.CENTER);
-    
+
     mainPanel.add(area);
-    //test string
-    area.setText("x + 5 = 8");
+
+    // test string
+    // String l = "x + 5 = 8";
+    // l += "\nx + 5 = 9";
+    // area.setText(l);
+
     area.setBorder(b1);
     area.setFont(myFont);
-    
+
     word = null;
     copyExpression();
 
   }
-  
+
   /**
    * 
    */
-  private void copyExpression() {
-    
-    area.addMouseListener(new MouseAdapter() {
-      public void mouseClicked(MouseEvent e) {
-        try {
-          
+  private void copyExpression()
+  {
+
+    area.addMouseListener(new MouseAdapter()
+    {
+      public void mouseClicked(MouseEvent e)
+      {
+        try
+        {
+
           int point = area.viewToModel2D(e.getPoint());
           int startPoint = Utilities.getRowStart(area, point);
           int endPoint = Utilities.getRowEnd(area, point);
-          
+
           word = area.getText(startPoint, endPoint - startPoint);
-          System.out.println("word: " + word);
-          
+          // System.out.println("word: " + word);
+
           StringSelection selection = new StringSelection(word);
           Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
           clipboard.setContents(selection, selection);
-          
-        } catch (Exception ex) {
+
+        }
+        catch (Exception ex)
+        {
           ex.printStackTrace();
         }
       }
-      
-      public void mouseEntered(MouseEvent e) {
-        
-       
+
+      public void mouseEntered(MouseEvent e)
+      {
+
+        // fill
+
       }
     });
-    
+
   }
 
   /**
@@ -114,9 +116,12 @@ public class HistoryPanel extends JFrame
   {
     boolean visible = mainPanel.isVisible();
     mainPanel.setVisible(!visible);
-    if (!visible) {
-    animate(mainPanel, new Point(308, 35), 15, 10);
-    } else {
+    if (!visible)
+    {
+      animate(mainPanel, new Point(308, 35), 15, 10);
+    }
+    else
+    {
       mainPanel.setLocation(curr);
     }
   }
@@ -154,10 +159,12 @@ public class HistoryPanel extends JFrame
         component.setBounds(oldPoint.x + (animFrame.x * currentFrame),
             oldPoint.y + (animFrame.y * currentFrame), compBounds.width, compBounds.height);
 
-        if (currentFrame != frames) {
+        if (currentFrame != frames)
+        {
           currentFrame++;
         }
-        else {
+        else
+        {
           ((Timer) e.getSource()).stop();
         }
       }
