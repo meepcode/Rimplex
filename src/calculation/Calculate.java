@@ -381,7 +381,7 @@ public class Calculate
     if (op1 instanceof PolarComplexNumber)
     {
       op1 = convertPolarToRectangular(op1);
-      ComplexNumber result = divide(new ComplexNumber(1.0, 0.0), op1);
+      ComplexNumber result = new ComplexNumber(1/op1.getReal(), 1/op1.getImaginary());
       return convertRectangularToPolar(result);
     }
     return new ComplexNumber(1/op1.getReal(), 1/op1.getImaginary());
