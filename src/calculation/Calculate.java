@@ -342,7 +342,7 @@ public class Calculate
         // If power is even, just return a realNumber
         if (exp % 2 == 0)
         {
-          op1 = new ComplexNumber(Math.pow(op1.getImaginary(), exp), 0.0);
+          op1 = new ComplexNumber(Math.pow(op1.getImaginary(), exp) * -1, 0.0);
         } else 
         { // Otherwise return an imaginary part
           op1 = new ComplexNumber(0.0, Math.pow(op1.getImaginary(), exp) * -1);
@@ -351,11 +351,13 @@ public class Calculate
       else
       {
         ComplexNumber temp = op1;
-        for (int i = 0; i < exp; i++) 
+        ComplexNumber ret = new ComplexNumber(op1.getReal(), op1.getImaginary());
+        
+        for (int i = 0; i < exp - 1; i++) 
         {
-          temp = multiply(temp, temp);
+          ret = multiply(ret, temp);
         }
-        return temp;
+        return ret;
       }
       return op1;
     }
