@@ -449,7 +449,7 @@ public class Calculate
       ComplexNumber result = divide(new ComplexNumber(1.0, 0.0), op1);
       return convertRectangularToPolar(result);
     }
-    return divide(new ComplexNumber(1.0, 0.0), op1);
+    return new ComplexNumber(1/op1.getReal(), 1/op1.getImaginary());
   }
 
   /**
@@ -476,6 +476,6 @@ public class Calculate
         + Math.pow(op1.getImaginary(), 2));
     Double polarAngle = Math.atan(op1.getReal()/op1.getImaginary());
 
-    return new PolarComplexNumber(polarMagnitude, polarMagnitude, polarAngle);
+    return new PolarComplexNumber(polarAngle, polarAngle, polarMagnitude);
   }
 }
