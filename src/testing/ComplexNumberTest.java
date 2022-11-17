@@ -73,15 +73,6 @@ class ComplexNumberTest
   }
 
   /**
-   * Test evaluate.
-   */
-  @Test
-  void testEvaluate()
-  {
-    assertEquals(test, test.evaluate(null));
-  }
-
-  /**
    * Test equals with two equal complex number.
    */
   @Test
