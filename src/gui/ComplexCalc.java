@@ -29,6 +29,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton, leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton;
   private final JPanel panel;
   private final HistoryPanel his;
+  private final String result;
 
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
 
@@ -51,6 +52,8 @@ public class ComplexCalc extends JFrame implements ActionListener
     
     // adding history panel
     his = new HistoryPanel();
+    // temp initialization of result
+    result = "";
     
 
     textfield = new JTextField();
@@ -439,6 +442,14 @@ public class ComplexCalc extends JFrame implements ActionListener
       });
 
       return menuBar;
+    }
+    
+    /**
+     * Getter for expression
+     * @return result
+     */
+    public String getResult() {
+      return result;
     }
 
     @Override
