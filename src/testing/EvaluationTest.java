@@ -6,12 +6,12 @@ import parse.ExpressionEvaluationException;
 
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-class ParseTest
+class EvaluationTest
 {
 
   @Test
   void testBasicExpression() throws ExpressionEvaluationException
   {
-    assertNull(Evaluation.evaluateExpression("((.1 + 2i) * (3i))"));
+    assertNull(Evaluation.evaluateExpression("(5+.12i)"));
   }
 }
