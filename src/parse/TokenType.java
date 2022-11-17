@@ -24,7 +24,7 @@ public enum TokenType
     this.pattern = Pattern.compile("^(" + regex + ")");
     this.type = type;
   }
-
+  
   /**
    * Accessor method for the pattern.
    *
