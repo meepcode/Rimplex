@@ -269,7 +269,8 @@ public class Calculate
       if (op1.getReal() == 0) 
       {
          // If only imaginary part is valid
-        return new ComplexNumber(Math.log(op1.getImaginary()) / Math.log(base), Math.PI / 2);
+        return new ComplexNumber(Math.log(op1.getImaginary()) 
+            / Math.log(base), (Math.PI / 2) / Math.log(base));
       } else if (op1.getImaginary() == 0) 
       {
          // If only real part is valid
@@ -277,8 +278,11 @@ public class Calculate
       } else 
       {
          // If operand is full complex number
-        return new ComplexNumber(Math.log(op1.getImaginary()) / Math.log(base) 
-            + Math.log(op1.getReal()) / Math.log(base), Math.PI / 2);
+        //return new ComplexNumber(Math.log(op1.getImaginary()) / Math.log(base) 
+        //    + Math.log(op1.getReal()) / Math.log(base), (Math.PI / 2) / Math.log(base));
+        PolarComplexNumber temp = convertRectangularToPolar(op1);
+        return new ComplexNumber(Math.log(temp.getPolarMagnitude()) 
+            / Math.log(base), temp.getImaginary() / Math.log(base));
       }
     }
   }
@@ -471,7 +475,7 @@ public class Calculate
    * @param operand rectangular complex number
    * @return a complex number
    */
-  public static ComplexNumber convertRectangularToPolar(final ComplexNumber operand)
+  public static PolarComplexNumber convertRectangularToPolar(final ComplexNumber operand)
   {
     ComplexNumber op1 = operand;
     Double polarMagnitude = Math.sqrt(Math.pow(op1.getReal(), 2) 
