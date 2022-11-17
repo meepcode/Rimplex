@@ -91,13 +91,21 @@ class CalculateTest2
     temp = new PolarComplexNumber(((int) (temp.getReal() * 100)) / 100.0,  
         ((int) (temp.getImaginary() * 100)) / 100.0, 
         ((int) (temp.getPolarMagnitude() * 100)) / 100.0);
+    res1 = new PolarComplexNumber(((int) (res1.getReal() * 100)) / 100.0,  
+        ((int) (res1.getImaginary() * 100)) / 100.0, 
+        ((int) (res1.getPolarMagnitude() * 100)) / 100.0);
     assertEquals(res1, temp);
   }
   
   @Test
   void testSquareRootPolar()
   {
-
+    ComplexNumber op = new ComplexNumber(4.0, 0.0);
+    PolarComplexNumber op1 = Calculate.convertRectangularToPolar(op);
+    ComplexNumber res = new ComplexNumber(2.0, 0.0);
+    PolarComplexNumber res1 = Calculate.convertRectangularToPolar(res);
+    ComplexNumber temp = Calculate.convertPolarToRectangular(Calculate.squareRoot(op1));
+    assertEquals(res, temp);
   }
   
   @Test

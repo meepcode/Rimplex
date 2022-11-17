@@ -337,7 +337,7 @@ public class Calculate
       op1 = new ComplexNumber(0.0, Math.sqrt(op1.getImaginary()));
     } else 
     { // If operand is a full complex number.
-        //√(a + ib) = ± (√{[√(a^2 + b^2) + a]/2} + ib/|b| √{[√(a^2 + b^2) - a]/2})
+        //√(a + ib) = ± (√{     [√(a^2 + b^2) + a]    /2} + ib/|b| √{[√(a^2 + b^2) - a]/2})
 
       Double a = op1.getReal();
       Double b = op1.getImaginary();
@@ -409,7 +409,7 @@ public class Calculate
     ComplexNumber op1 = operand;
     Double polarMagnitude = Math.sqrt(Math.pow(op1.getReal(), 2) 
         + Math.pow(op1.getImaginary(), 2));
-    Double polarAngle = Math.atan(op1.getReal()/op1.getImaginary());
+    Double polarAngle = Math.atan(op1.getImaginary()/op1.getReal());
 
     return new PolarComplexNumber(polarAngle, polarAngle, polarMagnitude);
   }
