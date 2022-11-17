@@ -1,6 +1,8 @@
 package gui;
 
 import javax.swing.*;
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,6 +28,8 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final JButton addButton, subButton, mulButton, divButton;
   private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton, leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton;
   private final JPanel panel;
+  private final HistoryPanel his;
+  private final String result;
 
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
 
@@ -37,12 +41,20 @@ public class ComplexCalc extends JFrame implements ActionListener
     frame = new JFrame("Calculator");
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setSize(420, 480);
-    frame.setLayout(null);
+    frame.setLayout(new BorderLayout());
     frame.setResizable(false);
+
+    frame.setLocationRelativeTo(null);
 
     // adding file menu
     MenuBar mb = new MenuBar();
     frame.setJMenuBar(mb.createMenuBar());
+    
+    // adding history panel
+    his = new HistoryPanel();
+    // temp initialization of result
+    result = "";
+    
 
     textfield = new JTextField();
     textfield.setBounds(50, 25, 300, 50);
@@ -110,7 +122,8 @@ public class ComplexCalc extends JFrame implements ActionListener
     panel = new JPanel();
     panel.setBounds(50, 100, 300, 300);
     panel.setLayout(new GridLayout(5, 4, 10, 10));
-
+    
+    
     panel.add(numberButtons[1]);
     panel.add(numberButtons[2]);
     panel.add(numberButtons[3]);
@@ -138,8 +151,9 @@ public class ComplexCalc extends JFrame implements ActionListener
     panel.add(logButton);
     panel.add(imaginaryNum);
     panel.add(sqrtButton);
-    frame.add(textfield);
-    frame.add(panel);
+    frame.add(textfield, BorderLayout.NORTH);
+    frame.add(panel, BorderLayout.CENTER);
+    frame.add(his.getPanel(), BorderLayout.EAST);
 
     frame.setVisible(true);
   }
@@ -318,7 +332,8 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
-
+          his.createAndShowGUI();
+          frame.pack();
         }
       });
 
@@ -427,6 +442,14 @@ public class ComplexCalc extends JFrame implements ActionListener
       });
 
       return menuBar;
+    }
+    
+    /**
+     * Getter for expression
+     * @return result
+     */
+    public String getResult() {
+      return result;
     }
 
     @Override

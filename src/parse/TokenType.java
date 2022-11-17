@@ -18,12 +18,11 @@ public enum TokenType
   SUBTRACT("[-]", "SUBTRACT", 0), MULTIPLY("[*]", "MULTIPLY", 1), DIVIDE("[/]", "DIVIDE", 1),
   EXP("\\^", "EXP", 2), POSITIVE(null, "POSITIVE", -1), NEGATIVE(null, "NEGATIVE", -1);
 
-  //language=RegExp
-  //language=RegExp
   private final Pattern pattern;
   private final String type;
   private final int precedence;
 
+  //language=RegExp
   TokenType(final String regex, final String type, final int precedence)
   {
     this.precedence = precedence;

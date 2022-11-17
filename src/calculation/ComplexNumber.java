@@ -1,7 +1,5 @@
 package calculation;
 
-import java.util.Objects;
-
 /**
  * Complex number.
  *
@@ -91,10 +89,12 @@ public class ComplexNumber
    */
   @Override public boolean equals(final Object other)
   {
-    if (other instanceof ComplexNumber op2)
+    double epsilon = 0.00000001;
+
+    if (other instanceof ComplexNumber that)
     {
-      return (Objects.equals(this.getReal(), op2.getReal()) && Objects.equals(this.getImaginary(),
-          op2.getImaginary()));
+      return (Math.abs(this.getReal() - that.getReal()) < epsilon
+          && Math.abs(this.getImaginary() - that.getImaginary()) < epsilon);
     }
     return false;
   }

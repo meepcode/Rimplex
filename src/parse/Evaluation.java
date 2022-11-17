@@ -86,9 +86,9 @@ public class Evaluation
       ComplexNumber operand = evaluate(expression);
       ComplexNumber base = evaluate(expression);
 
-      if (base.getImaginary() != 0)
+      if (Math.abs(base.getImaginary() - 0.0) > 0.000000001)
       {
-        throw new ExpressionEvaluationException("Base must be real number");
+        throw new ExpressionEvaluationException("Base must be real number for log");
       }
 
       result = Calculate.log(base.getReal(), operand);
@@ -145,8 +145,8 @@ public class Evaluation
     }
     else if (type == TokenType.SUBTRACT)
     {
-      ComplexNumber left = evaluate(expression);
       ComplexNumber right = evaluate(expression);
+      ComplexNumber left = evaluate(expression);
 
       result = Calculate.subtract(left, right);
     }
@@ -156,19 +156,22 @@ public class Evaluation
     }
     else if (type == TokenType.DIVIDE)
     {
-      ComplexNumber left = evaluate(expression);
       ComplexNumber right = evaluate(expression);
+      ComplexNumber left = evaluate(expression);
 
       result = Calculate.divide(left, right);
     }
     else if (type == TokenType.EXP)
     {
-      ComplexNumber left = evaluate(expression);
-      ComplexNumber right = evaluate(expression);
+      ComplexNumber power = evaluate(expression);
+      ComplexNumber base = evaluate(expression);
 
-      // TODO: Check on Exponent function
+      if (Math.abs(base.getImaginary() - 0.0) > 0.000000001)
+      {
+        throw new ExpressionEvaluationException("Base must be real number for exponentiation");
+      }
 
-      result = Calculate.exponent(left.getReal(), right);
+      result = Calculate.exponent(base.getReal(), power);
     }
     else if (type == TokenType.POSITIVE)
     {
@@ -226,7 +229,7 @@ public class Evaluation
       else
       {
         while (!operators.isEmpty()
-            && token.type.getPrecedence() > operators.peek().type.getPrecedence())
+            && token.type.getPrecedence() >= operators.peek().type.getPrecedence())
         {
           output.push(operators.pop());
         }
