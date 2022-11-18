@@ -1,6 +1,8 @@
 package gui;
 
 import javax.swing.*;
+
+import calculation.Calculate;
 import calculation.ComplexNumber;
 import parse.Evaluation;
 import parse.ExpressionEvaluationException;
@@ -37,6 +39,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final HistoryPanel his;
   protected static final String result = "";
   protected static boolean isClicked = false;
+  private boolean isPolarActive = false;
 
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
 
@@ -246,6 +249,10 @@ public class ComplexCalc extends JFrame implements ActionListener
       try
       {
         ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
+        if (isPolarActive)
+        {
+          res = Calculate.convertRectangularToPolar(res);
+        }
         textfield.setText(textfield.getText() + "=" + res);
         isClicked = true;
         his.add();
@@ -325,7 +332,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
-          //TODO
+          isPolarActive = false;
         }
       });
       JMenuItem polar = new JMenuItem("Polar");
@@ -336,7 +343,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
-          //TODO
+          isPolarActive = true;
         }
       });
 
