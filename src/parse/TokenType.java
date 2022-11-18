@@ -36,7 +36,7 @@ public enum TokenType
     }
     this.type = type;
   }
-
+  
   /**
    * Accessor method for the pattern.
    *

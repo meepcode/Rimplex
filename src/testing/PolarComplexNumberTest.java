@@ -7,6 +7,7 @@ import org.junit.jupiter.api.Test;
 
 /**
  * Test cases for PolarComplexNumber.
+ * 
  * @author TeamD
  * @version 11/18/22 This work complies with the JMU Honor Code.
  *
@@ -20,8 +21,6 @@ public class PolarComplexNumberTest
   private PolarComplexNumber test3 = new PolarComplexNumber(121.0, -120.0, 4.0);
   private PolarComplexNumber test4 = new PolarComplexNumber(120.0, -120.0, 3.0);
 
-
-
   /**
    * toString test.
    */
@@ -29,9 +28,9 @@ public class PolarComplexNumberTest
   public void testToString()
   {
     // covers the else
-    assertEquals("2.00(cos(120.00Â°) + isin(120.00Â°))", test.toString());
+    assertEquals("2.0(cos(120.0°) + isin(120.0°))", test.toString());
     // covers the if
-    assertEquals("4.00(cos(120.00Â°) - isin(120.00Â°))", test2.toString());
+    assertEquals("4.0(cos(120.0°) - isin(120.0°))", test2.toString());
   }
 
   /**
@@ -43,7 +42,7 @@ public class PolarComplexNumberTest
     assertEquals(2.0, test.getPolarMagnitude());
     assertEquals(4.0, test2.getPolarMagnitude());
   }
-  
+
   /**
    * Equals test.
    */
@@ -52,7 +51,7 @@ public class PolarComplexNumberTest
   {
     assertEquals(test, test);
   }
-  
+
   /**
    * Tests equals with non-equal polar complex number.
    */
@@ -64,8 +63,7 @@ public class PolarComplexNumberTest
     assertEquals(false, test.equals(test3));
     assertEquals(false, test.equals(test4));
   }
-  
-  
+
   /**
    * hashCode test.
    */
