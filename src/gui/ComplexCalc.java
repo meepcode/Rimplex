@@ -1,6 +1,8 @@
 package gui;
 
 import javax.swing.*;
+
+import calculation.Calculate;
 import calculation.ComplexNumber;
 import parse.Evaluation;
 import parse.ExpressionEvaluationException;
@@ -29,14 +31,16 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final JFrame frame;
   private final JTextField textfield;
   private final JButton[] numberButtons = new JButton[10];
-  private final JButton[] functionButtons = new JButton[16];
+  private final JButton[] functionButtons = new JButton[20];
   private final JButton addButton, subButton, mulButton, divButton;
   private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton,
-      leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton;
+      leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton, realPart,
+      conjugate, imaginaryPart, backspace;
   private final JPanel panel;
   private final HistoryPanel his;
   protected static String result = "";
   protected static boolean isClicked = false;
+  private boolean isPolarActive = false;
 
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
 
@@ -79,6 +83,10 @@ public class ComplexCalc extends JFrame implements ActionListener
     imaginaryNum = new JButton("i");
     logButton = new JButton("Log");
     sqrtButton = new JButton("\u221A");
+    realPart = new JButton("real(");
+    conjugate = new JButton("conj");
+    backspace = new JButton("\u2190");
+    imaginaryPart = new JButton("imag");
 
     functionButtons[0] = addButton;
     functionButtons[1] = subButton;
@@ -96,8 +104,12 @@ public class ComplexCalc extends JFrame implements ActionListener
     functionButtons[13] = imaginaryNum;
     functionButtons[14] = logButton;
     functionButtons[15] = sqrtButton;
+    functionButtons[16] = realPart;
+    functionButtons[17] = conjugate;
+    functionButtons[18] = imaginaryPart;
+    functionButtons[19] = backspace;
 
-    for (int i = 0; i < 16; i++)
+    for (int i = 0; i < 20; i++)
     {
       functionButtons[i].addActionListener(this);
       functionButtons[i].setFont(myFont);
@@ -120,6 +132,13 @@ public class ComplexCalc extends JFrame implements ActionListener
       numberButtons[i].setFont(myFont);
       numberButtons[i].setFocusable(false);
     }
+
+    for (int i = 16; i < 19; i++)
+    {
+      functionButtons[i].setFont(new Font(SERIF, Font.BOLD, 12));
+    }
+
+    backspace.setFont(new Font(SERIF, Font.BOLD, 20));
 
     panel = new JPanel();
     panel.setBounds(50, 100, 300, 300);
@@ -152,6 +171,10 @@ public class ComplexCalc extends JFrame implements ActionListener
     panel.add(logButton);
     panel.add(imaginaryNum);
     panel.add(sqrtButton);
+    panel.add(realPart);
+    panel.add(conjugate);
+    panel.add(imaginaryPart);
+    panel.add(backspace);
     frame.add(textfield, BorderLayout.NORTH);
     frame.add(panel, BorderLayout.CENTER);
     frame.add(his.getPanel(), BorderLayout.EAST);
@@ -246,6 +269,10 @@ public class ComplexCalc extends JFrame implements ActionListener
       try
       {
         ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
+        if (isPolarActive)
+        {
+          res = Calculate.convertRectangularToPolar(res);
+        }
         textfield.setText(textfield.getText() + "=" + res);
         result = textfield.getText();
         isClicked = true;
@@ -326,7 +353,8 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
-          //TODO
+
+          isPolarActive = false;
         }
       });
       JMenuItem polar = new JMenuItem("Polar");
@@ -337,7 +365,9 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
-          //TODO
+
+          isPolarActive = true;
+
         }
       });
 
@@ -479,7 +509,6 @@ public class ComplexCalc extends JFrame implements ActionListener
       });
       return menuBar;
     }
-    
 
     @Override
     public void actionPerformed(ActionEvent e)
@@ -488,13 +517,13 @@ public class ComplexCalc extends JFrame implements ActionListener
 
     }
   }
-  
+
   /**
    * setting boolean click
    */
-  public static void setClick() {
+  public static void setClick()
+  {
     isClicked = !isClicked;
   }
-  
 
 }

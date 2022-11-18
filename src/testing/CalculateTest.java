@@ -1,10 +1,9 @@
-
 package testing;
 
-import org.junit.jupiter.api.Test;
 import calculation.Calculate;
 import calculation.ComplexNumber;
 import calculation.PolarComplexNumber;
+import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -19,30 +18,28 @@ class CalculateTest
   private final ComplexNumber comp6 = new ComplexNumber(0.0, -1.0);
 
   /**
-   * Test IllegalArgumentException for - add, subtract, multiply and divide
+   * Test IllegalArgumentException for - add, subtract, multiply and divide.
    */
-  @Test
-  void testIllegalArgumentException()
+  @Test void testIllegalArgumentException()
   {
-    assertThrows(IllegalArgumentException.class, () -> {
-      Calculate.add(comp1);
-    });
-    assertThrows(IllegalArgumentException.class, () -> {
-      Calculate.divide(comp1);
-    });
-    assertThrows(IllegalArgumentException.class, () -> {
-      Calculate.multiply(comp1);
-    });
-    assertThrows(IllegalArgumentException.class, () -> {
-      Calculate.subtract(comp1);
-    });
+    assertThrows(IllegalArgumentException.class, () ->
+
+        Calculate.add(comp1));
+    assertThrows(IllegalArgumentException.class, () ->
+
+        Calculate.divide(comp1));
+    assertThrows(IllegalArgumentException.class, () ->
+
+        Calculate.multiply(comp1));
+    assertThrows(IllegalArgumentException.class, () ->
+
+        Calculate.subtract(comp1));
   }
 
   /**
    * Test subtract.
    */
-  @Test
-  void testSubtract()
+  @Test void testSubtract()
   {
     assertEquals(new ComplexNumber(3.0, 2.0), Calculate.subtract(comp1, comp2));
   }
@@ -50,8 +47,7 @@ class CalculateTest
   /**
    * Test add.
    */
-  @Test
-  void testAdd()
+  @Test void testAdd()
   {
     assertEquals(new ComplexNumber(9.0, 6.0), Calculate.add(comp1, comp2));
   }
@@ -59,8 +55,7 @@ class CalculateTest
   /**
    * Test divide.
    */
-  @Test
-  void testDivide()
+  @Test void testDivide()
   {
     assertEquals(new ComplexNumber(2.0, 0.0), Calculate.divide(comp1, comp2));
   }
@@ -68,8 +63,7 @@ class CalculateTest
   /**
    * Test multiply.
    */
-  @Test
-  void testMultiply()
+  @Test void testMultiply()
   {
     assertEquals(new ComplexNumber(10.0, 24.0), Calculate.multiply(comp1, comp2));
   }
@@ -77,8 +71,7 @@ class CalculateTest
   /**
    * Test multiply with a 0 real value.
    */
-  @Test
-  void testMultiplyZeroReal()
+  @Test void testMultiplyZeroReal()
   {
     assertEquals(new ComplexNumber(-8.0, 12.0), Calculate.multiply(comp1, comp3));
   }
@@ -86,8 +79,7 @@ class CalculateTest
   /**
    * Test multiply with a 0 imaginary value.
    */
-  @Test
-  void testMultiplyZeroImaginary()
+  @Test void testMultiplyZeroImaginary()
   {
     assertEquals(new ComplexNumber(12.0, 8.0), Calculate.multiply(comp1, comp4));
   }
@@ -95,8 +87,7 @@ class CalculateTest
   /**
    * Test divide with a 0 real value in divisor.
    */
-  @Test
-  void testDivideZeroRealDivisor()
+  @Test void testDivideZeroRealDivisor()
   {
     assertEquals(new ComplexNumber(2.0, -3.0), Calculate.divide(comp1, comp3));
   }
@@ -104,8 +95,7 @@ class CalculateTest
   /**
    * Test divide with a 0 imaginary value in divisor.
    */
-  @Test
-  void testDivideZeroImaginaryDivisor()
+  @Test void testDivideZeroImaginaryDivisor()
   {
     assertEquals(new ComplexNumber(3.0, 2.0), Calculate.divide(comp1, comp4));
   }
@@ -113,8 +103,7 @@ class CalculateTest
   /**
    * Test divide with a 0 real value in numerator.
    */
-  @Test
-  void testDivideZeroRealNumerator()
+  @Test void testDivideZeroRealNumerator()
   {
     assertEquals(new ComplexNumber(2.0 / 13, 3.0 / 13), Calculate.divide(comp3, comp1));
   }
@@ -122,8 +111,7 @@ class CalculateTest
   /**
    * Test divide with a 0 imaginary value in numerator.
    */
-  @Test
-  void testDivideZeroImaginaryNumerator()
+  @Test void testDivideZeroImaginaryNumerator()
   {
     assertEquals(new ComplexNumber(3.0 / 13, -2.0 / 13), Calculate.divide(comp4, comp1));
   }
@@ -131,8 +119,7 @@ class CalculateTest
   /**
    * Test divide with by 0 + 0i.
    */
-  @Test
-  void testDivideByZero()
+  @Test void testDivideByZero()
   {
     assertThrows(ArithmeticException.class, () -> Calculate.divide(comp1, comp5));
   }
@@ -140,8 +127,7 @@ class CalculateTest
   /**
    * Test divide with a 0 value in numerator and denominator.
    */
-  @Test
-  void testDivideMultipleZero()
+  @Test void testDivideMultipleZero()
   {
     assertEquals(new ComplexNumber(0.0, 2.0), Calculate.divide(comp4, comp6));
   }
@@ -149,33 +135,28 @@ class CalculateTest
   /**
    * Test constructor.
    */
-  // @SuppressWarnings("InstantiationOfUtilityClass")
-  @Test
-  void testConstructor()
+  @SuppressWarnings("InstantiationOfUtilityClass")
+  @Test void testConstructor()
   {
     new Calculate();
   }
 
-  @Test
-  void subtractTest()
+  @Test void subtractTest()
   {
     assertEquals(new ComplexNumber(3.0, 2.0), Calculate.subtract(comp1, comp2));
   }
 
-  @Test
-  void divideTest()
+  @Test void divideTest()
   {
     assertEquals(new ComplexNumber(2.0, 0.0), Calculate.divide(comp1, comp2));
   }
 
-  @Test
-  void multiplyTest()
+  @Test void multiplyTest()
   {
     assertEquals(new ComplexNumber(10.0, 24.0), Calculate.multiply(comp1, comp2));
   }
 
-  @Test
-  void testAddPolar()
+  @Test void testAddPolar()
   {
     ComplexNumber op1 = new ComplexNumber(2.0, 8.8);
     PolarComplexNumber test = Calculate.convertRectangularToPolar(op1);
@@ -187,8 +168,7 @@ class CalculateTest
     assertEquals(res, test1);
   }
 
-  @Test
-  void testSubtractPolar()
+  @Test void testSubtractPolar()
   {
     ComplexNumber op1 = new ComplexNumber(2.0, 8.8);
     PolarComplexNumber test = Calculate.convertRectangularToPolar(op1);
@@ -200,8 +180,7 @@ class CalculateTest
     assertEquals(res, test1);
   }
 
-  @Test
-  void testMultiplyPolar()
+  @Test void testMultiplyPolar()
   {
     ComplexNumber op1 = new ComplexNumber(2.0, 8.8);
     PolarComplexNumber test = Calculate.convertRectangularToPolar(op1);
@@ -213,8 +192,7 @@ class CalculateTest
     assertEquals(res, test1);
   }
 
-  @Test
-  void testDividePolar()
+  @Test void testDividePolar()
   {
     ComplexNumber op1 = new ComplexNumber(2.0, 8.8);
     PolarComplexNumber test = Calculate.convertRectangularToPolar(op1);
@@ -226,8 +204,7 @@ class CalculateTest
     assertEquals(res, test1);
   }
 
-  @Test
-  void testLogPolar()
+  @Test void testLogPolar()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
     PolarComplexNumber op1 = Calculate.convertRectangularToPolar(op);
@@ -244,8 +221,7 @@ class CalculateTest
     assertEquals(res1, test);
   }
 
-  @Test
-  void testExponentPolar()
+  @Test void testExponentPolar()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
     PolarComplexNumber op1 = Calculate.convertRectangularToPolar(op);
@@ -261,19 +237,17 @@ class CalculateTest
     assertEquals(res1, temp);
   }
 
-  @Test
-  void testSquareRootPolar()
+  @Test void testSquareRootPolar()
   {
     ComplexNumber op = new ComplexNumber(4.0, 0.0);
     PolarComplexNumber op1 = Calculate.convertRectangularToPolar(op);
     ComplexNumber res = new ComplexNumber(2.0, 0.0);
-    PolarComplexNumber res1 = Calculate.convertRectangularToPolar(res);
+    // PolarComplexNumber res1 = Calculate.convertRectangularToPolar(res);
     ComplexNumber temp = Calculate.convertPolarToRectangular(Calculate.squareRoot(op1));
     assertEquals(res, temp);
   }
 
-  @Test
-  void testConjugatePolar()
+  @Test void testConjugatePolar()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
     PolarComplexNumber test = Calculate.convertRectangularToPolar(op);
@@ -289,8 +263,7 @@ class CalculateTest
     assertEquals(res, temp);
   }
 
-  @Test
-  void testInvertPolar()
+  @Test void testInvertPolar()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
     PolarComplexNumber test = Calculate.convertRectangularToPolar(op);
@@ -306,8 +279,7 @@ class CalculateTest
     assertEquals(res, temp);
   }
 
-  @Test
-  void testLog()
+  @Test void testLog()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
     ComplexNumber res = new ComplexNumber(1.5, 1.13);
@@ -318,16 +290,14 @@ class CalculateTest
     assertEquals(res, test);
   }
 
-  @Test
-  void testLogRealOnly()
+  @Test void testLogRealOnly()
   {
     ComplexNumber op = new ComplexNumber(2.0, 0.0);
     ComplexNumber res = new ComplexNumber(1.0, 0.0);
     assertEquals(res, Calculate.log(2.0, op));
   }
 
-  @Test
-  void testLogImaginaryOnly()
+  @Test void testLogImaginaryOnly()
   {
     ComplexNumber op = new ComplexNumber(0.0, 2.0);
     ComplexNumber res = new ComplexNumber(1.0, 2.26);
@@ -338,40 +308,35 @@ class CalculateTest
     assertEquals(res, test);
   }
 
-  @Test
-  void testExponent()
+  @Test void testExponent()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
     ComplexNumber res = new ComplexNumber(0.0, 8.0);
     assertEquals(res, Calculate.exponent(2.0, op));
   }
 
-  @Test
-  void testExponentRealOnly()
+  @Test void testExponentRealOnly()
   {
     ComplexNumber op = new ComplexNumber(2.0, 0.0);
     ComplexNumber res = new ComplexNumber(4.0, 0.0);
     assertEquals(res, Calculate.exponent(2.0, op));
   }
 
-  @Test
-  void testExponentImaginaryOnlyEven()
+  @Test void testExponentImaginaryOnlyEven()
   {
     ComplexNumber op = new ComplexNumber(0.0, 2.0);
     ComplexNumber res = new ComplexNumber(-4.0, 0.0);
     assertEquals(res, Calculate.exponent(2.0, op));
   }
 
-  @Test
-  void testExponentImaginaryOnlyOdd()
+  @Test void testExponentImaginaryOnlyOdd()
   {
     ComplexNumber op = new ComplexNumber(0.0, 2.0);
     ComplexNumber res = new ComplexNumber(0.0, -8.0);
     assertEquals(res, Calculate.exponent(3.0, op));
   }
 
-  @Test
-  void testSquareRoot()
+  @Test void testSquareRoot()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
     ComplexNumber res = new ComplexNumber(1.55, 0.64);
@@ -382,40 +347,35 @@ class CalculateTest
     assertEquals(res, test);
   }
 
-  @Test
-  void testSquareRootRealOnly()
+  @Test void testSquareRootRealOnly()
   {
     ComplexNumber op = new ComplexNumber(4.0, 0.0);
     ComplexNumber res = new ComplexNumber(2.0, 0.0);
     assertEquals(res, Calculate.squareRoot(op));
   }
 
-  @Test
-  void testSquareRootImaginaryOnly()
+  @Test void testSquareRootImaginaryOnly()
   {
     ComplexNumber op = new ComplexNumber(0.0, 4.0);
     ComplexNumber res = new ComplexNumber(0.0, 2.0);
     assertEquals(res, Calculate.squareRoot(op));
   }
 
-  @Test
-  void testConjugate()
+  @Test void testConjugate()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
     ComplexNumber res = new ComplexNumber(2.0, -2.0);
     assertEquals(res, Calculate.conjugate(op));
   }
 
-  @Test
-  void testInvert()
+  @Test void testInvert()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
     ComplexNumber res = new ComplexNumber(1 / 2.0, 1 / 2.0);
     assertEquals(res, Calculate.invert(op));
   }
 
-  @Test
-  void testPToR()
+  @Test void testPToR()
   {
     ComplexNumber op = new ComplexNumber(1.99, 1.99);
     PolarComplexNumber res = new PolarComplexNumber(0.78540, 0.78540, 2.8284);
@@ -426,8 +386,7 @@ class CalculateTest
     assertEquals(op, test);
   }
 
-  @Test
-  void testRToP()
+  @Test void testRToP()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
     PolarComplexNumber res = new PolarComplexNumber(0.78, 0.78, 2.82);
