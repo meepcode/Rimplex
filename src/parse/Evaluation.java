@@ -96,6 +96,11 @@ public class Evaluation
         {
           throw new ExpressionEvaluationException("Base must be real number for log");
         }
+        
+        if (base.getReal() == 0 && base.getImaginary() == 0)
+        {
+          throw new ExpressionEvaluationException("Base cannot be 0");
+        }
 
         result = Calculate.log(base.getReal(), operand);
       }

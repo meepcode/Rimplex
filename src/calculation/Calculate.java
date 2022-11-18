@@ -227,6 +227,10 @@ public class Calculate
   public static ComplexNumber log(final Double base, final ComplexNumber operand)
   {
     boolean polar = false;
+    if (base == 0)
+    {
+      throw new IllegalArgumentException("Base is invalid");
+    }
     
     ComplexNumber op1 = operand;
     if (op1 instanceof PolarComplexNumber)
