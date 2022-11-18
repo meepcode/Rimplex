@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 package testing;
 
 import calculation.Calculate;
@@ -303,13 +306,18 @@ class EvaluationTest
   @Test
   void testLogOnAdditionExpressions() throws ExpressionEvaluationException
   {
+<<<<<<< HEAD
     assertEquals(
         new ComplexNumber(
+=======
+    assertEquals(new ComplexNumber(
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
             1.499999999999999999999999999999999999999999999999999999999999999999999999999999,
             1.133090035456798452406920736429166702542965366930948896046504136985150238),
         evaluateExpression("((2)+(0))Log((2)+(0+.5i)+(1.5i))"));
   }
 
+<<<<<<< HEAD
   @Test
   void testLogBeforeAddition() throws ExpressionEvaluationException
   {
@@ -318,7 +326,11 @@ class EvaluationTest
 
   @Test
   void testInverse() throws ExpressionEvaluationException
+=======
+  @Test void testInverse() throws ExpressionEvaluationException
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
   {
-    assertEquals(new ComplexNumber(0.25, -0.25), evaluateExpression("Inv(2+2i)"));
+    assertEquals(new ComplexNumber(0.25, -0.25),
+        evaluateExpression("Inv(2+2i)"));
   }
 }
