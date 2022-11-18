@@ -173,7 +173,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   {
     ComplexCalc calc = new ComplexCalc();
   }
-
+  
   @Override
   public void actionPerformed(final ActionEvent e)
   {
@@ -298,14 +298,6 @@ public class ComplexCalc extends JFrame implements ActionListener
                 e1.printStackTrace();
               }
           }   
-          
-          MenuItemWindow p = new MenuItemWindow(printTitle, 300, 300);
-          // final print button
-          JPanel panel = new JPanel();
-          JButton printButton = new JButton(printTitle);
-          p.add(panel, BorderLayout.SOUTH);
-          panel.setLayout((new FlowLayout(FlowLayout.TRAILING)));
-          panel.add(printButton);
         }
       });
 
@@ -346,8 +338,11 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         public void actionPerformed(ActionEvent e)
         {
-          JOptionPane.showMessageDialog(null, aboutMessage, aboutTitle,
-              JOptionPane.INFORMATION_MESSAGE);
+          JOptionPane.showMessageDialog(null,
+              "This calculator performs operations on the given complex number operands. "
+                  + "A history of results from previosu calculations are stored in the history "
+                  + "panel.",
+              "About", JOptionPane.INFORMATION_MESSAGE);
         }
       });
 
@@ -469,7 +464,6 @@ public class ComplexCalc extends JFrame implements ActionListener
           exit.setText("Exit");
         }
       });
-
       return menuBar;
     }
     
