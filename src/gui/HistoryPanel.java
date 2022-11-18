@@ -14,6 +14,11 @@ import javax.swing.border.Border;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.Utilities;
 
+/**
+ * 
+ * @author Team D
+ *
+ */
 public class HistoryPanel extends JFrame
 {
 
@@ -37,7 +42,7 @@ public class HistoryPanel extends JFrame
   // size: 420 x 480
 
   /**
-   * 
+   * Constructor.
    */
   public HistoryPanel()
   {
@@ -76,6 +81,9 @@ public class HistoryPanel extends JFrame
 
   }
 
+  /**
+   * Adds expression to history panel.
+   */
   public void add()
   {
 
@@ -91,7 +99,7 @@ public class HistoryPanel extends JFrame
   }
 
   /**
-   * 
+   * Copy expression to clipboard
    */
   private void copyExpression()
   {
@@ -132,7 +140,7 @@ public class HistoryPanel extends JFrame
   }
 
   /**
-   * 
+   * Generates History panel.
    */
   public void createAndShowGUI()
   {
@@ -150,7 +158,7 @@ public class HistoryPanel extends JFrame
   }
 
   /**
-   * 
+   * Get History panel.
    * @return
    */
   public JPanel getPanel()
@@ -159,7 +167,7 @@ public class HistoryPanel extends JFrame
   }
 
   /**
-   * 
+   * Helper to animate history panel.
    * @param component
    * @param newPoint
    * @param frames
