@@ -41,6 +41,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   protected static String result = "";
   protected static boolean isClicked = false;
   private boolean isPolarActive = false;
+  private String pastResult = "";
 
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
 
@@ -205,18 +206,34 @@ public class ComplexCalc extends JFrame implements ActionListener
     }
     if (e.getSource() == addButton)
     {
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(pastResult);
+      }
       textfield.setText(textfield.getText() + PLUS);
     }
     if (e.getSource() == subButton)
     {
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(pastResult);
+      }
       textfield.setText(textfield.getText() + MINUS);
     }
     if (e.getSource() == mulButton)
     {
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(pastResult);
+      }
       textfield.setText(textfield.getText() + ASTERISK);
     }
     if (e.getSource() == divButton)
     {
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(pastResult);
+      }
       textfield.setText(textfield.getText() + SLASH);
     }
     if (e.getSource() == resetButton)
@@ -234,6 +251,10 @@ public class ComplexCalc extends JFrame implements ActionListener
     }
     if (e.getSource() == expButton)
     {
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(pastResult);
+      }
       textfield.setText(textfield.getText() + "^");
     }
     if (e.getSource() == imaginaryNum)
@@ -250,10 +271,18 @@ public class ComplexCalc extends JFrame implements ActionListener
     }
     if (e.getSource() == logButton)
     {
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(pastResult);
+      }
       textfield.setText(textfield.getText() + "log");
     }
     if (e.getSource() == sqrtButton)
     {
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(pastResult);
+      }
       textfield.setText(textfield.getText() + "sqrt()");
     }
     if (e.getSource() == invButton)
@@ -271,6 +300,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         }
         textfield.setText(textfield.getText() + "=" + res);
         result = textfield.getText();
+        pastResult = "(" + res.toString() + ")";
         isClicked = true;
         his.add();
       }
@@ -424,6 +454,8 @@ public class ComplexCalc extends JFrame implements ActionListener
           mode.setText("Modo");
           print.setText("Impresión");
           exit.setText("Salida");
+          rect.setText("Rectangular");
+          polar.setText("Polar");
         }
       });
 
@@ -449,6 +481,8 @@ public class ComplexCalc extends JFrame implements ActionListener
           mode.setText("Modus");
           print.setText("Drucken");
           exit.setText("Ausfahrt");
+          rect.setText("Rechteckig");
+          polar.setText("Polar");
         }
       });
 
@@ -474,6 +508,8 @@ public class ComplexCalc extends JFrame implements ActionListener
           mode.setText("Mode");
           print.setText("Imprimer");
           exit.setText("Sortir");
+          rect.setText("Rectangulaire");
+          polar.setText("Polaire");
         }
       });
 
@@ -501,6 +537,8 @@ public class ComplexCalc extends JFrame implements ActionListener
           mode.setText("Mode");
           print.setText("Print");
           exit.setText("Exit");
+          rect.setText("Polar");
+          polar.setText("Rectangular");
         }
       });
       return menuBar;
