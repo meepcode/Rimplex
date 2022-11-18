@@ -327,17 +327,7 @@ public class Evaluation
         tokens.add(i + 1, new Token(TokenType.MULTIPLY, "*"));
       }
 
-      if (curType.isFunction() && !(tokens.get(i + 1).type.isNumber()
-          && tokens.get(i + 1).type == TokenType.OPEN_PAREN))
-      {
-        int j = 1;
-
-        while (j < tokens.size())
-        {
-
-        }
-      }
-      else if (curType.isFunction() && tokens.get(i + 1).type == TokenType.NUMBER)
+      if (curType.isFunction() && tokens.get(i + 1).type == TokenType.NUMBER)
       {
         tokens.add(i + 1, new Token(TokenType.OPEN_PAREN, OPEN_PAREN));
         tokens.add(i + 3, new Token(TokenType.CLOSE_PAREN, CLOSE_PAREN));

@@ -12,9 +12,9 @@ public class PolarComplexNumber extends ComplexNumber
 {
   private static final String COS = "(cos(";
   private static final String SIN = "sin(";
-  private static final String END = "°))";
+  private static final String END = "\u00B0))";
 
-  private Double r; // The polar magnitude
+  private final Double r; // The polar magnitude
 
   /**
    * Constructor.

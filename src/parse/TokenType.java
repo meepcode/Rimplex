@@ -36,7 +36,7 @@ public enum TokenType
     }
     this.type = type;
   }
-  
+
   /**
    * Accessor method for the pattern.
    *
@@ -59,8 +59,8 @@ public enum TokenType
    */
   public boolean isFunction()
   {
-    return this == INV || this == SQRT || this == IM || this == RE || this == POSITIVE
-        || this == NEGATIVE;
+    return this == INV || this == CONJ || this == SQRT || this == IM || this == RE
+        || this == POSITIVE || this == NEGATIVE;
   }
 
   /**
