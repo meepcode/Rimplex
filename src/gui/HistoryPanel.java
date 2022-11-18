@@ -7,12 +7,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.Utilities;
 
+/**
+ * 
+ * @author Team D
+ *
+ */
 public class HistoryPanel extends JFrame
 {
 
@@ -21,9 +27,12 @@ public class HistoryPanel extends JFrame
   private final JEditorPane area;
   private final Point curr;
   private static final String SERIF = "Serif";
-  private final Font myFont = new Font(SERIF, Font.BOLD, 30);
+  private final Font myFont = new Font(SERIF, Font.BOLD, 25);
   private String word;
   private DefaultStyledDocument document;
+  private ArrayList<String> list;
+  private String historyList = "History\n";
+  private int index = 0;
 
   /**
    * 
@@ -33,7 +42,7 @@ public class HistoryPanel extends JFrame
   // size: 420 x 480
 
   /**
-   * 
+   * Constructor.
    */
   public HistoryPanel()
   {
@@ -45,7 +54,7 @@ public class HistoryPanel extends JFrame
     curr = mainPanel.getLocation();
 
     Border b1 = BorderFactory.createEmptyBorder(20, 20, 20, 20);
-    // mainPanel.setBorder(b1);
+    mainPanel.setBorder(b1);
 
     document = new DefaultStyledDocument();
     area = new JTextPane(document);
@@ -60,16 +69,37 @@ public class HistoryPanel extends JFrame
     // l += "\nx + 5 = 9";
     // area.setText(l);
 
+    area.setText("History\n");
     area.setBorder(b1);
     area.setFont(myFont);
 
     word = null;
     copyExpression();
 
+    list = new ArrayList<>();
+    // add();
+
   }
 
   /**
-   * 
+   * Adds expression to history panel.
+   */
+  public void add()
+  {
+
+    if (ComplexCalc.isClicked)
+    {
+      list.add(ComplexCalc.result);
+      historyList += list.get(index) + "\n";
+      index++;
+
+      area.setText(historyList);
+      ComplexCalc.setClick();
+    }
+  }
+
+  /**
+   * Copy expression to clipboard
    */
   private void copyExpression()
   {
@@ -110,12 +140,13 @@ public class HistoryPanel extends JFrame
   }
 
   /**
-   * 
+   * Generates History panel.
    */
   public void createAndShowGUI()
   {
     boolean visible = mainPanel.isVisible();
     mainPanel.setVisible(!visible);
+    area.setVisible(!visible);
     if (!visible)
     {
       animate(mainPanel, new Point(308, 35), 15, 10);
@@ -127,7 +158,7 @@ public class HistoryPanel extends JFrame
   }
 
   /**
-   * 
+   * Get History panel.
    * @return
    */
   public JPanel getPanel()
@@ -136,7 +167,7 @@ public class HistoryPanel extends JFrame
   }
 
   /**
-   * 
+   * Helper to animate history panel.
    * @param component
    * @param newPoint
    * @param frames

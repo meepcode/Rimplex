@@ -1,8 +1,6 @@
 package gui;
 
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
-
 import calculation.ComplexNumber;
 import parse.Evaluation;
 import parse.ExpressionEvaluationException;
@@ -21,6 +19,7 @@ import java.awt.print.PrinterJob;
  */
 public class ComplexCalc extends JFrame implements ActionListener
 {
+  private static final long serialVersionUID = 1L;
   private static final String SERIF = "Serif";
   private static final String MINUS = "-";
   private static final String PLUS = "+";
@@ -33,16 +32,17 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final JButton[] functionButtons = new JButton[20];
   private final JButton addButton, subButton, mulButton, divButton;
   private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton,
+<<<<<<< HEAD
       leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton, realPart,
       conjugate, imaginaryPart, backspace;
+=======
+      leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton;
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
   private final JPanel panel;
   private final HistoryPanel his;
   private final String result;
 
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
-
-  private final double num = 0;
-  private char operator;
 
   ComplexCalc()
   {
@@ -252,11 +252,11 @@ public class ComplexCalc extends JFrame implements ActionListener
     }
     if (e.getSource() == logButton)
     {
-      textfield.setText(textfield.getText() + "(Base)log(");
+      textfield.setText(textfield.getText() + "log");
     }
     if (e.getSource() == sqrtButton)
     {
-      textfield.setText(textfield.getText() + "sqrt(");
+      textfield.setText(textfield.getText() + "sqrt()");
     }
     if (e.getSource() == invButton)
     {
@@ -271,13 +271,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       }
       catch (ExpressionEvaluationException ex)
       {
-        MenuItemWindow p = new MenuItemWindow("Invalid Expression", 300, 300);
-        // final print button
-        // JPanel panel = new JPanel();
-        JButton printButton = new JButton("Cancel");
-        p.add(panel, BorderLayout.SOUTH);
-        panel.setLayout((new FlowLayout(FlowLayout.TRAILING)));
-        panel.add(printButton);
+        // TODO
       }
     }
   }
@@ -290,8 +284,8 @@ public class ComplexCalc extends JFrame implements ActionListener
     String aboutTitle = "About";
     String printTitle = "Print";
     JMenuBar menuBar;
-    JMenu file, edit, help;
-    JMenuItem print, exit, mode, about;
+    JMenu file, mode, help;
+    JMenuItem print, exit, about;
     MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
 
     public JMenuBar createMenuBar()
@@ -339,17 +333,29 @@ public class ComplexCalc extends JFrame implements ActionListener
       });
 
       // edit menu along menubar
-      edit = new JMenu("Edit");
-      menuBar.add(edit);
+      mode = new JMenu("Mode");
+      menuBar.add(mode);
 
-      mode = new JMenuItem("Mode");
-      edit.add(mode);
-      mode.addActionListener(this);
-      mode.addActionListener(new ActionListener()
+      JMenuItem rect = new JMenuItem("Rectangular");
+      mode.add(rect);
+      rect.addActionListener(this);
+      rect.addActionListener(new ActionListener()
       {
+        @Override
         public void actionPerformed(ActionEvent e)
         {
-          modeWindow.setVisible(true);
+          //TODO
+        }
+      });
+      JMenuItem polar = new JMenuItem("Polar");
+      mode.add(polar);
+      polar.addActionListener(this);
+      polar.addActionListener(new ActionListener()
+      {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+          //TODO
         }
       });
 
@@ -404,7 +410,6 @@ public class ComplexCalc extends JFrame implements ActionListener
           frame.setTitle("Calculadora");
           langs.setText("Idioma");
           file.setText("Expediente");
-          edit.setText("Editar");
           help.setText("Ayuda");
           about.setText("Sobre");
           mode.setText("Modo");
@@ -430,7 +435,6 @@ public class ComplexCalc extends JFrame implements ActionListener
           frame.setTitle("Taschenrechner");
           langs.setText("Sprachen");
           file.setText("Datei");
-          edit.setText("Bearbeiten");
           help.setText("Hilfe");
           about.setText("Um");
           mode.setText("Modus");
@@ -456,7 +460,6 @@ public class ComplexCalc extends JFrame implements ActionListener
           frame.setTitle("Calculatrice");
           langs.setText("Langue");
           file.setText("Dossier");
-          edit.setText("Éditer");
           help.setText("Aider");
           about.setText("Sur");
           mode.setText("Mode");
@@ -484,7 +487,6 @@ public class ComplexCalc extends JFrame implements ActionListener
           frame.setTitle("Calculator");
           langs.setText("Language");
           file.setText("File");
-          edit.setText("Edit");
           help.setText("Help");
           about.setText("About");
           mode.setText("Mode");

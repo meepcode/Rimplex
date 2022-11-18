@@ -50,22 +50,23 @@ public class PolarComplexNumber extends ComplexNumber
    */
   public String toString()
   {
-    if (getImaginary() < 0)
-    {
-      return String.format(FORMAT_TEXT, r) + COS 
+    // if (getImaginary() < 0)
+    // {
+    return String.format(FORMAT_TEXT, r) + COS 
           + String.format(FORMAT_TEXT, getReal() * (180/Math.PI))
-          + "°) - " + I + SIN 
-          + String.format(FORMAT_TEXT, Math.abs(getImaginary() * (180/Math.PI))) + END;
-    }
+          + "°) + " + I + SIN 
+          + String.format(FORMAT_TEXT, getImaginary() * (180/Math.PI)) + END;
+  }
+    // }
+    /*}
     else
     {
       return String.format(FORMAT_TEXT, r) + COS 
           + String.format(FORMAT_TEXT, getReal() * (180/Math.PI))
-          + "°) + " + I + SIN 
+          + "°) + " - I + SIN 
           + String.format(FORMAT_TEXT, Math.abs(getImaginary() * (180/Math.PI))) + END;
 
-    }
-  }
+    }*/
 
   /**
    * Compares two complex numbers.
