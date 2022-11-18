@@ -322,12 +322,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     {
       if (textfield.getText().contains("=")) 
       {
-        textfield.setText("");
-      }
-      if (!pastResult.equals("") && textfield.getText().equals(""))
-      {
-        textfield.setText(textfield.getText() + "(10)log");
-        textfield.setText(textfield.getText() + pastResult);
+        textfield.setText("(10)log" + pastResult);
       } else {
         textfield.setText(textfield.getText() + "(10)log(");
       }
@@ -336,12 +331,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     {
       if (textfield.getText().contains("=")) 
       {
-        textfield.setText("");
-      }
-      if (!pastResult.equals("") && textfield.getText().equals(""))
-      {
-        textfield.setText(textfield.getText() + "sqrt");
-        textfield.setText(textfield.getText() + pastResult);
+        textfield.setText("sqrt" + pastResult);
       } else {
         textfield.setText(textfield.getText() + "sqrt(");
       }
@@ -350,12 +340,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     {
       if (textfield.getText().contains("=")) 
       {
-        textfield.setText("");
-      }
-      if (!pastResult.equals("") && textfield.getText().equals(""))
-      {
-        textfield.setText(textfield.getText() + "Inv");
-        textfield.setText(textfield.getText() + pastResult);
+        textfield.setText("Inv" + pastResult);
       } else {
         textfield.setText(textfield.getText() + "Inv(");
       }
@@ -364,12 +349,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     {
       if (textfield.getText().contains("=")) 
       {
-        textfield.setText("");
-      }
-      if (!pastResult.equals("") && textfield.getText().equals(""))
-      {
-        textfield.setText(textfield.getText() + "re");
-        textfield.setText(textfield.getText() + pastResult);
+        textfield.setText("re" + pastResult);
       } else {
         textfield.setText(textfield.getText() + "re(");
       }
@@ -378,12 +358,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     {
       if (textfield.getText().contains("=")) 
       {
-        textfield.setText("");
-      }
-      if (!pastResult.equals("") && textfield.getText().equals(""))
-      {
-        textfield.setText(textfield.getText() + "im");
-        textfield.setText(textfield.getText() + pastResult);
+        textfield.setText("im" + pastResult);
       } else {
         textfield.setText(textfield.getText() + "im(");
       }
@@ -392,12 +367,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     {
       if (textfield.getText().contains("=")) 
       {
-        textfield.setText("");
-      }
-      if (!pastResult.equals("") && textfield.getText().equals(""))
-      {
-        textfield.setText(textfield.getText() + "conj");
-        textfield.setText(textfield.getText() + pastResult);
+        textfield.setText("conj" + pastResult);
       } else {
         textfield.setText(textfield.getText() + "conj(");
       }
@@ -426,7 +396,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
   }
 
 
-  public int print(Graphics g, PageFormat pf, int page) throws PrinterException
+  /*public int print(Graphics g, PageFormat pf, int page) throws PrinterException
   {
     if (page > 0)
     {
@@ -441,7 +411,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     frame.printAll(g);
 
     return PAGE_EXISTS;
-  }
+  }*/
 
   // Menu Bar Code
   class MenuBar implements ActionListener
