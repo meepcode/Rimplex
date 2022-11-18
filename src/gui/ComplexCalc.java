@@ -35,7 +35,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton;
   private final JPanel panel;
   private final HistoryPanel his;
-  protected static final String result = "";
+  protected static String result = "";
   protected static boolean isClicked = false;
 
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
@@ -247,6 +247,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
         textfield.setText(textfield.getText() + "=" + res);
+        result = textfield.getText();
         isClicked = true;
         his.add();
       }
@@ -354,7 +355,8 @@ public class ComplexCalc extends JFrame implements ActionListener
           JOptionPane.showMessageDialog(null,
               "This calculator performs operations on the given complex number operands. "
                   + "A history of results from previosu calculations are stored in the history "
-                  + "panel.",
+                  + "panel.\nClicking on an expression in the History "
+                  + "Panel copies that expression to the clipboard.",
               "About", JOptionPane.INFORMATION_MESSAGE);
         }
       });
