@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+package testing;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class EvaluationTest
+{
+
+  @Test
+  void test()
+  {
+    assertEquals(6, 6);
+  }
+
+}
+=======
 package testing;
 
 import calculation.Calculate;
@@ -271,3 +289,4 @@ class EvaluationTest
     assertEquals(new ComplexNumber(0.25, -0.25), evaluateExpression("Inv(2+2i)"));
   }
 }
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD

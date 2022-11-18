@@ -1,5 +1,6 @@
 package testing;
 
+import static org.junit.Assert.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import calculation.PolarComplexNumber;
@@ -28,9 +29,9 @@ public class PolarComplexNumberTest
   public void testToString()
   {
     // covers the else
-    assertEquals("2.0(cos(120.0°) + isin(120.0°))", test.toString());
+    assertEquals("2.00(cos(120.00°) + isin(120.00°))", test.toString());
     // covers the if
-    assertEquals("4.0(cos(120.0°) - isin(120.0°))", test2.toString());
+    assertEquals("4.00(cos(120.00°) - isin(120.00°))", test2.toString());
   }
 
   /**
@@ -50,6 +51,7 @@ public class PolarComplexNumberTest
   public void testEquals()
   {
     assertEquals(test, test);
+    assertNotEquals(test, 0);
   }
 
   /**
