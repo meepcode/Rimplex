@@ -300,10 +300,10 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       }
       if (!pastResult.equals("") && textfield.getText().equals(""))
       {
-        textfield.setText(textfield.getText() + "(base)^");
+        textfield.setText(textfield.getText() + "(exp)^");
         textfield.setText(textfield.getText() + pastResult);
       } else {
-        textfield.setText(textfield.getText() + "(base)^(");
+        textfield.setText(textfield.getText() + "(exp)^(");
       }
     }
     if (e.getSource() == imaginaryNum)
@@ -425,11 +425,11 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     JMenuBar menuBar;
     JMenu file, mode, help;
     JMenuItem print, exit, about;
-    MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
+    //MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
 
     public JMenuBar createMenuBar()
     {
-      modeWindow.setVisible(false);
+      // modeWindow.setVisible(false);
 
       menuBar = new JMenuBar();
 
@@ -523,7 +523,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
               + "en el panel de historial.";
           aboutTitle = "Sobre";
           hist.setText("Historia");
-          modeWindow.setTitle("Modo");
+          // modeWindow.setTitle("Modo");
           frame.setTitle("Calculadora");
           langs.setText("Idioma");
           file.setText("Expediente");
@@ -551,7 +551,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
               + "Verlaufsfeld gespeichert.";
           aboutTitle = "Um";
           hist.setText("Geschichte");
-          modeWindow.setTitle("Modus");
+          // modeWindow.setTitle("Modus");
           frame.setTitle("Taschenrechner");
           langs.setText("Sprachen");
           file.setText("Datei");
@@ -579,7 +579,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
               + " dans le panneau d'historique.";
           aboutTitle = "Sur";
           hist.setText("Histoire");
-          modeWindow.setTitle("Mode");
+          // modeWindow.setTitle("Mode");
           frame.setTitle("Calculatrice");
           langs.setText("Langue");
           file.setText("Dossier");
@@ -608,7 +608,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
                   + "panel.";
           aboutTitle = "About";
           hist.setText("History");
-          modeWindow.setTitle("Mode");
+          // modeWindow.setTitle("Mode");
           frame.setTitle("Calculator");
           langs.setText("Language");
           file.setText("File");
