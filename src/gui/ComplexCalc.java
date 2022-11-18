@@ -32,12 +32,8 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final JButton[] functionButtons = new JButton[20];
   private final JButton addButton, subButton, mulButton, divButton;
   private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton,
-<<<<<<< HEAD
       leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton, realPart,
       conjugate, imaginaryPart, backspace;
-=======
-      leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton;
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
   private final JPanel panel;
   private final HistoryPanel his;
   private final String result;
@@ -84,7 +80,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     imaginaryNum = new JButton("i");
     logButton = new JButton("Log");
     sqrtButton = new JButton("\u221A");
-    realPart = new JButton("re(");
+    realPart = new JButton("real(");
     conjugate = new JButton("conj");
     backspace = new JButton("\u2190");
     imaginaryPart = new JButton("imag");
@@ -134,10 +130,13 @@ public class ComplexCalc extends JFrame implements ActionListener
       numberButtons[i].setFocusable(false);
     }
 
-    for (int i = 16; i < 20; i++)
+    for (int i = 16; i < 19; i++)
     {
-      numberButtons[i].setFont(new Font(SERIF, Font.BOLD, 8));
+      functionButtons[i].setFont(new Font(SERIF, Font.BOLD, 12));
     }
+    
+    backspace.setFont(new Font(SERIF, Font.BOLD, 20));
+    
     panel = new JPanel();
     panel.setBounds(50, 100, 300, 300);
     panel.setLayout(new GridLayout(5, 4, 10, 10));
@@ -344,7 +343,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
-          //TODO
+          // TODO
         }
       });
       JMenuItem polar = new JMenuItem("Polar");
@@ -355,7 +354,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
-          //TODO
+          // TODO
         }
       });
 
