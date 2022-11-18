@@ -137,9 +137,9 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       functionButtons[i].setFont(new Font(SERIF, Font.BOLD, 12));
     }
-    
+
     backspace.setFont(new Font(SERIF, Font.BOLD, 20));
-    
+
     panel = new JPanel();
     panel.setBounds(50, 100, 300, 300);
     panel.setLayout(new GridLayout(5, 4, 10, 10));
@@ -352,11 +352,8 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
-<<<<<<< HEAD
-          // TODO
-=======
+
           isPolarActive = false;
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         }
       });
       JMenuItem polar = new JMenuItem("Polar");
@@ -367,11 +364,9 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
-<<<<<<< HEAD
-          // TODO
-=======
+
           isPolarActive = true;
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
+
         }
       });
 
@@ -512,7 +507,6 @@ public class ComplexCalc extends JFrame implements ActionListener
       });
       return menuBar;
     }
-    
 
     @Override
     public void actionPerformed(ActionEvent e)
@@ -521,13 +515,13 @@ public class ComplexCalc extends JFrame implements ActionListener
 
     }
   }
-  
+
   /**
    * setting boolean click
    */
-  public static void setClick() {
+  public static void setClick()
+  {
     isClicked = !isClicked;
   }
-  
 
 }
