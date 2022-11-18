@@ -22,7 +22,6 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
 import java.awt.print.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -33,16 +32,6 @@ import java.awt.print.PrinterJob;
 
 import static java.awt.print.Printable.NO_SUCH_PAGE;
 import static java.awt.print.Printable.PAGE_EXISTS;
-=======
-// import java.awt.print.*;
-//import java.awt.print.PageFormat;
-//import java.awt.print.Printable;
-//import java.awt.print.PrinterException;
-//import java.awt.print.PrinterJob;
-//
-//import static java.awt.print.Printable.NO_SUCH_PAGE;
-//import static java.awt.print.Printable.PAGE_EXISTS;
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
 /**
  * Calculator GUI.
@@ -651,30 +640,5 @@ public class ComplexCalc extends JFrame implements ActionListener
 
     }
   }
-
-<<<<<<< HEAD
-  @Override
-  public void keyTyped(KeyEvent e)
-  {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
-  public void keyPressed(KeyEvent e)
-  {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
-  public void keyReleased(KeyEvent e)
-  {
-    // TODO Auto-generated method stub
-
-  }
-=======
-
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
 }
