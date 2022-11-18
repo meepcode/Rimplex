@@ -320,45 +320,10 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       }
       catch (ExpressionEvaluationException ex)
       {
-        JOptionPane.showMessageDialog(null,
-            "ERROR: Invalid Expression Format.",
-            "ERROR", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "ERROR: Invalid Expression Format.", "ERROR",
+            JOptionPane.ERROR_MESSAGE);
       }
     }
-    
-    KeyListener listener = new KeyListener() {
-      @Override
-      public void keyPressed(KeyEvent event) {
-        try
-        {
-          ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
-          if (isPolarActive)
-          {
-            res = Calculate.convertRectangularToPolar(res);
-          }
-          textfield.setText(textfield.getText() + "=" + res);
-          result = textfield.getText();
-          pastResult = "(" + res.toString() + ")";
-          isClicked = true;
-          his.add();
-        }
-        catch (ExpressionEvaluationException ex)
-        {
-          JOptionPane.showMessageDialog(null,
-              "ERROR: Invalid Expression Format.",
-              "ERROR", JOptionPane.ERROR_MESSAGE);
-        }
-      }
-      @Override
-      public void keyReleased(KeyEvent event) {
-        // TODO
-      }
-      @Override
-      public void keyTyped(KeyEvent event) {
-        // TODO
-      }
-    };
-    textfield.addKeyListener(listener);
   }
 
   // Menu Bar Code
@@ -614,21 +579,21 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
   public void keyTyped(KeyEvent e)
   {
     // TODO Auto-generated method stub
-    
+
   }
 
   @Override
   public void keyPressed(KeyEvent e)
   {
     // TODO Auto-generated method stub
-    
+
   }
 
   @Override
   public void keyReleased(KeyEvent e)
   {
     // TODO Auto-generated method stub
-    
+
   }
 
 }
