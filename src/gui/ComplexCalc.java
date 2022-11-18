@@ -1,6 +1,8 @@
 package gui;
 
 import javax.swing.*;
+
+import calculation.Calculate;
 import calculation.ComplexNumber;
 import parse.Evaluation;
 import parse.ExpressionEvaluationException;
@@ -36,7 +38,9 @@ public class ComplexCalc extends JFrame implements ActionListener
       conjugate, imaginaryPart, backspace;
   private final JPanel panel;
   private final HistoryPanel his;
-  private final String result;
+  protected static final String result = "";
+  protected static boolean isClicked = false;
+  private boolean isPolarActive = false;
 
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
 
@@ -57,7 +61,6 @@ public class ComplexCalc extends JFrame implements ActionListener
     // adding history panel
     his = new HistoryPanel();
     // temp initialization of result
-    result = "";
 
     textfield = new JTextField();
     textfield.setBounds(50, 25, 300, 50);
@@ -266,7 +269,13 @@ public class ComplexCalc extends JFrame implements ActionListener
       try
       {
         ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
+        if (isPolarActive)
+        {
+          res = Calculate.convertRectangularToPolar(res);
+        }
         textfield.setText(textfield.getText() + "=" + res);
+        isClicked = true;
+        his.add();
       }
       catch (ExpressionEvaluationException ex)
       {
@@ -343,7 +352,11 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
+<<<<<<< HEAD
           // TODO
+=======
+          isPolarActive = false;
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         }
       });
       JMenuItem polar = new JMenuItem("Polar");
@@ -354,7 +367,11 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
+<<<<<<< HEAD
           // TODO
+=======
+          isPolarActive = true;
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         }
       });
 
@@ -495,16 +512,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       });
       return menuBar;
     }
-
-    /**
-     * Getter for expression
-     * 
-     * @return result
-     */
-    public String getResult()
-    {
-      return result;
-    }
+    
 
     @Override
     public void actionPerformed(ActionEvent e)
@@ -513,5 +521,13 @@ public class ComplexCalc extends JFrame implements ActionListener
 
     }
   }
+  
+  /**
+   * setting boolean click
+   */
+  public static void setClick() {
+    isClicked = !isClicked;
+  }
+  
 
 }
