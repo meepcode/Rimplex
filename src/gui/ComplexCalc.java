@@ -84,7 +84,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     imaginaryNum = new JButton("i");
     logButton = new JButton("Log");
     sqrtButton = new JButton("\u221A");
-    realPart = new JButton("real(");
+    realPart = new JButton("real");
     conjugate = new JButton("conj");
     imaginaryPart = new JButton("imag");
 
@@ -288,6 +288,18 @@ public class ComplexCalc extends JFrame implements ActionListener
     if (e.getSource() == invButton)
     {
       textfield.setText(textfield.getText() + "Inv(");
+    }
+    if (e.getSource() == realPart)
+    {
+      textfield.setText(textfield.getText() + "real(");
+    }
+    if (e.getSource() == imaginaryPart)
+    {
+      textfield.setText(textfield.getText() + "imag(");
+    }
+    if (e.getSource() == conjugate)
+    {
+      textfield.setText(textfield.getText() + "cong(");
     }
     if (e.getSource() == equButton)
     {
