@@ -233,6 +233,10 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
     if (e.getSource() == addButton)
     {
+      if (textfield.getText().contains("=")) 
+      {
+        textfield.setText("");
+      }
       if (!pastResult.equals("") && textfield.getText().equals(""))
       {
         textfield.setText(pastResult);
@@ -241,6 +245,10 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
     if (e.getSource() == subButton)
     {
+      if (textfield.getText().contains("=")) 
+      {
+        textfield.setText("");
+      }
       if (!pastResult.equals("") && textfield.getText().equals(""))
       {
         textfield.setText(pastResult);
@@ -249,6 +257,10 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
     if (e.getSource() == mulButton)
     {
+      if (textfield.getText().contains("=")) 
+      {
+        textfield.setText("");
+      }
       if (!pastResult.equals("") && textfield.getText().equals(""))
       {
         textfield.setText(pastResult);
@@ -257,6 +269,10 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
     if (e.getSource() == divButton)
     {
+      if (textfield.getText().contains("=")) 
+      {
+        textfield.setText("");
+      }
       if (!pastResult.equals("") && textfield.getText().equals(""))
       {
         textfield.setText(pastResult);
@@ -278,11 +294,17 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
     if (e.getSource() == expButton)
     {
+      if (textfield.getText().contains("=")) 
+      {
+        textfield.setText("");
+      }
       if (!pastResult.equals("") && textfield.getText().equals(""))
       {
-        textfield.setText(pastResult);
+        textfield.setText(textfield.getText() + "(base)^");
+        textfield.setText(textfield.getText() + pastResult);
+      } else {
+        textfield.setText(textfield.getText() + "(base)^(");
       }
-      textfield.setText(textfield.getText() + "^");
     }
     if (e.getSource() == imaginaryNum)
     {
@@ -298,35 +320,87 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
     if (e.getSource() == logButton)
     {
+      if (textfield.getText().contains("=")) 
+      {
+        textfield.setText("");
+      }
       if (!pastResult.equals("") && textfield.getText().equals(""))
       {
-        textfield.setText(pastResult);
+        textfield.setText(textfield.getText() + "(10)log");
+        textfield.setText(textfield.getText() + pastResult);
+      } else {
+        textfield.setText(textfield.getText() + "(10)log(");
       }
-      textfield.setText(textfield.getText() + "log");
     }
     if (e.getSource() == sqrtButton)
     {
+      if (textfield.getText().contains("=")) 
+      {
+        textfield.setText("");
+      }
       if (!pastResult.equals("") && textfield.getText().equals(""))
       {
-        textfield.setText(pastResult);
+        textfield.setText(textfield.getText() + "sqrt");
+        textfield.setText(textfield.getText() + pastResult);
+      } else {
+        textfield.setText(textfield.getText() + "sqrt(");
       }
-      textfield.setText(textfield.getText() + "sqrt()");
     }
     if (e.getSource() == invButton)
     {
-      textfield.setText(textfield.getText() + "Inv(");
+      if (textfield.getText().contains("=")) 
+      {
+        textfield.setText("");
+      }
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(textfield.getText() + "Inv");
+        textfield.setText(textfield.getText() + pastResult);
+      } else {
+        textfield.setText(textfield.getText() + "Inv(");
+      }
     }
     if (e.getSource() == realPart)
     {
-      textfield.setText(textfield.getText() + "re(");
+      if (textfield.getText().contains("=")) 
+      {
+        textfield.setText("");
+      }
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(textfield.getText() + "re");
+        textfield.setText(textfield.getText() + pastResult);
+      } else {
+        textfield.setText(textfield.getText() + "re(");
+      }
     }
     if (e.getSource() == imaginaryPart)
     {
-      textfield.setText(textfield.getText() + "im(");
+      if (textfield.getText().contains("=")) 
+      {
+        textfield.setText("");
+      }
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(textfield.getText() + "im");
+        textfield.setText(textfield.getText() + pastResult);
+      } else {
+        textfield.setText(textfield.getText() + "im(");
+      }
     }
     if (e.getSource() == conjugate)
     {
-      textfield.setText(textfield.getText() + "conj(");
+      if (textfield.getText().contains("=")) 
+      {
+        textfield.setText("");
+      }
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(textfield.getText() + "conj");
+        textfield.setText(textfield.getText() + pastResult);
+      } else {
+        textfield.setText(textfield.getText() + "conj(");
+      }
     }
     if (e.getSource() == equButton)
     {
