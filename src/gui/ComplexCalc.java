@@ -37,7 +37,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
   private final JButton addButton, subButton, mulButton, divButton;
   private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton,
       leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton, realPart,
-      conjugate, imaginaryPart, backspace;
+      conjugate, imaginaryPart;
   private final JPanel panel;
   private final HistoryPanel his;
   protected static String result = "";
@@ -77,7 +77,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     divButton = new JButton(SLASH);
     decButton = new JButton(DOT);
     equButton = new JButton("=");
-    clrButton = new JButton("C");
+    clrButton = new JButton("\u2190");
     expButton = new JButton("^");
     leftParenth = new JButton("(");
     rightParenth = new JButton(")");
@@ -86,9 +86,8 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     imaginaryNum = new JButton("i");
     logButton = new JButton("Log");
     sqrtButton = new JButton("\u221A");
-    realPart = new JButton("real(");
+    realPart = new JButton("real");
     conjugate = new JButton("conj");
-    backspace = new JButton("\u2190");
     imaginaryPart = new JButton("imag");
 
     functionButtons[0] = addButton;
@@ -110,9 +109,8 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     functionButtons[16] = realPart;
     functionButtons[17] = conjugate;
     functionButtons[18] = imaginaryPart;
-    functionButtons[19] = backspace;
 
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 19; i++)
     {
       functionButtons[i].addActionListener(this);
       functionButtons[i].setFont(myFont);
@@ -141,7 +139,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       functionButtons[i].setFont(new Font(SERIF, Font.BOLD, 12));
     }
 
-    backspace.setFont(new Font(SERIF, Font.BOLD, 20));
+    clrButton.setFont(new Font(SERIF, Font.BOLD, 20));
 
     panel = new JPanel();
     panel.setBounds(50, 100, 300, 300);
@@ -150,34 +148,32 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     panel.add(numberButtons[1]);
     panel.add(numberButtons[2]);
     panel.add(numberButtons[3]);
-    panel.add(addButton);
-    panel.add(subButton);
-
     panel.add(numberButtons[4]);
     panel.add(numberButtons[5]);
     panel.add(numberButtons[6]);
-    panel.add(mulButton);
-    panel.add(divButton);
-
     panel.add(numberButtons[7]);
     panel.add(numberButtons[8]);
     panel.add(numberButtons[9]);
+    panel.add(numberButtons[0]);
+
+    panel.add(addButton);
+    panel.add(subButton);
+    panel.add(mulButton);
+    panel.add(divButton);
     panel.add(leftParenth);
     panel.add(rightParenth);
     panel.add(decButton);
-    panel.add(numberButtons[0]);
     panel.add(equButton);
     panel.add(expButton);
     panel.add(invButton);
     panel.add(resetButton);
-    panel.add(clrButton);
     panel.add(logButton);
     panel.add(imaginaryNum);
     panel.add(sqrtButton);
     panel.add(realPart);
     panel.add(conjugate);
     panel.add(imaginaryPart);
-    panel.add(backspace);
+    panel.add(clrButton);
     frame.add(textfield, BorderLayout.NORTH);
     frame.add(panel, BorderLayout.CENTER);
     frame.add(his.getPanel(), BorderLayout.EAST);
@@ -294,6 +290,18 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     if (e.getSource() == invButton)
     {
       textfield.setText(textfield.getText() + "Inv(");
+    }
+    if (e.getSource() == realPart)
+    {
+      textfield.setText(textfield.getText() + "real(");
+    }
+    if (e.getSource() == imaginaryPart)
+    {
+      textfield.setText(textfield.getText() + "imag(");
+    }
+    if (e.getSource() == conjugate)
+    {
+      textfield.setText(textfield.getText() + "cong(");
     }
     if (e.getSource() == equButton)
     {
