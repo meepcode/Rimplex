@@ -21,7 +21,7 @@ public class HistoryPanel extends JFrame
   private final JEditorPane area;
   private final Point curr;
   private static final String SERIF = "Serif";
-  private final Font myFont = new Font(SERIF, Font.BOLD, 30);
+  private final Font myFont = new Font(SERIF, Font.BOLD, 25);
   private String word;
   private DefaultStyledDocument document;
 
@@ -60,6 +60,8 @@ public class HistoryPanel extends JFrame
     // l += "\nx + 5 = 9";
     // area.setText(l);
 
+    
+    area.setText("History:");
     area.setBorder(b1);
     area.setFont(myFont);
 
