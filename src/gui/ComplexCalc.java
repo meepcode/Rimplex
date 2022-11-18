@@ -1,6 +1,8 @@
 package gui;
 
 import javax.swing.*;
+
+import calculation.Calculate;
 import calculation.ComplexNumber;
 import parse.Evaluation;
 import parse.ExpressionEvaluationException;
@@ -31,13 +33,17 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
   private final JFrame frame;
   private final JTextField textfield;
   private final JButton[] numberButtons = new JButton[10];
-  private final JButton[] functionButtons = new JButton[16];
+  private final JButton[] functionButtons = new JButton[20];
   private final JButton addButton, subButton, mulButton, divButton;
   private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton,
-      leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton;
+      leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton, realPart,
+      conjugate, imaginaryPart, backspace;
   private final JPanel panel;
   private final HistoryPanel his;
-  private final String result;
+  protected static String result = "";
+  protected static boolean isClicked = false;
+  private boolean isPolarActive = false;
+  private String pastResult = "";
 
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
 
@@ -58,7 +64,6 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     // adding history panel
     his = new HistoryPanel();
     // temp initialization of result
-    result = "";
 
     textfield = new JTextField();
     textfield.setBounds(50, 25, 300, 50);
@@ -81,6 +86,10 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     imaginaryNum = new JButton("i");
     logButton = new JButton("Log");
     sqrtButton = new JButton("\u221A");
+    realPart = new JButton("real(");
+    conjugate = new JButton("conj");
+    backspace = new JButton("\u2190");
+    imaginaryPart = new JButton("imag");
 
     functionButtons[0] = addButton;
     functionButtons[1] = subButton;
@@ -98,8 +107,12 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     functionButtons[13] = imaginaryNum;
     functionButtons[14] = logButton;
     functionButtons[15] = sqrtButton;
+    functionButtons[16] = realPart;
+    functionButtons[17] = conjugate;
+    functionButtons[18] = imaginaryPart;
+    functionButtons[19] = backspace;
 
-    for (int i = 0; i < 16; i++)
+    for (int i = 0; i < 20; i++)
     {
       functionButtons[i].addActionListener(this);
       functionButtons[i].setFont(myFont);
@@ -122,6 +135,13 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       numberButtons[i].setFont(myFont);
       numberButtons[i].setFocusable(false);
     }
+
+    for (int i = 16; i < 19; i++)
+    {
+      functionButtons[i].setFont(new Font(SERIF, Font.BOLD, 12));
+    }
+
+    backspace.setFont(new Font(SERIF, Font.BOLD, 20));
 
     panel = new JPanel();
     panel.setBounds(50, 100, 300, 300);
@@ -154,6 +174,10 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     panel.add(logButton);
     panel.add(imaginaryNum);
     panel.add(sqrtButton);
+    panel.add(realPart);
+    panel.add(conjugate);
+    panel.add(imaginaryPart);
+    panel.add(backspace);
     frame.add(textfield, BorderLayout.NORTH);
     frame.add(panel, BorderLayout.CENTER);
     frame.add(his.getPanel(), BorderLayout.EAST);
@@ -188,18 +212,34 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
     if (e.getSource() == addButton)
     {
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(pastResult);
+      }
       textfield.setText(textfield.getText() + PLUS);
     }
     if (e.getSource() == subButton)
     {
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(pastResult);
+      }
       textfield.setText(textfield.getText() + MINUS);
     }
     if (e.getSource() == mulButton)
     {
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(pastResult);
+      }
       textfield.setText(textfield.getText() + ASTERISK);
     }
     if (e.getSource() == divButton)
     {
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(pastResult);
+      }
       textfield.setText(textfield.getText() + SLASH);
     }
     if (e.getSource() == resetButton)
@@ -217,6 +257,10 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
     if (e.getSource() == expButton)
     {
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(pastResult);
+      }
       textfield.setText(textfield.getText() + "^");
     }
     if (e.getSource() == imaginaryNum)
@@ -233,10 +277,18 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
     if (e.getSource() == logButton)
     {
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(pastResult);
+      }
       textfield.setText(textfield.getText() + "log");
     }
     if (e.getSource() == sqrtButton)
     {
+      if (!pastResult.equals("") && textfield.getText().equals(""))
+      {
+        textfield.setText(pastResult);
+      }
       textfield.setText(textfield.getText() + "sqrt()");
     }
     if (e.getSource() == invButton)
@@ -248,16 +300,22 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       try
       {
         ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
+        if (isPolarActive)
+        {
+          res = Calculate.convertRectangularToPolar(res);
+        }
         textfield.setText(textfield.getText() + "=" + res);
+        result = textfield.getText();
+        pastResult = "(" + res.toString() + ")";
+        isClicked = true;
+        his.add();
       }
       catch (ExpressionEvaluationException ex)
       {
-        JOptionPane.showMessageDialog(null,
-            "ERROR",
-            "ERROR", JOptionPane.ERROR_MESSAGE);
+        // TODO
       }
     }
-    
+  }
 
   // Menu Bar Code
   class MenuBar implements ActionListener
@@ -327,7 +385,8 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
-          // TODO
+
+          isPolarActive = false;
         }
       });
       JMenuItem polar = new JMenuItem("Polar");
@@ -338,7 +397,9 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
-          // TODO
+
+          isPolarActive = true;
+
         }
       });
 
@@ -356,7 +417,8 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
           JOptionPane.showMessageDialog(null,
               "This calculator performs operations on the given complex number operands. "
                   + "A history of results from previosu calculations are stored in the history "
-                  + "panel.",
+                  + "panel.\nClicking on an expression in the History "
+                  + "Panel copies that expression to the clipboard.",
               "About", JOptionPane.INFORMATION_MESSAGE);
         }
       });
@@ -398,6 +460,8 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
           mode.setText("Modo");
           print.setText("Impresión");
           exit.setText("Salida");
+          rect.setText("Rectangular");
+          polar.setText("Polar");
         }
       });
 
@@ -423,6 +487,8 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
           mode.setText("Modus");
           print.setText("Drucken");
           exit.setText("Ausfahrt");
+          rect.setText("Rechteckig");
+          polar.setText("Polar");
         }
       });
 
@@ -448,6 +514,8 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
           mode.setText("Mode");
           print.setText("Imprimer");
           exit.setText("Sortir");
+          rect.setText("Rectangulaire");
+          polar.setText("Polaire");
         }
       });
 
@@ -475,19 +543,11 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
           mode.setText("Mode");
           print.setText("Print");
           exit.setText("Exit");
+          rect.setText("Polar");
+          polar.setText("Rectangular");
         }
       });
       return menuBar;
-    }
-
-    /**
-     * Getter for expression
-     * 
-     * @return result
-     */
-    public String getResult()
-    {
-      return result;
     }
 
     @Override
@@ -498,25 +558,33 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
   }
 
+  /**
+   * setting boolean click
+   */
+  public static void setClick()
+  {
+    isClicked = !isClicked;
+  }
+
   @Override
   public void keyTyped(KeyEvent e)
   {
     // TODO Auto-generated method stub
-
+    
   }
 
   @Override
   public void keyPressed(KeyEvent e)
   {
     // TODO Auto-generated method stub
-
+    
   }
 
   @Override
   public void keyReleased(KeyEvent e)
   {
     // TODO Auto-generated method stub
-
+    
   }
 
 }

@@ -64,11 +64,6 @@ public class HistoryPanel extends JFrame
 
     mainPanel.add(area);
 
-    // test string
-    // String l = "x + 5 = 8";
-    // l += "\nx + 5 = 9";
-    // area.setText(l);
-
     area.setText(historyList);
     area.setBorder(b1);
     area.setFont(myFont);
@@ -77,8 +72,6 @@ public class HistoryPanel extends JFrame
     copyExpression();
 
     list = new ArrayList<>();
-    // add();
-
   }
 
   /**
@@ -147,14 +140,14 @@ public class HistoryPanel extends JFrame
     boolean visible = mainPanel.isVisible();
     mainPanel.setVisible(!visible);
     area.setVisible(!visible);
-    if (!visible)
-    {
-      animate(mainPanel, new Point(308, 35), 15, 10);
-    }
-    else
-    {
-      mainPanel.setLocation(curr);
-    }
+//    if (!visible)
+//    {
+//      animate(mainPanel, new Point(308, 35), 15, 10);
+//    }
+//    else
+//    {
+//      mainPanel.setLocation(curr);
+//    }
   }
 
   /**
