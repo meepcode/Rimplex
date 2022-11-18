@@ -11,6 +11,10 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 
 /**
  * Calculator GUI.
@@ -18,7 +22,8 @@ import java.awt.print.*;
  * @author TeamD
  * @version 11/4/22 This work complies with the JMU Honor Code.
  */
-public class ComplexCalc extends JFrame implements ActionListener, Printable
+
+public class ComplexCalc extends JFrame implements ActionListener, KeyListener
 {
   private static final long serialVersionUID = 1L;
   private static final String SERIF = "Serif";
@@ -34,7 +39,7 @@ public class ComplexCalc extends JFrame implements ActionListener, Printable
   private final JButton addButton, subButton, mulButton, divButton;
   private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton,
       leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton, realPart,
-      conjugate, imaginaryPart, backspace;
+      conjugate, imaginaryPart;
   private final JPanel panel;
   private final HistoryPanel his;
   protected static String result = "";
@@ -74,7 +79,7 @@ public class ComplexCalc extends JFrame implements ActionListener, Printable
     divButton = new JButton(SLASH);
     decButton = new JButton(DOT);
     equButton = new JButton("=");
-    clrButton = new JButton("C");
+    clrButton = new JButton("\u2190");
     expButton = new JButton("^");
     leftParenth = new JButton("(");
     rightParenth = new JButton(")");
@@ -83,9 +88,8 @@ public class ComplexCalc extends JFrame implements ActionListener, Printable
     imaginaryNum = new JButton("i");
     logButton = new JButton("Log");
     sqrtButton = new JButton("\u221A");
-    realPart = new JButton("real(");
+    realPart = new JButton("real");
     conjugate = new JButton("conj");
-    backspace = new JButton("\u2190");
     imaginaryPart = new JButton("imag");
 
     functionButtons[0] = addButton;
@@ -107,9 +111,8 @@ public class ComplexCalc extends JFrame implements ActionListener, Printable
     functionButtons[16] = realPart;
     functionButtons[17] = conjugate;
     functionButtons[18] = imaginaryPart;
-    functionButtons[19] = backspace;
 
-    for (int i = 0; i < 20; i++)
+    for (int i = 0; i < 19; i++)
     {
       functionButtons[i].addActionListener(this);
       functionButtons[i].setFont(myFont);
@@ -138,7 +141,7 @@ public class ComplexCalc extends JFrame implements ActionListener, Printable
       functionButtons[i].setFont(new Font(SERIF, Font.BOLD, 12));
     }
 
-    backspace.setFont(new Font(SERIF, Font.BOLD, 20));
+    clrButton.setFont(new Font(SERIF, Font.BOLD, 20));
 
     panel = new JPanel();
     panel.setBounds(50, 100, 300, 300);
@@ -147,34 +150,32 @@ public class ComplexCalc extends JFrame implements ActionListener, Printable
     panel.add(numberButtons[1]);
     panel.add(numberButtons[2]);
     panel.add(numberButtons[3]);
-    panel.add(addButton);
-    panel.add(subButton);
-
     panel.add(numberButtons[4]);
     panel.add(numberButtons[5]);
     panel.add(numberButtons[6]);
-    panel.add(mulButton);
-    panel.add(divButton);
-
     panel.add(numberButtons[7]);
     panel.add(numberButtons[8]);
     panel.add(numberButtons[9]);
+    panel.add(numberButtons[0]);
+
+    panel.add(addButton);
+    panel.add(subButton);
+    panel.add(mulButton);
+    panel.add(divButton);
     panel.add(leftParenth);
     panel.add(rightParenth);
     panel.add(decButton);
-    panel.add(numberButtons[0]);
     panel.add(equButton);
     panel.add(expButton);
     panel.add(invButton);
     panel.add(resetButton);
-    panel.add(clrButton);
     panel.add(logButton);
     panel.add(imaginaryNum);
     panel.add(sqrtButton);
     panel.add(realPart);
     panel.add(conjugate);
     panel.add(imaginaryPart);
-    panel.add(backspace);
+    panel.add(clrButton);
     frame.add(textfield, BorderLayout.NORTH);
     frame.add(panel, BorderLayout.CENTER);
     frame.add(his.getPanel(), BorderLayout.EAST);
@@ -292,6 +293,18 @@ public class ComplexCalc extends JFrame implements ActionListener, Printable
     {
       textfield.setText(textfield.getText() + "Inv(");
     }
+    if (e.getSource() == realPart)
+    {
+      textfield.setText(textfield.getText() + "real(");
+    }
+    if (e.getSource() == imaginaryPart)
+    {
+      textfield.setText(textfield.getText() + "imag(");
+    }
+    if (e.getSource() == conjugate)
+    {
+      textfield.setText(textfield.getText() + "cong(");
+    }
     if (e.getSource() == equButton)
     {
       try
@@ -309,7 +322,9 @@ public class ComplexCalc extends JFrame implements ActionListener, Printable
       }
       catch (ExpressionEvaluationException ex)
       {
-        // TODO
+        JOptionPane.showMessageDialog(null,
+            "ERROR: Invalid Expression.",
+            "ERROR", JOptionPane.ERROR_MESSAGE);
       }
     }
   }
@@ -562,31 +577,27 @@ public class ComplexCalc extends JFrame implements ActionListener, Printable
   {
     isClicked = !isClicked;
   }
-  
 
-    public int print(Graphics g, PageFormat pf, int page)
-        throws PrinterException {
 
-      // We have only one page, and 'page'
-      // is zero-based
-      if (page > 0) {
-           return NO_SUCH_PAGE;
-      }
-
-      // User (0,0) is typically outside the
-      // imageable area, so we must translate
-      // by the X and Y values in the PageFormat
-      // to avoid clipping.
-      Graphics2D g2d = (Graphics2D)g;
-      g2d.translate(pf.getImageableX(), pf.getImageableY());
-
-      // Now we perform our rendering
-      g.drawString("Hello world!", 100, 100);
-
-      // tell the caller that this page is part
-      // of the printed document
-      return PAGE_EXISTS;
+  @Override
+  public void keyTyped(KeyEvent e)
+  {
+    // TODO Auto-generated method stub
+    
   }
 
+  @Override
+  public void keyPressed(KeyEvent e)
+  {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void keyReleased(KeyEvent e)
+  {
+    // TODO Auto-generated method stub
+    
+  }
 
 }

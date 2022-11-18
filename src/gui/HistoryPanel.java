@@ -31,7 +31,7 @@ public class HistoryPanel extends JFrame
   private String word;
   private DefaultStyledDocument document;
   private ArrayList<String> list;
-  private String historyList = "--------History--------\n";
+  private String historyList = "\t--------History--------\n";
   private int index = 0;
 
   /**
@@ -67,7 +67,7 @@ public class HistoryPanel extends JFrame
     area.setText(historyList);
     area.setBorder(b1);
     area.setFont(myFont);
-
+    area.setPreferredSize(new Dimension(400, 240)); 
     word = null;
     copyExpression();
 
@@ -78,7 +78,11 @@ public class HistoryPanel extends JFrame
    * Adds expression to history panel.
    */
   public void add()
-  {
+  {   
+    String ex = ComplexCalc.result;
+    if (ex.length() >= 35) {
+      area.setFont(new Font(SERIF, Font.BOLD, 15));
+    }
 
     if (ComplexCalc.isClicked)
     {
@@ -192,7 +196,7 @@ public class HistoryPanel extends JFrame
           ((Timer) e.getSource()).stop();
         }
       }
-    }).start();
+    }).start(); 
   }
 
 }
