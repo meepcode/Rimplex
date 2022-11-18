@@ -132,5 +132,14 @@ class ComplexNumberTest
   {
     assertEquals(32, new ComplexNumber(1.0, 1.0).hashCode());
   }
+  
+  /**
+   * Test getPolarMagnitude.
+   */
+  @Test
+  void testGetMagnitude()
+  {
+    assertEquals(0.0, new ComplexNumber(1.0, 1.0).getPolarMagnitude());
+  }
 
 }

@@ -10,6 +10,9 @@ import java.util.Objects;
  */
 public class PolarComplexNumber extends ComplexNumber
 {
+  private static final String COS = "(cos(";
+  private static final String SIN = "sin(";
+  private static final String END = "°))";
 
   private Double r; // The polar magnitude
 
@@ -50,15 +53,16 @@ public class PolarComplexNumber extends ComplexNumber
     if (getImaginary() < 0)
     {
       return String.format(FORMAT_TEXT, r) + "(cos(" + String.format(FORMAT_TEXT, getReal())
-          + "°) - " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "°))";
+          + "�) - " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "�))";
     }
     else
     {
       return String.format(FORMAT_TEXT, r) + "(cos(" + String.format(FORMAT_TEXT, getReal())
-          + "°) + " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "°))";
+          + "�) + " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "�))";
+
     }
   }
-  
+
   /**
    * Compares two complex numbers.
    *
@@ -73,7 +77,7 @@ public class PolarComplexNumber extends ComplexNumber
     {
       return (Objects.equals(this.getReal(), op2.getReal())
           && Objects.equals(this.getImaginary(), op2.getImaginary())
-          && Objects.equals(this.r,  op2.r));
+          && Objects.equals(this.r, op2.r));
     }
     return false;
   }
