@@ -420,17 +420,18 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
           PageFormat pf = job.pageDialog(aset);
           job.setPrintable(new Printable()
           {
-            @Override public int print(Graphics g, PageFormat pf, int page) throws
-                PrinterException {
+            @Override public int print(Graphics g, PageFormat pf, int page) throws PrinterException
+            {
 
-              if (page > 0) { /* We have only one page, and 'page' is zero-based */
+              if (page > 0)
+              { /* We have only one page, and 'page' is zero-based */
                 return NO_SUCH_PAGE;
               }
 
               /* User (0,0) is typically outside the imageable area, so we must
                * translate by the X and Y values in the PageFormat to avoid clipping
                */
-              Graphics2D g2d = (Graphics2D)g;
+              Graphics2D g2d = (Graphics2D) g;
               g2d.translate(pf.getImageableX(), pf.getImageableY());
 
               /* Now we perform our rendering */
