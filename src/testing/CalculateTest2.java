@@ -130,7 +130,7 @@ class CalculateTest2
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
     PolarComplexNumber test = Calculate.convertRectangularToPolar(op);
-    ComplexNumber temp = new ComplexNumber(1/2.0, 1/2.0);
+    ComplexNumber temp = new ComplexNumber(0.25, -0.25);
     PolarComplexNumber res = Calculate.convertRectangularToPolar(temp);
     res = new PolarComplexNumber(((int) (res.getReal() * 100)) / 100.0,  
         ((int) (res.getImaginary() * 100)) / 100.0, 
@@ -253,7 +253,7 @@ class CalculateTest2
   void testInvert()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
-    ComplexNumber res = new ComplexNumber(1/2.0, 1/2.0);
+    ComplexNumber res = new ComplexNumber(0.25, -0.25);
     assertEquals(res, Calculate.invert(op));
   }
   

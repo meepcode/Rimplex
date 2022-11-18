@@ -330,14 +330,12 @@ public class Evaluation
       if (curType.isFunction() && !(tokens.get(i + 1).type.isNumber()
           && tokens.get(i + 1).type == TokenType.OPEN_PAREN))
       {
-        if (i == tokens.size() - 2)
-        {
-          throw new ExpressionEvaluationException(
-              "Invalid end to expression: " + tokens.get(i + 1).sequence);
-        }
+        int j = 1;
 
-        tokens.add(i + 1, new Token(TokenType.OPEN_PAREN, OPEN_PAREN));
-        tokens.add(i + 4, new Token(TokenType.CLOSE_PAREN, CLOSE_PAREN));
+        while (j < tokens.size())
+        {
+
+        }
       }
       else if (curType.isFunction() && tokens.get(i + 1).type == TokenType.NUMBER)
       {

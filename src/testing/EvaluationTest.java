@@ -1,3 +1,21 @@
+<<<<<<< HEAD
+package testing;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class EvaluationTest
+{
+
+  @Test
+  void test()
+  {
+    assertEquals(6, 6);
+  }
+
+}
+=======
 package testing;
 
 import calculation.Calculate;
@@ -163,17 +181,17 @@ class EvaluationTest
 
   @Test void testParensAddInFrontOfDivide() throws ExpressionEvaluationException
   {
-    assertEquals(new ComplexNumber(5.8, 3.4), evaluateExpression("((5+4i)+(6-2i))/(6+2i)"));
+    assertEquals(new ComplexNumber(1.75, -0.25), evaluateExpression("((5+4i)+(6-2i))/(6+2i)"));
   }
 
   @Test void testParensSubtractInFrontOfMultiply() throws ExpressionEvaluationException
   {
-    assertEquals(new ComplexNumber(-35.0, +4.0), evaluateExpression("((5+4i)-(6-2i))*(6+2i)"));
+    assertEquals(new ComplexNumber(-18.0, +34.0), evaluateExpression("((5+4i)-(6-2i))*(6+2i)"));
   }
 
   @Test void testParensSubtractInFrontOfDivide() throws ExpressionEvaluationException
   {
-    assertEquals(new ComplexNumber(4.2, 4.6), evaluateExpression("((5+4i)-(6-2i))/(6+2i)"));
+    assertEquals(new ComplexNumber(0.15, 0.95), evaluateExpression("((5+4i)-(6-2i))/(6+2i)"));
   }
 
   @Test void testParensMultiplyInFrontOfAdd() throws ExpressionEvaluationException
@@ -195,4 +213,80 @@ class EvaluationTest
   {
     assertEquals(new ComplexNumber(-5.45, -1.15), evaluateExpression("((5+4i)/(6-2i))-(6+2i)"));
   }
+
+  @Test void testAddInFrontOfParensMultiply() throws ExpressionEvaluationException
+  {
+    assertEquals(new ComplexNumber(45.0, 4.0), evaluateExpression("(5+4i)+((6-2i)*(6+2i))"));
+  }
+
+  @Test void testAddInFrontOfParensDivide() throws ExpressionEvaluationException
+  {
+    assertEquals(new ComplexNumber(5.8, 3.4), evaluateExpression("(5+4i)+((6-2i)/(6+2i))"));
+  }
+
+  @Test void testSubtractInFrontOfParensMultiply() throws ExpressionEvaluationException
+  {
+    assertEquals(new ComplexNumber(-35.0, +4.0), evaluateExpression("(5+4i)-((6-2i)*(6+2i))"));
+  }
+
+  @Test void testSubtractInFrontOfParensDivide() throws ExpressionEvaluationException
+  {
+    assertEquals(new ComplexNumber(4.2, 4.6), evaluateExpression("(5+4i)-((6-2i)/(6+2i))"));
+  }
+
+  @Test void testMultiplyInFrontOfParensAdd() throws ExpressionEvaluationException
+  {
+    assertEquals(new ComplexNumber(60.0, 48.0), evaluateExpression("(5+4i)*((6-2i)+(6+2i))"));
+  }
+
+  @Test void testDivideInFrontOfParensAdd() throws ExpressionEvaluationException
+  {
+    assertEquals(new ComplexNumber(5.0 * (1.0 / 12.0), 4.0 * (1.0 / 12.0)),
+        evaluateExpression("(5+4i)/((6-2i)+(6+2i))"));
+  }
+
+  @Test void testMultiplyInFrontOfParensSubtract() throws ExpressionEvaluationException
+  {
+    assertEquals(new ComplexNumber(16.0, -20.0), evaluateExpression("(5+4i)*((6-2i)-(6+2i))"));
+  }
+
+  @Test void testDivideInFrontOfParensSubtract() throws ExpressionEvaluationException
+  {
+    assertEquals(new ComplexNumber(-1.0, +1.25), evaluateExpression("(5+4i)/((6-2i)-(6+2i))"));
+  }
+
+  @Test void testArithmeticExpressionParens() throws ExpressionEvaluationException
+  {
+    assertEquals(
+        new ComplexNumber(-0.48082332245228172829982784733915955635412648987309620793783689,
+            -1.2677279611668751940245152914836172754724790923885946510380899),
+        evaluateExpression("(5+4i)/((6-2i)-(6+2i)*(9)) + (4-6i)/((3.6)-(4.7i) + (9i))"));
+  }
+
+  @Test void testLog() throws ExpressionEvaluationException
+  {
+    assertEquals(new ComplexNumber(
+            1.499999999999999999999999999999999999999999999999999999999999999999999999999999,
+            1.133090035456798452406920736429166702542965366930948896046504136985150238),
+        evaluateExpression("(2)log(2+2i)"));
+  }
+
+  @Test void testLogOnAdditionExpressions() throws ExpressionEvaluationException
+  {
+    assertEquals(new ComplexNumber(
+        1.499999999999999999999999999999999999999999999999999999999999999999999999999999,
+        1.133090035456798452406920736429166702542965366930948896046504136985150238),
+        evaluateExpression("((2)+(0))Log((2)+(0+.5i)+(1.5i))"));
+  }
+
+  @Test void testLogBeforeAddition() throws ExpressionEvaluationException
+  {
+
+  }
+
+  @Test void testInverse() throws ExpressionEvaluationException
+  {
+    assertEquals(new ComplexNumber(0.25, -0.25), evaluateExpression("Inv(2+2i)"));
+  }
 }
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD

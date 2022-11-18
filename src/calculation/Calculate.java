@@ -381,10 +381,20 @@ public class Calculate
     if (op1 instanceof PolarComplexNumber)
     {
       op1 = convertPolarToRectangular(op1);
-      ComplexNumber result = new ComplexNumber(1/op1.getReal(), 1/op1.getImaginary());
+      ComplexNumber numer = conjugate(op1);
+      ComplexNumber denom = multiply(op1, conjugate(op1));
+      
+      
+      ComplexNumber result = divide(numer, denom);
       return convertRectangularToPolar(result);
     }
-    return new ComplexNumber(1/op1.getReal(), 1/op1.getImaginary());
+    
+    ComplexNumber numer = conjugate(op1);
+    ComplexNumber denom = multiply(op1, conjugate(op1));
+    
+    
+    ComplexNumber result = divide(numer, denom);
+    return result;
   }
 
   /**
