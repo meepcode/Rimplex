@@ -6,7 +6,7 @@ import parse.Evaluation;
 import parse.ExpressionEvaluationException;
 
 // import javax.print.attribute.HashPrintRequestAttributeSet;
-// import javax.print.attribute.PrintRequestAttributeSet;
+// import javax.print.attribute.PrintRequestAttributeSet; 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -17,11 +17,12 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import java.awt.BorderLayout;
 import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
+//import java.awt.Graphics;
+//import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+<<<<<<< HEAD
 import java.awt.print.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -32,6 +33,16 @@ import java.awt.print.PrinterJob;
 
 import static java.awt.print.Printable.NO_SUCH_PAGE;
 import static java.awt.print.Printable.PAGE_EXISTS;
+=======
+// import java.awt.print.*;
+//import java.awt.print.PageFormat;
+//import java.awt.print.Printable;
+//import java.awt.print.PrinterException;
+//import java.awt.print.PrinterJob;
+//
+//import static java.awt.print.Printable.NO_SUCH_PAGE;
+//import static java.awt.print.Printable.PAGE_EXISTS;
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
 /**
  * Calculator GUI.
@@ -40,7 +51,7 @@ import static java.awt.print.Printable.PAGE_EXISTS;
  * @version 11/4/22 This work complies with the JMU Honor Code.
  */
 
-public class ComplexCalc extends JFrame implements ActionListener, KeyListener
+public class ComplexCalc extends JFrame implements ActionListener
 {
   private static final long serialVersionUID = 1L;
   private static final String SERIF = "Serif";
@@ -404,7 +415,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       }
       catch (ExpressionEvaluationException ex)
       {
-        JOptionPane.showMessageDialog(null, "ERROR: Invalid Expression.", "ERROR",
+        JOptionPane.showMessageDialog(null, "ERROR: Invalid Expression Format.", "ERROR",
             JOptionPane.ERROR_MESSAGE);
       }
     }
@@ -515,7 +526,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
         }
       });
 
-      JMenuItem span = new JMenuItem("Spanish");
+      JMenuItem span = new JMenuItem("Español");
       langs.add(span);
       span.addActionListener(this);
 
@@ -544,7 +555,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
         }
       });
 
-      JMenuItem german = new JMenuItem("German");
+      JMenuItem german = new JMenuItem("Deutsch");
       langs.add(german);
       german.addActionListener(this);
 
@@ -573,7 +584,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
         }
       });
 
-      JMenuItem french = new JMenuItem("French");
+      JMenuItem french = new JMenuItem("Français");
       langs.add(french);
       french.addActionListener(this);
 
@@ -641,6 +652,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
   }
 
+<<<<<<< HEAD
   @Override
   public void keyTyped(KeyEvent e)
   {
@@ -661,5 +673,8 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     // TODO Auto-generated method stub
 
   }
+=======
+
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
 }
