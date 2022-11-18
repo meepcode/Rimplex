@@ -312,7 +312,9 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       }
       catch (ExpressionEvaluationException ex)
       {
-        // TODO
+        JOptionPane.showMessageDialog(null,
+            "ERROR: Invalid Expression.",
+            "ERROR", JOptionPane.ERROR_MESSAGE);
       }
     }
   }
