@@ -2,9 +2,26 @@ package gui;
 
 import javax.swing.JFrame;
 
+/**
+ * Menu Item Window.
+ *
+ * @author TeamD
+ * @version 11/18/22 This work complies with the JMU Honor Code.
+ */
 public class MenuItemWindow extends JFrame
 {
-  public MenuItemWindow(String title, int width, int height)
+  /**
+   * 
+   */
+  private static final long serialVersionUID = 1L;
+  
+  /**
+   * Constructor. 
+   * @param title string.
+   * @param width int.
+   * @param height int.
+   */
+  public MenuItemWindow(final String title, final int width, final int height)
   {
     setTitle(title);
     setSize(width, height);

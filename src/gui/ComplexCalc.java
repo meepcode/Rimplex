@@ -62,10 +62,11 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
   private boolean isPolarActive = false;
   private String pastResult = "";
+  private final String CALCULATOR = "Calculator";
 
   ComplexCalc()
   {
-    frame = new JFrame("Calculator");
+    frame = new JFrame(CALCULATOR);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setSize(420, 480);
     frame.setLayout(new BorderLayout());
@@ -209,7 +210,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   }
 
   /**
-   * setting boolean click
+   * Sets boolean click.
    */
   public static void setClick()
   {
@@ -300,7 +301,8 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         textfield.setText(textfield.getText() + "(exp)^");
         textfield.setText(textfield.getText() + pastResult);
-      } else {
+      } else 
+      {
         textfield.setText(textfield.getText() + "(exp)^(");
       }
     }
@@ -321,7 +323,8 @@ public class ComplexCalc extends JFrame implements ActionListener
       if (textfield.getText().contains("=")) 
       {
         textfield.setText("(10)log" + pastResult);
-      } else {
+      } else 
+      {
         textfield.setText(textfield.getText() + "(10)log(");
       }
     }
@@ -330,7 +333,8 @@ public class ComplexCalc extends JFrame implements ActionListener
       if (textfield.getText().contains("=")) 
       {
         textfield.setText("sqrt" + pastResult);
-      } else {
+      } else 
+      {
         textfield.setText(textfield.getText() + "sqrt(");
       }
     }
@@ -339,7 +343,8 @@ public class ComplexCalc extends JFrame implements ActionListener
       if (textfield.getText().contains("=")) 
       {
         textfield.setText("Inv" + pastResult);
-      } else {
+      } else 
+      {
         textfield.setText(textfield.getText() + "Inv(");
       }
     }
@@ -348,7 +353,8 @@ public class ComplexCalc extends JFrame implements ActionListener
       if (textfield.getText().contains("=")) 
       {
         textfield.setText("re" + pastResult);
-      } else {
+      } else 
+      {
         textfield.setText(textfield.getText() + "re(");
       }
     }
@@ -357,7 +363,8 @@ public class ComplexCalc extends JFrame implements ActionListener
       if (textfield.getText().contains("=")) 
       {
         textfield.setText("im" + pastResult);
-      } else {
+      } else 
+      {
         textfield.setText(textfield.getText() + "im(");
       }
     }
@@ -366,7 +373,8 @@ public class ComplexCalc extends JFrame implements ActionListener
       if (textfield.getText().contains("=")) 
       {
         textfield.setText("conj" + pastResult);
-      } else {
+      } else 
+      {
         textfield.setText(textfield.getText() + "conj(");
       }
     }
@@ -442,7 +450,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       exit.addActionListener(this);
       exit.addActionListener(new ActionListener()
       {
-        public void actionPerformed(ActionEvent e)
+        public void actionPerformed(final ActionEvent e)
         {
           System.exit(0);
         }
@@ -457,7 +465,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       rect.addActionListener(this);
       rect.addActionListener(new ActionListener()
       {
-        @Override public void actionPerformed(ActionEvent e)
+        @Override public void actionPerformed(final ActionEvent e)
         {
 
           isPolarActive = false;
@@ -468,7 +476,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       polar.addActionListener(this);
       polar.addActionListener(new ActionListener()
       {
-        @Override public void actionPerformed(ActionEvent e)
+        @Override public void actionPerformed(final ActionEvent e)
         {
 
           isPolarActive = true;
@@ -485,7 +493,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       about.addActionListener(this);
       about.addActionListener(new ActionListener()
       {
-        public void actionPerformed(ActionEvent e)
+        public void actionPerformed(final ActionEvent e)
         {
           JOptionPane.showMessageDialog(null,
               aboutMessage, "About",
@@ -500,7 +508,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       menuBar.add(hist);
       hist.addActionListener(new ActionListener()
       {
-        @Override public void actionPerformed(ActionEvent e)
+        @Override public void actionPerformed(final ActionEvent e)
         {
           his.createAndShowGUI();
           frame.pack();
@@ -513,7 +521,7 @@ public class ComplexCalc extends JFrame implements ActionListener
 
       span.addActionListener(new ActionListener()
       {
-        @Override public void actionPerformed(ActionEvent e)
+        @Override public void actionPerformed(final ActionEvent e)
         {
           printTitle = "Impresión";
           aboutMessage = "Esta calculadora realiza operaciones en los operandos de números "
@@ -541,7 +549,7 @@ public class ComplexCalc extends JFrame implements ActionListener
 
       german.addActionListener(new ActionListener()
       {
-        @Override public void actionPerformed(ActionEvent e)
+        @Override public void actionPerformed(final ActionEvent e)
         {
           printTitle = "Drucken";
           aboutMessage = "Dieser Rechner führt Operationen an den gegebenen Operanden für "
@@ -569,7 +577,7 @@ public class ComplexCalc extends JFrame implements ActionListener
 
       french.addActionListener(new ActionListener()
       {
-        @Override public void actionPerformed(ActionEvent e)
+        @Override public void actionPerformed(final ActionEvent e)
         {
           printTitle = "Imprimer";
           aboutMessage = "Cette calculatrice effectue des opérations sur les opérandes de nombres"
@@ -597,7 +605,7 @@ public class ComplexCalc extends JFrame implements ActionListener
 
       english.addActionListener(new ActionListener()
       {
-        @Override public void actionPerformed(ActionEvent e)
+        @Override public void actionPerformed(final ActionEvent e)
         {
           printTitle = "Print";
           aboutMessage =
@@ -607,7 +615,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           aboutTitle = "About";
           hist.setText("History");
           // modeWindow.setTitle("Mode");
-          frame.setTitle("Calculator");
+          frame.setTitle(CALCULATOR);
           langs.setText("Language");
           file.setText("File");
           help.setText("Help");
@@ -622,7 +630,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       return menuBar;
     }
 
-    @Override public void actionPerformed(ActionEvent e)
+    @Override public void actionPerformed(final ActionEvent e)
     {
       // TODO Auto-generated method stub
 

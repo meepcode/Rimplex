@@ -1,26 +1,28 @@
 package gui;
 
 import javax.swing.BorderFactory;
-import javax.swing.JComponent;
+
+//import javax.swing.JComponent;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
-import javax.swing.Timer;
+//import javax.swing.Timer;
 import javax.swing.border.Border;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
 import javax.swing.text.Utilities;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
-import java.awt.Rectangle;
+//import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
@@ -44,14 +46,16 @@ public class HistoryPanel extends JFrame
   private String word;
   private final DefaultStyledDocument document;
   private final ArrayList<String> list;
-  private String historyList = "\t--------History--------\n";
+  private String historyList = "";
   private int index = 0;
-
+  
+  
   /**
    * Constructor.
    */
   public HistoryPanel()
   {
+
     mainPanel = new JPanel();
     mainPanel.setLayout(new BorderLayout());
     mainPanel.setBounds(50, 100, 300, 300);
@@ -115,14 +119,14 @@ public class HistoryPanel extends JFrame
   }
 
   /**
-   * Copy expression to clipboard
+   * Copy expression to clipboard.
    */
   private void copyExpression()
   {
 
     area.addMouseListener(new MouseAdapter()
     {
-      public void mouseClicked(MouseEvent e)
+      public void mouseClicked(final MouseEvent e)
       {
         try
         {
@@ -139,13 +143,13 @@ public class HistoryPanel extends JFrame
           clipboard.setContents(selection, selection);
 
         }
-        catch (Exception ex)
+        catch (BadLocationException ex)
         {
           ex.printStackTrace();
         }
       }
 
-      public void mouseEntered(MouseEvent e)
+      public void mouseEntered(final MouseEvent e)
       {
 
         // fill
@@ -176,7 +180,7 @@ public class HistoryPanel extends JFrame
   /**
    * Get History panel.
    *
-   * @return
+   * @return main panel.
    */
   public JPanel getPanel()
   {
@@ -191,7 +195,8 @@ public class HistoryPanel extends JFrame
    * @param frames
    * @param interval
    */
-  private void animate(JComponent component, Point newPoint, int frames, int interval)
+  /*private void animate(final JComponent component, final Point newPoint, 
+      final int frames, final int interval)
   {
     Rectangle compBounds = component.getBounds();
 
@@ -202,7 +207,7 @@ public class HistoryPanel extends JFrame
     {
       int currentFrame = 0;
 
-      public void actionPerformed(ActionEvent e)
+      public void actionPerformed(final ActionEvent e)
       {
         component.setBounds(oldPoint.x + (animFrame.x * currentFrame),
             oldPoint.y + (animFrame.y * currentFrame), compBounds.width, compBounds.height);
@@ -217,6 +222,6 @@ public class HistoryPanel extends JFrame
         }
       }
     }).start();
-  }
+  }*/
 
 }
