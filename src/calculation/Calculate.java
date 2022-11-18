@@ -277,7 +277,7 @@ public class Calculate
       polar = true;
       op1 = convertPolarToRectangular(op1);
     }
-      
+    
     if (op1.getImaginary() == 0)
     {
         // If only real part is valid.
@@ -305,7 +305,7 @@ public class Calculate
       }
       op1 = ret;
     }
-      
+    
     if (polar)
     {
       return convertRectangularToPolar(op1);

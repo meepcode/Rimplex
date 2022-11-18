@@ -3,10 +3,15 @@ package gui;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 
+import calculation.ComplexNumber;
+import parse.Evaluation;
+import parse.ExpressionEvaluationException;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 /**
  * Calculator GUI.
  *
@@ -238,7 +243,17 @@ public class ComplexCalc extends JFrame implements ActionListener
     }
     if (e.getSource() == invButton)
     {
-      textfield.setText(textfield.getText() + "Inv()");
+      textfield.setText(textfield.getText() + "Inv(");
+    }
+    if (e.getSource() == equButton)
+    {
+      try {
+        ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
+        textfield.setText(textfield.getText() + "=" + res);
+      } catch (ExpressionEvaluationException ex)
+      {
+        // TODO
+      }
     }
     if (e.getSource() == equButton)
     {
@@ -274,6 +289,20 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         public void actionPerformed(ActionEvent e)
         {
+          PrinterJob pj = PrinterJob.getPrinterJob();
+          if (pj.printDialog()) 
+          {
+              try
+              {
+                pj.print();
+              }
+              catch (PrinterException e1)
+              {
+                // TODO Auto-generated catch block
+                e1.printStackTrace();
+              }
+          }   
+          
           MenuItemWindow p = new MenuItemWindow(printTitle, 300, 300);
           // final print button
           JPanel panel = new JPanel();
