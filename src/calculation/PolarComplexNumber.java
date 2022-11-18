@@ -54,7 +54,7 @@ public class PolarComplexNumber extends ComplexNumber
     // {
     return String.format(FORMAT_TEXT, r) + COS 
           + String.format(FORMAT_TEXT, getReal() * (180/Math.PI))
-          + "Â°) + " + I + SIN 
+          + "°) + " + I + SIN 
           + String.format(FORMAT_TEXT, getImaginary() * (180/Math.PI)) + END;
   }
     // }
@@ -63,7 +63,7 @@ public class PolarComplexNumber extends ComplexNumber
     {
       return String.format(FORMAT_TEXT, r) + COS 
           + String.format(FORMAT_TEXT, getReal() * (180/Math.PI))
-          + "Â°) + " - I + SIN 
+          + "°) + " - I + SIN 
           + String.format(FORMAT_TEXT, Math.abs(getImaginary() * (180/Math.PI))) + END;
 
     }*/

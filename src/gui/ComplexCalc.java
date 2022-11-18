@@ -22,7 +22,7 @@ import java.awt.Graphics2D;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-// import java.awt.print.*;
+import java.awt.print.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.print.PageFormat;
@@ -203,7 +203,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
    * Main method.
    *
    * @param args
-   *     cmd line args
+   *          cmd line args
    */
   public static void main(final String[] args)
   {
@@ -218,7 +218,8 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     isClicked = !isClicked;
   }
 
-  @Override public void actionPerformed(final ActionEvent e)
+  @Override
+  public void actionPerformed(final ActionEvent e)
   {
     for (int i = 0; i < 10; i++)
     {
@@ -233,7 +234,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
     if (e.getSource() == addButton)
     {
-      if (textfield.getText().contains("=")) 
+      if (textfield.getText().contains("="))
       {
         textfield.setText("");
       }
@@ -245,7 +246,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
     if (e.getSource() == subButton)
     {
-      if (textfield.getText().contains("=")) 
+      if (textfield.getText().contains("="))
       {
         textfield.setText("");
       }
@@ -257,7 +258,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
     if (e.getSource() == mulButton)
     {
-      if (textfield.getText().contains("=")) 
+      if (textfield.getText().contains("="))
       {
         textfield.setText("");
       }
@@ -269,7 +270,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
     if (e.getSource() == divButton)
     {
-      if (textfield.getText().contains("=")) 
+      if (textfield.getText().contains("="))
       {
         textfield.setText("");
       }
@@ -294,7 +295,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
     if (e.getSource() == expButton)
     {
-      if (textfield.getText().contains("=")) 
+      if (textfield.getText().contains("="))
       {
         textfield.setText("");
       }
@@ -302,7 +303,9 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       {
         textfield.setText(textfield.getText() + "(exp)^");
         textfield.setText(textfield.getText() + pastResult);
-      } else {
+      }
+      else
+      {
         textfield.setText(textfield.getText() + "(exp)^(");
       }
     }
@@ -320,55 +323,67 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
     if (e.getSource() == logButton)
     {
-      if (textfield.getText().contains("=")) 
+      if (textfield.getText().contains("="))
       {
         textfield.setText("(10)log" + pastResult);
-      } else {
+      }
+      else
+      {
         textfield.setText(textfield.getText() + "(10)log(");
       }
     }
     if (e.getSource() == sqrtButton)
     {
-      if (textfield.getText().contains("=")) 
+      if (textfield.getText().contains("="))
       {
         textfield.setText("sqrt" + pastResult);
-      } else {
+      }
+      else
+      {
         textfield.setText(textfield.getText() + "sqrt(");
       }
     }
     if (e.getSource() == invButton)
     {
-      if (textfield.getText().contains("=")) 
+      if (textfield.getText().contains("="))
       {
         textfield.setText("Inv" + pastResult);
-      } else {
+      }
+      else
+      {
         textfield.setText(textfield.getText() + "Inv(");
       }
     }
     if (e.getSource() == realPart)
     {
-      if (textfield.getText().contains("=")) 
+      if (textfield.getText().contains("="))
       {
         textfield.setText("re" + pastResult);
-      } else {
+      }
+      else
+      {
         textfield.setText(textfield.getText() + "re(");
       }
     }
     if (e.getSource() == imaginaryPart)
     {
-      if (textfield.getText().contains("=")) 
+      if (textfield.getText().contains("="))
       {
         textfield.setText("im" + pastResult);
-      } else {
+      }
+      else
+      {
         textfield.setText(textfield.getText() + "im(");
       }
     }
     if (e.getSource() == conjugate)
     {
-      if (textfield.getText().contains("=")) 
+      if (textfield.getText().contains("="))
       {
         textfield.setText("conj" + pastResult);
-      } else {
+      }
+      else
+      {
         textfield.setText(textfield.getText() + "conj(");
       }
     }
@@ -395,37 +410,28 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
   }
 
-
-  /*public int print(Graphics g, PageFormat pf, int page) throws PrinterException
-  {
-    if (page > 0)
-    {
-      return NO_SUCH_PAGE;
-    }
-
-    Graphics2D g2d = (Graphics2D) g;
-    g2d.translate(pf.getImageableX(), pf.getImageableY());
-
-    // Print the entire visible contents of a
-    // java.awt.Frame.
-    frame.printAll(g);
-
-    return PAGE_EXISTS;
-  }*/
+  /*
+   * public int print(Graphics g, PageFormat pf, int page) throws PrinterException { if (page > 0) {
+   * return NO_SUCH_PAGE; }
+   * 
+   * Graphics2D g2d = (Graphics2D) g; g2d.translate(pf.getImageableX(), pf.getImageableY());
+   * 
+   * // Print the entire visible contents of a // java.awt.Frame. frame.printAll(g);
+   * 
+   * return PAGE_EXISTS; }
+   */
 
   // Menu Bar Code
   class MenuBar implements ActionListener
   {
-    String aboutMessage =
-        "This calculator performs operations on the given complex number operands. "
-            + "A history of results from previosu calculations are stored in the history "
-            + "panel.";
+    String aboutMessage = "This calculator performs operations on the given complex number operands. "
+        + "A history of results from previosu calculations are stored in the history " + "panel.";
     String aboutTitle = "About";
     String printTitle = "Print";
     JMenuBar menuBar;
     JMenu file, mode, help;
     JMenuItem print, exit, about;
-    //MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
+    // MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
 
     public JMenuBar createMenuBar()
     {
@@ -436,8 +442,6 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       // file menu along menubar
       file = new JMenu("File");
       menuBar.add(file);
-      
-      
 
       exit = new JMenuItem("Exit");
       file.add(exit);
@@ -459,7 +463,8 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       rect.addActionListener(this);
       rect.addActionListener(new ActionListener()
       {
-        @Override public void actionPerformed(ActionEvent e)
+        @Override
+        public void actionPerformed(ActionEvent e)
         {
 
           isPolarActive = false;
@@ -470,7 +475,8 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       polar.addActionListener(this);
       polar.addActionListener(new ActionListener()
       {
-        @Override public void actionPerformed(ActionEvent e)
+        @Override
+        public void actionPerformed(ActionEvent e)
         {
 
           isPolarActive = true;
@@ -489,8 +495,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       {
         public void actionPerformed(ActionEvent e)
         {
-          JOptionPane.showMessageDialog(null,
-              aboutMessage, "About",
+          JOptionPane.showMessageDialog(null, aboutMessage, "About",
               JOptionPane.INFORMATION_MESSAGE);
         }
       });
@@ -502,7 +507,8 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       menuBar.add(hist);
       hist.addActionListener(new ActionListener()
       {
-        @Override public void actionPerformed(ActionEvent e)
+        @Override
+        public void actionPerformed(ActionEvent e)
         {
           his.createAndShowGUI();
           frame.pack();
@@ -515,7 +521,8 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
 
       span.addActionListener(new ActionListener()
       {
-        @Override public void actionPerformed(ActionEvent e)
+        @Override
+        public void actionPerformed(ActionEvent e)
         {
           printTitle = "Impresión";
           aboutMessage = "Esta calculadora realiza operaciones en los operandos de números "
@@ -543,7 +550,8 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
 
       german.addActionListener(new ActionListener()
       {
-        @Override public void actionPerformed(ActionEvent e)
+        @Override
+        public void actionPerformed(ActionEvent e)
         {
           printTitle = "Drucken";
           aboutMessage = "Dieser Rechner führt Operationen an den gegebenen Operanden für "
@@ -571,7 +579,8 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
 
       french.addActionListener(new ActionListener()
       {
-        @Override public void actionPerformed(ActionEvent e)
+        @Override
+        public void actionPerformed(ActionEvent e)
         {
           printTitle = "Imprimer";
           aboutMessage = "Cette calculatrice effectue des opérations sur les opérandes de nombres"
@@ -599,13 +608,13 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
 
       english.addActionListener(new ActionListener()
       {
-        @Override public void actionPerformed(ActionEvent e)
+        @Override
+        public void actionPerformed(ActionEvent e)
         {
           printTitle = "Print";
-          aboutMessage =
-              "This calculator performs operations on the given complex number operands. "
-                  + "A history of results from previosu calculations are stored in the history "
-                  + "panel.";
+          aboutMessage = "This calculator performs operations on the given complex number operands. "
+              + "A history of results from previosu calculations are stored in the history "
+              + "panel.";
           aboutTitle = "About";
           hist.setText("History");
           // modeWindow.setTitle("Mode");
@@ -624,35 +633,33 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       return menuBar;
     }
 
-    @Override public void actionPerformed(ActionEvent e)
+    @Override
+    public void actionPerformed(ActionEvent e)
     {
       // TODO Auto-generated method stub
 
     }
   }
 
-
-
   @Override
   public void keyTyped(KeyEvent e)
   {
     // TODO Auto-generated method stub
-    
+
   }
 
   @Override
   public void keyPressed(KeyEvent e)
   {
     // TODO Auto-generated method stub
-    
+
   }
 
   @Override
   public void keyReleased(KeyEvent e)
   {
     // TODO Auto-generated method stub
-    
-  }
 
+  }
 
 }
