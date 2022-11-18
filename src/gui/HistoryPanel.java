@@ -118,6 +118,7 @@ public class HistoryPanel extends JFrame
   {
     boolean visible = mainPanel.isVisible();
     mainPanel.setVisible(!visible);
+    area.setVisible(!visible);
     if (!visible)
     {
       animate(mainPanel, new Point(308, 35), 15, 10);
