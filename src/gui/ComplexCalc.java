@@ -324,7 +324,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
     if (e.getSource() == conjugate)
     {
-      textfield.setText(textfield.getText() + "cong(");
+      textfield.setText(textfield.getText() + "conj(");
     }
     if (e.getSource() == equButton)
     {
@@ -413,7 +413,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       file.addActionListener(this);
       print.addActionListener(new ActionListener()
       {
-        public void actionPerformed(ActionEvent e)
+        public void actionPerformed(final ActionEvent e)
         {
           PrinterJob job = PrinterJob.getPrinterJob();
           PrintRequestAttributeSet aset = new HashPrintRequestAttributeSet();
@@ -446,7 +446,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
           {
             try
             {
-              job.print(aset);
+              his.getArea().print();
             }
             catch (PrinterException ex)
             {
