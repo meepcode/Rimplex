@@ -192,7 +192,7 @@ public class HistoryPanel extends JFrame
           ((Timer) e.getSource()).stop();
         }
       }
-    }).start();
+    }).start(); 
   }
 
 }
