@@ -13,10 +13,8 @@ public class PolarComplexNumber extends ComplexNumber
   private static final String COS = "(cos(";
   private static final String SIN = "sin(";
   private static final String END = "Â°))";
-  
+
   private Double r; // The polar magnitude
-  
-  
 
   /**
    * Constructor.
@@ -54,38 +52,17 @@ public class PolarComplexNumber extends ComplexNumber
   {
     if (getImaginary() < 0)
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-      return String.format(FORMAT_TEXT, r) + "(cos(" + 
-          String.format(FORMAT_TEXT, getReal()) 
-          + "°) - " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "°))";
-=======
       return String.format(FORMAT_TEXT, r) + "(cos(" + String.format(FORMAT_TEXT, getReal())
-          + "Â°) - " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "Â°))";
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
-=======
-      return String.format(FORMAT_TEXT, r) + COS + String.format(FORMAT_TEXT, getReal())
-          + "Â°) - " + I + SIN + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + END;
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
+          + "°) - " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "°))";
     }
     else
     {
-<<<<<<< HEAD
-<<<<<<< HEAD
-      return String.format(FORMAT_TEXT, r) + "(cos(" + 
-          String.format(FORMAT_TEXT, getReal()) 
-          + "°) + " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "°))";
-=======
       return String.format(FORMAT_TEXT, r) + "(cos(" + String.format(FORMAT_TEXT, getReal())
-          + "Â°) + " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "Â°))";
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
-=======
-      return String.format(FORMAT_TEXT, r) + COS + String.format(FORMAT_TEXT, getReal())
-          + "Â°) + " + I + SIN + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + END;
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
+          + "°) + " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "°))";
+
     }
   }
-  
+
   /**
    * Compares two complex numbers.
    *
@@ -100,7 +77,7 @@ public class PolarComplexNumber extends ComplexNumber
     {
       return (Objects.equals(this.getReal(), op2.getReal())
           && Objects.equals(this.getImaginary(), op2.getImaginary())
-          && Objects.equals(this.r,  op2.r));
+          && Objects.equals(this.r, op2.r));
     }
     return false;
   }
