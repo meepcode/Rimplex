@@ -3,6 +3,7 @@ package gui;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 
+import calculation.Calculate;
 import calculation.ComplexNumber;
 import parse.Evaluation;
 import parse.ExpressionEvaluationException;
@@ -35,6 +36,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final JPanel panel;
   private final HistoryPanel his;
   private final String result;
+  private boolean complexMode = false;
 
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
 
@@ -249,6 +251,10 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       try {
         ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
+        if (complexMode) 
+        {
+          res = Calculate.convertRectangularToPolar(res);
+        }
         textfield.setText(textfield.getText() + "=" + res);
       } catch (ExpressionEvaluationException ex)
       {
@@ -330,6 +336,11 @@ public class ComplexCalc extends JFrame implements ActionListener
         public void actionPerformed(ActionEvent e)
         {
           modeWindow.setVisible(true);
+          if (complexMode) {
+            complexMode = false;
+          } else {
+            complexMode = true;
+          }
         }
       });
 
