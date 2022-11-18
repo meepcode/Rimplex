@@ -29,8 +29,11 @@ public class ComplexNumber
   public ComplexNumber(final Double realPart, final Double imaginaryPart)
   {
     this.realPart = realPart;
-    this.imaginaryPart = imaginaryPart;
-  }
+    if (imaginaryPart == -0.0)
+      this.imaginaryPart = 0.0;
+    else 
+      this.imaginaryPart = imaginaryPart;
+    }
 
   /**
    * Gets the real number part of a complex number.

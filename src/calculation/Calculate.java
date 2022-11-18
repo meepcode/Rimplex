@@ -227,6 +227,10 @@ public class Calculate
   public static ComplexNumber log(final Double base, final ComplexNumber operand)
   {
     boolean polar = false;
+    if (base == 0)
+    {
+      throw new IllegalArgumentException("Base is invalid");
+    }
     
     ComplexNumber op1 = operand;
     if (op1 instanceof PolarComplexNumber)
@@ -235,21 +239,28 @@ public class Calculate
       op1 = convertPolarToRectangular(op1);
     } 
       
-    if (op1.getReal() == 0) 
-    {
-       // If only imaginary part is valid
-      op1 = new ComplexNumber(Math.log(op1.getImaginary()) 
-            / Math.log(base), (Math.PI / 2) / Math.log(base));
-    } else if (op1.getImaginary() == 0) 
-    {
-       // If only real part is valid
-      op1 = new ComplexNumber(Math.log(op1.getReal()) / Math.log(base), 0.0);
-    } else 
-    {
-       // If operand is full complex number
+    if (op1.getReal() == 0 && op1.getImaginary() == 0) {
+      // If operand will result in infinity
       PolarComplexNumber temp = convertRectangularToPolar(op1);
       op1 = new ComplexNumber(Math.log(temp.getPolarMagnitude()) 
-            / Math.log(base), temp.getImaginary() / Math.log(base));
+            / Math.log(base), 0.0);
+    } else {
+    if (op1.getReal() == 0) 
+      {
+         // If only imaginary part is valid
+        op1 = new ComplexNumber(Math.log(op1.getImaginary()) 
+              / Math.log(base), (Math.PI / 2) / Math.log(base));
+      } else if (op1.getImaginary() == 0) 
+      {
+         // If only real part is valid
+        op1 = new ComplexNumber(Math.log(op1.getReal()) / Math.log(base), 0.0);
+      } else 
+      {
+         // If operand is full complex number
+        PolarComplexNumber temp = convertRectangularToPolar(op1);
+        op1 = new ComplexNumber(Math.log(temp.getPolarMagnitude()) 
+              / Math.log(base), temp.getImaginary() / Math.log(base));
+      }
     }
     if (polar)
     {
