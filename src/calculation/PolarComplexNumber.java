@@ -10,8 +10,13 @@ import java.util.Objects;
  */
 public class PolarComplexNumber extends ComplexNumber
 {
-
+  private static final String COS = "(cos(";
+  private static final String SIN = "sin(";
+  private static final String END = "째))";
+  
   private Double r; // The polar magnitude
+  
+  
 
   /**
    * Constructor.
@@ -50,6 +55,7 @@ public class PolarComplexNumber extends ComplexNumber
     if (getImaginary() < 0)
     {
 <<<<<<< HEAD
+<<<<<<< HEAD
       return String.format(FORMAT_TEXT, r) + "(cos(" + 
           String.format(FORMAT_TEXT, getReal()) 
           + "�) - " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "�))";
@@ -57,9 +63,14 @@ public class PolarComplexNumber extends ComplexNumber
       return String.format(FORMAT_TEXT, r) + "(cos(" + String.format(FORMAT_TEXT, getReal())
           + "째) - " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "째))";
 >>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
+=======
+      return String.format(FORMAT_TEXT, r) + COS + String.format(FORMAT_TEXT, getReal())
+          + "째) - " + I + SIN + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + END;
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
     }
     else
     {
+<<<<<<< HEAD
 <<<<<<< HEAD
       return String.format(FORMAT_TEXT, r) + "(cos(" + 
           String.format(FORMAT_TEXT, getReal()) 
@@ -67,6 +78,10 @@ public class PolarComplexNumber extends ComplexNumber
 =======
       return String.format(FORMAT_TEXT, r) + "(cos(" + String.format(FORMAT_TEXT, getReal())
           + "째) + " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "째))";
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
+=======
+      return String.format(FORMAT_TEXT, r) + COS + String.format(FORMAT_TEXT, getReal())
+          + "째) + " + I + SIN + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + END;
 >>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
     }
   }

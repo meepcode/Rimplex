@@ -6,7 +6,6 @@ import calculation.PolarComplexNumber;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Deque;
 import java.util.List;
 import java.util.Objects;
@@ -57,133 +56,142 @@ public class Evaluation
   private static ComplexNumber evaluate(final Deque<Token> expression)
       throws ExpressionEvaluationException
   {
+    if (expression.isEmpty())
+    {
+      throw new ExpressionEvaluationException("Illegal expression");
+    }
+
     Token token = expression.pop();
     TokenType type = token.type;
     ComplexNumber result;
 
-    if (type == TokenType.INV)
+    try
     {
-      result = Calculate.invert(evaluate(expression));
-    }
-    else if (type == TokenType.SQRT)
-    {
-      result = Calculate.squareRoot(evaluate(expression));
-    }
-    else if (type == TokenType.CONJ)
-    {
-      result = Calculate.conjugate(evaluate(expression));
-    }
-    else if (type == TokenType.RE)
-    {
-      result = new ComplexNumber(evaluate(expression).getReal(), 0.0);
-    }
-    else if (type == TokenType.IM)
-    {
-      result = new ComplexNumber(0.0, evaluate(expression).getImaginary());
-    }
-    else if (type == TokenType.LOG)
-    {
-      ComplexNumber operand = evaluate(expression);
-      ComplexNumber base = evaluate(expression);
-
-      if (Math.abs(base.getImaginary() - 0.0) > 0.000000001)
+      if (type == TokenType.INV)
       {
-        throw new ExpressionEvaluationException("Base must be real number for log");
+        result = Calculate.invert(evaluate(expression));
       }
-
-      result = Calculate.log(base.getReal(), operand);
-    }
-    else if (type == TokenType.NUMBER)
-    {
-      String[] parts = token.sequence.substring(1, token.sequence.length() - 1).split("(?=[+-])");
-      double realPart = 0.0;
-      double imaginaryPart = 0.0;
-
-      System.out.println(Arrays.toString(parts));
-
-      if (parts.length == 1)
+      else if (type == TokenType.SQRT)
       {
-        if (parts[0].charAt(parts[0].length() - 1) == 'i')
+        result = Calculate.squareRoot(evaluate(expression));
+      }
+      else if (type == TokenType.CONJ)
+      {
+        result = Calculate.conjugate(evaluate(expression));
+      }
+      else if (type == TokenType.RE)
+      {
+        result = new ComplexNumber(evaluate(expression).getReal(), 0.0);
+      }
+      else if (type == TokenType.IM)
+      {
+        result = new ComplexNumber(0.0, evaluate(expression).getImaginary());
+      }
+      else if (type == TokenType.LOG)
+      {
+        ComplexNumber operand = evaluate(expression);
+        ComplexNumber base = evaluate(expression);
+
+        if (Math.abs(base.getImaginary() - 0.0) > ComplexNumber.EPSILON)
         {
-          parts[0] = parts[0].replaceAll('i' + "", "");
-          imaginaryPart = Double.parseDouble(parts[0]);
+          throw new ExpressionEvaluationException("Base must be real number for log");
+        }
+
+        result = Calculate.log(base.getReal(), operand);
+      }
+      else if (type == TokenType.NUMBER)
+      {
+        String[] parts = token.sequence.substring(1, token.sequence.length() - 1).split("(?=[+-])");
+        double realPart = 0.0;
+        double imaginaryPart = 0.0;
+
+        if (parts.length == 1)
+        {
+          if (parts[0].charAt(parts[0].length() - 1) == 'i')
+          {
+            parts[0] = parts[0].replaceAll('i' + "", "");
+            imaginaryPart = Double.parseDouble(parts[0]);
+          }
+          else
+          {
+            realPart = Double.parseDouble(parts[0]);
+          }
         }
         else
         {
+          parts[1] = parts[1].replaceAll('i' + "", "");
+          imaginaryPart = Double.parseDouble(parts[1]);
           realPart = Double.parseDouble(parts[0]);
         }
+
+        result = new ComplexNumber(realPart, imaginaryPart);
+      }
+      else if (type == TokenType.POLAR_NUMBER)
+      {
+        String sequence = token.sequence.substring(1, token.sequence.length() - 1);
+
+        String[] parts = sequence.split("(\\(cos\\()|(°?\\)[+]isin\\()|(°?\\))");
+
+        if (!Objects.equals(parts[1], parts[2]))
+        {
+          throw new ExpressionEvaluationException(
+              String.format("Theta must be equal in cos(%s) and isin(%s)", parts[1], parts[2]));
+        }
+
+        result = Calculate.convertPolarToRectangular(
+            new PolarComplexNumber(Double.parseDouble(parts[1]), Double.parseDouble(parts[1]),
+                Double.parseDouble(parts[0])));
+      }
+      else if (type == TokenType.ADD)
+      {
+        result = Calculate.add(evaluate(expression), evaluate(expression));
+      }
+      else if (type == TokenType.SUBTRACT)
+      {
+        ComplexNumber right = evaluate(expression);
+        ComplexNumber left = evaluate(expression);
+
+        result = Calculate.subtract(left, right);
+      }
+      else if (type == TokenType.MULTIPLY)
+      {
+        result = Calculate.multiply(evaluate(expression), evaluate(expression));
+      }
+      else if (type == TokenType.DIVIDE)
+      {
+        ComplexNumber right = evaluate(expression);
+        ComplexNumber left = evaluate(expression);
+
+        result = Calculate.divide(left, right);
+      }
+      else if (type == TokenType.EXP)
+      {
+        ComplexNumber power = evaluate(expression);
+        ComplexNumber base = evaluate(expression);
+
+        if (Math.abs(base.getImaginary() - 0.0) > ComplexNumber.EPSILON)
+        {
+          throw new ExpressionEvaluationException("Power must be real number for exponentiation");
+        }
+
+        result = Calculate.exponent(base.getReal(), power);
+      }
+      else if (type == TokenType.POSITIVE)
+      {
+        result = evaluate(expression);
+      }
+      else if (type == TokenType.NEGATIVE)
+      {
+        result = Calculate.multiply(evaluate(expression), new ComplexNumber(-1.0, 0.0));
       }
       else
       {
-        parts[1] = parts[1].replaceAll('i' + "", "");
-        imaginaryPart = Double.parseDouble(parts[1]);
-        realPart = Double.parseDouble(parts[0]);
+        throw new ExpressionEvaluationException("type == " + type);
       }
-
-      result = new ComplexNumber(realPart, imaginaryPart);
     }
-    else if (type == TokenType.POLAR_NUMBER)
+    catch (ArithmeticException exc)
     {
-      String sequence = token.sequence.substring(1, token.sequence.length() - 1);
-
-      String[] parts = sequence.split("(\\(cos\\()|(°?\\)[+]isin\\()|(°?\\))");
-      System.out.println(Arrays.toString(parts));
-
-      if (!Objects.equals(parts[1], parts[2]))
-      {
-        throw new ExpressionEvaluationException(
-            String.format("Theta must be equal in cos(%s) and isin(%s)", parts[1], parts[2]));
-      }
-
-      result = Calculate.convertPolarToRectangular(
-          new PolarComplexNumber(Double.parseDouble(parts[1]), Double.parseDouble(parts[1]),
-              Double.parseDouble(parts[0])));
-    }
-    else if (type == TokenType.ADD)
-    {
-      result = Calculate.add(evaluate(expression), evaluate(expression));
-    }
-    else if (type == TokenType.SUBTRACT)
-    {
-      ComplexNumber right = evaluate(expression);
-      ComplexNumber left = evaluate(expression);
-
-      result = Calculate.subtract(left, right);
-    }
-    else if (type == TokenType.MULTIPLY)
-    {
-      result = Calculate.multiply(evaluate(expression), evaluate(expression));
-    }
-    else if (type == TokenType.DIVIDE)
-    {
-      ComplexNumber right = evaluate(expression);
-      ComplexNumber left = evaluate(expression);
-
-      result = Calculate.divide(left, right);
-    }
-    else if (type == TokenType.EXP)
-    {
-      ComplexNumber power = evaluate(expression);
-      ComplexNumber base = evaluate(expression);
-
-      if (Math.abs(base.getImaginary() - 0.0) > 0.000000001)
-      {
-        throw new ExpressionEvaluationException("Base must be real number for exponentiation");
-      }
-
-      result = Calculate.exponent(base.getReal(), power);
-    }
-    else if (type == TokenType.POSITIVE)
-    {
-      result = evaluate(expression);
-    }
-    else if (type == TokenType.NEGATIVE)
-    {
-      result = Calculate.multiply(evaluate(expression), new ComplexNumber(-1.0, 0.0));
-    }
-    else
-    {
-      throw new ExpressionEvaluationException("type == " + type);
+      throw new ExpressionEvaluationException(exc.getMessage());
     }
 
     return result;
@@ -229,7 +237,8 @@ public class Evaluation
       else
       {
         while (!operators.isEmpty()
-            && token.type.getPrecedence() >= operators.peek().type.getPrecedence())
+            && token.type.getPrecedence() <= operators.peek().type.getPrecedence()
+            && operators.peek().type != TokenType.OPEN_PAREN)
         {
           output.push(operators.pop());
         }
@@ -312,7 +321,8 @@ public class Evaluation
         }
       }
 
-      if (curType == TokenType.CLOSE_PAREN && tokens.get(i + 1).type == TokenType.OPEN_PAREN)
+      if ((curType == TokenType.CLOSE_PAREN || curType.isNumber()) && (
+          tokens.get(i + 1).type == TokenType.OPEN_PAREN || tokens.get(i + 1).type.isNumber()))
       {
         tokens.add(i + 1, new Token(TokenType.MULTIPLY, "*"));
       }
