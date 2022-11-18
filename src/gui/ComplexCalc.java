@@ -235,11 +235,11 @@ public class ComplexCalc extends JFrame implements ActionListener
     }
     if (e.getSource() == logButton)
     {
-      textfield.setText(textfield.getText() + "log");
+      textfield.setText(textfield.getText() + "(Base)log(");
     }
     if (e.getSource() == sqrtButton)
     {
-      textfield.setText(textfield.getText() + "sqrt()");
+      textfield.setText(textfield.getText() + "sqrt(");
     }
     if (e.getSource() == invButton)
     {
@@ -252,7 +252,13 @@ public class ComplexCalc extends JFrame implements ActionListener
         textfield.setText(textfield.getText() + "=" + res);
       } catch (ExpressionEvaluationException ex)
       {
-        // TODO
+        MenuItemWindow p = new MenuItemWindow("Invalid Expression", 300, 300);
+        // final print button
+        // JPanel panel = new JPanel();
+        JButton printButton = new JButton("Cancel");
+        p.add(panel, BorderLayout.SOUTH);
+        panel.setLayout((new FlowLayout(FlowLayout.TRAILING)));
+        panel.add(printButton);
       }
     }
   }
@@ -299,13 +305,13 @@ public class ComplexCalc extends JFrame implements ActionListener
               }
           }   
           
-          MenuItemWindow p = new MenuItemWindow(printTitle, 300, 300);
+          /*MenuItemWindow p = new MenuItemWindow(printTitle, 300, 300);
           // final print button
           JPanel panel = new JPanel();
           JButton printButton = new JButton(printTitle);
           p.add(panel, BorderLayout.SOUTH);
           panel.setLayout((new FlowLayout(FlowLayout.TRAILING)));
-          panel.add(printButton);
+          panel.add(printButton);*/
         }
       });
 

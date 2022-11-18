@@ -52,13 +52,17 @@ public class PolarComplexNumber extends ComplexNumber
   {
     if (getImaginary() < 0)
     {
-      return String.format(FORMAT_TEXT, r) + "(cos(" + String.format(FORMAT_TEXT, getReal())
-          + "°) - " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "°))";
+      return String.format(FORMAT_TEXT, r) + COS 
+          + String.format(FORMAT_TEXT, getReal() * (180/Math.PI))
+          + "Â°) - " + I + SIN 
+          + String.format(FORMAT_TEXT, Math.abs(getImaginary() * (180/Math.PI))) + END;
     }
     else
     {
-      return String.format(FORMAT_TEXT, r) + "(cos(" + String.format(FORMAT_TEXT, getReal())
-          + "°) + " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "°))";
+      return String.format(FORMAT_TEXT, r) + COS 
+          + String.format(FORMAT_TEXT, getReal() * (180/Math.PI))
+          + "Â°) + " + I + SIN 
+          + String.format(FORMAT_TEXT, Math.abs(getImaginary() * (180/Math.PI))) + END;
 
     }
   }
