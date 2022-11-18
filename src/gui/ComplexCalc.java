@@ -10,6 +10,8 @@ import parse.ExpressionEvaluationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 
@@ -19,7 +21,7 @@ import java.awt.print.PrinterJob;
  * @author TeamD
  * @version 11/4/22 This work complies with the JMU Honor Code.
  */
-public class ComplexCalc extends JFrame implements ActionListener
+public class ComplexCalc extends JFrame implements ActionListener, KeyListener
 {
   private static final long serialVersionUID = 1L;
   private static final String SERIF = "Serif";
@@ -318,7 +320,9 @@ public class ComplexCalc extends JFrame implements ActionListener
       }
       catch (ExpressionEvaluationException ex)
       {
-        // TODO
+        JOptionPane.showMessageDialog(null,
+            "ERROR: Invalid Expression.",
+            "ERROR", JOptionPane.ERROR_MESSAGE);
       }
     }
   }
@@ -570,6 +574,27 @@ public class ComplexCalc extends JFrame implements ActionListener
   public static void setClick()
   {
     isClicked = !isClicked;
+  }
+
+  @Override
+  public void keyTyped(KeyEvent e)
+  {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void keyPressed(KeyEvent e)
+  {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void keyReleased(KeyEvent e)
+  {
+    // TODO Auto-generated method stub
+    
   }
 
 }
