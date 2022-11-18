@@ -419,7 +419,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             + "A history of results from previosu calculations are stored in the history "
             + "panel.";
     String aboutTitle = "About";
-    String printTitle = "Print";
+    // String printTitle = "Print";
     JMenuBar menuBar;
     JMenu file, mode, help;
     JMenuItem print, exit, about;
@@ -515,7 +515,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         @Override public void actionPerformed(ActionEvent e)
         {
-          printTitle = "Impresión";
+        // printTitle = "Impresión";
           aboutMessage = "Esta calculadora realiza operaciones en los operandos de números "
               + "complejos dados. Un historial de resultados de cálculos anteriores se almacena "
               + "en el panel de historial.";
@@ -528,7 +528,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           help.setText("Ayuda");
           about.setText("Sobre");
           mode.setText("Modo");
-          print.setText("Impresión");
+          // print.setText("Impresión");
           exit.setText("Salida");
           rect.setText("Rectangular");
           polar.setText("Polar");
@@ -543,7 +543,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         @Override public void actionPerformed(ActionEvent e)
         {
-          printTitle = "Drucken";
+          // printTitle = "Drucken";
           aboutMessage = "Dieser Rechner führt Operationen an den gegebenen Operanden für "
               + "komplexe Zahlen aus. Ein Verlauf der Ergebnisse früherer Berechnungen wird im "
               + "Verlaufsfeld gespeichert.";
@@ -556,7 +556,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           help.setText("Hilfe");
           about.setText("Um");
           mode.setText("Modus");
-          print.setText("Drucken");
+          // print.setText("Drucken");
           exit.setText("Ausfahrt");
           rect.setText("Rechteckig");
           polar.setText("Polar");
@@ -571,7 +571,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         @Override public void actionPerformed(ActionEvent e)
         {
-          printTitle = "Imprimer";
+          // printTitle = "Imprimer";
           aboutMessage = "Cette calculatrice effectue des opérations sur les opérandes de nombres"
               + " complexes donnés. Un historique des résultats des calculs précédents est stocké"
               + " dans le panneau d'historique.";
@@ -584,7 +584,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           help.setText("Aider");
           about.setText("Sur");
           mode.setText("Mode");
-          print.setText("Imprimer");
+          // print.setText("Imprimer");
           exit.setText("Sortir");
           rect.setText("Rectangulaire");
           polar.setText("Polaire");
@@ -599,7 +599,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         @Override public void actionPerformed(ActionEvent e)
         {
-          printTitle = "Print";
+          // printTitle = "Print";
           aboutMessage =
               "This calculator performs operations on the given complex number operands. "
                   + "A history of results from previosu calculations are stored in the history "
@@ -613,7 +613,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           help.setText("Help");
           about.setText("About");
           mode.setText("Mode");
-          print.setText("Print");
+          // print.setText("Print");
           exit.setText("Exit");
           rect.setText("Polar");
           polar.setText("Rectangular");
