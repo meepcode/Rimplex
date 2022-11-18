@@ -507,7 +507,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         }
       });
 
-      JMenuItem span = new JMenuItem("Spanish");
+      JMenuItem span = new JMenuItem("Español");
       langs.add(span);
       span.addActionListener(this);
 
@@ -535,7 +535,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         }
       });
 
-      JMenuItem german = new JMenuItem("German");
+      JMenuItem german = new JMenuItem("Deutsch");
       langs.add(german);
       german.addActionListener(this);
 
@@ -563,7 +563,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         }
       });
 
-      JMenuItem french = new JMenuItem("French");
+      JMenuItem french = new JMenuItem("Français");
       langs.add(french);
       french.addActionListener(this);
 
