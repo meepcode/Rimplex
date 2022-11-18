@@ -155,7 +155,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   {
     ComplexCalc calc = new ComplexCalc();
   }
-
+  
   @Override
   public void actionPerformed(final ActionEvent e)
   {
@@ -226,6 +226,10 @@ public class ComplexCalc extends JFrame implements ActionListener
     if (e.getSource() == invButton)
     {
       textfield.setText(textfield.getText() + "Inv()");
+    }
+    if (e.getSource() == equButton)
+    {
+      //EQUAL BUTTON LOGIC TO COPY TO HISTORY PANEL
     }
   }
 
@@ -303,7 +307,9 @@ public class ComplexCalc extends JFrame implements ActionListener
         public void actionPerformed(ActionEvent e)
         {
           JOptionPane.showMessageDialog(null,
-              "This calculator performs operations on the given complex number operands. " + "A history of results from previosu calculations are stored in the history " + "panel.",
+              "This calculator performs operations on the given complex number operands. "
+                  + "A history of results from previosu calculations are stored in the history "
+                  + "panel.",
               "About", JOptionPane.INFORMATION_MESSAGE);
         }
       });
@@ -409,7 +415,6 @@ public class ComplexCalc extends JFrame implements ActionListener
 
         }
       });
-
 
       return menuBar;
     }
