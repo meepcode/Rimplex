@@ -31,7 +31,7 @@ public class HistoryPanel extends JFrame
   private String word;
   private DefaultStyledDocument document;
   private ArrayList<String> list;
-  private String historyList = "";
+  private String historyList = "History\n";
   private int index = 0;
 
   /**
@@ -54,7 +54,7 @@ public class HistoryPanel extends JFrame
     curr = mainPanel.getLocation();
 
     Border b1 = BorderFactory.createEmptyBorder(20, 20, 20, 20);
-    // mainPanel.setBorder(b1);
+    mainPanel.setBorder(b1);
 
     document = new DefaultStyledDocument();
     area = new JTextPane(document);
