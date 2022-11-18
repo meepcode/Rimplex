@@ -1,20 +1,37 @@
 package gui;
 
-import javax.swing.*;
-
 import calculation.Calculate;
 import calculation.ComplexNumber;
 import parse.Evaluation;
 import parse.ExpressionEvaluationException;
 
-import java.awt.*;
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import java.awt.BorderLayout;
+import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.print.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.print.PageFormat;
+import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
+
+import static java.awt.print.Printable.NO_SUCH_PAGE;
+import static java.awt.print.Printable.PAGE_EXISTS;
 
 /**
  * Calculator GUI.
@@ -32,6 +49,8 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
   private static final String ASTERISK = "*";
   private static final String SLASH = "/";
   private static final String DOT = ".";
+  protected static String result = "";
+  protected static boolean isClicked = false;
   private final JFrame frame;
   private final JTextField textfield;
   private final JButton[] numberButtons = new JButton[10];
@@ -42,12 +61,9 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       conjugate, imaginaryPart;
   private final JPanel panel;
   private final HistoryPanel his;
-  protected static String result = "";
-  protected static boolean isClicked = false;
+  private final Font myFont = new Font(SERIF, Font.BOLD, 30);
   private boolean isPolarActive = false;
   private String pastResult = "";
-
-  private final Font myFont = new Font(SERIF, Font.BOLD, 30);
 
   ComplexCalc()
   {
@@ -187,15 +203,22 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
    * Main method.
    *
    * @param args
-   *          cmd line args
+   *     cmd line args
    */
   public static void main(final String[] args)
   {
     ComplexCalc calc = new ComplexCalc();
   }
 
-  @Override
-  public void actionPerformed(final ActionEvent e)
+  /**
+   * setting boolean click
+   */
+  public static void setClick()
+  {
+    isClicked = !isClicked;
+  }
+
+  @Override public void actionPerformed(final ActionEvent e)
   {
     for (int i = 0; i < 10; i++)
     {
@@ -295,15 +318,15 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     }
     if (e.getSource() == realPart)
     {
-      textfield.setText(textfield.getText() + "real(");
+      textfield.setText(textfield.getText() + "re(");
     }
     if (e.getSource() == imaginaryPart)
     {
-      textfield.setText(textfield.getText() + "imag(");
+      textfield.setText(textfield.getText() + "im(");
     }
     if (e.getSource() == conjugate)
     {
-      textfield.setText(textfield.getText() + "cong(");
+      textfield.setText(textfield.getText() + "conj(");
     }
     if (e.getSource() == equButton)
     {
@@ -322,18 +345,37 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       }
       catch (ExpressionEvaluationException ex)
       {
-        JOptionPane.showMessageDialog(null,
-            "ERROR: Invalid Expression.",
-            "ERROR", JOptionPane.ERROR_MESSAGE);
+        JOptionPane.showMessageDialog(null, "ERROR: Invalid Expression.", "ERROR",
+            JOptionPane.ERROR_MESSAGE);
       }
     }
+  }
+
+
+  public int print(Graphics g, PageFormat pf, int page) throws PrinterException
+  {
+    if (page > 0)
+    {
+      return NO_SUCH_PAGE;
+    }
+
+    Graphics2D g2d = (Graphics2D) g;
+    g2d.translate(pf.getImageableX(), pf.getImageableY());
+
+    // Print the entire visible contents of a
+    // java.awt.Frame.
+    frame.printAll(g);
+
+    return PAGE_EXISTS;
   }
 
   // Menu Bar Code
   class MenuBar implements ActionListener
   {
-    String aboutMessage = "This calculator performs operations on the given complex number operands. "
-        + "A history of results from previosu calculations are stored in the history " + "panel.";
+    String aboutMessage =
+        "This calculator performs operations on the given complex number operands. "
+            + "A history of results from previosu calculations are stored in the history "
+            + "panel.";
     String aboutTitle = "About";
     String printTitle = "Print";
     JMenuBar menuBar;
@@ -358,17 +400,42 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       {
         public void actionPerformed(ActionEvent e)
         {
-          PrinterJob pj = PrinterJob.getPrinterJob();
-          if (pj.printDialog())
+          PrinterJob job = PrinterJob.getPrinterJob();
+          PrintRequestAttributeSet aset = new HashPrintRequestAttributeSet();
+          PageFormat pf = job.pageDialog(aset);
+          job.setPrintable(new Printable()
+          {
+            @Override public int print(Graphics g, PageFormat pf, int page) throws
+                PrinterException {
+
+              if (page > 0) { /* We have only one page, and 'page' is zero-based */
+                return NO_SUCH_PAGE;
+              }
+
+              /* User (0,0) is typically outside the imageable area, so we must
+               * translate by the X and Y values in the PageFormat to avoid clipping
+               */
+              Graphics2D g2d = (Graphics2D)g;
+              g2d.translate(pf.getImageableX(), pf.getImageableY());
+
+              /* Now we perform our rendering */
+              g.drawString("Test the print dialog!", 100, 100);
+
+              /* tell the caller that this page is part of the printed document */
+              return PAGE_EXISTS;
+            }
+          }, pf);
+          boolean ok = job.printDialog(aset);
+          if (ok)
           {
             try
             {
-              print(his.getGraphics(), new PageFormat(), 0);
+
+              job.print(aset);
             }
-            catch (Exception e1)
+            catch (PrinterException ex)
             {
-              // TODO Auto-generated catch block
-              e1.printStackTrace();
+              /* The job did not successfully complete */
             }
           }
         }
@@ -394,8 +461,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       rect.addActionListener(this);
       rect.addActionListener(new ActionListener()
       {
-        @Override
-        public void actionPerformed(ActionEvent e)
+        @Override public void actionPerformed(ActionEvent e)
         {
 
           isPolarActive = false;
@@ -406,8 +472,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       polar.addActionListener(this);
       polar.addActionListener(new ActionListener()
       {
-        @Override
-        public void actionPerformed(ActionEvent e)
+        @Override public void actionPerformed(ActionEvent e)
         {
 
           isPolarActive = true;
@@ -430,8 +495,8 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
               "This calculator performs operations on the given complex number operands. "
                   + "A history of results from previosu calculations are stored in the history "
                   + "panel.\nClicking on an expression in the History "
-                  + "Panel copies that expression to the clipboard.",
-              "About", JOptionPane.INFORMATION_MESSAGE);
+                  + "Panel copies that expression to the clipboard.", "About",
+              JOptionPane.INFORMATION_MESSAGE);
         }
       });
 
@@ -442,8 +507,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       menuBar.add(hist);
       hist.addActionListener(new ActionListener()
       {
-        @Override
-        public void actionPerformed(ActionEvent e)
+        @Override public void actionPerformed(ActionEvent e)
         {
           his.createAndShowGUI();
           frame.pack();
@@ -456,11 +520,12 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
 
       span.addActionListener(new ActionListener()
       {
-        @Override
-        public void actionPerformed(ActionEvent e)
+        @Override public void actionPerformed(ActionEvent e)
         {
           printTitle = "Impresión";
-          aboutMessage = "Esta calculadora realiza operaciones en los operandos de números complejos dados. Un historial de resultados de cálculos anteriores se almacena en el panel de historial.";
+          aboutMessage = "Esta calculadora realiza operaciones en los operandos de números "
+              + "complejos dados. Un historial de resultados de cálculos anteriores se almacena "
+              + "en el panel de historial.";
           aboutTitle = "Sobre";
           hist.setText("Historia");
           modeWindow.setTitle("Modo");
@@ -483,11 +548,12 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
 
       german.addActionListener(new ActionListener()
       {
-        @Override
-        public void actionPerformed(ActionEvent e)
+        @Override public void actionPerformed(ActionEvent e)
         {
           printTitle = "Drucken";
-          aboutMessage = "Dieser Rechner führt Operationen an den gegebenen Operanden für komplexe Zahlen aus. Ein Verlauf der Ergebnisse früherer Berechnungen wird im Verlaufsfeld gespeichert.";
+          aboutMessage = "Dieser Rechner führt Operationen an den gegebenen Operanden für "
+              + "komplexe Zahlen aus. Ein Verlauf der Ergebnisse früherer Berechnungen wird im "
+              + "Verlaufsfeld gespeichert.";
           aboutTitle = "Um";
           hist.setText("Geschichte");
           modeWindow.setTitle("Modus");
@@ -510,11 +576,12 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
 
       french.addActionListener(new ActionListener()
       {
-        @Override
-        public void actionPerformed(ActionEvent e)
+        @Override public void actionPerformed(ActionEvent e)
         {
           printTitle = "Imprimer";
-          aboutMessage = "Cette calculatrice effectue des opérations sur les opérandes de nombres complexes donnés. Un historique des résultats des calculs précédents est stocké dans le panneau d'historique.";
+          aboutMessage = "Cette calculatrice effectue des opérations sur les opérandes de nombres"
+              + " complexes donnés. Un historique des résultats des calculs précédents est stocké"
+              + " dans le panneau d'historique.";
           aboutTitle = "Sur";
           hist.setText("Histoire");
           modeWindow.setTitle("Mode");
@@ -537,13 +604,13 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
 
       english.addActionListener(new ActionListener()
       {
-        @Override
-        public void actionPerformed(ActionEvent e)
+        @Override public void actionPerformed(ActionEvent e)
         {
           printTitle = "Print";
-          aboutMessage = "This calculator performs operations on the given complex number operands. "
-              + "A history of results from previosu calculations are stored in the history "
-              + "panel.";
+          aboutMessage =
+              "This calculator performs operations on the given complex number operands. "
+                  + "A history of results from previosu calculations are stored in the history "
+                  + "panel.";
           aboutTitle = "About";
           hist.setText("History");
           modeWindow.setTitle("Mode");
@@ -562,21 +629,13 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
       return menuBar;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e)
+    @Override public void actionPerformed(ActionEvent e)
     {
       // TODO Auto-generated method stub
 
     }
   }
 
-  /**
-   * setting boolean click
-   */
-  public static void setClick()
-  {
-    isClicked = !isClicked;
-  }
 
 
   @Override
@@ -599,5 +658,6 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
     // TODO Auto-generated method stub
     
   }
+
 
 }
