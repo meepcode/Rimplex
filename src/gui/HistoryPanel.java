@@ -7,6 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -24,6 +25,9 @@ public class HistoryPanel extends JFrame
   private final Font myFont = new Font(SERIF, Font.BOLD, 25);
   private String word;
   private DefaultStyledDocument document;
+  private ArrayList<String> list;
+  private String historyList = "";
+  private int index = 0;
 
   /**
    * 
@@ -60,14 +64,30 @@ public class HistoryPanel extends JFrame
     // l += "\nx + 5 = 9";
     // area.setText(l);
 
-    
-    area.setText("History:");
+    area.setText("History\n");
     area.setBorder(b1);
     area.setFont(myFont);
 
     word = null;
     copyExpression();
 
+    list = new ArrayList<>();
+    // add();
+
+  }
+
+  public void add()
+  {
+
+    if (ComplexCalc.isClicked)
+    {
+      list.add(ComplexCalc.result);
+      historyList += list.get(index) + "\n";
+      index++;
+
+      area.setText(historyList);
+      ComplexCalc.setClick();
+    }
   }
 
   /**

@@ -34,7 +34,8 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton, leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton;
   private final JPanel panel;
   private final HistoryPanel his;
-  private final String result;
+  protected static  String result;
+  protected static boolean isClicked = false;
 
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
 
@@ -250,6 +251,9 @@ public class ComplexCalc extends JFrame implements ActionListener
       try {
         ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
         textfield.setText(textfield.getText() + "=" + res);
+        result = textfield.getText();
+        isClicked = true;
+        his.add();
       } catch (ExpressionEvaluationException ex)
       {
         // TODO
@@ -473,13 +477,6 @@ public class ComplexCalc extends JFrame implements ActionListener
       return menuBar;
     }
     
-    /**
-     * Getter for expression
-     * @return result
-     */
-    public String getResult() {
-      return result;
-    }
 
     @Override
     public void actionPerformed(ActionEvent e)
@@ -488,5 +485,15 @@ public class ComplexCalc extends JFrame implements ActionListener
 
     }
   }
+  
+  public String getResult() {
+    return result;
+  }
+ 
+  
+  public static void setClick() {
+    isClicked = !isClicked;
+  }
+
 
 }
