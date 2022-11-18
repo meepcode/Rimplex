@@ -10,8 +10,7 @@ import parse.ExpressionEvaluationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
+import java.awt.print.*;
 
 /**
  * Calculator GUI.
@@ -19,7 +18,7 @@ import java.awt.print.PrinterJob;
  * @author TeamD
  * @version 11/4/22 This work complies with the JMU Honor Code.
  */
-public class ComplexCalc extends JFrame implements ActionListener
+public class ComplexCalc extends JFrame implements ActionListener, Printable
 {
   private static final long serialVersionUID = 1L;
   private static final String SERIF = "Serif";
@@ -349,9 +348,9 @@ public class ComplexCalc extends JFrame implements ActionListener
           {
             try
             {
-              pj.print();
+              print(his.getGraphics(), new PageFormat(), 0);
             }
-            catch (PrinterException e1)
+            catch (Exception e1)
             {
               // TODO Auto-generated catch block
               e1.printStackTrace();
@@ -563,5 +562,31 @@ public class ComplexCalc extends JFrame implements ActionListener
   {
     isClicked = !isClicked;
   }
+  
+
+    public int print(Graphics g, PageFormat pf, int page)
+        throws PrinterException {
+
+      // We have only one page, and 'page'
+      // is zero-based
+      if (page > 0) {
+           return NO_SUCH_PAGE;
+      }
+
+      // User (0,0) is typically outside the
+      // imageable area, so we must translate
+      // by the X and Y values in the PageFormat
+      // to avoid clipping.
+      Graphics2D g2d = (Graphics2D)g;
+      g2d.translate(pf.getImageableX(), pf.getImageableY());
+
+      // Now we perform our rendering
+      g.drawString("Hello world!", 100, 100);
+
+      // tell the caller that this page is part
+      // of the printed document
+      return PAGE_EXISTS;
+  }
+
 
 }
