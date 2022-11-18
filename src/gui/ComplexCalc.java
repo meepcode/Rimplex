@@ -5,8 +5,8 @@ import calculation.ComplexNumber;
 import parse.Evaluation;
 import parse.ExpressionEvaluationException;
 
-import javax.print.attribute.HashPrintRequestAttributeSet;
-import javax.print.attribute.PrintRequestAttributeSet;
+// import javax.print.attribute.HashPrintRequestAttributeSet;
+// import javax.print.attribute.PrintRequestAttributeSet;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -446,10 +446,7 @@ public class ComplexCalc extends JFrame implements ActionListener, KeyListener
         public void actionPerformed(ActionEvent e)
         {
           JOptionPane.showMessageDialog(null,
-              "This calculator performs operations on the given complex number operands. "
-                  + "A history of results from previosu calculations are stored in the history "
-                  + "panel.\nClicking on an expression in the History "
-                  + "Panel copies that expression to the clipboard.", "About",
+              aboutMessage, "About",
               JOptionPane.INFORMATION_MESSAGE);
         }
       });
