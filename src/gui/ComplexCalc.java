@@ -403,6 +403,8 @@ public class ComplexCalc extends JFrame implements ActionListener
           mode.setText("Modo");
           print.setText("Impresión");
           exit.setText("Salida");
+          rect.setText("Rectangular");
+          polar.setText("Polar");
         }
       });
 
@@ -428,6 +430,8 @@ public class ComplexCalc extends JFrame implements ActionListener
           mode.setText("Modus");
           print.setText("Drucken");
           exit.setText("Ausfahrt");
+          rect.setText("Rechteckig");
+          polar.setText("Polar");
         }
       });
 
@@ -453,6 +457,8 @@ public class ComplexCalc extends JFrame implements ActionListener
           mode.setText("Mode");
           print.setText("Imprimer");
           exit.setText("Sortir");
+          rect.setText("Rectangulaire");
+          polar.setText("Polaire");
         }
       });
 
@@ -480,6 +486,8 @@ public class ComplexCalc extends JFrame implements ActionListener
           mode.setText("Mode");
           print.setText("Print");
           exit.setText("Exit");
+          rect.setText("Polar");
+          polar.setText("Rectangular");
         }
       });
       return menuBar;
