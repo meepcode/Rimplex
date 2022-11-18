@@ -1,5 +1,7 @@
 package calculation;
 
+import java.util.Objects;
+
 /**
  * Polar Complex number.
  *
@@ -8,6 +10,9 @@ package calculation;
  */
 public class PolarComplexNumber extends ComplexNumber
 {
+  private static final String COS = "(cos(";
+  private static final String SIN = "sin(";
+  private static final String END = "°))";
 
   private Double r; // The polar magnitude
 
@@ -32,6 +37,7 @@ public class PolarComplexNumber extends ComplexNumber
    * 
    * @return r.
    */
+  @Override
   public Double getPolarMagnitude()
   {
     return r;
@@ -47,13 +53,44 @@ public class PolarComplexNumber extends ComplexNumber
     if (getImaginary() < 0)
     {
       return String.format(FORMAT_TEXT, r) + "(cos(" + String.format(FORMAT_TEXT, getReal())
-          + "°) - " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "°))";
+          + "�) - " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "�))";
     }
     else
     {
       return String.format(FORMAT_TEXT, r) + "(cos(" + String.format(FORMAT_TEXT, getReal())
-          + "°) + " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "°))";
+          + "�) + " + I + "sin(" + String.format(FORMAT_TEXT, Math.abs(getImaginary())) + "�))";
+
     }
+  }
+
+  /**
+   * Compares two complex numbers.
+   *
+   * @param other
+   *          complex number to compare.
+   * @return true if same complex numbers.
+   */
+  @Override
+  public boolean equals(final Object other)
+  {
+    if (other instanceof PolarComplexNumber op2)
+    {
+      return (Objects.equals(this.getReal(), op2.getReal())
+          && Objects.equals(this.getImaginary(), op2.getImaginary())
+          && Objects.equals(this.r, op2.r));
+    }
+    return false;
+  }
+
+  /**
+   * Gets the hashcode.
+   *
+   * @return hashcode.
+   */
+  @Override
+  public int hashCode()
+  {
+    return (int) (getReal() + 31 * getImaginary());
   }
 
 }

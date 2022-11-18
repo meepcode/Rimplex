@@ -63,22 +63,13 @@ class ComplexNumberTest
   void testToString()
   {
 
-    String complexNumberString = "%.1f+%.1fi";
+    String complexNumberString = "%.2f+%.2fi";
     String sTest = String.format(complexNumberString, real, imag);
     assertEquals(sTest, test.toString());
     String sTest1 = String.format(complexNumberString, real1, imag1);
     assertEquals(sTest1, test1.toString());
-    String sNegI = String.format("%.1f-%.1fi", real, Math.abs(imagN));
+    String sNegI = String.format("%.2f-%.2fi", real, Math.abs(imagN));
     assertEquals(sNegI, negI.toString());
-  }
-
-  /**
-   * Test evaluate.
-   */
-  @Test
-  void testEvaluate()
-  {
-    assertEquals(test, test.evaluate(null));
   }
 
   /**
@@ -140,6 +131,15 @@ class ComplexNumberTest
   void testHashcode()
   {
     assertEquals(32, new ComplexNumber(1.0, 1.0).hashCode());
+  }
+  
+  /**
+   * Test getPolarMagnitude.
+   */
+  @Test
+  void testGetMagnitude()
+  {
+    assertEquals(0.0, new ComplexNumber(1.0, 1.0).getPolarMagnitude());
   }
 
 }
