@@ -1,6 +1,22 @@
 package gui;
 
-import java.awt.*;
+import javax.swing.BorderFactory;
+import javax.swing.JComponent;
+import javax.swing.JEditorPane;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextPane;
+import javax.swing.Timer;
+import javax.swing.border.Border;
+import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.Utilities;
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.Point;
+import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.awt.event.ActionEvent;
@@ -9,37 +25,27 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.text.DefaultStyledDocument;
-import javax.swing.text.Utilities;
-
 /**
- * 
  * @author Team D
- *
  */
 public class HistoryPanel extends JFrame
 {
 
+  private static final String SERIF = "Serif";
+  /**
+   *
+   */
+  private static final long serialVersionUID = 1L;
   private final JPanel mainPanel;
   private final JScrollPane pane;
   private final JEditorPane area;
   private final Point curr;
-  private static final String SERIF = "Serif";
   private final Font myFont = new Font(SERIF, Font.BOLD, 20);
   private String word;
-  private DefaultStyledDocument document;
-  private ArrayList<String> list;
+  private final DefaultStyledDocument document;
+  private final ArrayList<String> list;
   private String historyList = "\t--------History--------\n";
   private int index = 0;
-
-  /**
-   * 
-   */
-  private static final long serialVersionUID = 1L;
-
-  // size: 420 x 480
 
   /**
    * Constructor.
@@ -67,20 +73,33 @@ public class HistoryPanel extends JFrame
     area.setText(historyList);
     area.setBorder(b1);
     area.setFont(myFont);
-    area.setPreferredSize(new Dimension(400, 240)); 
+    area.setPreferredSize(new Dimension(400, 240));
     word = null;
     copyExpression();
 
     list = new ArrayList<>();
   }
 
+  // size: 420 x 480
+
+  /**
+   * Accessor method for area.
+   *
+   * @return the area
+   */
+  public JEditorPane getArea()
+  {
+    return area;
+  }
+
   /**
    * Adds expression to history panel.
    */
   public void add()
-  {   
+  {
     String ex = ComplexCalc.result;
-    if (ex.length() >= 35) {
+    if (ex.length() >= 35)
+    {
       area.setFont(new Font(SERIF, Font.BOLD, 15));
     }
 
@@ -144,18 +163,19 @@ public class HistoryPanel extends JFrame
     boolean visible = mainPanel.isVisible();
     mainPanel.setVisible(!visible);
     area.setVisible(!visible);
-//    if (!visible)
-//    {
-//      animate(mainPanel, new Point(308, 35), 15, 10);
-//    }
-//    else
-//    {
-//      mainPanel.setLocation(curr);
-//    }
+    //    if (!visible)
+    //    {
+    //      animate(mainPanel, new Point(308, 35), 15, 10);
+    //    }
+    //    else
+    //    {
+    //      mainPanel.setLocation(curr);
+    //    }
   }
 
   /**
    * Get History panel.
+   *
    * @return
    */
   public JPanel getPanel()
@@ -165,6 +185,7 @@ public class HistoryPanel extends JFrame
 
   /**
    * Helper to animate history panel.
+   *
    * @param component
    * @param newPoint
    * @param frames
@@ -174,9 +195,8 @@ public class HistoryPanel extends JFrame
   {
     Rectangle compBounds = component.getBounds();
 
-    Point oldPoint = new Point(compBounds.x, compBounds.y),
-        animFrame = new Point((newPoint.x - oldPoint.x) / frames,
-            (newPoint.y - oldPoint.y) / frames);
+    Point oldPoint = new Point(compBounds.x, compBounds.y), animFrame = new Point(
+        (newPoint.x - oldPoint.x) / frames, (newPoint.y - oldPoint.y) / frames);
 
     new Timer(interval, new ActionListener()
     {
@@ -196,7 +216,7 @@ public class HistoryPanel extends JFrame
           ((Timer) e.getSource()).stop();
         }
       }
-    }).start(); 
+    }).start();
   }
 
 }
