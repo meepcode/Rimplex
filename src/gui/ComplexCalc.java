@@ -1,8 +1,6 @@
 package gui;
 
 import javax.swing.*;
-
-import calculation.Calculate;
 import calculation.ComplexNumber;
 import parse.Evaluation;
 import parse.ExpressionEvaluationException;
@@ -10,6 +8,8 @@ import parse.ExpressionEvaluationException;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 
@@ -19,7 +19,7 @@ import java.awt.print.PrinterJob;
  * @author TeamD
  * @version 11/4/22 This work complies with the JMU Honor Code.
  */
-public class ComplexCalc extends JFrame implements ActionListener
+public class ComplexCalc extends JFrame implements ActionListener, KeyListener
 {
   private static final long serialVersionUID = 1L;
   private static final String SERIF = "Serif";
@@ -37,9 +37,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton;
   private final JPanel panel;
   private final HistoryPanel his;
-  protected static final String result = "";
-  protected static boolean isClicked = false;
-  private boolean isPolarActive = false;
+  private final String result;
 
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
 
@@ -60,6 +58,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     // adding history panel
     his = new HistoryPanel();
     // temp initialization of result
+    result = "";
 
     textfield = new JTextField();
     textfield.setBounds(50, 25, 300, 50);
@@ -249,20 +248,16 @@ public class ComplexCalc extends JFrame implements ActionListener
       try
       {
         ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
-        if (isPolarActive)
-        {
-          res = Calculate.convertRectangularToPolar(res);
-        }
         textfield.setText(textfield.getText() + "=" + res);
-        isClicked = true;
-        his.add();
       }
       catch (ExpressionEvaluationException ex)
       {
-        // TODO
+        JOptionPane.showMessageDialog(null,
+            "ERROR",
+            "ERROR", JOptionPane.ERROR_MESSAGE);
       }
     }
-  }
+    
 
   // Menu Bar Code
   class MenuBar implements ActionListener
@@ -332,7 +327,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
-          isPolarActive = false;
+          // TODO
         }
       });
       JMenuItem polar = new JMenuItem("Polar");
@@ -343,7 +338,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
-          isPolarActive = true;
+          // TODO
         }
       });
 
@@ -484,7 +479,16 @@ public class ComplexCalc extends JFrame implements ActionListener
       });
       return menuBar;
     }
-    
+
+    /**
+     * Getter for expression
+     * 
+     * @return result
+     */
+    public String getResult()
+    {
+      return result;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e)
@@ -493,13 +497,26 @@ public class ComplexCalc extends JFrame implements ActionListener
 
     }
   }
-  
-  /**
-   * setting boolean click
-   */
-  public static void setClick() {
-    isClicked = !isClicked;
+
+  @Override
+  public void keyTyped(KeyEvent e)
+  {
+    // TODO Auto-generated method stub
+
   }
-  
+
+  @Override
+  public void keyPressed(KeyEvent e)
+  {
+    // TODO Auto-generated method stub
+
+  }
+
+  @Override
+  public void keyReleased(KeyEvent e)
+  {
+    // TODO Auto-generated method stub
+
+  }
 
 }
