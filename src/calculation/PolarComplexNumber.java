@@ -52,10 +52,19 @@ public class PolarComplexNumber extends ComplexNumber
   {
     // if (getImaginary() < 0)
     // {
+    Double real = getReal();
+    Double imaginary = getImaginary();
+    if (Math.abs(real-0) < ComplexNumber.EPSILON) {
+      real = 0.0;
+    }
+    if (Math.abs(imaginary-0) < ComplexNumber.EPSILON) {
+      imaginary = 0.0;
+    }
+    
     return String.format(FORMAT_TEXT, r) + COS 
-          + String.format(FORMAT_TEXT, getReal() * (180/Math.PI))
+          + String.format(FORMAT_TEXT, real)
           + "°) + " + I + SIN 
-          + String.format(FORMAT_TEXT, getImaginary() * (180/Math.PI)) + END;
+          + String.format(FORMAT_TEXT, imaginary) + END;
   }
     // }
     /*}

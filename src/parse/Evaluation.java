@@ -144,7 +144,7 @@ public class Evaluation
         }
 
         result = Calculate.convertPolarToRectangular(
-            new PolarComplexNumber(Double.parseDouble(parts[1]), Double.parseDouble(parts[1]),
+            new PolarComplexNumber(Double.parseDouble(parts[1])*(Math.PI/180), Double.parseDouble(parts[1])*(Math.PI/180),
                 Double.parseDouble(parts[0])));
       }
       else if (type == TokenType.ADD)
