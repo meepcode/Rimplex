@@ -536,7 +536,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           help.setText("Ayuda");
           about.setText("Sobre");
           mode.setText("Modo");
-          print.setText("Impresión");
+          //print.setText("Impresión");
           exit.setText("Salida");
           rect.setText("Rectangular");
           polar.setText("Polar");
@@ -563,7 +563,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           help.setText("Hilfe");
           about.setText("Um");
           mode.setText("Modus");
-          print.setText("Drucken");
+          //    print.setText("Drucken");
           exit.setText("Ausfahrt");
           rect.setText("Rechteckig");
           polar.setText("Polar");
@@ -590,7 +590,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           help.setText("Aider");
           about.setText("Sur");
           mode.setText("Mode");
-          print.setText("Imprimer");
+          //   print.setText("Imprimer");
           exit.setText("Sortir");
           rect.setText("Rectangulaire");
           polar.setText("Polaire");
@@ -617,7 +617,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           help.setText("Help");
           about.setText("About");
           mode.setText("Mode");
-          print.setText("Print");
+          //  print.setText("Print");
           exit.setText("Exit");
           rect.setText("Polar");
           polar.setText("Rectangular");
