@@ -419,7 +419,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     String printTitle = "Print";
     JMenuBar menuBar;
     JMenu file, mode, help;
-    JMenuItem print, exit, about, plot;
+    JMenuItem print, exit, about, plot, newWindow;
     //MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
 
     public JMenuBar createMenuBar()
@@ -443,15 +443,15 @@ public class ComplexCalc extends JFrame implements ActionListener
         }
       });
 
-      plot = new JMenuItem("Plot");
-      file.add(plot);
-      plot.addActionListener(this);
-      plot.addActionListener(new ActionListener()
+      newWindow = new JMenuItem("New Window");
+      file.add(newWindow);
+      newWindow.addActionListener(this);
+      newWindow.addActionListener(new ActionListener()
       {
         @Override
         public void actionPerformed(ActionEvent e)
         {
-
+          new ComplexCalc();
         }
       });
 
