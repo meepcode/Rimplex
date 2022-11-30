@@ -16,6 +16,7 @@ import javax.swing.JTextField;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 
 /**
  * Calculator GUI.
@@ -496,8 +497,17 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         public void actionPerformed(final ActionEvent e)
         {
-          JOptionPane.showMessageDialog(null, aboutMessage, "About",
-              JOptionPane.INFORMATION_MESSAGE);
+          try
+          {
+            System.out.println("Start..");
+            File file = new java.io.File("src/gui/helpPage.html").getAbsoluteFile();
+            Desktop.getDesktop().open(file);
+            System.out.println("End..");
+          }
+          catch (Exception e1)
+          {
+            e1.printStackTrace();
+          }
         }
       });
 
