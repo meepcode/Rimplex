@@ -647,7 +647,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         }
       });
 
-      menuBar.add(help);
+      menuBar.add(help); 
       
       help.add(helpPage);
       
