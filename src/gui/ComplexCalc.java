@@ -420,7 +420,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     String printTitle = "Print";
     JMenuBar menuBar;
     JMenu file, mode, help;
-    JMenuItem print, exit, about, plot, newWindow;
+    JMenuItem print, exit, about, newWindow;
     //MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
 
     public JMenuBar createMenuBar()
@@ -490,7 +490,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       help = new JMenu("Help");
       menuBar.add(help);
 
-      about = new JMenuItem("About");
+      about = new JMenuItem("Help page");
       help.add(about);
       about.addActionListener(this);
       about.addActionListener(new ActionListener()
@@ -499,10 +499,8 @@ public class ComplexCalc extends JFrame implements ActionListener
         {
           try
           {
-            System.out.println("Start..");
             File file = new java.io.File("src/gui/helpPage.html").getAbsoluteFile();
             Desktop.getDesktop().open(file);
-            System.out.println("End..");
           }
           catch (Exception e1)
           {
@@ -513,6 +511,16 @@ public class ComplexCalc extends JFrame implements ActionListener
 
       JMenu langs = new JMenu("Language");
       menuBar.add(langs);
+
+      JButton plot = new JButton("Plot");
+      menuBar.add(plot);
+      plot.addActionListener(new ActionListener()
+      {
+        @Override
+        public void actionPerformed(final ActionEvent e)
+        {
+        }
+      });
 
       JButton hist = new JButton("History");
       menuBar.add(hist);
