@@ -48,6 +48,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final String CALCULATOR = "Calculator";
   private boolean isPolarActive = false;
   private String pastResult = "";
+  private ComplexPlane complexPlane = new ComplexPlane();
 
   ComplexCalc()
   {
@@ -524,13 +525,16 @@ public class ComplexCalc extends JFrame implements ActionListener
       JMenu langs = new JMenu("Language");
       menuBar.add(langs);
 
-      JButton plot = new JButton("Plot");
+      
+      JButton plot = new JButton("Graph");
       menuBar.add(plot);
       plot.addActionListener(new ActionListener()
       {
         @Override
         public void actionPerformed(final ActionEvent e)
         {
+          // fill
+          complexPlane.setVisible(true);
         }
       });
 
