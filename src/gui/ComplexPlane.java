@@ -1,20 +1,22 @@
 package gui;
 
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.io.Serial;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
-
+/**
+ * Represents the visual complex plane graph.
+ */
 public class ComplexPlane extends JFrame
 {
 
   /**
-   * 
+   *
    */
-  private static final long serialVersionUID = 1L;
+  @Serial private static final long serialVersionUID = 1L;
   ComplexPanel panel;
 
   /**
@@ -28,7 +30,7 @@ public class ComplexPlane extends JFrame
   }
 
   /**
-   * Set plane frame
+   * Set plane frame.
    */
   public void createUI()
   {
@@ -42,9 +44,8 @@ public class ComplexPlane extends JFrame
 class ComplexPanel extends JPanel
 {
   /**
-   * 
+   *
    */
-  private static final long serialVersionUID = 1L;
   // x-axis coord constants
   public static final int X_AXIS_FIRST_X_COORD = 50;
   public static final int X_AXIS_SECOND_X_COORD = 650;
@@ -66,8 +67,9 @@ class ComplexPanel extends JPanel
 
   // distance of coordinate strings from axis
   public static final int AXIS_STRING_DISTANCE = 20;
+  @Serial private static final long serialVersionUID = 1L;
 
-  public void paintComponent(Graphics g)
+  public void paintComponent(final Graphics g)
   {
 
     super.paintComponent(g);
@@ -146,7 +148,7 @@ class ComplexPanel extends JPanel
         continue;
       }
 
-      String yAxis = Integer.toString(yNum) + "i";
+      String yAxis = yNum + "i";
       g2.drawLine(Y_AXIS_X_COORD - SECOND_LENGHT, Y_AXIS_SECOND_Y_COORD - (i * yLength),
           Y_AXIS_X_COORD + SECOND_LENGHT, Y_AXIS_SECOND_Y_COORD - (i * yLength));
       g2.drawString(yAxis, Y_AXIS_X_COORD - AXIS_STRING_DISTANCE,
