@@ -5,14 +5,7 @@ import calculation.ComplexNumber;
 import parse.Evaluation;
 import parse.ExpressionEvaluationException;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.awt.Font;
@@ -432,6 +425,12 @@ public class ComplexCalc extends JFrame implements ActionListener
 
       menuBar = new JMenuBar();
 
+      ImageIcon image = new ImageIcon("logo.png");
+      JLabel imageLabel = new JLabel(image);
+      menuBar.add(imageLabel);
+
+
+
       // file menu along menubar
       fileMenu = new JMenu("File");
       menuBar.add(fileMenu);
@@ -548,6 +547,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         his.createAndShowGUI();
         frame.pack();
       });
+
 
       JMenuItem span = new JMenuItem("Español");
       langs.add(span);
