@@ -54,17 +54,19 @@ public class PolarComplexNumber extends ComplexNumber
     // {
     Double real = getReal();
     Double imaginary = getImaginary();
-    if (Math.abs(real-0) < ComplexNumber.EPSILON) {
+    if (Math.abs(real-0) < ComplexNumber.EPSILON) 
+    {
       real = 0.0;
     }
-    if (Math.abs(imaginary-0) < ComplexNumber.EPSILON) {
+    if (Math.abs(imaginary-0) < ComplexNumber.EPSILON) 
+    {
       imaginary = 0.0;
     }
     
-    return String.format(FORMAT_TEXT, r) + COS 
-          + String.format(FORMAT_TEXT, real)
+    return String.format(getFormat(), r) + COS 
+          + String.format(getFormat(), real)
           + "°) + " + I + SIN 
-          + String.format(FORMAT_TEXT, imaginary) + END;
+          + String.format(getFormat(), imaginary) + END;
   }
     // }
     /*}
