@@ -57,7 +57,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     Image icon = Toolkit.getDefaultToolkit().getImage("src/logo.png");
     frame.setIconImage(icon);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setSize(420, 480);
+    frame.setSize(650, 480);
     frame.setLayout(new BorderLayout());
     frame.setResizable(false);
 
