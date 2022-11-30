@@ -472,6 +472,18 @@ public class ComplexCalc extends JFrame implements ActionListener
       fileMenu = new JMenu("File");
       menuBar.add(fileMenu);
       
+      // new window sub menu
+      newWindow = new JMenuItem("New Window");
+      newWindow.addActionListener(this);
+      newWindow.addActionListener(new ActionListener()
+      {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+          new ComplexCalc();
+        }
+      });
+      
       // preference sub menu
       pref = new JMenuItem("Preferences");
       fileMenu.add(pref);
@@ -533,6 +545,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             prefWindow.setTitle("Preferences");
             plot.setText("Graph");
             helpPage.setText("Help Page");
+            newWindow.setText("New Window");
           }
         });
         
@@ -561,6 +574,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           prefWindow.setTitle("Preferencias");
           plot.setText("Conspirar");
           helpPage.setText("Página de ayuda");
+          newWindow.setText("Nueva ventana");
           }
         });
         
@@ -589,6 +603,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             prefWindow.setTitle("Einstellungen");
             plot.setText("Handlung");
             helpPage.setText("Hilfeseite");
+            newWindow.setText("Neues Fenster");
           }
         });
         
@@ -617,6 +632,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             prefWindow.setTitle("Préférences");
             plot.setText("Complot");
             helpPage.setText("Page d’aide");
+            newWindow.setText("Nouvelle fenêtre");
           }
         });
       });
@@ -631,19 +647,6 @@ public class ComplexCalc extends JFrame implements ActionListener
         public void actionPerformed(final ActionEvent e)
         {
           System.exit(0);
-        }
-      });
-
-      // new window sub menu
-      newWindow = new JMenuItem("New Window");
-      fileMenu.add(newWindow);
-      newWindow.addActionListener(this);
-      newWindow.addActionListener(new ActionListener()
-      {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-          new ComplexCalc();
         }
       });
 
