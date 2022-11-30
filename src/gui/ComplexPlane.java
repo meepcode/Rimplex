@@ -32,7 +32,7 @@ public class ComplexPlane extends JFrame
    */
   public void createUI()
   {
-    setDefaultCloseOperation(ComplexPlane.DISPOSE_ON_CLOSE);
+    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
     setTitle("Complex Panel");
     setSize(700, 700);
     setVisible(false);
