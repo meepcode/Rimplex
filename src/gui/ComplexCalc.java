@@ -420,7 +420,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     String printTitle = "Print";
     JMenuBar menuBar;
     JMenu file, mode, help;
-    JMenuItem print, exit, about, newWindow;
+    JMenuItem print, exit, about, newWindow, helpPage;
     //MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
 
     public JMenuBar createMenuBar()
@@ -490,10 +490,22 @@ public class ComplexCalc extends JFrame implements ActionListener
       help = new JMenu("Help");
       menuBar.add(help);
 
-      about = new JMenuItem("Help page");
+      about = new JMenuItem("About");
       help.add(about);
       about.addActionListener(this);
       about.addActionListener(new ActionListener()
+      {
+        public void actionPerformed(ActionEvent e)
+        {
+          JOptionPane.showMessageDialog(null,
+              "This calculator performs operations on the given complex number operands. " + "A history of results from previous calculations are stored in the history " + "panel.\nClicking on an expression in the History " + "Panel copies that expression to the clipboard.");
+        }
+      });
+
+      helpPage = new JMenuItem("Help page");
+      help.add(helpPage);
+      helpPage.addActionListener(this);
+      helpPage.addActionListener(new ActionListener()
       {
         public void actionPerformed(final ActionEvent e)
         {
