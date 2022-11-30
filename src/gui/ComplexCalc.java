@@ -5,8 +5,6 @@ import calculation.ComplexNumber;
 import parse.Evaluation;
 import parse.ExpressionEvaluationException;
 
-// import javax.print.attribute.HashPrintRequestAttributeSet;
-// import javax.print.attribute.PrintRequestAttributeSet; 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
@@ -15,13 +13,10 @@ import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
-import java.awt.BorderLayout;
-import java.awt.Font;
-//import java.awt.Graphics;
-//import java.awt.Graphics2D;
-import java.awt.GridLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+<<<<<<< HEAD
 import java.awt.print.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -32,6 +27,9 @@ import java.awt.print.PrinterJob;
 
 import static java.awt.print.Printable.NO_SUCH_PAGE;
 import static java.awt.print.Printable.PAGE_EXISTS;
+=======
+import java.io.File;
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
 /**
  * Calculator GUI.
@@ -56,18 +54,18 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final JButton[] numberButtons = new JButton[10];
   private final JButton[] functionButtons = new JButton[20];
   private final JButton addButton, subButton, mulButton, divButton;
-  private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton,
-      leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton, realPart,
-      conjugate, imaginaryPart;
+  private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton, leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton, realPart, conjugate, imaginaryPart;
   private final JPanel panel;
   private final HistoryPanel his;
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
+  private final String CALCULATOR = "Calculator";
   private boolean isPolarActive = false;
   private String pastResult = "";
+  private ComplexPlane complexPlane = new ComplexPlane();
 
   ComplexCalc()
   {
-    frame = new JFrame("Calculator");
+    frame = new JFrame(CALCULATOR);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setSize(420, 480);
     frame.setLayout(new BorderLayout());
@@ -211,7 +209,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   }
 
   /**
-   * setting boolean click
+   * Sets boolean click.
    */
   public static void setClick()
   {
@@ -424,14 +422,23 @@ public class ComplexCalc extends JFrame implements ActionListener
   // Menu Bar Code
   class MenuBar implements ActionListener
   {
+<<<<<<< HEAD
     String aboutMessage = "This calculator performs operations on the given complex number operands. "
         + "A history of results from previosu calculations are stored in the history " + "panel.";
+=======
+    String aboutMessage = "This calculator performs operations on the given complex number operands. " + "A history of results from previosu calculations are stored in the history " + "panel.";
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
     String aboutTitle = "About";
     String printTitle = "Print";
     JMenuBar menuBar;
     JMenu file, mode, help;
+<<<<<<< HEAD
     JMenuItem print, exit, about;
     // MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
+=======
+    JMenuItem print, exit, about, newWindow, helpPage;
+    //MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
     public JMenuBar createMenuBar()
     {
@@ -448,9 +455,21 @@ public class ComplexCalc extends JFrame implements ActionListener
       exit.addActionListener(this);
       exit.addActionListener(new ActionListener()
       {
-        public void actionPerformed(ActionEvent e)
+        public void actionPerformed(final ActionEvent e)
         {
           System.exit(0);
+        }
+      });
+
+      newWindow = new JMenuItem("New Window");
+      file.add(newWindow);
+      newWindow.addActionListener(this);
+      newWindow.addActionListener(new ActionListener()
+      {
+        @Override
+        public void actionPerformed(ActionEvent e)
+        {
+          new ComplexCalc();
         }
       });
 
@@ -464,7 +483,11 @@ public class ComplexCalc extends JFrame implements ActionListener
       rect.addActionListener(new ActionListener()
       {
         @Override
+<<<<<<< HEAD
         public void actionPerformed(ActionEvent e)
+=======
+        public void actionPerformed(final ActionEvent e)
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         {
 
           isPolarActive = false;
@@ -476,7 +499,11 @@ public class ComplexCalc extends JFrame implements ActionListener
       polar.addActionListener(new ActionListener()
       {
         @Override
+<<<<<<< HEAD
         public void actionPerformed(ActionEvent e)
+=======
+        public void actionPerformed(final ActionEvent e)
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         {
 
           isPolarActive = true;
@@ -495,20 +522,61 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         public void actionPerformed(ActionEvent e)
         {
+<<<<<<< HEAD
           JOptionPane.showMessageDialog(null, aboutMessage, "About",
               JOptionPane.INFORMATION_MESSAGE);
+=======
+          JOptionPane.showMessageDialog(null,
+              "This calculator performs operations on the given complex number operands. " + "A history of results from previous calculations are stored in the history " + "panel.\nClicking on an expression in the History " + "Panel copies that expression to the clipboard.");
+        }
+      });
+
+      helpPage = new JMenuItem("Help page");
+      help.add(helpPage);
+      helpPage.addActionListener(this);
+      helpPage.addActionListener(new ActionListener()
+      {
+        public void actionPerformed(final ActionEvent e)
+        {
+          try
+          {
+            File file = new java.io.File("src/gui/helpPage.html").getAbsoluteFile();
+            Desktop.getDesktop().open(file);
+          }
+          catch (Exception e1)
+          {
+            e1.printStackTrace();
+          }
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         }
       });
 
       JMenu langs = new JMenu("Language");
       menuBar.add(langs);
 
+      
+      JButton plot = new JButton("Graph");
+      menuBar.add(plot);
+      plot.addActionListener(new ActionListener()
+      {
+        @Override
+        public void actionPerformed(final ActionEvent e)
+        {
+          // fill
+          complexPlane.setVisible(true);
+        }
+      });
+
       JButton hist = new JButton("History");
       menuBar.add(hist);
       hist.addActionListener(new ActionListener()
       {
         @Override
+<<<<<<< HEAD
         public void actionPerformed(ActionEvent e)
+=======
+        public void actionPerformed(final ActionEvent e)
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         {
           his.createAndShowGUI();
           frame.pack();
@@ -522,12 +590,14 @@ public class ComplexCalc extends JFrame implements ActionListener
       span.addActionListener(new ActionListener()
       {
         @Override
+<<<<<<< HEAD
         public void actionPerformed(ActionEvent e)
+=======
+        public void actionPerformed(final ActionEvent e)
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         {
           printTitle = "Impresión";
-          aboutMessage = "Esta calculadora realiza operaciones en los operandos de números "
-              + "complejos dados. Un historial de resultados de cálculos anteriores se almacena "
-              + "en el panel de historial.";
+          aboutMessage = "Esta calculadora realiza operaciones en los operandos de números " + "complejos dados. Un historial de resultados de cálculos anteriores se almacena " + "en el panel de historial.";
           aboutTitle = "Sobre";
           hist.setText("Historia");
           // modeWindow.setTitle("Modo");
@@ -537,7 +607,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           help.setText("Ayuda");
           about.setText("Sobre");
           mode.setText("Modo");
-          print.setText("Impresión");
+          //print.setText("Impresión");
           exit.setText("Salida");
           rect.setText("Rectangular");
           polar.setText("Polar");
@@ -551,12 +621,14 @@ public class ComplexCalc extends JFrame implements ActionListener
       german.addActionListener(new ActionListener()
       {
         @Override
+<<<<<<< HEAD
         public void actionPerformed(ActionEvent e)
+=======
+        public void actionPerformed(final ActionEvent e)
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         {
           printTitle = "Drucken";
-          aboutMessage = "Dieser Rechner führt Operationen an den gegebenen Operanden für "
-              + "komplexe Zahlen aus. Ein Verlauf der Ergebnisse früherer Berechnungen wird im "
-              + "Verlaufsfeld gespeichert.";
+          aboutMessage = "Dieser Rechner führt Operationen an den gegebenen Operanden für " + "komplexe Zahlen aus. Ein Verlauf der Ergebnisse früherer Berechnungen wird im " + "Verlaufsfeld gespeichert.";
           aboutTitle = "Um";
           hist.setText("Geschichte");
           // modeWindow.setTitle("Modus");
@@ -566,7 +638,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           help.setText("Hilfe");
           about.setText("Um");
           mode.setText("Modus");
-          print.setText("Drucken");
+          //    print.setText("Drucken");
           exit.setText("Ausfahrt");
           rect.setText("Rechteckig");
           polar.setText("Polar");
@@ -580,12 +652,14 @@ public class ComplexCalc extends JFrame implements ActionListener
       french.addActionListener(new ActionListener()
       {
         @Override
+<<<<<<< HEAD
         public void actionPerformed(ActionEvent e)
+=======
+        public void actionPerformed(final ActionEvent e)
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         {
           printTitle = "Imprimer";
-          aboutMessage = "Cette calculatrice effectue des opérations sur les opérandes de nombres"
-              + " complexes donnés. Un historique des résultats des calculs précédents est stocké"
-              + " dans le panneau d'historique.";
+          aboutMessage = "Cette calculatrice effectue des opérations sur les opérandes de nombres" + " complexes donnés. Un historique des résultats des calculs précédents est stocké" + " dans le panneau d'historique.";
           aboutTitle = "Sur";
           hist.setText("Histoire");
           // modeWindow.setTitle("Mode");
@@ -595,7 +669,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           help.setText("Aider");
           about.setText("Sur");
           mode.setText("Mode");
-          print.setText("Imprimer");
+          //   print.setText("Imprimer");
           exit.setText("Sortir");
           rect.setText("Rectangulaire");
           polar.setText("Polaire");
@@ -609,22 +683,30 @@ public class ComplexCalc extends JFrame implements ActionListener
       english.addActionListener(new ActionListener()
       {
         @Override
+<<<<<<< HEAD
         public void actionPerformed(ActionEvent e)
+=======
+        public void actionPerformed(final ActionEvent e)
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         {
           printTitle = "Print";
+<<<<<<< HEAD
           aboutMessage = "This calculator performs operations on the given complex number operands. "
               + "A history of results from previosu calculations are stored in the history "
               + "panel.";
+=======
+          aboutMessage = "This calculator performs operations on the given complex number operands. " + "A history of results from previosu calculations are stored in the history " + "panel.";
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
           aboutTitle = "About";
           hist.setText("History");
           // modeWindow.setTitle("Mode");
-          frame.setTitle("Calculator");
+          frame.setTitle(CALCULATOR);
           langs.setText("Language");
           file.setText("File");
           help.setText("Help");
           about.setText("About");
           mode.setText("Mode");
-          print.setText("Print");
+          //  print.setText("Print");
           exit.setText("Exit");
           rect.setText("Polar");
           polar.setText("Rectangular");
@@ -634,7 +716,11 @@ public class ComplexCalc extends JFrame implements ActionListener
     }
 
     @Override
+<<<<<<< HEAD
     public void actionPerformed(ActionEvent e)
+=======
+    public void actionPerformed(final ActionEvent e)
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
     {
       // TODO Auto-generated method stub
 
