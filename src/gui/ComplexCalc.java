@@ -53,6 +53,8 @@ public class ComplexCalc extends JFrame implements ActionListener
   ComplexCalc()
   {
     frame = new JFrame(CALCULATOR);
+    Image icon = Toolkit.getDefaultToolkit().getImage("src/logo.png");
+    frame.setIconImage(icon);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     frame.setSize(420, 480);
     frame.setLayout(new BorderLayout());
@@ -417,7 +419,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     String aboutTitle = "About";
     String printTitle = "Print";
     JMenuBar menuBar;
-    JMenu file, mode, help;
+    JMenu file, pref, mode, help;
     JMenuItem print, exit, about, newWindow, helpPage;
     //MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
 
@@ -451,6 +453,27 @@ public class ComplexCalc extends JFrame implements ActionListener
         public void actionPerformed(ActionEvent e)
         {
           new ComplexCalc();
+        }
+      });
+      
+      // preferences menu along menubar
+      pref = new JMenu("Preferences");
+      menuBar.add(pref);
+      pref.addActionListener(this);
+      pref.addActionListener(new ActionListener()
+      {
+        @Override
+        public void actionPerformed(final ActionEvent e)
+        {
+
+          MenuItemWindow prefWindow = new MenuItemWindow("Preferences", 300, 300);
+          JButton eng = new JButton("English");
+          prefWindow.add(eng);
+          JButton french = new JButton("Français");
+          prefWindow.add(french);
+          JButton german = new JButton("Deutsch");
+          prefWindow.add(german);
+          JButton spanish = new JButton("Español");
         }
       });
 
