@@ -57,7 +57,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   {
     frame = new JFrame(calculatorStr);
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-    frame.setSize(420, 480);
+    frame.setSize(380, 480);
     frame.setLayout(new BorderLayout());
     frame.setResizable(false);
 
