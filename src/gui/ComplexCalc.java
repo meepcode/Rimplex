@@ -54,8 +54,6 @@ public class ComplexCalc extends JFrame implements ActionListener
   ComplexCalc()
   {
     frame = new JFrame(calculatorStr);
-    Image icon = Toolkit.getDefaultToolkit().getImage("src/logo.png");
-    frame.setIconImage(icon);
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frame.setSize(650, 480);
     frame.setLayout(new BorderLayout());
@@ -421,7 +419,6 @@ public class ComplexCalc extends JFrame implements ActionListener
       // modeWindow.setVisible(false);
 
       menuBar = new JMenuBar();
-
 
       // file menu along menubar
       fileMenu = new JMenu("File");
