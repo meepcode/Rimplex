@@ -42,6 +42,8 @@ import static java.awt.print.Printable.PAGE_EXISTS;
 
 public class ComplexCalc extends JFrame implements ActionListener
 {
+  protected static String result = "";
+  protected static boolean isClicked = false;
   private static final long serialVersionUID = 1L;
   private static final String SERIF = "Serif";
   private static final String MINUS = "-";
@@ -49,8 +51,6 @@ public class ComplexCalc extends JFrame implements ActionListener
   private static final String ASTERISK = "*";
   private static final String SLASH = "/";
   private static final String DOT = ".";
-  protected static String result = "";
-  protected static boolean isClicked = false;
   private final JFrame frame;
   private final JTextField textfield;
   private final JButton[] numberButtons = new JButton[10];

@@ -191,7 +191,7 @@ public class HistoryPanel extends JFrame
    * @param frames
    * @param interval
    */
-  private void animate(JComponent component, Point newPoint, int frames, int interval)
+  private void animate(JComponent component, final Point newPoint, int frames, int interval)
   {
     Rectangle compBounds = component.getBounds();
 
@@ -202,7 +202,7 @@ public class HistoryPanel extends JFrame
     {
       int currentFrame = 0;
 
-      public void actionPerformed(ActionEvent e)
+      public void actionPerformed(final ActionEvent e)
       {
         component.setBounds(oldPoint.x + (animFrame.x * currentFrame),
             oldPoint.y + (animFrame.y * currentFrame), compBounds.width, compBounds.height);

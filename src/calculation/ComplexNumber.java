@@ -22,18 +22,18 @@ public class ComplexNumber
    * Constructor from floating point numbers.
    *
    * @param realPart
-   *     the real part of the complex number
+   *          the real part of the complex number
    * @param imaginaryPart
-   *     the imaginary part of the complex number
+   *          the imaginary part of the complex number
    */
   public ComplexNumber(final Double realPart, final Double imaginaryPart)
   {
     this.realPart = realPart;
     if (imaginaryPart == -0.0)
       this.imaginaryPart = 0.0;
-    else 
+    else
       this.imaginaryPart = imaginaryPart;
-    }
+  }
 
   /**
    * Gets the real number part of a complex number.
@@ -74,8 +74,8 @@ public class ComplexNumber
   {
     if (imaginaryPart < 0)
     {
-      return String.format(FORMAT_TEXT, realPart) + "-" + String.format(FORMAT_TEXT,
-          Math.abs(imaginaryPart)) + I;
+      return String.format(FORMAT_TEXT, realPart) + "-"
+          + String.format(FORMAT_TEXT, Math.abs(imaginaryPart)) + I;
     }
     else
     {
@@ -88,10 +88,11 @@ public class ComplexNumber
    * Compares two complex numbers.
    *
    * @param other
-   *     complex number to compare.
+   *          complex number to compare.
    * @return true if same complex numbers.
    */
-  @Override public boolean equals(final Object other)
+  @Override
+  public boolean equals(final Object other)
   {
     if (other instanceof ComplexNumber that)
     {
@@ -106,7 +107,8 @@ public class ComplexNumber
    *
    * @return hashcode.
    */
-  @Override public int hashCode()
+  @Override
+  public int hashCode()
   {
     return (int) (realPart + 31 * imaginaryPart);
   }
