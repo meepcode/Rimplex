@@ -5,14 +5,7 @@ import calculation.ComplexNumber;
 import parse.Evaluation;
 import parse.ExpressionEvaluationException;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
+import javax.swing.*;
 import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.awt.Font;
@@ -516,7 +509,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             isPolarActive = true;
           }
         });
-        
+
         JPanel langs = new JPanel();
         langs.setLayout(new GridLayout(4, 1, 10, 10));
         prefWindow.add(langs, BorderLayout.EAST);
@@ -655,7 +648,14 @@ public class ComplexCalc extends JFrame implements ActionListener
       menuBar.add(plot);
       
       menuBar.add(hist);
-      
+
+
+      ImageIcon icon = new ImageIcon(getClass().getResource("logo.png"));
+      JLabel label = new JLabel(icon);
+      menuBar.add(label);
+
+
+
       return menuBar;
     }
 
