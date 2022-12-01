@@ -6,12 +6,7 @@ import parse.Evaluation;
 import parse.ExpressionEvaluationException;
 
 import javax.swing.*;
-import java.awt.BorderLayout;
-import java.awt.Desktop;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.Image;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -27,8 +22,6 @@ import java.io.Serial;
 
 public class ComplexCalc extends JFrame implements ActionListener
 {
-  protected static String result = "";
-  protected static boolean isClicked = false;
   @Serial
   private static final long serialVersionUID = 1L;
   private static final String SERIF = "Serif";
@@ -37,14 +30,14 @@ public class ComplexCalc extends JFrame implements ActionListener
   private static final String ASTERISK = "*";
   private static final String SLASH = "/";
   private static final String DOT = ".";
+  protected static String result = "";
+  protected static boolean isClicked = false;
   private final JFrame frame;
   private final JTextField textfield;
   private final JButton[] numberButtons = new JButton[10];
   private final JButton[] functionButtons = new JButton[20];
   private final JButton addButton, subButton, mulButton, divButton;
-  private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton,
-      leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton, realPart,
-      conjugate, imaginaryPart;
+  private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton, leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton, realPart, conjugate, imaginaryPart;
   private final JPanel panel;
   private final HistoryPanel his;
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
@@ -52,6 +45,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final ComplexPlane complexPlane = new ComplexPlane();
   private boolean isPolarActive = false;
   private String pastResult = "";
+  private Color colorScheme = Color.CYAN;
 
   ComplexCalc()
   {
@@ -74,6 +68,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     textfield = new JTextField();
     textfield.setBounds(50, 25, 300, 50);
     textfield.setFont(myFont);
+
     textfield.setEditable(true);
 
     resetButton = new JButton("R");
@@ -191,7 +186,7 @@ public class ComplexCalc extends JFrame implements ActionListener
    * Main method.
    *
    * @param args
-   *          cmd line args
+   *     cmd line args
    */
   public static void main(final String[] args)
   {
@@ -408,25 +403,25 @@ public class ComplexCalc extends JFrame implements ActionListener
   // Menu Bar Code
   class MenuBar implements ActionListener
   {
-    String aboutMessage = "This calculator performs operations on the given complex number operands. "
-        + "A history of results from previosu calculations are stored in the history " + "panel.";
+    String aboutMessage = "This calculator performs operations on the given complex number operands. " + "A history of results from previosu calculations are stored in the history " + "panel.";
     String aboutTitle = "About";
     String printTitle = "Print";
     JMenuBar menuBar;
     JMenu fileMenu, help;
     JMenuItem pref, print, exit, about, newWindow, helpPage;
-    
+
     public JMenuBar createMenuBar()
     {
 
-      menuBar = new JMenuBar(); 
-      
+      menuBar = new JMenuBar();
+
+
       JButton plot = new JButton("Graph");
       plot.addActionListener(e -> {
         // fill
         complexPlane.setVisible(true);
       });
-      
+
       JButton hist = new JButton("History");
       hist.addActionListener(e -> {
         his.createAndShowGUI();
@@ -440,10 +435,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       help.add(about);
       about.addActionListener(this);
       about.addActionListener(e -> JOptionPane.showMessageDialog(null,
-          "This calculator performs operations on the given complex number operands. "
-              + "A history of results from previous calculations are stored in the history "
-              + "panel.\nClicking on an expression in the History "
-              + "Panel copies that expression to the clipboard."));
+          "This calculator performs operations on the given complex number operands. " + "A history of results from previous calculations are stored in the history " + "panel.\nClicking on an expression in the History " + "Panel copies that expression to the clipboard."));
 
       helpPage = new JMenuItem("Help page");
       helpPage.addActionListener(this);
@@ -462,7 +454,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       // file menu along menubar
       fileMenu = new JMenu("File");
       menuBar.add(fileMenu);
-      
+
       // new window sub menu
       newWindow = new JMenuItem("New Window");
       newWindow.addActionListener(this);
@@ -474,18 +466,18 @@ public class ComplexCalc extends JFrame implements ActionListener
           new ComplexCalc();
         }
       });
-      
+
       // preference sub menu
       pref = new JMenuItem("Preferences");
       fileMenu.add(pref);
       pref.addActionListener(this);
       pref.addActionListener(e -> {
         MenuItemWindow prefWindow = new MenuItemWindow("Preferences", 300, 400);
-        
+
         JPanel modes = new JPanel();
         modes.setLayout(new GridLayout(2, 1, 10, 10));
         prefWindow.add(modes, BorderLayout.WEST);
-        
+
         JButton rect = new JButton("rectangular");
         modes.add(rect);
         rect.addActionListener(this);
@@ -497,7 +489,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             isPolarActive = false;
           }
         });
-        
+
         JButton polar = new JButton("polar");
         modes.add(polar);
         polar.addActionListener(this);
@@ -521,9 +513,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           public void actionPerformed(final ActionEvent e)
           {
             printTitle = "Print";
-            aboutMessage = "This calculator performs operations on the given complex number operands. "
-                + "A history of results from previosu calculations are stored in the history "
-                + "panel.";
+            aboutMessage = "This calculator performs operations on the given complex number operands. " + "A history of results from previosu calculations are stored in the history " + "panel.";
             aboutTitle = "About";
             hist.setText("History");
             frame.setTitle(calculatorStr);
@@ -539,7 +529,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             newWindow.setText("New Window");
           }
         });
-        
+
         JButton spanish = new JButton("Español");
         langs.add(spanish);
         spanish.addActionListener(this);
@@ -549,26 +539,24 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(final ActionEvent e)
           {
-          printTitle = "Impresión";
-          aboutMessage = "Esta calculadora realiza operaciones en los operandos de números "
-              + "complejos dados. Un historial de resultados de cálculos anteriores se almacena "
-              + "en el panel de historial.";
-          aboutTitle = "Sobre";
-          hist.setText("Historia");
-          frame.setTitle("Calculadora");
-          fileMenu.setText("Expediente");
-          help.setText("Ayuda");
-          about.setText("Sobre");
-          // print.setText("Impresión");
-          exit.setText("Salida");
-          pref.setText("Preferencias");
-          prefWindow.setTitle("Preferencias");
-          plot.setText("Conspirar");
-          helpPage.setText("Página de ayuda");
-          newWindow.setText("Nueva ventana");
+            printTitle = "Impresión";
+            aboutMessage = "Esta calculadora realiza operaciones en los operandos de números " + "complejos dados. Un historial de resultados de cálculos anteriores se almacena " + "en el panel de historial.";
+            aboutTitle = "Sobre";
+            hist.setText("Historia");
+            frame.setTitle("Calculadora");
+            fileMenu.setText("Expediente");
+            help.setText("Ayuda");
+            about.setText("Sobre");
+            // print.setText("Impresión");
+            exit.setText("Salida");
+            pref.setText("Preferencias");
+            prefWindow.setTitle("Preferencias");
+            plot.setText("Conspirar");
+            helpPage.setText("Página de ayuda");
+            newWindow.setText("Nueva ventana");
           }
         });
-        
+
         JButton german = new JButton("Deutsch");
         langs.add(german);
         german.addActionListener(this);
@@ -579,9 +567,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           public void actionPerformed(final ActionEvent e)
           {
             printTitle = "Drucken";
-            aboutMessage = "Dieser Rechner führt Operationen an den gegebenen Operanden für "
-                + "komplexe Zahlen aus. Ein Verlauf der Ergebnisse früherer Berechnungen wird im "
-                + "Verlaufsfeld gespeichert.";
+            aboutMessage = "Dieser Rechner führt Operationen an den gegebenen Operanden für " + "komplexe Zahlen aus. Ein Verlauf der Ergebnisse früherer Berechnungen wird im " + "Verlaufsfeld gespeichert.";
             aboutTitle = "Um";
             hist.setText("Geschichte");
             frame.setTitle("Taschenrechner");
@@ -597,7 +583,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             newWindow.setText("Neues Fenster");
           }
         });
-        
+
         JButton french = new JButton("Français");
         langs.add(french);
         french.addActionListener(this);
@@ -608,9 +594,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           public void actionPerformed(final ActionEvent e)
           {
             printTitle = "Imprimer";
-            aboutMessage = "Cette calculatrice effectue des opérations sur les opérandes de nombres"
-                + " complexes donnés. Un historique des résultats des calculs précédents est stocké"
-                + " dans le panneau d'historique.";
+            aboutMessage = "Cette calculatrice effectue des opérations sur les opérandes de nombres" + " complexes donnés. Un historique des résultats des calculs précédents est stocké" + " dans le panneau d'historique.";
             aboutTitle = "Sur";
             hist.setText("Histoire");
             frame.setTitle("Calculatrice");
@@ -628,7 +612,6 @@ public class ComplexCalc extends JFrame implements ActionListener
         });
       });
 
-
       // exit sub menu
       exit = new JMenuItem("Exit");
       fileMenu.add(exit);
@@ -641,20 +624,17 @@ public class ComplexCalc extends JFrame implements ActionListener
         }
       });
 
-      menuBar.add(help); 
-      
-      help.add(helpPage);
-      
-      menuBar.add(plot);
-      
-      menuBar.add(hist);
+      menuBar.add(help);
 
+      help.add(helpPage);
+
+      menuBar.add(plot);
+
+      menuBar.add(hist);
 
       ImageIcon icon = new ImageIcon(getClass().getResource("logo.png"));
       JLabel label = new JLabel(icon);
       menuBar.add(label);
-
-
 
       return menuBar;
     }
