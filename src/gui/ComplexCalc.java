@@ -505,13 +505,24 @@ public class ComplexCalc extends JFrame implements ActionListener
         JPanel langs = new JPanel();
         langs.setLayout(new GridLayout(4, 1, 10, 10));
         prefWindow.add(langs, BorderLayout.EAST);
+        
         JButton english = new JButton("English");
+        JButton spanish = new JButton("Español");
+        JButton german = new JButton("Deutsch");
+        JButton french = new JButton("Français");
+        
         langs.add(english);
+        english .addActionListener(this);
+        
         english.addActionListener(new ActionListener()
         {
           @Override
           public void actionPerformed(final ActionEvent e)
           {
+            english.setBackground(Color.GRAY);
+            french.setBackground(null);
+            german.setBackground(null);
+            spanish.setBackground(null);
             printTitle = "Print";
             aboutMessage = "This calculator performs operations on the given complex number operands. " + "A history of results from previosu calculations are stored in the history " + "panel.";
             aboutTitle = "About";
@@ -530,7 +541,6 @@ public class ComplexCalc extends JFrame implements ActionListener
           }
         });
 
-        JButton spanish = new JButton("Español");
         langs.add(spanish);
         spanish.addActionListener(this);
 
@@ -539,6 +549,10 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(final ActionEvent e)
           {
+            spanish.setBackground(Color.GRAY);
+            english.setBackground(null);
+            german.setBackground(null);
+            spanish.setBackground(null);
             printTitle = "Impresión";
             aboutMessage = "Esta calculadora realiza operaciones en los operandos de números " + "complejos dados. Un historial de resultados de cálculos anteriores se almacena " + "en el panel de historial.";
             aboutTitle = "Sobre";
@@ -557,7 +571,6 @@ public class ComplexCalc extends JFrame implements ActionListener
           }
         });
 
-        JButton german = new JButton("Deutsch");
         langs.add(german);
         german.addActionListener(this);
 
@@ -566,6 +579,10 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(final ActionEvent e)
           {
+            german.setBackground(Color.GRAY);
+            english.setBackground(null);
+            french.setBackground(null);
+            spanish.setBackground(null);
             printTitle = "Drucken";
             aboutMessage = "Dieser Rechner führt Operationen an den gegebenen Operanden für " + "komplexe Zahlen aus. Ein Verlauf der Ergebnisse früherer Berechnungen wird im " + "Verlaufsfeld gespeichert.";
             aboutTitle = "Um";
@@ -584,7 +601,6 @@ public class ComplexCalc extends JFrame implements ActionListener
           }
         });
 
-        JButton french = new JButton("Français");
         langs.add(french);
         french.addActionListener(this);
 
@@ -593,6 +609,10 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(final ActionEvent e)
           {
+            french.setBackground(Color.GRAY);
+            english.setBackground(null);
+            german.setBackground(null);
+            spanish.setBackground(null);
             printTitle = "Imprimer";
             aboutMessage = "Cette calculatrice effectue des opérations sur les opérandes de nombres" + " complexes donnés. Un historique des résultats des calculs précédents est stocké" + " dans le panneau d'historique.";
             aboutTitle = "Sur";
