@@ -552,7 +552,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             spanish.setBackground(Color.GRAY);
             english.setBackground(null);
             german.setBackground(null);
-            spanish.setBackground(null);
+            french.setBackground(null);
             printTitle = "Impresión";
             aboutMessage = "Esta calculadora realiza operaciones en los operandos de números " + "complejos dados. Un historial de resultados de cálculos anteriores se almacena " + "en el panel de historial.";
             aboutTitle = "Sobre";
