@@ -1,3 +1,4 @@
+
 package gui;
 
 import calculation.Calculate;
@@ -9,23 +10,10 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
-import java.awt.print.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.awt.print.PageFormat;
-import java.awt.print.Printable;
-import java.awt.print.PrinterException;
-import java.awt.print.PrinterJob;
-=======
 import java.io.File;
 import java.io.IOException;
 import java.io.Serial;
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
-import static java.awt.print.Printable.NO_SUCH_PAGE;
-import static java.awt.print.Printable.PAGE_EXISTS;
-//import java.io.File;
 /**
  * Calculator GUI.
  *
@@ -35,12 +23,7 @@ import static java.awt.print.Printable.PAGE_EXISTS;
 
 public class ComplexCalc extends JFrame implements ActionListener
 {
-<<<<<<< HEAD
-  protected static String result = "";
-  protected static boolean isClicked = false;
-=======
   @Serial
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
   private static final long serialVersionUID = 1L;
   private static final String SERIF = "Serif";
   private static final String MINUS = "-";
@@ -48,12 +31,16 @@ public class ComplexCalc extends JFrame implements ActionListener
   private static final String ASTERISK = "*";
   private static final String SLASH = "/";
   private static final String DOT = ".";
+  protected static String result = "";
+  protected static boolean isClicked = false;
   private final JFrame frame;
   private final JTextField textfield;
   private final JButton[] numberButtons = new JButton[10];
   private final JButton[] functionButtons = new JButton[20];
   private final JButton addButton, subButton, mulButton, divButton;
-  private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton, leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton, realPart, conjugate, imaginaryPart;
+  private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton,
+      leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton, realPart,
+      conjugate, imaginaryPart;
   private final JPanel panel;
   private final HistoryPanel his;
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
@@ -63,7 +50,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   private String pastResult = "";
   private Color colorScheme = Color.CYAN;
   private boolean thousandsSeparator = false;
-  private boolean trailingZeroes = false; 
+  private boolean trailingZeroes = false;
   private int numDecimals = 0;
 
   ComplexCalc()
@@ -414,19 +401,9 @@ public class ComplexCalc extends JFrame implements ActionListener
 
   /*
    * public int print(Graphics g, PageFormat pf, int page) throws PrinterException { if (page > 0) {
-<<<<<<< HEAD
-   * return NO_SUCH_PAGE; }
-   * 
-   * Graphics2D g2d = (Graphics2D) g; g2d.translate(pf.getImageableX(), pf.getImageableY());
-   * 
-   * // Print the entire visible contents of a // java.awt.Frame. frame.printAll(g);
-   * 
-   * return PAGE_EXISTS; }
-=======
    * return NO_SUCH_PAGE; } Graphics2D g2d = (Graphics2D) g; g2d.translate(pf.getImageableX(),
    * pf.getImageableY()); // Print the entire visible contents of a // java.awt.Frame.
    * frame.printAll(g); return PAGE_EXISTS; }
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    */
 
   // Menu Bar Code
@@ -437,20 +414,13 @@ public class ComplexCalc extends JFrame implements ActionListener
     String aboutTitle = "About";
     String printTitle = "Print";
     JMenuBar menuBar;
-<<<<<<< HEAD
-    JMenu file, mode, help;
-    JMenuItem print, exit, about;
-    // MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
-=======
     JMenu fileMenu, help;
     JMenuItem pref, print, exit, about, newWindow, helpPage;
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
     public JMenuBar createMenuBar()
     {
 
       menuBar = new JMenuBar();
-
 
       JButton plot = new JButton("Graph");
       plot.addActionListener(e -> {
@@ -471,7 +441,10 @@ public class ComplexCalc extends JFrame implements ActionListener
       help.add(about);
       about.addActionListener(this);
       about.addActionListener(e -> JOptionPane.showMessageDialog(null,
-          "This calculator performs operations on the given complex number operands. " + "A history of results from previous calculations are stored in the history " + "panel.\nClicking on an expression in the History " + "Panel copies that expression to the clipboard."));
+          "This calculator performs operations on the given complex number operands. "
+              + "A history of results from previous calculations are stored in the history "
+              + "panel.\nClicking on an expression in the History "
+              + "Panel copies that expression to the clipboard."));
 
       helpPage = new JMenuItem("Help page");
       helpPage.addActionListener(this);
@@ -511,15 +484,6 @@ public class ComplexCalc extends JFrame implements ActionListener
       pref.addActionListener(e -> {
         MenuItemWindow prefWindow = new MenuItemWindow("Preferences", 300, 400);
 
-<<<<<<< HEAD
-      JMenuItem rect = new JMenuItem("Rectangular");
-      mode.add(rect);
-      rect.addActionListener(this);
-      rect.addActionListener(new ActionListener()
-      {
-        @Override
-        public void actionPerformed(ActionEvent e)
-=======
         JPanel modes = new JPanel();
         modes.setLayout(new GridLayout(2, 1, 10, 10));
         prefWindow.add(modes, BorderLayout.WEST);
@@ -528,7 +492,6 @@ public class ComplexCalc extends JFrame implements ActionListener
         modes.add(rect);
         rect.addActionListener(this);
         rect.addActionListener(new ActionListener()
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         {
           @Override
           public void actionPerformed(ActionEvent e)
@@ -548,7 +511,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             isPolarActive = true;
           }
         });
-        
+
         JButton thousands = new JButton("Thousands Separator");
         modes.add(thousands);
         thousands.addActionListener(this);
@@ -560,7 +523,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             thousandsSeparator = true;
           }
         });
-        
+
         JButton zeroes = new JButton("Trailing zeroes");
         modes.add(zeroes);
         zeroes.addActionListener(this);
@@ -572,23 +535,22 @@ public class ComplexCalc extends JFrame implements ActionListener
             trailingZeroes = true;
           }
         });
-        
+
         JTextArea numDecimals = new JTextArea("0");
         modes.add(numDecimals);
-        
 
         JPanel langs = new JPanel();
         langs.setLayout(new GridLayout(4, 1, 10, 10));
         prefWindow.add(langs, BorderLayout.EAST);
-        
+
         JButton english = new JButton("English");
-        JButton spanish = new JButton("EspaÃ±ol");
+        JButton spanish = new JButton("Español");
         JButton german = new JButton("Deutsch");
-        JButton french = new JButton("FranÃ§ais");
-        
+        JButton french = new JButton("Français");
+
         langs.add(english);
-        english .addActionListener(this);
-        
+        english.addActionListener(this);
+
         english.addActionListener(new ActionListener()
         {
           @Override
@@ -599,7 +561,9 @@ public class ComplexCalc extends JFrame implements ActionListener
             german.setBackground(null);
             spanish.setBackground(null);
             printTitle = "Print";
-            aboutMessage = "This calculator performs operations on the given complex number operands. " + "A history of results from previosu calculations are stored in the history " + "panel.";
+            aboutMessage = "This calculator performs operations on the given complex number operands. "
+                + "A history of results from previosu calculations are stored in the history "
+                + "panel.";
             aboutTitle = "About";
             hist.setText("History");
             frame.setTitle(calculatorStr);
@@ -628,20 +592,22 @@ public class ComplexCalc extends JFrame implements ActionListener
             english.setBackground(null);
             german.setBackground(null);
             french.setBackground(null);
-            printTitle = "ImpresiÃ³n";
-            aboutMessage = "Esta calculadora realiza operaciones en los operandos de nÃºmeros " + "complejos dados. Un historial de resultados de cÃ¡lculos anteriores se almacena " + "en el panel de historial.";
+            printTitle = "Impresión";
+            aboutMessage = "Esta calculadora realiza operaciones en los operandos de números "
+                + "complejos dados. Un historial de resultados de cálculos anteriores se almacena "
+                + "en el panel de historial.";
             aboutTitle = "Sobre";
             hist.setText("Historia");
             frame.setTitle("Calculadora");
             fileMenu.setText("Expediente");
             help.setText("Ayuda");
             about.setText("Sobre");
-            // print.setText("ImpresiÃ³n");
+            // print.setText("Impresión");
             exit.setText("Salida");
             pref.setText("Preferencias");
             prefWindow.setTitle("Preferencias");
             plot.setText("Conspirar");
-            helpPage.setText("PÃ¡gina de ayuda");
+            helpPage.setText("Página de ayuda");
             newWindow.setText("Nueva ventana");
           }
         });
@@ -659,7 +625,9 @@ public class ComplexCalc extends JFrame implements ActionListener
             french.setBackground(null);
             spanish.setBackground(null);
             printTitle = "Drucken";
-            aboutMessage = "Dieser Rechner fÃ¼hrt Operationen an den gegebenen Operanden fÃ¼r " + "komplexe Zahlen aus. Ein Verlauf der Ergebnisse frÃ¼herer Berechnungen wird im " + "Verlaufsfeld gespeichert.";
+            aboutMessage = "Dieser Rechner führt Operationen an den gegebenen Operanden für "
+                + "komplexe Zahlen aus. Ein Verlauf der Ergebnisse früherer Berechnungen wird im "
+                + "Verlaufsfeld gespeichert.";
             aboutTitle = "Um";
             hist.setText("Geschichte");
             frame.setTitle("Taschenrechner");
@@ -689,7 +657,9 @@ public class ComplexCalc extends JFrame implements ActionListener
             german.setBackground(null);
             spanish.setBackground(null);
             printTitle = "Imprimer";
-            aboutMessage = "Cette calculatrice effectue des opÃ©rations sur les opÃ©randes de nombres" + " complexes donnÃ©s. Un historique des rÃ©sultats des calculs prÃ©cÃ©dents est stockÃ©" + " dans le panneau d'historique.";
+            aboutMessage = "Cette calculatrice effectue des opérations sur les opérandes de nombres"
+                + " complexes donnés. Un historique des résultats des calculs précédents est stocké"
+                + " dans le panneau d'historique.";
             aboutTitle = "Sur";
             hist.setText("Histoire");
             frame.setTitle("Calculatrice");
@@ -698,11 +668,11 @@ public class ComplexCalc extends JFrame implements ActionListener
             about.setText("Sur");
             // print.setText("Imprimer");
             exit.setText("Sortir");
-            pref.setText("PrÃ©fÃ©rences");
-            prefWindow.setTitle("PrÃ©fÃ©rences");
+            pref.setText("Préférences");
+            prefWindow.setTitle("Préférences");
             plot.setText("Complot");
-            helpPage.setText("Page dâ€™aide");
-            newWindow.setText("Nouvelle fenÃªtre");
+            helpPage.setText("Page d’aide");
+            newWindow.setText("Nouvelle fenêtre");
           }
         });
       });
@@ -713,12 +683,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       exit.addActionListener(this);
       exit.addActionListener(new ActionListener()
       {
-<<<<<<< HEAD
-        @Override
-        public void actionPerformed(ActionEvent e)
-=======
         public void actionPerformed(final ActionEvent e)
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         {
           System.exit(0);
         }
@@ -726,167 +691,21 @@ public class ComplexCalc extends JFrame implements ActionListener
 
       menuBar.add(help);
 
-<<<<<<< HEAD
-      about = new JMenuItem("About");
-      help.add(about);
-      about.addActionListener(this);
-      about.addActionListener(new ActionListener()
-      {
-        public void actionPerformed(ActionEvent e)
-        {
-          JOptionPane.showMessageDialog(null, aboutMessage, "About",
-              JOptionPane.INFORMATION_MESSAGE);
-          JOptionPane.showMessageDialog(null,
-              "This calculator performs operations on the given complex number operands. " + "A history of results from previous calculations are stored in the history " + "panel.\nClicking on an expression in the History " + "Panel copies that expression to the clipboard.");
-        }
-      });
-
-      helpPage = new JMenuItem("Help page");
-=======
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
       help.add(helpPage);
 
       menuBar.add(plot);
 
       menuBar.add(hist);
-<<<<<<< HEAD
-      hist.addActionListener(new ActionListener()
-      {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-          his.createAndShowGUI();
-          frame.pack();
-        }
-      });
-=======
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
       ImageIcon icon = new ImageIcon(getClass().getResource("logo.png"));
       JLabel label = new JLabel(icon);
       menuBar.add(label);
 
-<<<<<<< HEAD
-      span.addActionListener(new ActionListener()
-      {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-          printTitle = "ImpresiÃ³n";
-          aboutMessage = "Esta calculadora realiza operaciones en los operandos de nÃºmeros " + "complejos dados. Un historial de resultados de cÃ¡lculos anteriores se almacena " + "en el panel de historial.";
-          aboutTitle = "Sobre";
-          hist.setText("Historia");
-          // modeWindow.setTitle("Modo");
-          frame.setTitle("Calculadora");
-          langs.setText("Idioma");
-          file.setText("Expediente");
-          help.setText("Ayuda");
-          about.setText("Sobre");
-          mode.setText("Modo");
-          //print.setText("ImpresiÃ³n");
-          exit.setText("Salida");
-          rect.setText("Rectangular");
-          polar.setText("Polar");
-        }
-      });
-
-      JMenuItem german = new JMenuItem("Deutsch");
-      langs.add(german);
-      german.addActionListener(this);
-
-      german.addActionListener(new ActionListener()
-      {
-        @Override
-<<<<<<< HEAD
-        public void actionPerformed(ActionEvent e)
-=======
-        public void actionPerformed(final ActionEvent e)
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
-        {
-          printTitle = "Drucken";
-          aboutMessage = "Dieser Rechner fÃ¼hrt Operationen an den gegebenen Operanden fÃ¼r " + "komplexe Zahlen aus. Ein Verlauf der Ergebnisse frÃ¼herer Berechnungen wird im " + "Verlaufsfeld gespeichert.";
-          aboutTitle = "Um";
-          hist.setText("Geschichte");
-          // modeWindow.setTitle("Modus");
-          frame.setTitle("Taschenrechner");
-          langs.setText("Sprachen");
-          file.setText("Datei");
-          help.setText("Hilfe");
-          about.setText("Um");
-          mode.setText("Modus");
-          //    print.setText("Drucken");
-          exit.setText("Ausfahrt");
-          rect.setText("Rechteckig");
-          polar.setText("Polar");
-        }
-      });
-
-      JMenuItem french = new JMenuItem("FranÃ§ais");
-      langs.add(french);
-      french.addActionListener(this);
-
-      french.addActionListener(new ActionListener()
-      {
-        @Override
-        public void actionPerformed(ActionEvent e)
-        {
-          printTitle = "Imprimer";
-          aboutMessage = "Cette calculatrice effectue des opÃ©rations sur les opÃ©randes de nombres" + " complexes donnÃ©s. Un historique des rÃ©sultats des calculs prÃ©cÃ©dents est stockÃ©" + " dans le panneau d'historique.";
-          aboutTitle = "Sur";
-          hist.setText("Histoire");
-          // modeWindow.setTitle("Mode");
-          frame.setTitle("Calculatrice");
-          langs.setText("Langue");
-          file.setText("Dossier");
-          help.setText("Aider");
-          about.setText("Sur");
-          mode.setText("Mode");
-          //   print.setText("Imprimer");
-          exit.setText("Sortir");
-          rect.setText("Rectangulaire");
-          polar.setText("Polaire");
-        }
-      });
-
-      JMenuItem english = new JMenuItem("English");
-      langs.add(english);
-      english.addActionListener(this);
-
-      english.addActionListener(new ActionListener()
-      {
-        @Override
-
-        public void actionPerformed(ActionEvent e)
-
-        {
-          printTitle = "Print";
-          aboutMessage = "This calculator performs operations on the given complex number operands. "
-              + "A history of results from previosu calculations are stored in the history "
-              + "panel.";
-
-          aboutTitle = "About";
-          hist.setText("History");
-          // modeWindow.setTitle("Mode");
-          frame.setTitle(CALCULATOR);
-          langs.setText("Language");
-          file.setText("File");
-          help.setText("Help");
-          about.setText("About");
-          mode.setText("Mode");
-          //  print.setText("Print");
-          exit.setText("Exit");
-          rect.setText("Polar");
-          polar.setText("Rectangular");
-        }
-      });
-=======
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
       return menuBar;
     }
 
     @Override
-    public void actionPerformed(ActionEvent e)
-
+    public void actionPerformed(final ActionEvent e)
     {
       // TODO Auto-generated method stub
 
