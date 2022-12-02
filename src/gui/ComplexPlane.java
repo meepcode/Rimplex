@@ -2,20 +2,26 @@ package gui;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.SwingUtilities;
 
 public class ComplexPlane extends JFrame
 {
+  // testing
+//  public static void main(String[] args) {
+//    ComplexPlane plane = new ComplexPlane();
+//    plane.setVisible(true);
+//  }
 
   /**
-   * 
+   * attributes
    */
   private static final long serialVersionUID = 1L;
-  ComplexPanel panel;
+  private ComplexPanel panel;
 
   /**
    * Constructor.
@@ -25,6 +31,7 @@ public class ComplexPlane extends JFrame
     panel = new ComplexPanel();
     add(panel);
     this.createUI();
+    // panel.drawPoint(new Point(3, 4));
   }
 
   /**
@@ -39,10 +46,18 @@ public class ComplexPlane extends JFrame
   }
 }
 
+/**
+ * helper class to paint plane
+ * 
+ * @author jaxco
+ *
+ */
 class ComplexPanel extends JPanel
 {
+  
+  
   /**
-   * 
+   * constant attributes
    */
   private static final long serialVersionUID = 1L;
   // x-axis coord constants
@@ -67,6 +82,44 @@ class ComplexPanel extends JPanel
   // distance of coordinate strings from axis
   public static final int AXIS_STRING_DISTANCE = 20;
 
+  // numerate axis
+  int xCoordNumbers = 12;
+  int yCoordNumbers = 12;
+  int xLength = (X_AXIS_SECOND_X_COORD - X_AXIS_FIRST_X_COORD) / xCoordNumbers;
+  int yLength = (Y_AXIS_SECOND_Y_COORD - Y_AXIS_FIRST_Y_COORD) / yCoordNumbers;
+
+  private ArrayList<Point> points = new ArrayList<>();
+
+  /**
+   * Repaints graph with new complex point.
+   * 
+   * @param point
+   */
+  public void drawPoint(Point point)
+  {
+    points.add(point);
+    repaint();
+  }
+
+  /**
+   * Draws Point on panel
+   * 
+   * @param point
+   * @param g
+   */
+  private void drawPointOnPanel(Point point, Graphics g)
+  {
+    final int pointDiameter = 5;
+    final int x = X_AXIS_FIRST_X_COORD + (point.x * xLength) - pointDiameter / 2;
+    final int y = Y_AXIS_SECOND_Y_COORD - (point.y * yLength) - pointDiameter / 2;
+    System.out.println(Y_AXIS_FIRST_Y_COORD);
+    System.out.println(y);
+    g.fillOval(x, y, pointDiameter, pointDiameter);
+  }
+
+  /**
+   * Paints Complex Plane
+   */
   public void paintComponent(Graphics g)
   {
 
@@ -110,12 +163,6 @@ class ComplexPanel extends JPanel
     // Y_AXIS_SECOND_Y_COORD + AXIS_STRING_DISTANCE);
     g2.drawString("(0, 0)", 352, 365);
 
-    // numerate axis
-    int xCoordNumbers = 12;
-    int yCoordNumbers = 12;
-    int xLength = (X_AXIS_SECOND_X_COORD - X_AXIS_FIRST_X_COORD) / xCoordNumbers;
-    int yLength = (Y_AXIS_SECOND_Y_COORD - Y_AXIS_FIRST_Y_COORD) / yCoordNumbers;
-
     // draw x-axis numbers
     int xNum = -5;
     for (int i = 1; i < xCoordNumbers; i++)
@@ -153,5 +200,7 @@ class ComplexPanel extends JPanel
           Y_AXIS_SECOND_Y_COORD - (i * yLength));
       yNum++;
     }
+    // draw points
+    points.forEach(p -> drawPointOnPanel(p, g));
   }
 }
