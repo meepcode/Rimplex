@@ -421,14 +421,9 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
 
       menuBar = new JMenuBar();
-
-<<<<<<< HEAD
-=======
       ImageIcon icon = new ImageIcon(getClass().getResource("logo.png"));
       JLabel label = new JLabel(icon);
       menuBar.add(label);
-
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
       JButton plot = new JButton("Graph");
       plot.addActionListener(e -> {
         // fill
