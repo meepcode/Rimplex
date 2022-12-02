@@ -47,7 +47,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   private String pastResult = "";
   private Color colorScheme = Color.CYAN;
   private boolean thousandsSeparator = false;
-  private boolean trailingZeroes = false; 
+  private boolean trailingZeroes = false;
   private int numDecimals = 0;
 
   ComplexCalc()
@@ -410,8 +410,8 @@ public class ComplexCalc extends JFrame implements ActionListener
     String aboutTitle = "About";
     String printTitle = "Print";
     JMenuBar menuBar;
-    JMenu fileMenu, help;
-    JMenuItem pref, print, exit, about, newWindow, helpPage;
+    JMenu fileMenu, help, helpPage;
+    JMenuItem pref, print, exit, about, newWindow;
 
     public JMenuBar createMenuBar()
     {
@@ -443,19 +443,35 @@ public class ComplexCalc extends JFrame implements ActionListener
       about.addActionListener(e -> JOptionPane.showMessageDialog(null,
           "This calculator performs operations on the given complex number operands. " + "A history of results from previous calculations are stored in the history " + "panel.\nClicking on an expression in the History " + "Panel copies that expression to the clipboard."));
 
-      helpPage = new JMenuItem("Help page");
-      helpPage.addActionListener(this);
-      helpPage.addActionListener(e -> {
-        try
+      helpPage = new JMenu("Help Page");
+
+      JMenuItem englishHelpPage = new JMenuItem("Help in English");
+      helpPage.add(englishHelpPage);
+
+      englishHelpPage.addActionListener(this);
+      englishHelpPage.addActionListener(e -> {
+        if (e.getSource() == englishHelpPage)
         {
-          File file = new File("src/helpfile/helpPage.html").getAbsoluteFile();
-          Desktop.getDesktop().open(file);
-        }
-        catch (IOException e1)
-        {
-          e1.printStackTrace();
+          try
+          {
+            File file = new File("src/helpfile/helpPage.html").getAbsoluteFile();
+            Desktop.getDesktop().open(file);
+          }
+          catch (IOException e1)
+          {
+            e1.printStackTrace();
+          }
         }
       });
+
+      JMenuItem spanishHelpPage = new JMenuItem("Ayuda en Español");
+      helpPage.add(spanishHelpPage);
+
+      JMenuItem frenchHelpPage = new JMenuItem("Aide en Français");
+      helpPage.add(frenchHelpPage);
+
+      JMenuItem germanHelpPage = new JMenuItem("Aide en Allemand");
+      helpPage.add(germanHelpPage);
 
       // file menu along menubar
       fileMenu = new JMenu("File");
@@ -508,7 +524,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             isPolarActive = true;
           }
         });
-        
+
         JButton thousands = new JButton("Thousands Separator");
         modes.add(thousands);
         thousands.addActionListener(this);
@@ -520,7 +536,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             thousandsSeparator = true;
           }
         });
-        
+
         JButton zeroes = new JButton("Trailing zeroes");
         modes.add(zeroes);
         zeroes.addActionListener(this);
@@ -532,23 +548,22 @@ public class ComplexCalc extends JFrame implements ActionListener
             trailingZeroes = true;
           }
         });
-        
+
         JTextArea numDecimals = new JTextArea("0");
         modes.add(numDecimals);
-        
 
         JPanel langs = new JPanel();
         langs.setLayout(new GridLayout(4, 1, 10, 10));
         prefWindow.add(langs, BorderLayout.EAST);
-        
+
         JButton english = new JButton("English");
         JButton spanish = new JButton("Español");
         JButton german = new JButton("Deutsch");
         JButton french = new JButton("Français");
-        
+
         langs.add(english);
-        english .addActionListener(this);
-        
+        english.addActionListener(this);
+
         english.addActionListener(new ActionListener()
         {
           @Override
