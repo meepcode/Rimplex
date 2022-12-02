@@ -16,10 +16,10 @@ public class Calculate
    * Adds two complex numbers.
    *
    * @param operands
-   *          the operands to be added
+   *     the operands to be added
    * @return The resulting complex number
    * @throws IllegalArgumentException
-   *           if the number of arguments is not equal to 2
+   *     if the number of arguments is not equal to 2
    */
   public static ComplexNumber add(final ComplexNumber... operands)
   {
@@ -62,10 +62,10 @@ public class Calculate
    * Subtracts two complex numbers.
    *
    * @param operands
-   *          the operands to be subtracted
+   *     the operands to be subtracted
    * @return The resulting complex number
    * @throws IllegalArgumentException
-   *           if the number of operands is not equal to 2
+   *     if the number of operands is not equal to 2
    */
   public static ComplexNumber subtract(final ComplexNumber... operands)
   {
@@ -108,10 +108,10 @@ public class Calculate
    * Multiplies two complex numbers.
    *
    * @param operands
-   *          the operands to be multiplied
+   *     the operands to be multiplied
    * @return The resulting complex number
    * @throws IllegalArgumentException
-   *           if the number of arguments is not equal to 2
+   *     if the number of arguments is not equal to 2
    */
   public static ComplexNumber multiply(final ComplexNumber... operands)
   {
@@ -142,8 +142,13 @@ public class Calculate
     }
 
     Double realResult = op1.getReal() * op2.getReal() - op1.getImaginary() * op2.getImaginary();
+<<<<<<< HEAD
     Double imaginaryResult = op1.getReal() * op2.getImaginary()
         + op1.getImaginary() * op2.getReal();
+=======
+    Double imaginaryResult =
+        op1.getReal() * op2.getImaginary() + op1.getImaginary() * op2.getReal();
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
     ComplexNumber ret = new ComplexNumber(realResult, imaginaryResult);
     if (polar)
     {
@@ -156,7 +161,7 @@ public class Calculate
    * Divides two complex numbers.
    *
    * @param operands
-   *          the operands to divide together
+   *     the operands to divide together
    * @return The resulting complex number.
    */
   public static ComplexNumber divide(final ComplexNumber... operands)
@@ -221,11 +226,19 @@ public class Calculate
 
   /**
    * Calculate the log of a number.
+<<<<<<< HEAD
    * 
    * @param base
    *          base to use for log calculation
    * @param operand
    *          the operand to calculate log for
+=======
+   *
+   * @param base
+   *     base to use for log calculation
+   * @param operand
+   *     the operand to calculate log for
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the log as a complex number
    */
   public static ComplexNumber log(final Double base, final ComplexNumber operand)
@@ -279,11 +292,11 @@ public class Calculate
 
   /**
    * Calculate the exponentiation of a number.
-   * 
+   *
    * @param operand
-   *          the operands to use
+   *     the operands to use
    * @param exp
-   *          power to use
+   *     power to use
    * @return the exponentiation as a complex number
    */
   public static ComplexNumber exponent(final Double exp, final ComplexNumber operand)
@@ -337,9 +350,15 @@ public class Calculate
 
   /**
    * Calculate the square root of a number.
+<<<<<<< HEAD
    * 
    * @param operand
    *          the operand to use.
+=======
+   *
+   * @param operand
+   *     the operand to use.
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the square root as a complex number.
    */
   public static ComplexNumber squareRoot(final ComplexNumber operand)
@@ -363,7 +382,11 @@ public class Calculate
     }
     else
     { // If operand is a full complex number.
+<<<<<<< HEAD
       // √(a + ib) = ± (√{ [√(a^2 + b^2) + a] /2} + ib/|b| √{[√(a^2 + b^2) - a]/2})
+=======
+      //√(a + ib) = ± (√{     [√(a^2 + b^2) + a]    /2} + ib/|b| √{[√(a^2 + b^2) - a]/2})
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
       Double a = op1.getReal();
       Double b = op1.getImaginary();
@@ -381,9 +404,15 @@ public class Calculate
 
   /**
    * Calculate the conjugate of a number.
+<<<<<<< HEAD
    * 
    * @param operand
    *          the operand to use
+=======
+   *
+   * @param operand
+   *     the operand to use
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the conjugate as a complex number.
    */
   public static ComplexNumber conjugate(final ComplexNumber operand)
@@ -400,9 +429,15 @@ public class Calculate
 
   /**
    * Calculate the inverse of a number.
+<<<<<<< HEAD
    * 
    * @param operand
    *          complex number
+=======
+   *
+   * @param operand
+   *     complex number
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the inverse as a complex number.
    */
   public static ComplexNumber invert(final ComplexNumber operand)
@@ -427,9 +462,15 @@ public class Calculate
 
   /**
    * Converts a polar complex number to rectangular complex number.
+<<<<<<< HEAD
    * 
    * @param operand
    *          polar complex number
+=======
+   *
+   * @param operand
+   *     polar complex number
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return a complex number
    */
   public static ComplexNumber convertPolarToRectangular(final ComplexNumber operand)
@@ -441,9 +482,15 @@ public class Calculate
 
   /**
    * Converts a rectangular complex number to polar complex number.
+<<<<<<< HEAD
    * 
    * @param operand
    *          rectangular complex number
+=======
+   *
+   * @param operand
+   *     rectangular complex number
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return a complex number
    */
   public static PolarComplexNumber convertRectangularToPolar(final ComplexNumber operand)

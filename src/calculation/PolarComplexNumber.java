@@ -54,13 +54,16 @@ public class PolarComplexNumber extends ComplexNumber
     // {
     Double real = getReal();
     Double imaginary = getImaginary();
-    if (Math.abs(real-0) < ComplexNumber.EPSILON) {
+    if (Math.abs(real-0) < ComplexNumber.EPSILON) 
+    {
       real = 0.0;
     }
-    if (Math.abs(imaginary-0) < ComplexNumber.EPSILON) {
+    if (Math.abs(imaginary-0) < ComplexNumber.EPSILON) 
+    {
       imaginary = 0.0;
     }
     
+<<<<<<< HEAD
     return String.format(FORMAT_TEXT, r) + COS 
 <<<<<<< HEAD
           + String.format(FORMAT_TEXT, getReal() * (180/Math.PI))
@@ -68,8 +71,16 @@ public class PolarComplexNumber extends ComplexNumber
           + String.format(FORMAT_TEXT, getImaginary() * (180/Math.PI)) + END;
 =======
           + String.format(FORMAT_TEXT, real)
+=======
+    return String.format(getFormat(), r) + COS 
+          + String.format(getFormat(), real)
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
           + "°) + " + I + SIN 
+<<<<<<< HEAD
           + String.format(FORMAT_TEXT, imaginary) + END;
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
+=======
+          + String.format(getFormat(), imaginary) + END;
 >>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
   }
     // }
