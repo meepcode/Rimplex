@@ -422,6 +422,13 @@ public class ComplexCalc extends JFrame implements ActionListener
 
       menuBar = new JMenuBar();
 
+<<<<<<< HEAD
+=======
+      ImageIcon icon = new ImageIcon(getClass().getResource("logo.png"));
+      JLabel label = new JLabel(icon);
+      menuBar.add(label);
+
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
       JButton plot = new JButton("Graph");
       plot.addActionListener(e -> {
         // fill
@@ -482,13 +489,13 @@ public class ComplexCalc extends JFrame implements ActionListener
       fileMenu.add(pref);
       pref.addActionListener(this);
       pref.addActionListener(e -> {
-        MenuItemWindow prefWindow = new MenuItemWindow("Preferences", 300, 400);
+        MenuItemWindow prefWindow = new MenuItemWindow("Preferences", 600, 300);
 
         JPanel modes = new JPanel();
         modes.setLayout(new GridLayout(2, 1, 10, 10));
         prefWindow.add(modes, BorderLayout.WEST);
 
-        JButton rect = new JButton("rectangular");
+        JButton rect = new JButton("Rectangular");
         modes.add(rect);
         rect.addActionListener(this);
         rect.addActionListener(new ActionListener()
@@ -500,7 +507,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           }
         });
 
-        JButton polar = new JButton("polar");
+        JButton polar = new JButton("Polar");
         modes.add(polar);
         polar.addActionListener(this);
         polar.addActionListener(new ActionListener()
@@ -696,10 +703,6 @@ public class ComplexCalc extends JFrame implements ActionListener
       menuBar.add(plot);
 
       menuBar.add(hist);
-
-      ImageIcon icon = new ImageIcon(getClass().getResource("logo.png"));
-      JLabel label = new JLabel(icon);
-      menuBar.add(label);
 
       return menuBar;
     }
