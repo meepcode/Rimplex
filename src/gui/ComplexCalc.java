@@ -46,14 +46,17 @@ public class ComplexCalc extends JFrame implements ActionListener
   private boolean isPolarActive = false;
   private String pastResult = "";
   private Color colorScheme = Color.CYAN;
+  private boolean thousandsSeparator = false;
+  private boolean trailingZeroes = false; 
+  private int numDecimals = 0;
 
   ComplexCalc()
   {
     frame = new JFrame(calculatorStr);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frame.setSize(380, 480);
     frame.setLayout(new BorderLayout());
-    frame.setResizable(false);
+    frame.setResizable(true);
 
     frame.setLocationRelativeTo(null);
 
@@ -415,6 +418,9 @@ public class ComplexCalc extends JFrame implements ActionListener
 
       menuBar = new JMenuBar();
 
+      ImageIcon icon = new ImageIcon(getClass().getResource("logo.png"));
+      JLabel label = new JLabel(icon);
+      menuBar.add(label);
 
       JButton plot = new JButton("Graph");
       plot.addActionListener(e -> {
@@ -442,7 +448,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       helpPage.addActionListener(e -> {
         try
         {
-          File file = new File("src/gui/helpPage.html").getAbsoluteFile();
+          File file = new File("src/helpfile/helpPage.html").getAbsoluteFile();
           Desktop.getDesktop().open(file);
         }
         catch (IOException e1)
@@ -457,6 +463,7 @@ public class ComplexCalc extends JFrame implements ActionListener
 
       // new window sub menu
       newWindow = new JMenuItem("New Window");
+      fileMenu.add(newWindow);
       newWindow.addActionListener(this);
       newWindow.addActionListener(new ActionListener()
       {
@@ -472,13 +479,13 @@ public class ComplexCalc extends JFrame implements ActionListener
       fileMenu.add(pref);
       pref.addActionListener(this);
       pref.addActionListener(e -> {
-        MenuItemWindow prefWindow = new MenuItemWindow("Preferences", 300, 400);
+        MenuItemWindow prefWindow = new MenuItemWindow("Preferences", 600, 300);
 
         JPanel modes = new JPanel();
         modes.setLayout(new GridLayout(2, 1, 10, 10));
         prefWindow.add(modes, BorderLayout.WEST);
 
-        JButton rect = new JButton("rectangular");
+        JButton rect = new JButton("Rectangular");
         modes.add(rect);
         rect.addActionListener(this);
         rect.addActionListener(new ActionListener()
@@ -490,7 +497,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           }
         });
 
-        JButton polar = new JButton("polar");
+        JButton polar = new JButton("Polar");
         modes.add(polar);
         polar.addActionListener(this);
         polar.addActionListener(new ActionListener()
@@ -501,6 +508,34 @@ public class ComplexCalc extends JFrame implements ActionListener
             isPolarActive = true;
           }
         });
+        
+        JButton thousands = new JButton("Thousands Separator");
+        modes.add(thousands);
+        thousands.addActionListener(this);
+        thousands.addActionListener(new ActionListener()
+        {
+          @Override
+          public void actionPerformed(ActionEvent e)
+          {
+            thousandsSeparator = true;
+          }
+        });
+        
+        JButton zeroes = new JButton("Trailing zeroes");
+        modes.add(zeroes);
+        zeroes.addActionListener(this);
+        zeroes.addActionListener(new ActionListener()
+        {
+          @Override
+          public void actionPerformed(ActionEvent e)
+          {
+            trailingZeroes = true;
+          }
+        });
+        
+        JTextArea numDecimals = new JTextArea("0");
+        modes.add(numDecimals);
+        
 
         JPanel langs = new JPanel();
         langs.setLayout(new GridLayout(4, 1, 10, 10));
@@ -519,6 +554,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(final ActionEvent e)
           {
+            frame.setSize(380, 480);
             english.setBackground(Color.GRAY);
             french.setBackground(null);
             german.setBackground(null);
@@ -549,6 +585,8 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(final ActionEvent e)
           {
+            frame.setSize(460, 480);
+
             spanish.setBackground(Color.GRAY);
             english.setBackground(null);
             german.setBackground(null);
@@ -579,6 +617,8 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(final ActionEvent e)
           {
+            frame.setSize(440, 480);
+
             german.setBackground(Color.GRAY);
             english.setBackground(null);
             french.setBackground(null);
@@ -609,6 +649,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(final ActionEvent e)
           {
+            frame.setSize(430, 480);
             french.setBackground(Color.GRAY);
             english.setBackground(null);
             german.setBackground(null);
@@ -651,10 +692,6 @@ public class ComplexCalc extends JFrame implements ActionListener
       menuBar.add(plot);
 
       menuBar.add(hist);
-
-      ImageIcon icon = new ImageIcon(getClass().getResource("logo.png"));
-      JLabel label = new JLabel(icon);
-      menuBar.add(label);
 
       return menuBar;
     }
