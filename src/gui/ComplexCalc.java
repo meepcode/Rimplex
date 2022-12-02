@@ -53,7 +53,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   ComplexCalc()
   {
     frame = new JFrame(calculatorStr);
-    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frame.setSize(380, 480);
     frame.setLayout(new BorderLayout());
     frame.setResizable(false);
@@ -460,6 +460,7 @@ public class ComplexCalc extends JFrame implements ActionListener
 
       // new window sub menu
       newWindow = new JMenuItem("New Window");
+      fileMenu.add(newWindow);
       newWindow.addActionListener(this);
       newWindow.addActionListener(new ActionListener()
       {
