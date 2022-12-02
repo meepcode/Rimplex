@@ -486,11 +486,40 @@ public class ComplexCalc extends JFrame implements ActionListener
       frenchHelpPage = new JMenuItem("Aide en Français");
       helpPage.add(frenchHelpPage);
 
-
-
+      frenchHelpPage.addActionListener(this);
+      frenchHelpPage.addActionListener(e -> {
+        if (e.getSource() == frenchHelpPage)
+        {
+          try
+          {
+            File file = new File("src/helpfile/helpPageFrench.html").getAbsoluteFile();
+            Desktop.getDesktop().open(file);
+          }
+          catch (IOException e1)
+          {
+            e1.printStackTrace();
+          }
+        }
+      });
 
       germanHelpPage = new JMenuItem("Aide en Allemand");
       helpPage.add(germanHelpPage);
+
+      germanHelpPage.addActionListener(this);
+      germanHelpPage.addActionListener(e -> {
+        if (e.getSource() == germanHelpPage)
+        {
+          try
+          {
+            File file = new File("src/helpfile/helpPageGerman.html").getAbsoluteFile();
+            Desktop.getDesktop().open(file);
+          }
+          catch (IOException e1)
+          {
+            e1.printStackTrace();
+          }
+        }
+      });
 
       // file menu along menubar
       fileMenu = new JMenu("File");
