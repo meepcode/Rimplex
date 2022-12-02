@@ -448,7 +448,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       helpPage.addActionListener(e -> {
         try
         {
-          File file = new File("src/gui/helpPage.html").getAbsoluteFile();
+          File file = new File("src/helpfile/helpPage.html").getAbsoluteFile();
           Desktop.getDesktop().open(file);
         }
         catch (IOException e1)
