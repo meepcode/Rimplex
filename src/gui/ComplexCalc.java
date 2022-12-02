@@ -59,7 +59,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     frame.setSize(380, 480);
     frame.setLayout(new BorderLayout());
-    frame.setResizable(false);
+    frame.setResizable(true);
 
     frame.setLocationRelativeTo(null);
 
@@ -558,6 +558,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(final ActionEvent e)
           {
+            frame.setSize(380, 480);
             english.setBackground(Color.GRAY);
             french.setBackground(null);
             german.setBackground(null);
@@ -590,6 +591,8 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(final ActionEvent e)
           {
+            frame.setSize(460, 480);
+
             spanish.setBackground(Color.GRAY);
             english.setBackground(null);
             german.setBackground(null);
@@ -622,6 +625,8 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(final ActionEvent e)
           {
+            frame.setSize(440, 480);
+
             german.setBackground(Color.GRAY);
             english.setBackground(null);
             french.setBackground(null);
@@ -654,6 +659,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(final ActionEvent e)
           {
+            frame.setSize(430, 480);
             french.setBackground(Color.GRAY);
             english.setBackground(null);
             german.setBackground(null);
