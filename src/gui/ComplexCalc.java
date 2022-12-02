@@ -16,7 +16,6 @@ import javax.swing.JTextField;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-<<<<<<< HEAD
 import java.awt.print.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -27,10 +26,7 @@ import java.awt.print.PrinterJob;
 
 import static java.awt.print.Printable.NO_SUCH_PAGE;
 import static java.awt.print.Printable.PAGE_EXISTS;
-=======
-import java.io.File;
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
-
+//import java.io.File;
 /**
  * Calculator GUI.
  *
@@ -422,23 +418,14 @@ public class ComplexCalc extends JFrame implements ActionListener
   // Menu Bar Code
   class MenuBar implements ActionListener
   {
-<<<<<<< HEAD
     String aboutMessage = "This calculator performs operations on the given complex number operands. "
         + "A history of results from previosu calculations are stored in the history " + "panel.";
-=======
-    String aboutMessage = "This calculator performs operations on the given complex number operands. " + "A history of results from previosu calculations are stored in the history " + "panel.";
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
     String aboutTitle = "About";
     String printTitle = "Print";
     JMenuBar menuBar;
     JMenu file, mode, help;
-<<<<<<< HEAD
     JMenuItem print, exit, about;
     // MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
-=======
-    JMenuItem print, exit, about, newWindow, helpPage;
-    //MenuItemWindow modeWindow = new MenuItemWindow("Mode", 250, 200);
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
     public JMenuBar createMenuBar()
     {
@@ -483,11 +470,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       rect.addActionListener(new ActionListener()
       {
         @Override
-<<<<<<< HEAD
         public void actionPerformed(ActionEvent e)
-=======
-        public void actionPerformed(final ActionEvent e)
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         {
 
           isPolarActive = false;
@@ -499,11 +482,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       polar.addActionListener(new ActionListener()
       {
         @Override
-<<<<<<< HEAD
         public void actionPerformed(ActionEvent e)
-=======
-        public void actionPerformed(final ActionEvent e)
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         {
 
           isPolarActive = true;
@@ -522,10 +501,8 @@ public class ComplexCalc extends JFrame implements ActionListener
       {
         public void actionPerformed(ActionEvent e)
         {
-<<<<<<< HEAD
           JOptionPane.showMessageDialog(null, aboutMessage, "About",
               JOptionPane.INFORMATION_MESSAGE);
-=======
           JOptionPane.showMessageDialog(null,
               "This calculator performs operations on the given complex number operands. " + "A history of results from previous calculations are stored in the history " + "panel.\nClicking on an expression in the History " + "Panel copies that expression to the clipboard.");
         }
@@ -547,7 +524,6 @@ public class ComplexCalc extends JFrame implements ActionListener
           {
             e1.printStackTrace();
           }
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         }
       });
 
@@ -572,11 +548,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       hist.addActionListener(new ActionListener()
       {
         @Override
-<<<<<<< HEAD
         public void actionPerformed(ActionEvent e)
-=======
-        public void actionPerformed(final ActionEvent e)
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         {
           his.createAndShowGUI();
           frame.pack();
@@ -590,11 +562,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       span.addActionListener(new ActionListener()
       {
         @Override
-<<<<<<< HEAD
         public void actionPerformed(ActionEvent e)
-=======
-        public void actionPerformed(final ActionEvent e)
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         {
           printTitle = "Impresión";
           aboutMessage = "Esta calculadora realiza operaciones en los operandos de números " + "complejos dados. Un historial de resultados de cálculos anteriores se almacena " + "en el panel de historial.";
@@ -652,11 +620,7 @@ public class ComplexCalc extends JFrame implements ActionListener
       french.addActionListener(new ActionListener()
       {
         @Override
-<<<<<<< HEAD
         public void actionPerformed(ActionEvent e)
-=======
-        public void actionPerformed(final ActionEvent e)
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
         {
           printTitle = "Imprimer";
           aboutMessage = "Cette calculatrice effectue des opérations sur les opérandes de nombres" + " complexes donnés. Un historique des résultats des calculs précédents est stocké" + " dans le panneau d'historique.";
@@ -683,20 +647,15 @@ public class ComplexCalc extends JFrame implements ActionListener
       english.addActionListener(new ActionListener()
       {
         @Override
-<<<<<<< HEAD
+
         public void actionPerformed(ActionEvent e)
-=======
-        public void actionPerformed(final ActionEvent e)
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
+
         {
           printTitle = "Print";
-<<<<<<< HEAD
           aboutMessage = "This calculator performs operations on the given complex number operands. "
               + "A history of results from previosu calculations are stored in the history "
               + "panel.";
-=======
-          aboutMessage = "This calculator performs operations on the given complex number operands. " + "A history of results from previosu calculations are stored in the history " + "panel.";
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
+
           aboutTitle = "About";
           hist.setText("History");
           // modeWindow.setTitle("Mode");
@@ -716,11 +675,8 @@ public class ComplexCalc extends JFrame implements ActionListener
     }
 
     @Override
-<<<<<<< HEAD
     public void actionPerformed(ActionEvent e)
-=======
-    public void actionPerformed(final ActionEvent e)
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
+
     {
       // TODO Auto-generated method stub
 
