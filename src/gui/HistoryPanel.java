@@ -1,7 +1,7 @@
 package gui;
 
 import javax.swing.BorderFactory;
-
+import javax.swing.JComponent;
 //import javax.swing.JComponent;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
@@ -192,12 +192,12 @@ public class HistoryPanel extends JFrame
    *
    * @param component
    * @param newPoint
-   * @param frames
+   * @param framess
    * @param interval
    */
-<<<<<<< HEAD
-  private void animate(JComponent component, final Point newPoint, int frames, int interval)
-=======
+  private void animate(JComponent component, final Point newPoint, int frames, int interval) {
+    
+  }
   /*private void animate(final JComponent component, final Point newPoint, 
       final int frames, final int interval)
 >>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD

@@ -63,25 +63,10 @@ public class PolarComplexNumber extends ComplexNumber
       imaginary = 0.0;
     }
     
-<<<<<<< HEAD
-    return String.format(FORMAT_TEXT, r) + COS 
-<<<<<<< HEAD
-          + String.format(FORMAT_TEXT, getReal() * (180/Math.PI))
-          + "°) + " + I + SIN 
-          + String.format(FORMAT_TEXT, getImaginary() * (180/Math.PI)) + END;
-=======
-          + String.format(FORMAT_TEXT, real)
-=======
     return String.format(getFormat(), r) + COS 
           + String.format(getFormat(), real)
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
-          + "Â°) + " + I + SIN 
-<<<<<<< HEAD
-          + String.format(FORMAT_TEXT, imaginary) + END;
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
-=======
+          + "°) + " + I + SIN 
           + String.format(getFormat(), imaginary) + END;
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
   }
     // }
     /*}
@@ -91,7 +76,6 @@ public class PolarComplexNumber extends ComplexNumber
           + String.format(FORMAT_TEXT, getReal() * (180/Math.PI))
           + "°) + " - I + SIN 
           + String.format(FORMAT_TEXT, Math.abs(getImaginary() * (180/Math.PI))) + END;
-
     }*/
 
   /**
@@ -125,3 +109,4 @@ public class PolarComplexNumber extends ComplexNumber
   }
 
 }
+

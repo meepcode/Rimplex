@@ -35,10 +35,7 @@ public class ComplexNumber
       this.imaginaryPart = 0.0;
     else
       this.imaginaryPart = imaginaryPart;
-<<<<<<< HEAD
-=======
     formatText = "%.2f";
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
   }
 
   /**
@@ -80,13 +77,8 @@ public class ComplexNumber
   {
     if (imaginaryPart < 0)
     {
-<<<<<<< HEAD
-      return String.format(FORMAT_TEXT, realPart) + "-"
-          + String.format(FORMAT_TEXT, Math.abs(imaginaryPart)) + I;
-=======
-      return String.format(formatText, realPart) + "-" + String.format(formatText,
-          Math.abs(imaginaryPart)) + I;
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
+      return String.format(formatText, realPart) + "-"
+          + String.format(formatText, Math.abs(imaginaryPart)) + I;
     }
     else
     {

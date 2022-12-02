@@ -142,13 +142,8 @@ public class Calculate
     }
 
     Double realResult = op1.getReal() * op2.getReal() - op1.getImaginary() * op2.getImaginary();
-<<<<<<< HEAD
     Double imaginaryResult = op1.getReal() * op2.getImaginary()
         + op1.getImaginary() * op2.getReal();
-=======
-    Double imaginaryResult =
-        op1.getReal() * op2.getImaginary() + op1.getImaginary() * op2.getReal();
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
     ComplexNumber ret = new ComplexNumber(realResult, imaginaryResult);
     if (polar)
     {
@@ -382,11 +377,7 @@ public class Calculate
     }
     else
     { // If operand is a full complex number.
-<<<<<<< HEAD
       // √(a + ib) = ± (√{ [√(a^2 + b^2) + a] /2} + ib/|b| √{[√(a^2 + b^2) - a]/2})
-=======
-      //√(a + ib) = ± (√{     [√(a^2 + b^2) + a]    /2} + ib/|b| √{[√(a^2 + b^2) - a]/2})
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
       Double a = op1.getReal();
       Double b = op1.getImaginary();
