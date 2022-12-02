@@ -46,6 +46,9 @@ public class ComplexCalc extends JFrame implements ActionListener
   private boolean isPolarActive = false;
   private String pastResult = "";
   private Color colorScheme = Color.CYAN;
+  private boolean thousandsSeparator = false;
+  private boolean trailingZeroes = false; 
+  private int numDecimals = 0;
 
   ComplexCalc()
   {
@@ -501,6 +504,34 @@ public class ComplexCalc extends JFrame implements ActionListener
             isPolarActive = true;
           }
         });
+        
+        JButton thousands = new JButton("Thousands Separator");
+        modes.add(thousands);
+        thousands.addActionListener(this);
+        thousands.addActionListener(new ActionListener()
+        {
+          @Override
+          public void actionPerformed(ActionEvent e)
+          {
+            thousandsSeparator = true;
+          }
+        });
+        
+        JButton zeroes = new JButton("Trailing zeroes");
+        modes.add(zeroes);
+        zeroes.addActionListener(this);
+        zeroes.addActionListener(new ActionListener()
+        {
+          @Override
+          public void actionPerformed(ActionEvent e)
+          {
+            trailingZeroes = true;
+          }
+        });
+        
+        JTextArea numDecimals = new JTextArea("0");
+        modes.add(numDecimals);
+        
 
         JPanel langs = new JPanel();
         langs.setLayout(new GridLayout(4, 1, 10, 10));
