@@ -96,7 +96,7 @@ public class Evaluation
         {
           throw new ExpressionEvaluationException("Base must be real number for log");
         }
-        
+
         if (base.getReal() == 0 && base.getImaginary() == 0)
         {
           throw new ExpressionEvaluationException("Base cannot be 0");
@@ -144,8 +144,8 @@ public class Evaluation
         }
 
         result = Calculate.convertPolarToRectangular(
-            new PolarComplexNumber(Double.parseDouble(parts[1])*(Math.PI/180), Double.parseDouble(parts[1])*(Math.PI/180),
-                Double.parseDouble(parts[0])));
+            new PolarComplexNumber(Double.parseDouble(parts[1]) * (Math.PI / 180),
+                Double.parseDouble(parts[1]) * (Math.PI / 180), Double.parseDouble(parts[0])));
       }
       else if (type == TokenType.ADD)
       {
