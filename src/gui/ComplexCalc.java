@@ -411,7 +411,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     String printTitle = "Print";
     JMenuBar menuBar;
     JMenu fileMenu, help, helpPage;
-    JMenuItem pref, print, exit, about, newWindow;
+    JMenuItem pref, print, exit, about, newWindow, englishHelpPage, spanishHelpPage, frenchHelpPage, germanHelpPage;
 
     public JMenuBar createMenuBar()
     {
@@ -445,7 +445,7 @@ public class ComplexCalc extends JFrame implements ActionListener
 
       helpPage = new JMenu("Help Page");
 
-      JMenuItem englishHelpPage = new JMenuItem("Help in English");
+      englishHelpPage = new JMenuItem("Help in English");
       helpPage.add(englishHelpPage);
 
       englishHelpPage.addActionListener(this);
@@ -464,13 +464,32 @@ public class ComplexCalc extends JFrame implements ActionListener
         }
       });
 
-      JMenuItem spanishHelpPage = new JMenuItem("Ayuda en Español");
+      spanishHelpPage = new JMenuItem("Ayuda en Español");
       helpPage.add(spanishHelpPage);
 
-      JMenuItem frenchHelpPage = new JMenuItem("Aide en Français");
+      spanishHelpPage.addActionListener(this);
+      spanishHelpPage.addActionListener(e -> {
+        if (e.getSource() == spanishHelpPage)
+        {
+          try
+          {
+            File file = new File("src/helpfile/helpPageSpanish.html").getAbsoluteFile();
+            Desktop.getDesktop().open(file);
+          }
+          catch (IOException e1)
+          {
+            e1.printStackTrace();
+          }
+        }
+      });
+
+      frenchHelpPage = new JMenuItem("Aide en Français");
       helpPage.add(frenchHelpPage);
 
-      JMenuItem germanHelpPage = new JMenuItem("Aide en Allemand");
+
+
+
+      germanHelpPage = new JMenuItem("Aide en Allemand");
       helpPage.add(germanHelpPage);
 
       // file menu along menubar
