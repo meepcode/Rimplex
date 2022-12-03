@@ -6,6 +6,9 @@ import parse.Evaluation;
 import parse.ExpressionEvaluationException;
 
 import javax.swing.*;
+
+import org.junit.jupiter.params.provider.EnumSource.Mode;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -382,6 +385,23 @@ public class ComplexCalc extends JFrame implements ActionListener
         {
           res = Calculate.convertRectangularToPolar(res);
         }
+        
+        /*String formatting*/
+        //numDecimals = Integer.parseInt();
+        if (thousandsSeparator && trailingZeroes) 
+        {
+          res.setFormat("%,.0" + numDecimals + "f");
+        } else if (thousandsSeparator) 
+        {
+          res.setFormat("%,." + numDecimals + "f");
+        } else if (trailingZeroes)
+        {
+          res.setFormat("%.0" + numDecimals + "f");
+        } else 
+        {
+          res.setFormat("%." + numDecimals + "f");
+        }
+
         textfield.setText(textfield.getText() + "=" + res);
         result = textfield.getText();
         pastResult = "(" + res.toString() + ")";
@@ -546,22 +566,10 @@ public class ComplexCalc extends JFrame implements ActionListener
         MenuItemWindow prefWindow = new MenuItemWindow("Preferences", 600, 300);
 
         JPanel modes = new JPanel();
-        modes.setLayout(new GridLayout(2, 1, 10, 10));
-        prefWindow.add(modes, BorderLayout.WEST);
+        modes.setLayout(new FlowLayout());
+        prefWindow.add(modes, BorderLayout.NORTH);
 
-        JButton rect = new JButton("Rectangular");
-        modes.add(rect);
-        rect.addActionListener(this);
-        rect.addActionListener(new ActionListener()
-        {
-          @Override
-          public void actionPerformed(ActionEvent e)
-          {
-            isPolarActive = false;
-          }
-        });
-
-        JButton polar = new JButton("Polar");
+        JCheckBox polar = new JCheckBox("Polar");
         modes.add(polar);
         polar.addActionListener(this);
         polar.addActionListener(new ActionListener()
@@ -569,11 +577,11 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(ActionEvent e)
           {
-            isPolarActive = true;
+            isPolarActive = !isPolarActive;
           }
         });
 
-        JButton thousands = new JButton("Thousands Separator");
+        JCheckBox thousands = new JCheckBox("Thousands Separator");
         modes.add(thousands);
         thousands.addActionListener(this);
         thousands.addActionListener(new ActionListener()
@@ -581,11 +589,11 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(ActionEvent e)
           {
-            thousandsSeparator = true;
+            thousandsSeparator = !thousandsSeparator;
           }
         });
 
-        JButton zeroes = new JButton("Trailing zeroes");
+        JCheckBox zeroes = new JCheckBox("Trailing zeroes");
         modes.add(zeroes);
         zeroes.addActionListener(this);
         zeroes.addActionListener(new ActionListener()
@@ -593,16 +601,16 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(ActionEvent e)
           {
-            trailingZeroes = true;
+            trailingZeroes = !trailingZeroes;
           }
         });
 
-        JTextArea numDecimals = new JTextArea("0");
-        modes.add(numDecimals);
+        JTextArea decimals = new JTextArea("2");
+        modes.add(decimals);
 
         JPanel langs = new JPanel();
-        langs.setLayout(new GridLayout(4, 1, 10, 10));
-        prefWindow.add(langs, BorderLayout.EAST);
+        langs.setLayout(new FlowLayout());
+        prefWindow.add(langs, BorderLayout.CENTER);
 
         JButton english = new JButton("English");
         JButton spanish = new JButton("Español");
