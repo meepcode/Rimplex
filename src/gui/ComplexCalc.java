@@ -51,7 +51,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   private Color colorScheme = Color.CYAN;
   private boolean thousandsSeparator = false;
   private boolean trailingZeroes = false;
-  private int numDecimals = 0;
+  private int numDecimals = 2; // Default is 2, ask him if this is ok
 
   ComplexCalc()
   {
@@ -604,13 +604,46 @@ public class ComplexCalc extends JFrame implements ActionListener
             trailingZeroes = !trailingZeroes;
           }
         });
-
+        
+        JPanel decimalPanel = new JPanel();
+        decimalPanel.setLayout(new FlowLayout());
         JTextArea decimals = new JTextArea("2");
-        modes.add(decimals);
+        decimals.setEditable(false);
+        JButton up = new JButton("↑");
+        up.addActionListener(this);
+        up.addActionListener(new ActionListener()
+        {
+          @Override
+          public void actionPerformed(ActionEvent e)
+          {
+            numDecimals++;
+            decimals.setText(String.valueOf(numDecimals));
+          }
+        });
+        JButton down = new JButton("↓");
+        down.addActionListener(this);
+        down.addActionListener(new ActionListener()
+        {
+          @Override
+          public void actionPerformed(ActionEvent e)
+          {
+            if (numDecimals != 0) 
+            {
+              numDecimals--;
+              decimals.setText(String.valueOf(numDecimals));
+            }
+          }
+        });
+        
+        decimalPanel.add(up);
+        decimalPanel.add(decimals);
+        decimalPanel.add(down);
+        
+        prefWindow.add(decimalPanel, BorderLayout.CENTER);
 
         JPanel langs = new JPanel();
         langs.setLayout(new FlowLayout());
-        prefWindow.add(langs, BorderLayout.CENTER);
+        prefWindow.add(langs, BorderLayout.SOUTH);
 
         JButton english = new JButton("English");
         JButton spanish = new JButton("Español");
