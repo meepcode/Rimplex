@@ -6,6 +6,9 @@ import parse.Evaluation;
 import parse.ExpressionEvaluationException;
 
 import javax.swing.*;
+
+import org.junit.jupiter.params.provider.EnumSource.Mode;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -47,14 +50,14 @@ public class ComplexCalc extends JFrame implements ActionListener
   private String pastResult = "";
   private Color colorScheme = Color.CYAN;
   private boolean thousandsSeparator = false;
-  private boolean trailingZeroes = false; 
-  private int numDecimals = 0;
+  private boolean trailingZeroes = false;
+  private int numDecimals = 2; // Default is 2, ask him if this is ok
 
   ComplexCalc()
   {
     frame = new JFrame(calculatorStr);
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-    frame.setSize(380, 480);
+    frame.setSize(420, 480);
     frame.setLayout(new BorderLayout());
     frame.setResizable(true);
 
@@ -382,6 +385,23 @@ public class ComplexCalc extends JFrame implements ActionListener
         {
           res = Calculate.convertRectangularToPolar(res);
         }
+        
+        /*String formatting*/
+        //numDecimals = Integer.parseInt();
+        if (thousandsSeparator && trailingZeroes) 
+        {
+          res.setFormat("%,.0" + numDecimals + "f");
+        } else if (thousandsSeparator) 
+        {
+          res.setFormat("%,." + numDecimals + "f");
+        } else if (trailingZeroes)
+        {
+          res.setFormat("%.0" + numDecimals + "f");
+        } else 
+        {
+          res.setFormat("%." + numDecimals + "f");
+        }
+
         textfield.setText(textfield.getText() + "=" + res);
         result = textfield.getText();
         pastResult = "(" + res.toString() + ")";
@@ -410,8 +430,8 @@ public class ComplexCalc extends JFrame implements ActionListener
     String aboutTitle = "About";
     String printTitle = "Print";
     JMenuBar menuBar;
-    JMenu fileMenu, help;
-    JMenuItem pref, print, exit, about, newWindow, helpPage;
+    JMenu fileMenu, help, helpPage;
+    JMenuItem pref, print, exit, about, newWindow, englishHelpPage, spanishHelpPage, frenchHelpPage, germanHelpPage;
 
     public JMenuBar createMenuBar()
     {
@@ -443,17 +463,81 @@ public class ComplexCalc extends JFrame implements ActionListener
       about.addActionListener(e -> JOptionPane.showMessageDialog(null,
           "This calculator performs operations on the given complex number operands. " + "A history of results from previous calculations are stored in the history " + "panel.\nClicking on an expression in the History " + "Panel copies that expression to the clipboard."));
 
-      helpPage = new JMenuItem("Help page");
-      helpPage.addActionListener(this);
-      helpPage.addActionListener(e -> {
-        try
+      helpPage = new JMenu("Help Page");
+
+      englishHelpPage = new JMenuItem("Help in English");
+      helpPage.add(englishHelpPage);
+
+      englishHelpPage.addActionListener(this);
+      englishHelpPage.addActionListener(e -> {
+        if (e.getSource() == englishHelpPage)
         {
-          File file = new File("src/helpfile/helpPage.html").getAbsoluteFile();
-          Desktop.getDesktop().open(file);
+          try
+          {
+            File file = new File("src/helpfile/helpPage.html").getAbsoluteFile();
+            Desktop.getDesktop().open(file);
+          }
+          catch (IOException e1)
+          {
+            e1.printStackTrace();
+          }
         }
-        catch (IOException e1)
+      });
+
+      spanishHelpPage = new JMenuItem("Ayuda en Español");
+      helpPage.add(spanishHelpPage);
+
+      spanishHelpPage.addActionListener(this);
+      spanishHelpPage.addActionListener(e -> {
+        if (e.getSource() == spanishHelpPage)
         {
-          e1.printStackTrace();
+          try
+          {
+            File file = new File("src/helpfile/helpPageSpanish.html").getAbsoluteFile();
+            Desktop.getDesktop().open(file);
+          }
+          catch (IOException e1)
+          {
+            e1.printStackTrace();
+          }
+        }
+      });
+
+      frenchHelpPage = new JMenuItem("Aide en Français");
+      helpPage.add(frenchHelpPage);
+
+      frenchHelpPage.addActionListener(this);
+      frenchHelpPage.addActionListener(e -> {
+        if (e.getSource() == frenchHelpPage)
+        {
+          try
+          {
+            File file = new File("src/helpfile/helpPageFrench.html").getAbsoluteFile();
+            Desktop.getDesktop().open(file);
+          }
+          catch (IOException e1)
+          {
+            e1.printStackTrace();
+          }
+        }
+      });
+
+      germanHelpPage = new JMenuItem("Aide en Allemand");
+      helpPage.add(germanHelpPage);
+
+      germanHelpPage.addActionListener(this);
+      germanHelpPage.addActionListener(e -> {
+        if (e.getSource() == germanHelpPage)
+        {
+          try
+          {
+            File file = new File("src/helpfile/helpPageGerman.html").getAbsoluteFile();
+            Desktop.getDesktop().open(file);
+          }
+          catch (IOException e1)
+          {
+            e1.printStackTrace();
+          }
         }
       });
 
@@ -482,22 +566,10 @@ public class ComplexCalc extends JFrame implements ActionListener
         MenuItemWindow prefWindow = new MenuItemWindow("Preferences", 600, 300);
 
         JPanel modes = new JPanel();
-        modes.setLayout(new GridLayout(2, 1, 10, 10));
-        prefWindow.add(modes, BorderLayout.WEST);
+        modes.setLayout(new FlowLayout());
+        prefWindow.add(modes, BorderLayout.NORTH);
 
-        JButton rect = new JButton("Rectangular");
-        modes.add(rect);
-        rect.addActionListener(this);
-        rect.addActionListener(new ActionListener()
-        {
-          @Override
-          public void actionPerformed(ActionEvent e)
-          {
-            isPolarActive = false;
-          }
-        });
-
-        JButton polar = new JButton("Polar");
+        JCheckBox polar = new JCheckBox("Polar");
         modes.add(polar);
         polar.addActionListener(this);
         polar.addActionListener(new ActionListener()
@@ -505,11 +577,11 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(ActionEvent e)
           {
-            isPolarActive = true;
+            isPolarActive = !isPolarActive;
           }
         });
-        
-        JButton thousands = new JButton("Thousands Separator");
+
+        JCheckBox thousands = new JCheckBox("Thousands Separator");
         modes.add(thousands);
         thousands.addActionListener(this);
         thousands.addActionListener(new ActionListener()
@@ -517,11 +589,11 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(ActionEvent e)
           {
-            thousandsSeparator = true;
+            thousandsSeparator = !thousandsSeparator;
           }
         });
-        
-        JButton zeroes = new JButton("Trailing zeroes");
+
+        JCheckBox zeroes = new JCheckBox("Trailing zeroes");
         modes.add(zeroes);
         zeroes.addActionListener(this);
         zeroes.addActionListener(new ActionListener()
@@ -529,32 +601,64 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(ActionEvent e)
           {
-            trailingZeroes = true;
+            trailingZeroes = !trailingZeroes;
           }
         });
         
-        JTextArea numDecimals = new JTextArea("0");
-        modes.add(numDecimals);
+        JPanel decimalPanel = new JPanel();
+        decimalPanel.setLayout(new FlowLayout());
+        JTextArea decimals = new JTextArea("2");
+        decimals.setEditable(false);
+        JButton up = new JButton("↑");
+        up.addActionListener(this);
+        up.addActionListener(new ActionListener()
+        {
+          @Override
+          public void actionPerformed(ActionEvent e)
+          {
+            numDecimals++;
+            decimals.setText(String.valueOf(numDecimals));
+          }
+        });
+        JButton down = new JButton("↓");
+        down.addActionListener(this);
+        down.addActionListener(new ActionListener()
+        {
+          @Override
+          public void actionPerformed(ActionEvent e)
+          {
+            if (numDecimals != 0) 
+            {
+              numDecimals--;
+              decimals.setText(String.valueOf(numDecimals));
+            }
+          }
+        });
         
+        decimalPanel.add(up);
+        decimalPanel.add(decimals);
+        decimalPanel.add(down);
+        
+        prefWindow.add(decimalPanel, BorderLayout.CENTER);
 
         JPanel langs = new JPanel();
-        langs.setLayout(new GridLayout(4, 1, 10, 10));
-        prefWindow.add(langs, BorderLayout.EAST);
-        
+        langs.setLayout(new FlowLayout());
+        prefWindow.add(langs, BorderLayout.SOUTH);
+
         JButton english = new JButton("English");
         JButton spanish = new JButton("Español");
         JButton german = new JButton("Deutsch");
         JButton french = new JButton("Français");
-        
+
         langs.add(english);
-        english .addActionListener(this);
-        
+        english.addActionListener(this);
+
         english.addActionListener(new ActionListener()
         {
           @Override
           public void actionPerformed(final ActionEvent e)
           {
-            frame.setSize(380, 480);
+            frame.setSize(420, 480);
             english.setBackground(Color.GRAY);
             french.setBackground(null);
             german.setBackground(null);
