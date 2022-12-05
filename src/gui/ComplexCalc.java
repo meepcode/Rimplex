@@ -35,6 +35,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   private static final String DOT = ".";
   protected static String result = "";
   protected static boolean isClicked = false;
+  private static ComplexNumber res = null;
   private final JFrame frame;
   private final JTextField textfield;
   private final JButton[] numberButtons = new JButton[10];
@@ -380,7 +381,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     {
       try
       {
-        ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
+        res = Evaluation.evaluateExpression(textfield.getText());
         if (isPolarActive)
         {
           res = Calculate.convertRectangularToPolar(res);
@@ -406,6 +407,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         result = textfield.getText();
         pastResult = "(" + res.toString() + ")";
         isClicked = true;
+        complexPlane.getPanel().update();
         his.add();
       }
       catch (ExpressionEvaluationException ex)
@@ -414,6 +416,14 @@ public class ComplexCalc extends JFrame implements ActionListener
             JOptionPane.ERROR_MESSAGE);
       }
     }
+  }
+  
+  /**
+   * 
+   * @return
+   */
+  public static ComplexNumber getResult() {
+    return res;
   }
 
   /*

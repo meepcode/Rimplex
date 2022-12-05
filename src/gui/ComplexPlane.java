@@ -4,10 +4,13 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+
+import calculation.ComplexNumber;
 
 public class ComplexPlane extends JFrame
 {
@@ -15,7 +18,7 @@ public class ComplexPlane extends JFrame
   public static void main(String[] args)
   {
     ComplexPlane plane = new ComplexPlane();
-    plane.setVisible(true);
+    plane.setVisible(false);
   }
 
   /**
@@ -32,7 +35,6 @@ public class ComplexPlane extends JFrame
     panel = new ComplexPanel();
     add(panel);
     this.createUI();
-    panel.drawPoint(new Point(-5, 3));
   }
 
   /**
@@ -44,6 +46,14 @@ public class ComplexPlane extends JFrame
     setTitle("Complex Plane");
     setSize(700, 700);
     setVisible(false);
+  }
+  
+  /**
+   * 
+   * @return
+   */
+  public ComplexPanel getPanel() {
+    return panel;
   }
 }
 
@@ -101,17 +111,31 @@ class ComplexPanel extends JPanel
   int xLength = (X_AXIS_SECOND_X_COORD - X_AXIS_FIRST_X_COORD) / xCoordNumbers;
   int yLength = (Y_AXIS_SECOND_Y_COORD - Y_AXIS_FIRST_Y_COORD) / yCoordNumbers;
 
-  private ArrayList<Point> points = new ArrayList<>();
+  private ArrayList<Point2D> points = new ArrayList<>();
 
   /**
    * Repaints graph with new complex point.
    * 
    * @param point
    */
-  public void drawPoint(Point point)
+  public void drawPoint(Point2D point)
   {
     points.add(point);
     repaint();
+  }
+  
+  /**
+   * 
+   */
+  public void update() {
+    
+    if (ComplexCalc.isClicked) {
+      ComplexNumber res = ComplexCalc.getResult();
+      double x = res.getReal();
+      double y = res.getImaginary();
+      Point2D nextPoint = new Point2D.Double(x, y);
+      drawPoint(nextPoint);
+    }
   }
 
   /**
@@ -120,32 +144,32 @@ class ComplexPanel extends JPanel
    * @param point
    * @param g
    */
-  private void drawPointOnPanel(Point point, Graphics g)
+  private void drawPointOnPanel(Point2D point, Graphics g)
   {
 
-    int x = 0;
-    int y = 0;
+    double x = 0;
+    double y = 0;
 
     final int pointDiameter = 5;
-    if (point.x > 0)
+    if (point.getX() > 0)
     {
-      x = X_AXIS_FIRST_X_COORD + (point.x * xLength) - pointDiameter / 2;
+      x = X_AXIS_FIRST_X_COORD + (point.getX() * xLength) - pointDiameter / 2;
     }
     else
     {
       // fill
-      x = NEG_X_AXIS_SECOND_X_COORD + (point.x * negXLength) - pointDiameter / 2;
+      x = NEG_X_AXIS_SECOND_X_COORD + (point.getX() * negXLength) - pointDiameter / 2;
     }
-    if (point.y > 0)
+    if (point.getY() > 0)
     {
-      y = Y_AXIS_SECOND_Y_COORD - (point.y * yLength) - pointDiameter / 2;
+      y = Y_AXIS_SECOND_Y_COORD - (point.getY() * yLength) - pointDiameter / 2;
     }
     else
     {
       // fill
-      y = NEG_Y_AXIS_FIRST_Y_COORD - (point.y * negYLength) - pointDiameter / 2;
+      y = NEG_Y_AXIS_FIRST_Y_COORD - (point.getY() * negYLength) - pointDiameter / 2;
     }
-    g.fillOval(x, y, pointDiameter, pointDiameter);
+    g.fillOval((int) x, (int) y, pointDiameter, pointDiameter);
   }
 
   /**
