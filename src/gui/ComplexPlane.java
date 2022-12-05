@@ -32,7 +32,7 @@ public class ComplexPlane extends JFrame
     panel = new ComplexPanel();
     add(panel);
     this.createUI();
-    panel.drawPoint(new Point(3, 7));
+    panel.drawPoint(new Point(3, -7));
   }
 
   /**
@@ -95,6 +95,9 @@ class ComplexPanel extends JPanel
   // numerate axis
   int xCoordNumbers = 10;
   int yCoordNumbers = 10;
+  
+  int negXLength = (NEG_X_AXIS_SECOND_X_COORD - NEG_X_AXIS_FIRST_X_COORD) / xCoordNumbers;
+  int negYLength = (NEG_Y_AXIS_SECOND_Y_COORD - NEG_Y_AXIS_FIRST_Y_COORD) / yCoordNumbers;
   int xLength = (X_AXIS_SECOND_X_COORD - X_AXIS_FIRST_X_COORD) / xCoordNumbers;
   int yLength = (Y_AXIS_SECOND_Y_COORD - Y_AXIS_FIRST_Y_COORD) / yCoordNumbers;
 
@@ -131,6 +134,7 @@ class ComplexPanel extends JPanel
     else
     {
       // fill
+      x = NEG_X_AXIS_SECOND_X_COORD + (((point.x)) * negXLength) - pointDiameter / 2;
     }
     if (point.y > 0)
     {
@@ -139,6 +143,7 @@ class ComplexPanel extends JPanel
     else
     {
       // fill
+      y = NEG_Y_AXIS_FIRST_Y_COORD - (((point.y)) * negYLength) - pointDiameter / 2;
     }
     g.fillOval(x, y, pointDiameter, pointDiameter);
   }
