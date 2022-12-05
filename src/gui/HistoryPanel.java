@@ -171,6 +171,14 @@ public class HistoryPanel extends JFrame
     });
 
   }
+  
+  /**
+   * Getter method for historyList.
+   * @return String historyList
+   */
+  public String getHistoryList() {
+    return historyList;
+  }
 
   /**
    * Generates History panel.
