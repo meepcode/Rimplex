@@ -778,8 +778,13 @@ public class ComplexCalc extends JFrame implements ActionListener
       print.addActionListener(this);
       print.addActionListener(e -> {
         MenuItemWindow historyPrint = new MenuItemWindow("Print", 600, 300);
+        
         JButton printButton = new JButton("Print");
         historyPrint.add(printButton, BorderLayout.SOUTH);
+        
+        JTextPane copiedHistory = new JTextPane();
+        copiedHistory.setText(his.getHistoryList());
+        historyPrint.add(copiedHistory, BorderLayout.NORTH);
         });
 
       
