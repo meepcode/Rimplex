@@ -822,6 +822,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         
         DefaultStyledDocument doc = new DefaultStyledDocument();
         JTextPane copiedHistory = new JTextPane(doc);
+        copiedHistory.setEditable(false);
         copiedHistory.setText(his.getHistoryList());
         historyPrint.add(copiedHistory);
       });
