@@ -45,7 +45,8 @@ public class ComplexCalc extends JFrame implements ActionListener
 {
   protected static String result = "";
   protected static boolean isClicked = false;
-  @Serial private static final long serialVersionUID = 1L;
+  @Serial
+  private static final long serialVersionUID = 1L;
   private static final String SERIF = "Serif";
   private static final String MINUS = "-";
   private static final String PLUS = "+";
@@ -211,7 +212,7 @@ public class ComplexCalc extends JFrame implements ActionListener
    * Main method.
    *
    * @param args
-   *     cmd line args
+   *          cmd line args
    */
   public static void main(final String[] args)
   {
@@ -227,7 +228,8 @@ public class ComplexCalc extends JFrame implements ActionListener
     isClicked = !isClicked;
   }
 
-  @Override public void actionPerformed(final ActionEvent e)
+  @Override
+  public void actionPerformed(final ActionEvent e)
   {
     for (int i = 0; i < 10; i++)
     {
@@ -405,13 +407,14 @@ public class ComplexCalc extends JFrame implements ActionListener
           res = Calculate.convertRectangularToPolar(res);
         }
 
-        /*String formatting*/
-        //numDecimals = Integer.parseInt();
+        /* String formatting */
+        // numDecimals = Integer.parseInt();
 
         if (thousandsSeparator && trailingZeroes)
         {
           res.setFormat("%,." + numDecimals + "f");
-        } else if (thousandsSeparator) 
+        }
+        else if (thousandsSeparator)
         {
           res.setFormat("%,." + numDecimals + "f");
         }
@@ -442,16 +445,14 @@ public class ComplexCalc extends JFrame implements ActionListener
   // Menu Bar Code
   class MenuBar implements ActionListener
   {
-    String aboutMessage =
-        "This calculator performs operations on the given complex number operands. "
-            + "A history of results from previosu calculations are stored in the history "
-            + "panel.";
+    String aboutMessage = "This calculator performs operations on the given complex number operands. "
+        + "A history of results from previosu calculations are stored in the history " + "panel.";
     String aboutTitle = "About";
     String printTitle = "Print";
     JMenuBar menuBar;
     JMenu fileMenu, help, helpPage;
-    JMenuItem pref, print, exit, about, newWindow, englishHelpPage, spanishHelpPage,
-        frenchHelpPage, germanHelpPage;
+    JMenuItem pref, print, exit, about, newWindow, englishHelpPage, spanishHelpPage, frenchHelpPage,
+        germanHelpPage;
 
     public JMenuBar createMenuBar()
     {
@@ -825,7 +826,16 @@ public class ComplexCalc extends JFrame implements ActionListener
         {
           public void actionPerformed(final ActionEvent e)
           {
-            MenuItemWindow printWindow = new MenuItemWindow("Print", 300, 300);
+//            public int print(Graphics g, PageFormat pf, int page) throws PrinterException 
+//            { 
+//              if (page > 0) {
+//                return NO_SUCH_PAGE; 
+//                } 
+//            Graphics2D g2d = (Graphics2D) g; g2d.translate(pf.getImageableX(),
+//                pf.getImageableY()); // Print the entire visible contents of a // java.awt.Frame.
+//                frame.printAll(g); return PAGE_EXISTS; 
+//                }
+
           }
         });
         
@@ -859,7 +869,8 @@ public class ComplexCalc extends JFrame implements ActionListener
       return menuBar;
     }
 
-    @Override public void actionPerformed(final ActionEvent e)
+    @Override
+    public void actionPerformed(final ActionEvent e)
     {
       // TODO Auto-generated method stub
 
