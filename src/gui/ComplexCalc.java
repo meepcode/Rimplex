@@ -819,6 +819,15 @@ public class ComplexCalc extends JFrame implements ActionListener
         
         JButton printButton = new JButton("Print");
         historyPrint.add(printButton, BorderLayout.SOUTH);
+        // action listener for print button
+        printButton.addActionListener(this);
+        printButton.addActionListener(new ActionListener()
+        {
+          public void actionPerformed(final ActionEvent e)
+          {
+            MenuItemWindow printWindow = new MenuItemWindow("Print", 300, 300);
+          }
+        });
         
         DefaultStyledDocument doc = new DefaultStyledDocument();
         JTextPane copiedHistory = new JTextPane(doc);
@@ -826,13 +835,6 @@ public class ComplexCalc extends JFrame implements ActionListener
         copiedHistory.setText(his.getHistoryList());
         historyPrint.add(copiedHistory);
       });
-
-      //      public int print(Graphics g, PageFormat pf, int page) throws PrinterException { if
-      //      (page > 0) {
-      //        return NO_SUCH_PAGE; } Graphics2D g2d = (Graphics2D) g; g2d.translate(pf
-      //        .getImageableX(),
-      //        pf.getImageableY()); // Print the entire visible contents of a // java.awt.Frame.
-      //        frame.printAll(g); return PAGE_EXISTS; }
 
       // exit sub menu
       exit = new JMenuItem("Exit");
