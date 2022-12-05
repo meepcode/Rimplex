@@ -691,7 +691,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             fileMenu.setText("File");
             help.setText("Help");
             about.setText("About");
-            // print.setText("Print");
+            print.setText("Print");
             exit.setText("Exit");
             pref.setText("Preferences");
             prefWindow.setTitle("Preferences");
@@ -724,7 +724,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             fileMenu.setText("Expediente");
             help.setText("Ayuda");
             about.setText("Sobre");
-            // print.setText("Impresión");
+            print.setText("Impresión");
             exit.setText("Salida");
             pref.setText("Preferencias");
             prefWindow.setTitle("Preferencias");
@@ -757,7 +757,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             fileMenu.setText("Datei");
             help.setText("Hilfe");
             about.setText("Um");
-            // print.setText("Drucken");
+            print.setText("Drucken");
             exit.setText("Ausfahrt");
             pref.setText("Einstellungen");
             prefWindow.setTitle("Einstellungen");
@@ -791,7 +791,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             fileMenu.setText("Dossier");
             help.setText("Aider");
             about.setText("Sur");
-            // print.setText("Imprimer");
+            print.setText("Imprimer");
             exit.setText("Sortir");
             pref.setText("Préférences");
             prefWindow.setTitle("Préférences");
