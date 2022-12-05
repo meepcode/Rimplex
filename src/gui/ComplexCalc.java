@@ -60,9 +60,9 @@ public class ComplexCalc extends JFrame implements ActionListener
   private final Font myFont = new Font(SERIF, Font.BOLD, 30);
   private final String calculatorStr = "Calculator";
   private final ComplexPlane complexPlane = new ComplexPlane();
+  private final Color colorScheme = Color.CYAN;
   private boolean isPolarActive = false;
   private String pastResult = "";
-  private final Color colorScheme = Color.CYAN;
   private boolean thousandsSeparator = false;
   private boolean trailingZeroes = false;
   private int numDecimals = 2; // Default is 2, ask him if this is ok
@@ -432,7 +432,6 @@ public class ComplexCalc extends JFrame implements ActionListener
       }
     }
   }
-   
 
   // Menu Bar Code
   class MenuBar implements ActionListener
@@ -802,25 +801,25 @@ public class ComplexCalc extends JFrame implements ActionListener
           }
         });
       });
-      
+
       // print file menu
       print = new JMenuItem("Print");
       fileMenu.add(print);
-      
+
       print.addActionListener(this);
-      print.addActionListener(e -> {
+      print.addActionListener(e ->
+      {
         MenuItemWindow historyPrint = new MenuItemWindow("Print", 600, 300);
         JButton printButton = new JButton("Print");
         historyPrint.add(printButton, BorderLayout.SOUTH);
-        });
+      });
 
-      
-      
-      
-//      public int print(Graphics g, PageFormat pf, int page) throws PrinterException { if (page > 0) {
-//        return NO_SUCH_PAGE; } Graphics2D g2d = (Graphics2D) g; g2d.translate(pf.getImageableX(),
-//        pf.getImageableY()); // Print the entire visible contents of a // java.awt.Frame.
-//        frame.printAll(g); return PAGE_EXISTS; }
+      //      public int print(Graphics g, PageFormat pf, int page) throws PrinterException { if
+      //      (page > 0) {
+      //        return NO_SUCH_PAGE; } Graphics2D g2d = (Graphics2D) g; g2d.translate(pf
+      //        .getImageableX(),
+      //        pf.getImageableY()); // Print the entire visible contents of a // java.awt.Frame.
+      //        frame.printAll(g); return PAGE_EXISTS; }
 
       // exit sub menu
       exit = new JMenuItem("Exit");
