@@ -183,7 +183,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     panel.add(clrButton);
     frame.add(textfield, BorderLayout.NORTH);
     frame.add(panel, BorderLayout.CENTER);
-    frame.add(his.getPanel(), BorderLayout.EAST);
+    frame.add(his.getWindow(), BorderLayout.EAST); // changed to getWindow
 
     frame.setVisible(true);
   }

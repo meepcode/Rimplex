@@ -8,6 +8,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
+import javax.swing.JWindow;
 //import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
@@ -38,7 +39,7 @@ public class HistoryPanel extends JFrame
    *
    */
   private static final long serialVersionUID = 1L;
-  private final JPanel mainPanel;
+  private final JWindow mainPanel; // changed from JPanel 
   private final JScrollPane pane;
   private final JEditorPane area;
   private final Point curr;
@@ -56,7 +57,8 @@ public class HistoryPanel extends JFrame
   public HistoryPanel()
   {
 
-    mainPanel = new JPanel();
+    // mainPanel = new JPanel(); 
+    mainPanel = new JWindow();
     mainPanel.setLayout(new BorderLayout());
     mainPanel.setBounds(50, 100, 300, 300);
     mainPanel.setVisible(false);
@@ -64,7 +66,7 @@ public class HistoryPanel extends JFrame
     curr = mainPanel.getLocation();
 
     Border b1 = BorderFactory.createEmptyBorder(20, 20, 20, 20);
-    mainPanel.setBorder(b1);
+    // mainPanel.setBorder(b1);
 
     document = new DefaultStyledDocument();
     area = new JTextPane(document);
@@ -182,7 +184,7 @@ public class HistoryPanel extends JFrame
    *
    * @return main panel.
    */
-  public JPanel getPanel()
+  public JWindow getWindow() // changed to window
   {
     return mainPanel;
   }
