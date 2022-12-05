@@ -7,8 +7,6 @@ import parse.ExpressionEvaluationException;
 
 import javax.swing.*;
 
-import org.junit.jupiter.params.provider.EnumSource.Mode;
-
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -53,7 +51,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   private boolean trailingZeroes = false;
   private int numDecimals = 2; // Default is 2, ask him if this is ok
 
-  ComplexCalc()
+  private ComplexCalc(final Settings settings)
   {
     frame = new JFrame(calculatorStr);
     frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -196,7 +194,8 @@ public class ComplexCalc extends JFrame implements ActionListener
    */
   public static void main(final String[] args)
   {
-    ComplexCalc calc = new ComplexCalc();
+    Settings settings = Settings.getInstance();
+    ComplexCalc calc = new ComplexCalc(settings);
   }
 
   /**
@@ -385,19 +384,19 @@ public class ComplexCalc extends JFrame implements ActionListener
         {
           res = Calculate.convertRectangularToPolar(res);
         }
-        
+
         /*String formatting*/
         //numDecimals = Integer.parseInt();
-        if (thousandsSeparator && trailingZeroes) 
+        if (thousandsSeparator && trailingZeroes)
         {
           res.setFormat("%,.0" + numDecimals + "f");
-        } else if (thousandsSeparator) 
+        } else if (thousandsSeparator)
         {
           res.setFormat("%,." + numDecimals + "f");
         } else if (trailingZeroes)
         {
           res.setFormat("%.0" + numDecimals + "f");
-        } else 
+        } else
         {
           res.setFormat("%." + numDecimals + "f");
         }
@@ -554,7 +553,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         @Override
         public void actionPerformed(ActionEvent e)
         {
-          new ComplexCalc();
+          // new ComplexCalc(settings);
         }
       });
 
@@ -604,7 +603,7 @@ public class ComplexCalc extends JFrame implements ActionListener
             trailingZeroes = !trailingZeroes;
           }
         });
-        
+
         JPanel decimalPanel = new JPanel();
         decimalPanel.setLayout(new FlowLayout());
         JTextArea decimals = new JTextArea("2");
@@ -627,18 +626,18 @@ public class ComplexCalc extends JFrame implements ActionListener
           @Override
           public void actionPerformed(ActionEvent e)
           {
-            if (numDecimals != 0) 
+            if (numDecimals != 0)
             {
               numDecimals--;
               decimals.setText(String.valueOf(numDecimals));
             }
           }
         });
-        
+
         decimalPanel.add(up);
         decimalPanel.add(decimals);
         decimalPanel.add(down);
-        
+
         prefWindow.add(decimalPanel, BorderLayout.CENTER);
 
         JPanel langs = new JPanel();
@@ -742,6 +741,8 @@ public class ComplexCalc extends JFrame implements ActionListener
             plot.setText("Handlung");
             helpPage.setText("Hilfeseite");
             newWindow.setText("Neues Fenster");
+
+            int test = new java.awt.Point(4, 5).hashCode();
           }
         });
 
