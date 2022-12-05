@@ -18,6 +18,9 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.JTextPane;
+import javax.swing.text.DefaultStyledDocument;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
@@ -813,8 +816,14 @@ public class ComplexCalc extends JFrame implements ActionListener
       print.addActionListener(e ->
       {
         MenuItemWindow historyPrint = new MenuItemWindow("Print", 600, 300);
+        
         JButton printButton = new JButton("Print");
         historyPrint.add(printButton, BorderLayout.SOUTH);
+        
+        DefaultStyledDocument doc = new DefaultStyledDocument();
+        JTextPane copiedHistory = new JTextPane(doc);
+        copiedHistory.setText(his.getHistoryList());
+        historyPrint.add(copiedHistory);
       });
 
       //      public int print(Graphics g, PageFormat pf, int page) throws PrinterException { if
