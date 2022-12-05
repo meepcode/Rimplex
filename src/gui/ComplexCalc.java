@@ -2,6 +2,7 @@ package gui;
 
 import calculation.Calculate;
 import calculation.ComplexNumber;
+import calculation.PolarComplexNumber;
 import parse.Evaluation;
 import parse.ExpressionEvaluationException;
 
@@ -15,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serial;
+import java.text.DecimalFormat;
 
 /**
  * Calculator GUI.
@@ -388,15 +390,30 @@ public class ComplexCalc extends JFrame implements ActionListener
         
         /*String formatting*/
         //numDecimals = Integer.parseInt();
+        
+        // int numZeroesToRemove = 0;
         if (thousandsSeparator && trailingZeroes) 
         {
-          res.setFormat("%,.0" + numDecimals + "f");
+          res.setFormat("%,." + numDecimals + "f");
         } else if (thousandsSeparator) 
         {
           res.setFormat("%,." + numDecimals + "f");
+          
+          /*String str = res.toString();
+          boolean endScan = false;
+          for (int i = str.length() - 1; i >= str.indexOf("."); i--) 
+          {
+            if (str.charAt(i) != '0') 
+            {
+              endScan = true;
+            } else if (!endScan)
+            {
+              numZeroesToRemove++;
+            }
+          }*/
         } else if (trailingZeroes)
         {
-          res.setFormat("%.0" + numDecimals + "f");
+          res.setFormat("%." + numDecimals + "f");
         } else 
         {
           res.setFormat("%." + numDecimals + "f");
@@ -407,6 +424,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         pastResult = "(" + res.toString() + ")";
         isClicked = true;
         his.add();
+        // numZeroesToRemove = 0;
       }
       catch (ExpressionEvaluationException ex)
       {

@@ -84,7 +84,7 @@ public class HistoryPanel extends JFrame
     area.setFont(myFont);
     area.setPreferredSize(new Dimension(400, 240));
     word = null;
-    copyExpression();
+    //copyExpression();
 
     list = new ArrayList<>();
   }
