@@ -826,6 +826,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         {
           public void actionPerformed(final ActionEvent e)
           {
+            
 //            public int print(Graphics g, PageFormat pf, int page) throws PrinterException 
 //            { 
 //              if (page > 0) {
@@ -834,7 +835,7 @@ public class ComplexCalc extends JFrame implements ActionListener
 //            Graphics2D g2d = (Graphics2D) g; g2d.translate(pf.getImageableX(),
 //                pf.getImageableY()); // Print the entire visible contents of a // java.awt.Frame.
 //                frame.printAll(g); return PAGE_EXISTS; 
-//                }
+//            }
 
           }
         });
