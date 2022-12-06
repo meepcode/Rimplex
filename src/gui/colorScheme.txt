@@ -1,4 +1,6 @@
-MenuBar Color: green
+MenuBar Color: blue
 Background Color: red
-Number Buttons Color: blue
+Number Buttons Color: magenta
 Function Buttons Color: orange
+
+Color options: blue, magenta, cyan, gray, orange, red, green

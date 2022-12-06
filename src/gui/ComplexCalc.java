@@ -56,7 +56,7 @@ public class ComplexCalc extends JFrame implements ActionListener
   protected static boolean isClicked = false;
   private final JTextField textfield;
   private final JButton[] numberButtons = new JButton[10];
-  private final JButton[] functionButtons = new JButton[20];
+  private final JButton[] functionButtons = new JButton[19];
   private final JButton addButton, subButton, mulButton, divButton;
   private final JButton decButton, equButton, resetButton, clrButton, expButton, invButton, leftParenth, rightParenth, leftArrow, imaginaryNum, logButton, sqrtButton, realPart, conjugate, imaginaryPart;
   private final JPanel panel;
@@ -192,7 +192,7 @@ public class ComplexCalc extends JFrame implements ActionListener
 
     panel.setBackground(ColorSchemeUtil.backgroundColor());
 
-    for(int i = 0; i < 10; i++){
+    for(int i = 0; i < functionButtons.length; i++){
       functionButtons[i].setBackground(ColorSchemeUtil.functionButtonsColor());
     }
 
