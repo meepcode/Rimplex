@@ -1,0 +1,4 @@
+MenuBar Color: green
+Background Color: red
+Number Buttons Color: blue
+Function Buttons Color: orange
