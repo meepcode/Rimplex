@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * Test cases for PolarComplexNumber.
  *
  * @author TeamD
- * @version 11/18/22 This work complies with the JMU Honor Code.
+ * @version 12/9/22 This work complies with the JMU Honor Code.
  */
 public class PolarComplexNumberTest
 {
