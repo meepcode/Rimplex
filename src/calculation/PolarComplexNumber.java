@@ -14,7 +14,7 @@ public class PolarComplexNumber extends ComplexNumber
   private static final String SIN = "sin(";
   private static final String END = "\u00B0))";
 
-  private final Double r; // The polar magnitude
+  private Double r; // The polar magnitude
 
   /**
    * Constructor.
@@ -63,10 +63,40 @@ public class PolarComplexNumber extends ComplexNumber
       imaginary = 0.0;
     }
     
-    return String.format(getFormat(), r) + COS 
-          + String.format(getFormat(), real)
-          + "°) + " + I + SIN 
-          + String.format(getFormat(), imaginary) + END;
+    String mag = String.format(getFormat(), r);
+    String realStr = String.format(getFormat(), real);
+    String imag = String.format(getFormat(), imaginary);
+    
+    
+    if (!getTrailingZeroes()) 
+    {
+      while (mag.charAt(mag.length() - 1) == '0')
+      {
+        mag = mag.substring(0, mag.length() - 1);
+      }
+      while (realStr.charAt(realStr.length() - 1) == '0')
+      {
+        realStr = realStr.substring(0, realStr.length() - 1);
+      }
+      while (imag.charAt(imag.length() - 1) == '0')
+      {
+        imag = imag.substring(0, imag.length() - 1);
+      }
+      if (realStr.charAt(realStr.length() - 1) == '.') 
+      {
+        realStr = realStr.substring(0, realStr.length() - 1);
+      }
+      if (imag.charAt(imag.length() - 1) == '.') 
+      {
+        imag = imag.substring(0, imag.length() - 1);
+      }
+      if (mag.charAt(mag.length() - 1) == '.') 
+      {
+        mag = mag.substring(0, mag.length() - 1);
+      }
+    }
+    
+    return mag + COS + realStr + "°) + " + I + SIN + imag + END;
   }
     // }
     /*}

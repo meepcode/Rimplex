@@ -4,7 +4,7 @@ package calculation;
  * Complex number.
  *
  * @author TeamD
- * @version 11/4/22 This work complies with the JMU Honor Code.
+ * @version 11/9/22 This work complies with the JMU Honor Code.
  */
 public class ComplexNumber
 {
@@ -14,10 +14,11 @@ public class ComplexNumber
 
   // These will be doubles representing the parts of a complex number.
   // Ex. 3 + 2i would save 3 to realPart and 2 to imaginaryPart.
-  private final Double realPart;
-  private final Double imaginaryPart;
+  private Double realPart;
+  private Double imaginaryPart;
   
   private String formatText;
+  private boolean trailingZeroes;
 
 
   /**
@@ -36,6 +37,7 @@ public class ComplexNumber
     else 
       this.imaginaryPart = imaginaryPart;
     formatText = "%.2f";
+    trailingZeroes = false;
   }
 
   /**
@@ -77,13 +79,55 @@ public class ComplexNumber
   {
     if (imaginaryPart < 0)
     {
-      return String.format(formatText, realPart) + "-" + String.format(formatText,
-          Math.abs(imaginaryPart)) + I;
+      String real = String.format(formatText, realPart);
+      String imag = String.format(formatText, Math.abs(imaginaryPart));
+      if (!trailingZeroes) 
+      {
+        while (real.charAt(real.length() - 1) == '0')
+        {
+          real = real.substring(0, real.length() - 1);
+        }
+        while (imag.charAt(imag.length() - 1) == '0')
+        {
+          imag = imag.substring(0, imag.length() - 1);
+        }
+        if (real.charAt(real.length() - 1) == '.') 
+        {
+          real = real.substring(0, real.length() - 1);
+        }
+        if (imag.charAt(imag.length() - 1) == '.') 
+        {
+          imag = imag.substring(0, imag.length() - 1);
+        }
+      }
+      return real
+          + "-" + imag + I;
     }
     else
     {
-      return String.format(formatText, realPart) + "+" + String.format(formatText, imaginaryPart)
-          + I;
+      String real = String.format(formatText, realPart);
+      String imag = String.format(formatText, imaginaryPart);
+      if (!trailingZeroes) 
+      {
+        while (real.charAt(real.length() - 1) == '0')
+        {
+          real = real.substring(0, real.length() - 1);
+        }
+        while (imag.charAt(imag.length() - 1) == '0')
+        {
+          imag = imag.substring(0, imag.length() - 1);
+        }
+        if (real.charAt(real.length() - 1) == '.') 
+        {
+          real = real.substring(0, real.length() - 1);
+        }
+        if (imag.charAt(imag.length() - 1) == '.') 
+        {
+          imag = imag.substring(0, imag.length() - 1);
+        }
+      }
+      return real
+          + "+" + imag + I;
     }
   }
 
@@ -130,6 +174,24 @@ public class ComplexNumber
   public String getFormat()
   {
     return formatText;
+  }
+  
+  /**
+   * Set the formatting for trailing zeroes.
+   * @param zeroes true to turn zeroes on
+   */
+  public void setTrailingZeroes(final boolean zeroes)
+  {
+    trailingZeroes = zeroes;
+  }
+  
+  /**
+   * Get the formatting for trailing zeroes.
+   * @return true if zeroes should be included
+   */
+  public boolean getTrailingZeroes()
+  {
+    return trailingZeroes;
   }
 
 }

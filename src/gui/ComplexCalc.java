@@ -405,20 +405,40 @@ public class ComplexCalc extends JFrame implements ActionListener
         /*String formatting*/
         //numDecimals = Integer.parseInt();
 
-        if (thousandsSeparator && trailingZeroes)
+        /*if (thousandsSeparator && trailingZeroes)
         {
+          res.setTrailingZeroes(true);
           res.setFormat("%,." + numDecimals + "f");
         } else if (thousandsSeparator) 
         {
+          res.setTrailingZeroes(false);
           res.setFormat("%,." + numDecimals + "f");
         }
         else if (trailingZeroes)
         {
+          res.setTrailingZeroes(true);
           res.setFormat("%." + numDecimals + "f");
         }
         else
         {
+          res.setTrailingZeroes(false);
           res.setFormat("%." + numDecimals + "f");
+        }*/
+        
+        if (thousandsSeparator) 
+        {
+          res.setFormat("%,." + numDecimals + "f");
+        } else 
+        {
+          res.setFormat("%." + numDecimals + "f");
+        }
+        
+        if (trailingZeroes)
+        {
+          res.setTrailingZeroes(true);
+        } else 
+        {
+          res.setTrailingZeroes(false);
         }
 
         textfield.setText(textfield.getText() + "=" + res);
