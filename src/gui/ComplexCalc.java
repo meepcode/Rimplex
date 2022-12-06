@@ -640,7 +640,11 @@ public class ComplexCalc extends JFrame implements ActionListener
         });
 
         JPanel decimalPanel = new JPanel();
-        decimalPanel.setLayout(new GridLayout(1, 1));
+        decimalPanel.setLayout(new FlowLayout());
+        DefaultStyledDocument doc = new DefaultStyledDocument();
+        JTextPane decimalPlaces = new JTextPane(doc);
+        decimalPlaces.setText("Decimal Places");
+        decimalPlaces.setEditable(false);
         JTextArea decimals = new JTextArea("2");
         decimals.setEditable(false);
         JButton up = new JButton("↑");
@@ -667,6 +671,7 @@ public class ComplexCalc extends JFrame implements ActionListener
           }
         });
 
+        decimalPanel.add(decimalPlaces);
         decimalPanel.add(up);
         decimalPanel.add(decimals);
         decimalPanel.add(down);
@@ -674,7 +679,7 @@ public class ComplexCalc extends JFrame implements ActionListener
         all.add(decimalPanel);
         
         JPanel dpPanel = new JPanel();
-        dpPanel.setLayout(new GridLayout(1, 1));
+        dpPanel.setLayout(new GridLayout(1, 2));
         all.add(dpPanel);
         JCheckBox doubleParen = new JCheckBox("Double Parenthesis");
         dpPanel.add(doubleParen);
