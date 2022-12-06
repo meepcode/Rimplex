@@ -731,6 +731,12 @@ public class ComplexCalc extends JFrame implements ActionListener
             plot.setText("Graph");
             helpPage.setText("Help Page");
             newWindow.setText("New Window");
+            polar.setText("Polar");
+            thousands.setText("Thounsands Separator");
+            zeroes.setText("Trailing Zeroes");
+            decimalPlaces.setText("Decimal Places");
+            doubleParen.setText("Double Parenthesis");
+            
           }
         });
 
@@ -764,6 +770,12 @@ public class ComplexCalc extends JFrame implements ActionListener
             plot.setText("Conspirar");
             helpPage.setText("Página de ayuda");
             newWindow.setText("Nueva ventana");
+            polar.setText("MultiPolar");
+            thousands.setText("Separador de Miles");
+            zeroes.setText("Ceros Finales");
+            decimalPlaces.setText("Número de Decimales");
+            doubleParen.setText("Doble Paréntesis");
+            
           }
         });
 
@@ -797,6 +809,12 @@ public class ComplexCalc extends JFrame implements ActionListener
             plot.setText("Handlung");
             helpPage.setText("Hilfeseite");
             newWindow.setText("Neues Fenster");
+            polar.setText("Polar");
+            thousands.setText("Tausendertrennzeichen");
+            zeroes.setText("Nachgestellte Nullen");
+            decimalPlaces.setText("Dezimalstellen");
+            doubleParen.setText("Doppelte Klammern");
+            
 
             int test = new java.awt.Point(4, 5).hashCode();
           }
@@ -831,6 +849,12 @@ public class ComplexCalc extends JFrame implements ActionListener
             plot.setText("Complot");
             helpPage.setText("Page d’aide");
             newWindow.setText("Nouvelle fenêtre");
+            polar.setText("Polaire");
+            thousands.setText("Séparateur de Milliers");
+            zeroes.setText("Zéros à Droite");
+            decimalPlaces.setText("Décimales");
+            doubleParen.setText("Double parenthèse");
+            
           }
         });
       });
