@@ -4,7 +4,7 @@ package calculation;
  * Complex number.
  *
  * @author TeamD
- * @version 11/9/22 This work complies with the JMU Honor Code.
+ * @version 12/9/22 This work complies with the JMU Honor Code.
  */
 public class ComplexNumber
 {

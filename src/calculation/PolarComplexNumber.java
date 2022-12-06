@@ -6,7 +6,7 @@ import java.util.Objects;
  * Polar Complex number.
  *
  * @author TeamD
- * @version 11/18/22 This work complies with the JMU Honor Code.
+ * @version 12/9/22 This work complies with the JMU Honor Code.
  */
 public class PolarComplexNumber extends ComplexNumber
 {
@@ -50,8 +50,6 @@ public class PolarComplexNumber extends ComplexNumber
    */
   public String toString()
   {
-    // if (getImaginary() < 0)
-    // {
     Double real = getReal();
     Double imaginary = getImaginary();
     if (Math.abs(real-0) < ComplexNumber.EPSILON) 
@@ -98,16 +96,6 @@ public class PolarComplexNumber extends ComplexNumber
     
     return mag + COS + realStr + "°) + " + I + SIN + imag + END;
   }
-    // }
-    /*}
-    else
-    {
-      return String.format(FORMAT_TEXT, r) + COS 
-          + String.format(FORMAT_TEXT, getReal() * (180/Math.PI))
-          + "°) + " - I + SIN 
-          + String.format(FORMAT_TEXT, Math.abs(getImaginary() * (180/Math.PI))) + END;
-
-    }*/
 
   /**
    * Compares two complex numbers.
