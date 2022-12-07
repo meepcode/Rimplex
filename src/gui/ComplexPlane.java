@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -134,6 +135,7 @@ class ComplexPanel extends JPanel
       double x = res.getReal();
       double y = res.getImaginary();
       Point2D nextPoint = new Point2D.Double(x, y);
+      
       drawPoint(nextPoint);
     }
   }
@@ -169,6 +171,9 @@ class ComplexPanel extends JPanel
       // fill
       y = NEG_Y_AXIS_FIRST_Y_COORD - (point.getY() * negYLength) - pointDiameter / 2;
     }
+    
+    Dimension currentSize = this.getPreferredSize();
+    int maxSize = (int) Math.max(Math.abs(x), Math.abs(y));
     g.fillOval((int) x, (int) y, pointDiameter, pointDiameter);
   }
 
@@ -181,6 +186,7 @@ class ComplexPanel extends JPanel
     super.paintComponent(g);
 
     Graphics2D g2 = (Graphics2D) g;
+    
 
     g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 

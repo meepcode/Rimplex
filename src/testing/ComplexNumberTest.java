@@ -2,10 +2,16 @@ package testing;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+
 import org.junit.jupiter.api.Test;
 
 import calculation.ComplexNumber;
-
+/**
+ * Complex number tests.
+ *
+ * @author TeamD
+ * @version 12/9/22 This work complies with the JMU Honor Code.
+ */
 class ComplexNumberTest
 {
   // odd even
@@ -57,20 +63,68 @@ class ComplexNumberTest
   }
 
   /**
-   * Test toString.
+   * Test toString returns -i.
    */
   @Test
-  void testToString()
+  void testToStringMinus()
   {
-
-    String complexNumberString = "%.2f+%.2fi";
-    String sTest = String.format(complexNumberString, real, imag);
-    assertEquals(sTest, test.toString());
-    String sTest1 = String.format(complexNumberString, real1, imag1);
-    assertEquals(sTest1, test1.toString());
-    String sNegI = String.format("%.2f-%.2fi", real, Math.abs(imagN));
-    assertEquals(sNegI, negI.toString());
+    ComplexNumber c = new ComplexNumber(0.0, -1.0);
+    assertEquals("0-1i", c.toString());
   }
+  
+  /**
+   * Test toString returns +i.
+   */
+  @Test
+  void testToStringPos()
+  {
+    ComplexNumber c = new ComplexNumber(0.0, 1.0);
+    assertEquals("0+1i", c.toString());
+  }
+  
+  /**
+   * Test toString with trialing zeroes removed.
+   */
+  @Test
+  void testToStringTrailingZeroes()
+  {
+    ComplexNumber c = new ComplexNumber(0.0, 1.0);
+    c.setTrailingZeroes(true);
+    assertEquals("0.00+1.00i", c.toString());
+  }
+  
+  /**
+   * Test toString with trialing zeroes removed.
+   */
+  @Test
+  void testToStringTrailingZeroesNegative()
+  {
+    ComplexNumber c = new ComplexNumber(0.0, -1.0);
+    c.setTrailingZeroes(true);
+    assertEquals("0.00-1.00i", c.toString());
+  }
+  
+  /**
+   * Test toString with trialing zeroes removed.
+   */
+  @Test
+  void testToStringTrailingZeroes2()
+  {
+    ComplexNumber c = new ComplexNumber(1.1, -1.10);
+    assertEquals("1.1-1.1i", c.toString());
+  }
+  
+  /**
+   * Test toString with trialing zeroes removed.
+   */
+  @Test
+  void testToStringTrailingZeroes3()
+  {
+    ComplexNumber c = new ComplexNumber(1.1, 1.10);
+    assertEquals("1.1+1.1i", c.toString());
+  }
+  
+  
 
   /**
    * Test equals with two equal complex number.
@@ -140,6 +194,41 @@ class ComplexNumberTest
   void testGetMagnitude()
   {
     assertEquals(0.0, new ComplexNumber(1.0, 1.0).getPolarMagnitude());
+  }
+  
+  /**
+   * Test getFormat.
+   */
+  @Test
+  void testgetFormat()
+  {
+    ComplexNumber temp = new ComplexNumber(1.0, 1.0);
+    String format = "%.2f";
+    temp.setFormat(format);
+    
+    assertEquals(format, temp.getFormat());
+  }
+  
+  /**
+   * Test getTrailingZeroes.
+   */
+  @Test
+  void testgetTrailingZeroes()
+  {
+    ComplexNumber temp = new ComplexNumber(1.0, 1.0);
+    temp.setTrailingZeroes(true);
+    
+    assertEquals(true, temp.getTrailingZeroes());
+  }
+  
+  /**
+   * Test constructor with a negative zero input.
+   */
+  @Test
+  void testConstructorNegativeZero()
+  {
+    ComplexNumber temp = new ComplexNumber(0.0, -0.0);    
+    assertEquals(0.0, temp.getImaginary());
   }
 
 }

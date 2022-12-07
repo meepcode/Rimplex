@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertNotEquals;
  * Test cases for PolarComplexNumber.
  *
  * @author TeamD
- * @version 11/18/22 This work complies with the JMU Honor Code.
+ * @version 12/9/22 This work complies with the JMU Honor Code.
  */
 public class PolarComplexNumberTest
 {
@@ -27,10 +27,32 @@ public class PolarComplexNumberTest
   @Test public void testToString()
   {
     // covers the else
-    assertEquals("2.00(cos(120.00�) + isin(120.00�))", test.toString());
+    test.setTrailingZeroes(true);
+    assertEquals("2.00(cos(120.00°) + isin(120.00°))", test.toString());
     // covers the if
-    assertEquals("4.00(cos(120.00�) - isin(120.00�))", test2.toString());
+    test2.setTrailingZeroes(true);
+    assertEquals("4.00(cos(120.00°) + isin(-120.00°))", test2.toString());
   }
+  
+  /**
+   * toString test.
+   */
+  @Test public void testToStringZeroValues()
+  {
+    PolarComplexNumber c = new PolarComplexNumber(0.0, 0.0, 0.0);
+    assertEquals("0(cos(0°) + isin(0°))", c.toString());
+  }
+  
+  /**
+   * toString test.
+   */
+  @Test public void testToStringRemoveTrailingZeroes()
+  {
+    PolarComplexNumber c = new PolarComplexNumber(1.10, 1.10, 1.10);
+    assertEquals("1.1(cos(1.1°) + isin(1.1°))", c.toString());
+  }
+  
+  
 
   /**
    * getPolarMagnitude test.
