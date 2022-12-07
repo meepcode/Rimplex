@@ -84,7 +84,7 @@ public class HistoryPanel extends JFrame
     area.setFont(myFont);
     area.setPreferredSize(new Dimension(400, 240));
     word = null;
-    copyExpression();
+    //copyExpression();
 
     list = new ArrayList<>();
   }
@@ -170,6 +170,14 @@ public class HistoryPanel extends JFrame
       }
     });
 
+  }
+  
+  /**
+   * Getter method for historyList.
+   * @return String historyList
+   */
+  public String getHistoryList() {
+    return historyList;
   }
 
   /**
