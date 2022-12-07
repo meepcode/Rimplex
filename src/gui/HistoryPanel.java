@@ -2,14 +2,13 @@ package gui;
 
 import javax.swing.BorderFactory;
 import javax.swing.JComponent;
-//import javax.swing.JComponent;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.JWindow;
-//import javax.swing.Timer;
+import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultStyledDocument;
@@ -22,6 +21,8 @@ import java.awt.Point;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 //import java.awt.event.ActionEvent;
 //import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -60,12 +61,11 @@ public class HistoryPanel extends JFrame
     // mainPanel = new JPanel(); 
     mainPanel = new JWindow();
     mainPanel.setLayout(new BorderLayout());
-    mainPanel.setBounds(50, 100, 300, 300);
+    // mainPanel.setBounds(50, 100, 300, 300); setting the bounds else where 
     mainPanel.setVisible(false);
-
     curr = mainPanel.getLocation();
 
-    Border b1 = BorderFactory.createEmptyBorder(20, 20, 20, 20);
+    // Border b1 = BorderFactory.createEmptyBorder(20, 20, 20, 20);
     // mainPanel.setBorder(b1);
 
     document = new DefaultStyledDocument();
@@ -77,7 +77,7 @@ public class HistoryPanel extends JFrame
     mainPanel.add(area);
 
     area.setText(historyList);
-    area.setBorder(b1);
+    //area.setBorder(b1);
     area.setFont(myFont);
     area.setPreferredSize(new Dimension(400, 240));
     word = null;
@@ -164,10 +164,13 @@ public class HistoryPanel extends JFrame
   /**
    * Generates History panel.
    */
-  public void createAndShowGUI()
+  public void createAndShowGUI(Point p, int width, int height )
   {
+    int x = p.x + width;
+    int y = p.y + height / 2;
     boolean visible = mainPanel.isVisible();
     mainPanel.setVisible(!visible);
+    mainPanel.setLocation(x, y);
     area.setVisible(!visible);
     //    if (!visible)
     //    {
@@ -191,14 +194,17 @@ public class HistoryPanel extends JFrame
 
   /**
    * Helper to animate history panel.
-   *
-   * @param component
-   * @param newPoint
-   * @param framess
-   * @param interval
    */
-  private void animate(JComponent component, final Point newPoint, int frames, int interval) {
-    
+  private void animate() {
+    // a timer, swing packge
+    // construct a timer
+    int delay = 1000; //milliseconds
+    ActionListener taskPerformer = new ActionListener() {
+        public void actionPerformed(ActionEvent evt) {
+            //...Perform a task...
+        }
+    };
+    new Timer(delay, taskPerformer).start();
   }
   /*private void animate(final JComponent component, final Point newPoint, 
       final int frames, final int interval)

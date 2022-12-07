@@ -183,8 +183,8 @@ public class ComplexCalc extends JFrame implements ActionListener
     panel.add(clrButton);
     frame.add(textfield, BorderLayout.NORTH);
     frame.add(panel, BorderLayout.CENTER);
-    frame.add(his.getWindow(), BorderLayout.EAST); // changed to getWindow
-
+    // frame.add(his.getWindow());//, BorderLayout.EAST); // changed to getWindow 
+    
     frame.setVisible(true);
   }
 
@@ -430,9 +430,10 @@ public class ComplexCalc extends JFrame implements ActionListener
         complexPlane.setVisible(true);
       });
 
-      JButton hist = new JButton("History");
+      JButton hist = new JButton("History"); // HISTORY PANEL------------------------------------------------------------------------------------
       hist.addActionListener(e -> {
-        his.createAndShowGUI();
+        Point corner = frame.getLocation();
+        his.createAndShowGUI(corner, frame.getWidth(), frame.getHeight());
         frame.pack();
       });
 
