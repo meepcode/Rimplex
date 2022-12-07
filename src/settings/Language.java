@@ -2,6 +2,12 @@ package settings;
 
 import java.util.HashMap;
 
+/**
+ * Language class for changing preferences.
+ * 
+ * @author TeamD
+ * @version 12/9/22 This work complies with the JMU Honor Code.
+ */
 public class Language extends HashMap<String, String>
 {
   private final String languageName;

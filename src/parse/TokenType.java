@@ -4,6 +4,9 @@ import java.util.regex.Pattern;
 
 /**
  * The types of tokens allowed.
+ * 
+ * @author TeamD
+ * @version 12/9/22 This work complies with the JMU Honor Code.
  */
 public enum TokenType
 {

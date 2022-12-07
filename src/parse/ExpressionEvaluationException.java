@@ -2,6 +2,9 @@ package parse;
 
 /**
  * Throws when an expression is formatted improperly.
+ * 
+ * @author TeamD
+ * @version 12/9/22 This work complies with the JMU Honor Code.
  */
 public class ExpressionEvaluationException extends Exception
 {
