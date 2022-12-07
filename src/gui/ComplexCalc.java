@@ -927,7 +927,30 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         JButton printButton = new JButton("Print");
         historyPrint.add(printButton, BorderLayout.SOUTH);
         // action listener for print button
-        printButton.addActionListener(this);
+//        printButton.addActionListener(e ->
+//        {
+//          try {           
+//
+//            PrinterJob printerJob = PrinterJob.getPrinterJob();
+//
+//              PrintService printService=null;
+//              if(printerJob.printDialog())
+//              {
+//                  printService = printerJob.getPrintService();
+//              }
+//              DocFlavor flavor = DocFlavor.BYTE_ARRAY.AUTOSENSE;
+//              Doc doc = new SimpleDoc(outputImage, flavor, null);
+//              if(printService!=null) {
+//                  DocPrintJob printJob = printService.createPrintJob();
+//                  printJob.print(doc, null);
+//                  return "success";
+//              }
+//              return "error";
+//      } catch (Exception e) {
+//          throw new LabelServiceException("Unable to print", e);
+//      }
+//        });
+        
 //                printButton.addActionListener(new ActionListener()
 //                {
 //                  public void actionPerformed(final ActionEvent e)
@@ -944,7 +967,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
 //                    }
 //                  }
 //                });
-//     
+     
         DefaultStyledDocument doc = new DefaultStyledDocument();
         JTextPane copiedHistory = new JTextPane(doc);
         copiedHistory.setEditable(false);
