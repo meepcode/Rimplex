@@ -189,17 +189,17 @@ public class ComplexCalc extends JFrame implements ActionListener
     this.add(textfield, BorderLayout.NORTH);
     this.add(panel, BorderLayout.CENTER);
     this.add(his.getPanel(), BorderLayout.EAST);
-
     panel.setBackground(ColorSchemeUtil.backgroundColor());
 
-    for(int i = 0; i < functionButtons.length; i++){
+    for (int i = 0; i < functionButtons.length; i++)
+    {
       functionButtons[i].setBackground(ColorSchemeUtil.functionButtonsColor());
     }
 
-    for(int i = 0; i < numberButtons.length; i++){
+    for (int i = 0; i < numberButtons.length; i++)
+    {
       numberButtons[i].setBackground(ColorSchemeUtil.numberButtonsColor());
     }
-
 
     this.setVisible(true);
   }
@@ -446,19 +446,21 @@ public class ComplexCalc extends JFrame implements ActionListener
           res.setTrailingZeroes(false);
           res.setFormat("%." + numDecimals + "f");
         }*/
-        
-        if (thousandsSeparator) 
+
+        if (thousandsSeparator)
         {
           res.setFormat("%,." + numDecimals + "f");
-        } else 
+        }
+        else
         {
           res.setFormat("%." + numDecimals + "f");
         }
-        
+
         if (trailingZeroes)
         {
           res.setTrailingZeroes(true);
-        } else 
+        }
+        else
         {
           res.setTrailingZeroes(false);
         }
@@ -945,7 +947,6 @@ public class ComplexCalc extends JFrame implements ActionListener
       menuBar.add(hist);
 
       menuBar.setBackground(ColorSchemeUtil.menuBarColor());
-
 
       return menuBar;
     }
