@@ -85,7 +85,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
   private JCheckBox polar, thousands, zeroes, doubleParen;
   private JTextField decimalPlaces;
   private String helpPageStr;
-  private static int windowCount = 0;
+  private static int windowCount = 0; // close windows of all other windows when last window is closed
 
   private ComplexCalc(final Settings settings) throws FileNotFoundException
   {
