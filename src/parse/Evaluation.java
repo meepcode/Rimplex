@@ -13,6 +13,9 @@ import java.util.regex.Matcher;
 
 /**
  * A class with utilities for parsing strings into complex numbers.
+ * 
+ * @author TeamD
+ * @version 12/9/22 This work complies with the JMU Honor Code.
  */
 public class Evaluation
 {

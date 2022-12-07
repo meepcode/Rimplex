@@ -13,6 +13,9 @@ import java.util.Set;
 
 /**
  * Represents the settings of this program.
+ * 
+ * @author TeamD
+ * @version 12/9/22 This work complies with the JMU Honor Code.
  */
 public class Settings implements Serializable
 {
