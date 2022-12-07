@@ -8,6 +8,12 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+/**
+ * Tests for complex number calculation methods.
+ *
+ * @author TeamD
+ * @version 12/9/22 This work complies with the JMU Honor Code.
+ */
 class CalculateTest
 {
   private final ComplexNumber comp1 = new ComplexNumber(6.0, 4.0);
