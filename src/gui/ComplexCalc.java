@@ -93,6 +93,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
 
     this.settings = settings;
 
+    windowCount++;
     setupFrame();
     setupMenuBar();
     his = new HistoryPanel();
@@ -663,7 +664,6 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
           try
           {
             new ComplexCalc(settings);
-            windowCount++;
           }
           catch (FileNotFoundException ex)
           {
