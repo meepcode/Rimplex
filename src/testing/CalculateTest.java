@@ -146,22 +146,34 @@ class CalculateTest
   {
     new Calculate();
   }
-
+  
+  /**
+   * Test subtract.
+   */
   @Test void subtractTest()
   {
     assertEquals(new ComplexNumber(3.0, 2.0), Calculate.subtract(comp1, comp2));
   }
 
+  /**
+   * Test divide.
+   */
   @Test void divideTest()
   {
     assertEquals(new ComplexNumber(2.0, 0.0), Calculate.divide(comp1, comp2));
   }
 
+  /**
+   * Test multiply.
+   */
   @Test void multiplyTest()
   {
     assertEquals(new ComplexNumber(10.0, 24.0), Calculate.multiply(comp1, comp2));
   }
-
+  
+  /**
+   * Test add with polar number.
+   */
   @Test void testAddPolar()
   {
     ComplexNumber op1 = new ComplexNumber(2.0, 8.8);
@@ -174,6 +186,9 @@ class CalculateTest
     assertEquals(res, test1);
   }
 
+  /**
+   * Test subtract with polar number.
+   */
   @Test void testSubtractPolar()
   {
     ComplexNumber op1 = new ComplexNumber(2.0, 8.8);
@@ -186,6 +201,9 @@ class CalculateTest
     assertEquals(res, test1);
   }
 
+  /**
+   * Test multiply with polar number.
+   */
   @Test void testMultiplyPolar()
   {
     ComplexNumber op1 = new ComplexNumber(2.0, 8.8);
@@ -198,6 +216,9 @@ class CalculateTest
     assertEquals(res, test1);
   }
 
+  /**
+   * Test divide with polar number.
+   */
   @Test void testDividePolar()
   {
     ComplexNumber op1 = new ComplexNumber(2.0, 8.8);
@@ -210,6 +231,9 @@ class CalculateTest
     assertEquals(res, test1);
   }
 
+  /**
+   * Test log with polar number.
+   */
   @Test void testLogPolar()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
@@ -227,6 +251,9 @@ class CalculateTest
     assertEquals(res1, test);
   }
 
+  /**
+   * Test exponent with polar number.
+   */
   @Test void testExponentPolar()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
@@ -243,6 +270,9 @@ class CalculateTest
     assertEquals(res1, temp);
   }
 
+  /**
+   * Test square root wiht polar number.
+   */
   @Test void testSquareRootPolar()
   {
     ComplexNumber op = new ComplexNumber(4.0, 0.0);
@@ -253,6 +283,9 @@ class CalculateTest
     assertEquals(res, temp);
   }
 
+  /**
+   * Test conjugate with polar number.
+   */
   @Test void testConjugatePolar()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
@@ -269,6 +302,9 @@ class CalculateTest
     assertEquals(res, temp);
   }
 
+  /**
+   * Test invert with polar number.
+   */
   @Test void testInvertPolar()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
@@ -285,6 +321,9 @@ class CalculateTest
     assertEquals(res, temp);
   }
 
+  /**
+   * Test log.
+   */
   @Test void testLog()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
@@ -296,6 +335,9 @@ class CalculateTest
     assertEquals(res, test);
   }
 
+  /**
+   * Test log with just a real number.
+   */
   @Test void testLogRealOnly()
   {
     ComplexNumber op = new ComplexNumber(2.0, 0.0);
@@ -303,6 +345,9 @@ class CalculateTest
     assertEquals(res, Calculate.log(2.0, op));
   }
 
+  /**
+   * Test log with just an imaginary number.
+   */
   @Test void testLogImaginaryOnly()
   {
     ComplexNumber op = new ComplexNumber(0.0, 2.0);
@@ -313,14 +358,34 @@ class CalculateTest
         ((int) (temp.getImaginary() * 100)) / 100.0);
     assertEquals(res, test);
   }
+  
+  /**
+   * Test log that results in infinity.
+   */
+  @Test void testLogInfinity()
+  {
+    ComplexNumber op = new ComplexNumber(0.0, 0.0);
+    ComplexNumber res = new ComplexNumber(1.0, 0.0);
+    ComplexNumber temp = Calculate.log(2.0, op);
+    // Round result of log function to two digits.
+    ComplexNumber test = new ComplexNumber(((int) (temp.getReal() * 100)) / 100.0,
+        ((int) (temp.getImaginary() * 100)) / 100.0);
+    assertEquals(res, test);
+  }
 
+  /**
+   * Test exponent.
+   */
   @Test void testExponent()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
     ComplexNumber res = new ComplexNumber(0.0, 8.0);
     assertEquals(res, Calculate.exponent(2.0, op));
   }
-
+  
+  /**
+   * Test exponent with just real number.
+   */
   @Test void testExponentRealOnly()
   {
     ComplexNumber op = new ComplexNumber(2.0, 0.0);
@@ -328,13 +393,19 @@ class CalculateTest
     assertEquals(res, Calculate.exponent(2.0, op));
   }
 
+  /**
+   * Test exponent with just imaginary even number.
+   */
   @Test void testExponentImaginaryOnlyEven()
   {
     ComplexNumber op = new ComplexNumber(0.0, 2.0);
     ComplexNumber res = new ComplexNumber(-4.0, 0.0);
     assertEquals(res, Calculate.exponent(2.0, op));
   }
-
+  
+  /**
+   * Test exponent with just imaginary odd number.
+   */
   @Test void testExponentImaginaryOnlyOdd()
   {
     ComplexNumber op = new ComplexNumber(0.0, 2.0);
@@ -342,6 +413,9 @@ class CalculateTest
     assertEquals(res, Calculate.exponent(3.0, op));
   }
 
+  /**
+   * Test square root.
+   */
   @Test void testSquareRoot()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
@@ -353,6 +427,9 @@ class CalculateTest
     assertEquals(res, test);
   }
 
+  /**
+   * Test square root with just a real number.
+   */
   @Test void testSquareRootRealOnly()
   {
     ComplexNumber op = new ComplexNumber(4.0, 0.0);
@@ -360,6 +437,9 @@ class CalculateTest
     assertEquals(res, Calculate.squareRoot(op));
   }
 
+  /**
+   * Test square root with just an imaginary number.
+   */
   @Test void testSquareRootImaginaryOnly()
   {
     ComplexNumber op = new ComplexNumber(0.0, 4.0);
@@ -367,6 +447,9 @@ class CalculateTest
     assertEquals(res, Calculate.squareRoot(op));
   }
 
+  /**
+   * Test conjugate.
+   */
   @Test void testConjugate()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
@@ -374,6 +457,9 @@ class CalculateTest
     assertEquals(res, Calculate.conjugate(op));
   }
 
+  /**
+   * Test invert.
+   */
   @Test void testInvert()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
@@ -381,6 +467,9 @@ class CalculateTest
     assertEquals(res, Calculate.invert(op));
   }
 
+  /**
+   * Test polarToRectangular.
+   */
   @Test void testPToR()
   {
     ComplexNumber op = new ComplexNumber(1.99, 1.99);
@@ -392,6 +481,9 @@ class CalculateTest
     assertEquals(op, test);
   }
 
+  /**
+   * Test rectangularToPolar.
+   */
   @Test void testRToP()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);

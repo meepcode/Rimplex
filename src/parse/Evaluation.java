@@ -171,8 +171,8 @@ public class Evaluation
       }
       else if (type == TokenType.EXP)
       {
-        ComplexNumber power = evaluate(expression);
         ComplexNumber base = evaluate(expression);
+        ComplexNumber power = evaluate(expression);
 
         if (Math.abs(base.getImaginary() - 0.0) > ComplexNumber.EPSILON)
         {
