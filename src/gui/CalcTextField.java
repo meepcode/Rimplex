@@ -1,5 +1,7 @@
 package gui;
 
+import settings.Settings;
+
 import javax.swing.JTextField;
 import java.awt.Font;
 
