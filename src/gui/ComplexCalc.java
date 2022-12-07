@@ -348,7 +348,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       }
       else
       {
-        textfield.setText(textfield.getText() + "(exp)^(");
+        textfield.setText(textfield.getText() + "^");
       }
     }
     if (e.getSource() == imaginaryNum)
