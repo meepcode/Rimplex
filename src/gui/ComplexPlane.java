@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
 
@@ -107,12 +108,16 @@ class ComplexPanel extends JPanel
   int xCoordNumbers = 10;
   int yCoordNumbers = 10;
   
-  int negXLength = (NEG_X_AXIS_SECOND_X_COORD - NEG_X_AXIS_FIRST_X_COORD) / xCoordNumbers;
-  int negYLength = (NEG_Y_AXIS_SECOND_Y_COORD - NEG_Y_AXIS_FIRST_Y_COORD) / yCoordNumbers;
+  double negXLength = (NEG_X_AXIS_SECOND_X_COORD - NEG_X_AXIS_FIRST_X_COORD) / xCoordNumbers;
+  double negYLength = (NEG_Y_AXIS_SECOND_Y_COORD - NEG_Y_AXIS_FIRST_Y_COORD) / yCoordNumbers;
   int xLength = (X_AXIS_SECOND_X_COORD - X_AXIS_FIRST_X_COORD) / xCoordNumbers;
   int yLength = (Y_AXIS_SECOND_Y_COORD - Y_AXIS_FIRST_Y_COORD) / yCoordNumbers;
 
   private ArrayList<Point2D> points = new ArrayList<>();
+  private ArrayList<ComplexNumber> numbers = new ArrayList<>();
+  
+  double scale = 1.0;
+  
 
   /**
    * Repaints graph with new complex point.
@@ -132,6 +137,7 @@ class ComplexPanel extends JPanel
     
     if (ComplexCalc.isClicked) {
       ComplexNumber res = ComplexCalc.getResult();
+      numbers.add(res);
       double x = res.getReal();
       double y = res.getImaginary();
       Point2D nextPoint = new Point2D.Double(x, y);
@@ -148,6 +154,11 @@ class ComplexPanel extends JPanel
    */
   private void drawPointOnPanel(Point2D point, Graphics g)
   {
+    
+    Graphics2D gg = (Graphics2D) g;
+    
+    gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    gg.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
     double x = 0;
     double y = 0;
@@ -172,9 +183,18 @@ class ComplexPanel extends JPanel
       y = NEG_Y_AXIS_FIRST_Y_COORD - (point.getY() * negYLength) - pointDiameter / 2;
     }
     
-    Dimension currentSize = this.getPreferredSize();
-    int maxSize = (int) Math.max(Math.abs(x), Math.abs(y));
-    g.fillOval((int) x, (int) y, pointDiameter, pointDiameter);
+//    for (ComplexNumber z : numbers)
+//    {
+//      // Calculate the scaled x and y coordinates of the complex number
+//      double scaledX = x * scale;
+//      double scaledY = y * scale;
+//
+//      // Plot the complex number on the graph
+//      g.fillOval((int) scaledX, (int) scaledY, pointDiameter, pointDiameter);
+//    }
+    Ellipse2D.Double shape = new Ellipse2D.Double(x, y, pointDiameter, pointDiameter);
+    gg.fill(shape);
+    // g.fillOval((int) x, (int) y, pointDiameter, pointDiameter);
   }
 
   /**
