@@ -190,6 +190,7 @@ public class ComplexCalc extends JFrame implements ActionListener
     this.add(panel, BorderLayout.CENTER);
     this.add(his.getPanel(), BorderLayout.EAST);
     panel.setBackground(ColorSchemeUtil.backgroundColor());
+    setTitle(calculatorStr);
 
     for (int i = 0; i < functionButtons.length; i++)
     {
