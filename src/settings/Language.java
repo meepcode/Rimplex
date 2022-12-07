@@ -16,9 +16,11 @@ public class Language extends HashMap<String, String>
   {
     String result = super.get(key);
 
+
     if (result == null)
     {
-      throw new LanguageException((String) key, languageName);
+      result = "";
+      // throw new LanguageException((String) key, languageName);
     }
 
     return result;
