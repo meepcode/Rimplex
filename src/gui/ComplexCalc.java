@@ -29,6 +29,8 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -83,6 +85,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
   private JCheckBox polar, thousands, zeroes, doubleParen;
   private JTextField decimalPlaces;
   private String helpPageStr;
+  private static int windowCount = 0;
 
   private ComplexCalc(final Settings settings) throws FileNotFoundException
   {
@@ -660,6 +663,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
           try
           {
             new ComplexCalc(settings);
+            windowCount++;
           }
           catch (FileNotFoundException ex)
           {
@@ -958,7 +962,16 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         {
           System.exit(0);
         }
-      });
+      }); 
+      
+      addWindowListener(new WindowAdapter() {
+        public void windowClosing(WindowEvent e) {
+        windowCount--;
+        if (windowCount == 0) {
+          System.exit(0);
+        }
+        }
+        });
 
       menuBar.add(help);
 
