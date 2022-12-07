@@ -659,7 +659,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         {
           try
           {
-            new ComplexCalc(null);
+            new ComplexCalc(settings);
           }
           catch (FileNotFoundException ex)
           {
