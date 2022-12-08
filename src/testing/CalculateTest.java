@@ -5,9 +5,9 @@ import calculation.ComplexNumber;
 import calculation.PolarComplexNumber;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Tests for complex number calculation methods.
@@ -463,7 +463,7 @@ class CalculateTest
       ComplexNumber op = new ComplexNumber(0.0, 0.0);
       ComplexNumber temp = Calculate.log(0.0, op);
       fail();
-    } catch (IllegalArgumentException ex) 
+    } catch (IllegalArgumentException ex)
     {
       
     }
