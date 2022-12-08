@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RenderingHints;
+import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Point2D;
 import java.util.ArrayList;
@@ -185,7 +186,9 @@ class ComplexPanel extends JPanel
     Ellipse2D.Double shape = new Ellipse2D.Double(x, y, pointDiameter, pointDiameter);
     gg.fill(shape);
     // g.fillOval((int) x, (int) y, pointDiameter, pointDiameter);
+    
   }
+  
 
   /**
    * Paints Complex Plane
@@ -213,6 +216,7 @@ class ComplexPanel extends JPanel
     // negative y-axis
     g2.drawLine(NEG_Y_AXIS_X_COORD, NEG_Y_AXIS_FIRST_Y_COORD, NEG_Y_AXIS_X_COORD,
         NEG_Y_AXIS_SECOND_Y_COORD);
+    
 
     // x-axis arrow
     // g2.drawLine(X_AXIS_SECOND_X_COORD - FIRST_LENGHT, X_AXIS_Y_COORD - SECOND_LENGHT,
