@@ -5,6 +5,7 @@ import calculation.ComplexNumber;
 import calculation.PolarComplexNumber;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.Assert.fail;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -49,6 +50,28 @@ class CalculateTest
   {
     assertEquals(new ComplexNumber(3.0, 2.0), Calculate.subtract(comp1, comp2));
   }
+  
+  /**
+   * Test subtract polar + complex.
+   */
+  @Test void testSubPolarAndComplex()
+  {
+    ComplexNumber test = Calculate.convertRectangularToPolar(comp1);
+    ComplexNumber temp = new ComplexNumber(3.0, 2.0);
+    ComplexNumber res = Calculate.convertRectangularToPolar(temp);
+    assertEquals(res.toString(), Calculate.subtract(test, comp2).toString());
+  }
+  
+  /**
+   * Test subtract complex + polar.
+   */
+  @Test void testSubComplexAndPolar()
+  {
+    ComplexNumber test = Calculate.convertRectangularToPolar(comp2);
+    ComplexNumber temp = new ComplexNumber(3.0, 2.0);
+    ComplexNumber res = Calculate.convertRectangularToPolar(temp);
+    assertEquals(res.toString(), Calculate.subtract(comp1, test).toString());
+  }
 
   /**
    * Test add.
@@ -56,6 +79,28 @@ class CalculateTest
   @Test void testAdd()
   {
     assertEquals(new ComplexNumber(9.0, 6.0), Calculate.add(comp1, comp2));
+  }
+  
+  /**
+   * Test add polar + complex.
+   */
+  @Test void testAddPolarAndComplex()
+  {
+    ComplexNumber test = Calculate.convertRectangularToPolar(comp1);
+    ComplexNumber temp = new ComplexNumber(9.0, 6.0);
+    ComplexNumber res = Calculate.convertRectangularToPolar(temp);
+    assertEquals(res.toString(), Calculate.add(test, comp2).toString());
+  }
+  
+  /**
+   * Test add complex + polar.
+   */
+  @Test void testAddComplexAndPolar()
+  {
+    ComplexNumber test = Calculate.convertRectangularToPolar(comp2);
+    ComplexNumber temp = new ComplexNumber(9.0, 6.0);
+    ComplexNumber res = Calculate.convertRectangularToPolar(temp);
+    assertEquals(res.toString(), Calculate.add(comp1, test).toString());
   }
 
   /**
@@ -88,6 +133,28 @@ class CalculateTest
   @Test void testMultiplyZeroImaginary()
   {
     assertEquals(new ComplexNumber(12.0, 8.0), Calculate.multiply(comp1, comp4));
+  }
+  
+  /**
+   * Test multiply polar * complex.
+   */
+  @Test void testMultiplyPolarAndComplex()
+  {
+    ComplexNumber test = Calculate.convertRectangularToPolar(comp1);
+    ComplexNumber temp = new ComplexNumber(12.0, 8.0);
+    ComplexNumber res = Calculate.convertRectangularToPolar(temp);
+    assertEquals(res.toString(), Calculate.multiply(test, comp4).toString());
+  }
+  
+  /**
+   * Test subtract complex * polar.
+   */
+  @Test void testMultiplyComplexAndPolar()
+  {
+    ComplexNumber test = Calculate.convertRectangularToPolar(comp4);
+    ComplexNumber temp = new ComplexNumber(12.0, 8.0);
+    ComplexNumber res = Calculate.convertRectangularToPolar(temp);
+    assertEquals(res.toString(), Calculate.multiply(comp1, test).toString());
   }
 
   /**
@@ -137,6 +204,29 @@ class CalculateTest
   {
     assertEquals(new ComplexNumber(0.0, 2.0), Calculate.divide(comp4, comp6));
   }
+  
+  /**
+   * Test divide polar / complex.
+   */
+  @Test void testDividePolarAndComplex()
+  {
+    ComplexNumber test = Calculate.convertRectangularToPolar(comp1);
+    ComplexNumber temp = new ComplexNumber(2.0, 0.0);
+    ComplexNumber res = Calculate.convertRectangularToPolar(temp);
+    assertEquals(res.toString(), Calculate.divide(test, comp2).toString());
+  }
+  
+  /**
+   * Test divide complex / polar.
+   */
+  @Test void testDivideComplexAndPolar()
+  {
+    ComplexNumber test = Calculate.convertRectangularToPolar(comp2);
+    ComplexNumber temp = new ComplexNumber(2.0, 0.0);
+    ComplexNumber res = Calculate.convertRectangularToPolar(temp);
+    assertEquals(res.toString(), Calculate.divide(comp1, test).toString());
+  }
+
 
   /**
    * Test constructor.
@@ -308,17 +398,11 @@ class CalculateTest
   @Test void testInvertPolar()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
-    PolarComplexNumber test = Calculate.convertRectangularToPolar(op);
-    ComplexNumber temp = new ComplexNumber(1 / 2.0, 1 / 2.0);
-    PolarComplexNumber res = Calculate.convertRectangularToPolar(temp);
-    res = new PolarComplexNumber(((int) (res.getReal() * 100)) / 100.0,
-        ((int) (res.getImaginary() * 100)) / 100.0,
-        ((int) (res.getPolarMagnitude() * 100)) / 100.0);
-    temp = Calculate.invert(test);
-    temp = new PolarComplexNumber(((int) (temp.getReal() * 100)) / 100.0,
-        ((int) (temp.getImaginary() * 100)) / 100.0,
-        ((int) (temp.getPolarMagnitude() * 100)) / 100.0);
-    assertEquals(res, temp);
+    PolarComplexNumber op2 = Calculate.convertRectangularToPolar(op);
+    ComplexNumber temp = Calculate.invert(op2);
+    ComplexNumber res = Calculate.convertPolarToRectangular(temp);
+    ComplexNumber expected = new ComplexNumber(1 / 4.0, -1 / 4.0);
+    assertEquals(expected, res);
   }
 
   /**
@@ -365,12 +449,24 @@ class CalculateTest
   @Test void testLogInfinity()
   {
     ComplexNumber op = new ComplexNumber(0.0, 0.0);
-    ComplexNumber res = new ComplexNumber(1.0, 0.0);
     ComplexNumber temp = Calculate.log(2.0, op);
-    // Round result of log function to two digits.
-    ComplexNumber test = new ComplexNumber(((int) (temp.getReal() * 100)) / 100.0,
-        ((int) (temp.getImaginary() * 100)) / 100.0);
-    assertEquals(res, test);
+    assertEquals("-Infinity+0i", temp.toString());
+  }
+  
+  /**
+   * Test log with an invalid base (0).
+   */
+  @Test void testLogInvalidBase()
+  {
+    try 
+    {
+      ComplexNumber op = new ComplexNumber(0.0, 0.0);
+      ComplexNumber temp = Calculate.log(0.0, op);
+      fail();
+    } catch (IllegalArgumentException ex) 
+    {
+      
+    }
   }
 
   /**
@@ -463,7 +559,7 @@ class CalculateTest
   @Test void testInvert()
   {
     ComplexNumber op = new ComplexNumber(2.0, 2.0);
-    ComplexNumber res = new ComplexNumber(1 / 2.0, 1 / 2.0);
+    ComplexNumber res = new ComplexNumber(1 / 4.0, -1 / 4.0);
     assertEquals(res, Calculate.invert(op));
   }
 
