@@ -215,6 +215,8 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
     ComplexCalc calc = new ComplexCalc(settings);
   }
 
+  
+  
   /**
    * Sets boolean click.
    */
@@ -970,6 +972,8 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       // TODO Auto-generated method stub
 
     }
+    
+    
   }
 
 }

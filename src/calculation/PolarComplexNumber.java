@@ -20,9 +20,9 @@ public class PolarComplexNumber extends ComplexNumber
    * Constructor.
    * 
    * @param realPart
-   *          real
+   *          real number (in radians)
    * @param imaginaryPart
-   *          imaginary
+   *          imaginary (in radians)
    * @param r
    *          polar magnitude: a new part used for polar form
    */
@@ -50,8 +50,8 @@ public class PolarComplexNumber extends ComplexNumber
    */
   public String toString()
   {
-    Double real = getReal();
-    Double imaginary = getImaginary();
+    Double real = getReal() * (180.0 / Math.PI);
+    Double imaginary = getImaginary() * (180.0 / Math.PI);
     if (Math.abs(real-0) < ComplexNumber.EPSILON) 
     {
       real = 0.0;
