@@ -115,10 +115,8 @@ class ComplexPanel extends JPanel
 
   private ArrayList<Point2D> points = new ArrayList<>();
   private ArrayList<ComplexNumber> numbers = new ArrayList<>();
+ 
   
-  double scale = 1.0;
-  
-
   /**
    * Repaints graph with new complex point.
    * 
@@ -131,7 +129,7 @@ class ComplexPanel extends JPanel
   }
   
   /**
-   * 
+   * updates the GUI with the new point
    */
   public void update() {
     
@@ -162,6 +160,7 @@ class ComplexPanel extends JPanel
 
     double x = 0;
     double y = 0;
+    
 
     final int pointDiameter = 5;
     if (point.getX() > 0)
@@ -183,15 +182,6 @@ class ComplexPanel extends JPanel
       y = NEG_Y_AXIS_FIRST_Y_COORD - (point.getY() * negYLength) - pointDiameter / 2;
     }
     
-//    for (ComplexNumber z : numbers)
-//    {
-//      // Calculate the scaled x and y coordinates of the complex number
-//      double scaledX = x * scale;
-//      double scaledY = y * scale;
-//
-//      // Plot the complex number on the graph
-//      g.fillOval((int) scaledX, (int) scaledY, pointDiameter, pointDiameter);
-//    }
     Ellipse2D.Double shape = new Ellipse2D.Double(x, y, pointDiameter, pointDiameter);
     gg.fill(shape);
     // g.fillOval((int) x, (int) y, pointDiameter, pointDiameter);
