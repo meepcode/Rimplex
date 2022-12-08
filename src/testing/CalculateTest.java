@@ -450,7 +450,7 @@ class CalculateTest
   {
     ComplexNumber op = new ComplexNumber(0.0, 0.0);
     ComplexNumber temp = Calculate.log(2.0, op);
-    assertEquals("-Infinity+0i", temp.toString());
+    assertEquals("-Infinity+0\uD835\uDE2A", temp.toString());
   }
   
   /**

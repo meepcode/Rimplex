@@ -15,13 +15,19 @@ import settings.Language.LanguageException;
  */
 class LanguageTest
 {
-
+  
+  /**
+   * Tests the constructor.
+   */
   @Test
   void testConstructor()
   {
     Language test = new Language("English");
   }
   
+  /**
+   * Tests get().
+   */
   @Test
   void testGet()
   {
@@ -30,6 +36,9 @@ class LanguageTest
     assertEquals("aboutMessage", test.get("English"));
   }
   
+  /**
+   * Tests get() with an unmapped value.
+   */
   @Test
   void testGetNull()
   {
@@ -37,6 +46,9 @@ class LanguageTest
     assertEquals("", test.get("aboutMessage"));
   }
   
+  /**
+   * Tests the LanguageException constuctor.
+   */
   @Test
   void testLanguageException()
   {
