@@ -28,10 +28,7 @@ import java.awt.Desktop;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
@@ -39,6 +36,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serial;
+import java.security.Key;
 import java.util.Objects;
 
 /**
@@ -767,6 +765,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         decimalPlaces.setEditable(false);
         JTextArea decimals = new JTextArea("" + settings.getNumDecimals());
         numDecimals = settings.getNumDecimals();
+        decimals.setText(""+numDecimals);
         decimals.setEditable(false);
         JButton up = new JButton("↑");
         up.addActionListener(this);
@@ -785,7 +784,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         {
           settings.decrementNumDecimals();
           numDecimals--;
-          decimals.setText("" + settings.getTrailingZerosMode());
+          decimals.setText("" + settings.getNumDecimals());
         });
 
         decimalPanel.add(decimalPlaces);
@@ -818,6 +817,17 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         JComboBox<String> historyDropDown = new JComboBox<String>(hisShortcuts);
         historyDropDown.setVisible(true);
         shortcuts.add(historyDropDown);
+
+        historyDropDown.addActionListener(new ActionListener()
+        {
+          @Override
+          public void actionPerformed(ActionEvent e)
+          {
+            if(e.getSource() == hisShortcuts[0]){
+              hist.setMnemonic(KeyEvent.VK_C);
+            }
+          }
+        });
 
         // opening graph using keyboard shortcut dropdown menu
 
