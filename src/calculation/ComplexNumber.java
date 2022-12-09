@@ -15,10 +15,9 @@ public class ComplexNumber
   // Ex. 3 + 2i would save 3 to realPart and 2 to imaginaryPart.
   private Double realPart;
   private Double imaginaryPart;
-  
+
   private String formatText;
   private boolean trailingZeroes;
-
 
   /**
    * Constructor from floating point numbers.
@@ -80,7 +79,7 @@ public class ComplexNumber
     {
       String real = String.format(formatText, realPart);
       String imag = String.format(formatText, Math.abs(imaginaryPart));
-      if (!trailingZeroes) 
+      if (!trailingZeroes)
       {
         while (real.charAt(real.length() - 1) == '0')
         {
@@ -90,23 +89,22 @@ public class ComplexNumber
         {
           imag = imag.substring(0, imag.length() - 1);
         }
-        if (real.charAt(real.length() - 1) == '.') 
+        if (real.charAt(real.length() - 1) == '.')
         {
           real = real.substring(0, real.length() - 1);
         }
-        if (imag.charAt(imag.length() - 1) == '.') 
+        if (imag.charAt(imag.length() - 1) == '.')
         {
           imag = imag.substring(0, imag.length() - 1);
         }
       }
-      return real
-          + "-" + imag + I;
+      return real + "-" + imag + I;
     }
     else
     {
       String real = String.format(formatText, realPart);
       String imag = String.format(formatText, imaginaryPart);
-      if (!trailingZeroes) 
+      if (!trailingZeroes)
       {
         while (real.charAt(real.length() - 1) == '0')
         {
@@ -116,17 +114,16 @@ public class ComplexNumber
         {
           imag = imag.substring(0, imag.length() - 1);
         }
-        if (real.charAt(real.length() - 1) == '.') 
+        if (real.charAt(real.length() - 1) == '.')
         {
           real = real.substring(0, real.length() - 1);
         }
-        if (imag.charAt(imag.length() - 1) == '.') 
+        if (imag.charAt(imag.length() - 1) == '.')
         {
           imag = imag.substring(0, imag.length() - 1);
         }
       }
-      return real
-          + "+" + imag + I;
+      return real + "+" + imag + I;
     }
   }
 
@@ -158,36 +155,42 @@ public class ComplexNumber
   {
     return (int) (realPart + 31 * imaginaryPart);
   }
-  
+
   /**
    * Set the formatting for the complex number (number of decimals).
-   * @param formatString String
+   * 
+   * @param formatString
+   *          String
    */
   public void setFormat(final String formatString)
   {
     formatText = formatString;
   }
-  
+
   /**
    * Get the formatting.
+   * 
    * @return The format string.
    */
   public String getFormat()
   {
     return formatText;
   }
-  
+
   /**
    * Set the formatting for trailing zeroes.
-   * @param zeroes true to turn zeroes on
+   * 
+   * @param zeroes
+   *          true to turn zeroes on
    */
   public void setTrailingZeroes(final boolean zeroes)
   {
     trailingZeroes = zeroes;
   }
-  
+
   /**
    * Get the formatting for trailing zeroes.
+   * 
    * @return true if zeroes should be included
    */
   public boolean getTrailingZeroes()

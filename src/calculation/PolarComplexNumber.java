@@ -1,3 +1,4 @@
+
 package calculation;
 
 import java.util.Objects;
@@ -12,7 +13,7 @@ public class PolarComplexNumber extends ComplexNumber
 {
   private static final String COS = "(cos(";
   private static final String SIN = "sin(";
-  private static final String END = "Â°))";
+  private static final String END = "°))";
 
   private Double r; // The polar magnitude
 
@@ -52,15 +53,21 @@ public class PolarComplexNumber extends ComplexNumber
   {
     Double real = getReal() * (180.0 / Math.PI);
     Double imaginary = getImaginary() * (180.0 / Math.PI);
-    if (Math.abs(real-0) < ComplexNumber.EPSILON) 
+    if (Math.abs(real - 0) < ComplexNumber.EPSILON)
     {
       real = 0.0;
     }
-    if (Math.abs(imaginary-0) < ComplexNumber.EPSILON) 
+    if (Math.abs(imaginary - 0) < ComplexNumber.EPSILON)
     {
       imaginary = 0.0;
     }
-    
+
+    String mag = String.format(getFormat(), r);
+    String realStr = String.format(getFormat(), real);
+    String imag = String.format(getFormat(), imaginary);
+
+    if (!getTrailingZeroes())
+    {
       while (mag.charAt(mag.length() - 1) == '0')
       {
         mag = mag.substring(0, mag.length() - 1);
@@ -73,20 +80,20 @@ public class PolarComplexNumber extends ComplexNumber
       {
         imag = imag.substring(0, imag.length() - 1);
       }
-      if (realStr.charAt(realStr.length() - 1) == '.') 
+      if (realStr.charAt(realStr.length() - 1) == '.')
       {
         realStr = realStr.substring(0, realStr.length() - 1);
       }
-      if (imag.charAt(imag.length() - 1) == '.') 
+      if (imag.charAt(imag.length() - 1) == '.')
       {
         imag = imag.substring(0, imag.length() - 1);
       }
-      if (mag.charAt(mag.length() - 1) == '.') 
+      if (mag.charAt(mag.length() - 1) == '.')
       {
         mag = mag.substring(0, mag.length() - 1);
       }
     }
-    
+
     return mag + COS + realStr + "°) + " + I + SIN + imag + END;
   }
 
@@ -121,4 +128,3 @@ public class PolarComplexNumber extends ComplexNumber
   }
 
 }
-
