@@ -118,7 +118,7 @@ public class Evaluation
           if (parts[0].length() > 2
               && parts[0].charAt(parts[0].length() - 2) == ComplexNumber.I.charAt(0))
           {
-            parts[0] = parts[0].replaceAll(ComplexNumber.I + "", "");
+            parts[0] = parts[0].replaceAll(ComplexNumber.I, "");
             imaginaryPart = Double.parseDouble(parts[0]);
           }
           else
