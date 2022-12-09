@@ -6,6 +6,7 @@ import settings.Settings;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Point;
@@ -20,6 +21,12 @@ import javax.swing.JPanel;
 
 import calculation.ComplexNumber;
 
+/**
+ * Complex Plane class that displays Complex Plane
+ * 
+ * @author Team D
+ *
+ */
 public class ComplexPlane extends JFrame implements LanguageChangeable
 {
 
@@ -51,9 +58,12 @@ public class ComplexPlane extends JFrame implements LanguageChangeable
   }
 
   /**
-   * Change the set language.
+   * Getter for complex panel
+   * 
+   * @return complexPanel Change the set language.
    */
-  @Override public void changeLanguage()
+  @Override
+  public void changeLanguage()
   {
     setTitle(Settings.getInstance().getLanguage().get("complexPlaneTitle"));
   }
@@ -83,22 +93,22 @@ class ComplexPanel extends JPanel
   private static final long serialVersionUID = 1L;
   // positive x-axis coord constants
   public static final int X_AXIS_FIRST_X_COORD = 350;
-  public static final int X_AXIS_SECOND_X_COORD = 650;
+  public static final int X_AXIS_SECOND_X_COORD = 690;
   public static final int X_AXIS_Y_COORD = 350;
 
   // negative x-axis coord constants
-  public static final int NEG_X_AXIS_FIRST_X_COORD = 50;
+  public static final int NEG_X_AXIS_FIRST_X_COORD = 10;
   public static final int NEG_X_AXIS_SECOND_X_COORD = 350;
   public static final int NEG_X_AXIS_Y_COORD = 350;
 
   // positive y-axis coord constants
-  public static final int Y_AXIS_FIRST_Y_COORD = 50;
+  public static final int Y_AXIS_FIRST_Y_COORD = 10;
   public static final int Y_AXIS_SECOND_Y_COORD = 350;
   public static final int Y_AXIS_X_COORD = 350;
 
   // negative x-axis coord constants
-  public static final int NEG_Y_AXIS_FIRST_Y_COORD = 351;
-  public static final int NEG_Y_AXIS_SECOND_Y_COORD = 651;
+  public static final int NEG_Y_AXIS_FIRST_Y_COORD = 350;
+  public static final int NEG_Y_AXIS_SECOND_Y_COORD = 690;
   public static final int NEG_Y_AXIS_X_COORD = 350;
 
   // arrows of axis are represented with "hipotenuse" of
@@ -114,8 +124,8 @@ class ComplexPanel extends JPanel
   public static final int AXIS_STRING_DISTANCE = 20;
 
   // numerate axis
-  int xCoordNumbers = 10;
-  int yCoordNumbers = 10;
+  int xCoordNumbers = 100;
+  int yCoordNumbers = 100;
 
   double negXLength = (NEG_X_AXIS_SECOND_X_COORD - NEG_X_AXIS_FIRST_X_COORD) / xCoordNumbers;
   double negYLength = (NEG_Y_AXIS_SECOND_Y_COORD - NEG_Y_AXIS_FIRST_Y_COORD) / yCoordNumbers;
@@ -124,8 +134,6 @@ class ComplexPanel extends JPanel
 
   private ArrayList<Point2D> points = new ArrayList<>();
   private ArrayList<ComplexNumber> numbers = new ArrayList<>();
-
-  
 
   /**
    * Repaints graph with new complex point.
@@ -147,7 +155,6 @@ class ComplexPanel extends JPanel
     if (ComplexCalc.isClicked)
     {
       ComplexNumber res = ComplexCalc.getResult();
-      System.out.println(res.toString());
       numbers.add(res);
       double x = res.getReal();
       double y = res.getImaginary();
@@ -214,7 +221,6 @@ class ComplexPanel extends JPanel
     // AffineTransform oldTransform = g2.getTransform();
 
     // calculate the dimensions of the panel
-  
 
     // translate the graphics to the center of the panel
     // if (isCalled)
@@ -265,7 +271,7 @@ class ComplexPanel extends JPanel
     // g2.fillOval(347, 347, ORIGIN_COORDINATE_LENGHT, ORIGIN_COORDINATE_LENGHT);
 
     // draw text "X" and draw text "Y"
-    g2.drawString("X", X_AXIS_SECOND_X_COORD - AXIS_STRING_DISTANCE / 2,
+    g2.drawString("X", X_AXIS_SECOND_X_COORD - AXIS_STRING_DISTANCE / 2 - 5,
         X_AXIS_Y_COORD + AXIS_STRING_DISTANCE);
     g2.drawString("Y", Y_AXIS_X_COORD - AXIS_STRING_DISTANCE,
         Y_AXIS_FIRST_Y_COORD + AXIS_STRING_DISTANCE / 2);
@@ -275,8 +281,9 @@ class ComplexPanel extends JPanel
     // g2.drawString("(0, 0)", 352, 365);
 
     // draw x-axis numbers
-    int xNum = -9;
-    for (int i = 1; i < xCoordNumbers; i++)
+    int xNum = -100;
+    int xIncrement = 25;
+    for (int i = 1; i < 5; i++)
     {
 
       // if (xNum == 0)
@@ -286,25 +293,31 @@ class ComplexPanel extends JPanel
       // }
 
       // positive x
-      g2.drawLine(X_AXIS_FIRST_X_COORD + (i * xLength), X_AXIS_Y_COORD - SECOND_LENGHT,
-          X_AXIS_FIRST_X_COORD + (i * xLength), X_AXIS_Y_COORD + SECOND_LENGHT);
+      g2.drawLine(X_AXIS_FIRST_X_COORD + (xIncrement * xLength), X_AXIS_Y_COORD - SECOND_LENGHT,
+          X_AXIS_FIRST_X_COORD + (xIncrement * xLength), X_AXIS_Y_COORD + SECOND_LENGHT);
 
-      g2.drawString(Integer.toString(i), X_AXIS_FIRST_X_COORD + (i * xLength) - 3,
+      g.setFont(new Font("Serif", Font.PLAIN, 10));
+      g2.drawString(Integer.toString(xIncrement), X_AXIS_FIRST_X_COORD + (xIncrement * xLength) - 3,
           X_AXIS_Y_COORD + AXIS_STRING_DISTANCE);
 
       // negative X
-      g2.drawLine(NEG_X_AXIS_FIRST_X_COORD + (i * xLength), NEG_X_AXIS_Y_COORD - SECOND_LENGHT,
-          NEG_X_AXIS_FIRST_X_COORD + (i * xLength), NEG_X_AXIS_Y_COORD + SECOND_LENGHT);
+      g2.drawLine(NEG_X_AXIS_FIRST_X_COORD + ((xIncrement - 11) * xLength),
+          NEG_X_AXIS_Y_COORD - SECOND_LENGHT,
+          NEG_X_AXIS_FIRST_X_COORD + ((xIncrement - 11) * xLength),
+          NEG_X_AXIS_Y_COORD + SECOND_LENGHT);
 
-      g2.drawString(Integer.toString(xNum), NEG_X_AXIS_FIRST_X_COORD + (i * xLength) - 3,
+      g2.drawString(Integer.toString(xNum),
+          NEG_X_AXIS_FIRST_X_COORD + ((xIncrement - 11) * xLength) - 3,
           NEG_X_AXIS_Y_COORD + AXIS_STRING_DISTANCE);
 
-      xNum++;
+      xNum += 25;
+      xIncrement += 25;
     }
 
     // draw y-axis numbers
-    int yNum = -9;
-    for (int i = 1; i < yCoordNumbers; i++)
+    int yNum = -100;
+    int yIncrement = 25;
+    for (int i = 1; i < 5; i++)
     {
 
       // if (yNum == 0)
@@ -314,20 +327,24 @@ class ComplexPanel extends JPanel
       // }
 
       // positive y axis
-      String yAxis = Integer.toString(i) + "i";
-      g2.drawLine(Y_AXIS_X_COORD - SECOND_LENGHT, Y_AXIS_SECOND_Y_COORD - (i * yLength),
-          Y_AXIS_X_COORD + SECOND_LENGHT, Y_AXIS_SECOND_Y_COORD - (i * yLength));
+      String yAxis = Integer.toString(yIncrement) + "i";
+      g2.drawLine(Y_AXIS_X_COORD - SECOND_LENGHT, Y_AXIS_SECOND_Y_COORD - (yIncrement * yLength),
+          Y_AXIS_X_COORD + SECOND_LENGHT, Y_AXIS_SECOND_Y_COORD - (yIncrement * yLength));
 
+      g.setFont(new Font("Serif", Font.PLAIN, 10));
       g2.drawString(yAxis, Y_AXIS_X_COORD - AXIS_STRING_DISTANCE,
-          Y_AXIS_SECOND_Y_COORD - (i * yLength));
+          Y_AXIS_SECOND_Y_COORD - (yIncrement * yLength));
 
       // negative y axis
-      g2.drawLine(NEG_Y_AXIS_X_COORD - SECOND_LENGHT, NEG_Y_AXIS_SECOND_Y_COORD - (i * yLength),
-          NEG_Y_AXIS_X_COORD + SECOND_LENGHT, NEG_Y_AXIS_SECOND_Y_COORD - (i * yLength));
+      g2.drawLine(NEG_Y_AXIS_X_COORD - SECOND_LENGHT,
+          NEG_Y_AXIS_SECOND_Y_COORD - ((yIncrement - 11) * yLength),
+          NEG_Y_AXIS_X_COORD + SECOND_LENGHT,
+          NEG_Y_AXIS_SECOND_Y_COORD - ((yIncrement - 11) * yLength));
 
       g2.drawString(yNum + "i", NEG_Y_AXIS_X_COORD - AXIS_STRING_DISTANCE,
-          NEG_Y_AXIS_SECOND_Y_COORD - (i * yLength));
-      yNum++;
+          NEG_Y_AXIS_SECOND_Y_COORD - ((yIncrement - 11) * yLength));
+      yNum += 25;
+      yIncrement += 25;
     }
     // draw points
     points.forEach(p -> drawPointOnPanel(p, g));
