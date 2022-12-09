@@ -550,8 +550,8 @@ public class ComplexCalc extends JFrame
         complexPlane.setVisible(true);
       });
 
-      JButton hist = new JButton("History"); // HISTORY
-                                             // PANEL------------------------------------------------------------------------------------
+      JButton hist = new JButton("History"); // HISTORY PANEL------------------------------------------------------------------------------------
+
       // frame.addComponentListener((ComponentListener) frame);
       hist.addActionListener(e -> {
         Point corner = panel.getLocation();

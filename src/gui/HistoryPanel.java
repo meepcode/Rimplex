@@ -191,9 +191,10 @@ public class HistoryPanel extends JFrame
   public void createAndShowGUI(Point p, int width, int height )
   {
     System.out.println(p);
-    System.out.println("The width:" + width + "----The height:" + height);
-    int x = p.x + width - (width / 50);//- 10;
+    System.out.println("The panel width:" + width + "----The panel height:" + height);
+    int x = p.x + width; // - (width / 50);//- 10;
     int y = p.y + height / 4;
+    System.out.print("x:" + x + "y:"+ y);
     boolean visible = mainPanel.isVisible();
     mainPanel.setVisible(!visible);
     mainPanel.setLocation(x, y);
