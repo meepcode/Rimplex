@@ -48,7 +48,7 @@ public class HistoryPanel extends JFrame
    *
    */
   private static final long serialVersionUID = 1L;
-  private final JWindow mainPanel; // changed from JPanel 
+  private final JWindow mainPanel; // changed from JPanel
   private final JScrollPane pane;
   private final JEditorPane area;
   private final Point curr;
@@ -58,18 +58,17 @@ public class HistoryPanel extends JFrame
   private final ArrayList<String> list;
   private String historyList = "";
   private int index = 0;
-  
-  
+
   /**
    * Constructor.
    */
   public HistoryPanel()
   {
 
-    // mainPanel = new JPanel(); 
+    // mainPanel = new JPanel();
     mainPanel = new JWindow();
     mainPanel.setLayout(new BorderLayout());
-    mainPanel.setBounds(50, 100, 300, 300); // setting the bounds else where 
+    mainPanel.setBounds(50, 100, 300, 300); // setting the bounds else where
     mainPanel.setVisible(false);
     curr = mainPanel.getLocation();
 
@@ -85,11 +84,11 @@ public class HistoryPanel extends JFrame
     mainPanel.add(area);
 
     area.setText(historyList);
-    //area.setBorder(b1);
+    // area.setBorder(b1);
     area.setFont(myFont);
     area.setPreferredSize(new Dimension(400, 240));
     word = null;
-    //copyExpression();
+    // copyExpression();
 
     list = new ArrayList<>();
   }
@@ -140,7 +139,7 @@ public class HistoryPanel extends JFrame
       {
         try
         {
-          
+
           int point = area.viewToModel2D(e.getPoint());
           int startPoint = Utilities.getRowStart(area, point);
           int endPoint = Utilities.getRowEnd(area, point);
@@ -151,14 +150,13 @@ public class HistoryPanel extends JFrame
           StringSelection selection = new StringSelection(words[0]);
           Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
           clipboard.setContents(selection, selection);
-          
-          /*Highlight text to copy*/
+
+          /* Highlight text to copy */
           Highlighter highlighter = area.getHighlighter();
-          HighlightPainter painter = 
-                 new DefaultHighlighter.DefaultHighlightPainter(Color.cyan);
-          //int p0 = word.indexOf(startPoint);
-          //int p1 = p0 + "world".length();
-          highlighter.addHighlight(startPoint, endPoint - words[1].length() - 1, painter );
+          HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.cyan);
+          // int p0 = word.indexOf(startPoint);
+          // int p1 = p0 + "world".length();
+          highlighter.addHighlight(startPoint, endPoint - words[1].length() - 1, painter);
 
         }
         catch (BadLocationException ex)
@@ -176,25 +174,29 @@ public class HistoryPanel extends JFrame
     });
 
   }
-  
+
   /**
    * Getter method for historyList.
+   * 
    * @return String historyList
    */
-  public String getHistoryList() {
+  public String getHistoryList()
+  {
     return historyList;
   }
 
   /**
    * Generates History panel.
    */
-  public void createAndShowGUI(Point p, int width, int height )
+  public void createAndShowGUI(Point p, int width, int height)
   {
     System.out.println(p);
     System.out.println("The panel width:" + width + "----The panel height:" + height);
-    int x = p.x + width; // - (width / 50);//- 10;
-    int y = p.y + height / 4;
-    System.out.print("x:" + x + "y:"+ y);
+    // values to add x + 843 , y + 180
+    int x = p.x + 843; // - (width / 50);//- 10; had to change it to an random value bc we switch to
+                       // panel from frame
+    int y = p.y + 180;
+    System.out.print("x:" + x + "y:" + y);
     boolean visible = mainPanel.isVisible();
     mainPanel.setVisible(!visible);
     mainPanel.setLocation(x, y);
@@ -204,7 +206,7 @@ public class HistoryPanel extends JFrame
     slideout.setVisible(true);
     System.out.println(mainPanel.getLocation());
     System.out.println(mainPanel.getSize());
-    
+
   }
 
   /**
@@ -220,14 +222,17 @@ public class HistoryPanel extends JFrame
   /**
    * Helper to animate history panel.
    */
-  private void animate() {
+  private void animate()
+  {
     // a timer, swing packge
     // construct a timer
-    int delay = 1000; //milliseconds
-    ActionListener taskPerformer = new ActionListener() {
-        public void actionPerformed(ActionEvent evt) {
-            //...Perform a task...
-        }
+    int delay = 1000; // milliseconds
+    ActionListener taskPerformer = new ActionListener()
+    {
+      public void actionPerformed(ActionEvent evt)
+      {
+        // ...Perform a task...
+      }
     };
     new Timer(delay, taskPerformer).start();
   }
