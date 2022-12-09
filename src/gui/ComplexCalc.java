@@ -81,6 +81,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
   private final boolean doubleParenthesis = false;
   private final int numDecimals = 2; // Default is 2, ask him if this is ok
   private String pastResult = "";
+  private static ComplexNumber complexResult = null;
   private String printTitle, aboutTitle, aboutMessage;
   private JMenuBar menuBar;
   private JMenu fileMenu, help, helpPage;
@@ -443,6 +444,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       try
       {
         ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
+        complexResult = res;
         if (settings.getComplexNumberMode() == Settings.ON)
         {
           res = Calculate.convertRectangularToPolar(res);
@@ -1014,5 +1016,13 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
     }
 
   }
+
+  public static ComplexNumber getResult()
+  {
+    // TODO Auto-generated method stub
+    return complexResult;
+  }
+
+  
 
 }
