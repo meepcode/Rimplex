@@ -69,7 +69,7 @@ class ComplexNumberTest
   void testToStringMinus()
   {
     ComplexNumber c = new ComplexNumber(0.0, -1.0);
-    assertEquals("0-1i", c.toString());
+    assertEquals("0-1𝘪", c.toString());
   }
   
   /**
@@ -79,7 +79,7 @@ class ComplexNumberTest
   void testToStringPos()
   {
     ComplexNumber c = new ComplexNumber(0.0, 1.0);
-    assertEquals("0+1i", c.toString());
+    assertEquals("0+1𝘪", c.toString());
   }
   
   /**
@@ -90,7 +90,7 @@ class ComplexNumberTest
   {
     ComplexNumber c = new ComplexNumber(0.0, 1.0);
     c.setTrailingZeroes(true);
-    assertEquals("0.00+1.00i", c.toString());
+    assertEquals("0.00+1.00𝘪", c.toString());
   }
   
   /**
@@ -101,7 +101,7 @@ class ComplexNumberTest
   {
     ComplexNumber c = new ComplexNumber(0.0, -1.0);
     c.setTrailingZeroes(true);
-    assertEquals("0.00-1.00i", c.toString());
+    assertEquals("0.00-1.00𝘪", c.toString());
   }
   
   /**
@@ -111,7 +111,7 @@ class ComplexNumberTest
   void testToStringTrailingZeroes2()
   {
     ComplexNumber c = new ComplexNumber(1.1, -1.10);
-    assertEquals("1.1-1.1i", c.toString());
+    assertEquals("1.1-1.1𝘪", c.toString());
   }
   
   /**
@@ -121,7 +121,7 @@ class ComplexNumberTest
   void testToStringTrailingZeroes3()
   {
     ComplexNumber c = new ComplexNumber(1.1, 1.10);
-    assertEquals("1.1+1.1i", c.toString());
+    assertEquals("1.1+1.1𝘪", c.toString());
   }
   
   
