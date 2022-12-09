@@ -1,14 +1,11 @@
 package gui;
 
 import javax.swing.BorderFactory;
-<<<<<<< HEAD
 import javax.swing.JButton;
 import javax.swing.JComponent;
-=======
-
 
 //import javax.swing.JComponent;
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
+
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -233,34 +230,5 @@ public class HistoryPanel extends JFrame
     };
     new Timer(delay, taskPerformer).start();
   }
-  /*private void animate(final JComponent component, final Point newPoint, 
-      final int frames, final int interval)
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
-  {
-    Rectangle compBounds = component.getBounds();
-
-    Point oldPoint = new Point(compBounds.x, compBounds.y), animFrame = new Point(
-        (newPoint.x - oldPoint.x) / frames, (newPoint.y - oldPoint.y) / frames);
-
-    new Timer(interval, new ActionListener()
-    {
-      int currentFrame = 0;
-
-      public void actionPerformed(final ActionEvent e)
-      {
-        component.setBounds(oldPoint.x + (animFrame.x * currentFrame),
-            oldPoint.y + (animFrame.y * currentFrame), compBounds.width, compBounds.height);
-
-        if (currentFrame != frames)
-        {
-          currentFrame++;
-        }
-        else
-        {
-          ((Timer) e.getSource()).stop();
-        }
-      }
-    }).start();
-  }*/
 
 }
