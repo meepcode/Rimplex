@@ -29,18 +29,16 @@ import java.awt.Desktop;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
-<<<<<<< HEAD
+//import java.awt.Point;
+//import java.awt.event.ActionEvent;
+//import java.awt.event.ActionListener;
+//import java.awt.event.ComponentAdapter;
+//import java.awt.event.ComponentEvent;
+//import java.awt.event.ComponentListener;
+//import java.awt.event.WindowAdapter;
+//import java.awt.event.WindowEvent;
 import java.awt.Point;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-=======
 import java.awt.event.*;
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 import java.awt.print.PageFormat;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
