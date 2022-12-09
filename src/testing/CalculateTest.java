@@ -606,5 +606,16 @@ class CalculateTest
 
     assertEquals(res, test);
   }
+  
+  /**
+   * Test rectangularToPolar.
+   */
+  @Test void testRToP2()
+  {
+    ComplexNumber op = new ComplexNumber(0.0, 0.0);
+    PolarComplexNumber res = new PolarComplexNumber(0.0, 0.0, 0.0);
+    PolarComplexNumber temp = Calculate.convertRectangularToPolar(op);
+    assertEquals(res, temp);
+  }
 
 }
