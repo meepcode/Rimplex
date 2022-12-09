@@ -1,23 +1,34 @@
 package gui;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.RenderingHints;
-import java.io.Serial;
+import java.awt.geom.AffineTransform;
+import java.awt.geom.Ellipse2D;
+import java.awt.geom.Point2D;
+import java.util.ArrayList;
 
-/**
- * Represents the visual complex plane graph.
- */
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+
+import calculation.ComplexNumber;
+
 public class ComplexPlane extends JFrame
 {
+  // testing
+  public static void main(String[] args)
+  {
+    ComplexPlane plane = new ComplexPlane();
+    plane.setVisible(false);
+  }
 
   /**
-   *
+   * attributes
    */
-  @Serial private static final long serialVersionUID = 1L;
-  ComplexPanel panel;
+  private static final long serialVersionUID = 1L;
+  private ComplexPanel panel;
 
   /**
    * Constructor.
@@ -30,31 +41,58 @@ public class ComplexPlane extends JFrame
   }
 
   /**
-   * Set plane frame.
+   * Set plane frame
    */
   public void createUI()
   {
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-    setTitle("Complex Panel");
+    setTitle("Complex Plane");
     setSize(700, 700);
     setVisible(false);
   }
+
+  /**
+   * 
+   * @return
+   */
+  public ComplexPanel getPanel()
+  {
+    return panel;
+  }
 }
 
+/**
+ * helper class to paint plane
+ * 
+ * @author jaxco
+ *
+ */
 class ComplexPanel extends JPanel
 {
+
   /**
-   *
+   * constant attributes
    */
-  // x-axis coord constants
-  public static final int X_AXIS_FIRST_X_COORD = 50;
+  private static final long serialVersionUID = 1L;
+  // positive x-axis coord constants
+  public static final int X_AXIS_FIRST_X_COORD = 350;
   public static final int X_AXIS_SECOND_X_COORD = 650;
   public static final int X_AXIS_Y_COORD = 350;
 
-  // y-axis coord constants
+  // negative x-axis coord constants
+  public static final int NEG_X_AXIS_FIRST_X_COORD = 50;
+  public static final int NEG_X_AXIS_SECOND_X_COORD = 350;
+  public static final int NEG_X_AXIS_Y_COORD = 350;
+
+  // positive y-axis coord constants
   public static final int Y_AXIS_FIRST_Y_COORD = 50;
-  public static final int Y_AXIS_SECOND_Y_COORD = 650;
+  public static final int Y_AXIS_SECOND_Y_COORD = 350;
   public static final int Y_AXIS_X_COORD = 350;
+
+  // negative x-axis coord constants
+  public static final int NEG_Y_AXIS_FIRST_Y_COORD = 351;
+  public static final int NEG_Y_AXIS_SECOND_Y_COORD = 651;
+  public static final int NEG_Y_AXIS_X_COORD = 350;
 
   // arrows of axis are represented with "hipotenuse" of
   // triangle
@@ -67,40 +105,169 @@ class ComplexPanel extends JPanel
 
   // distance of coordinate strings from axis
   public static final int AXIS_STRING_DISTANCE = 20;
-  @Serial private static final long serialVersionUID = 1L;
 
-  public void paintComponent(final Graphics g)
+  // numerate axis
+  int xCoordNumbers = 10;
+  int yCoordNumbers = 10;
+
+  double negXLength = (NEG_X_AXIS_SECOND_X_COORD - NEG_X_AXIS_FIRST_X_COORD) / xCoordNumbers;
+  double negYLength = (NEG_Y_AXIS_SECOND_Y_COORD - NEG_Y_AXIS_FIRST_Y_COORD) / yCoordNumbers;
+  int xLength = (X_AXIS_SECOND_X_COORD - X_AXIS_FIRST_X_COORD) / xCoordNumbers;
+  int yLength = (Y_AXIS_SECOND_Y_COORD - Y_AXIS_FIRST_Y_COORD) / yCoordNumbers;
+
+  private ArrayList<Point2D> points = new ArrayList<>();
+  private ArrayList<ComplexNumber> numbers = new ArrayList<>();
+
+  private double scaleFactor = 1.0;
+  private int panelWidth;
+  private int panelHeight;
+
+  boolean isCalled = false;
+
+  /**
+   * Repaints graph with new complex point.
+   * 
+   * @param point
+   */
+  public void drawPoint(Point2D point)
+  {
+    points.add(point);
+    if (point.getX() > 10 || point.getY() > 10)
+    {
+      zoomOut();
+      isCalled = !isCalled;
+    }
+    else
+    {
+      repaint();
+    }
+  }
+
+  /**
+   * updates the GUI with the new point
+   */
+  public void update()
+  {
+
+    if (ComplexCalc.isClicked)
+    {
+      ComplexNumber res = ComplexCalc.getResult();
+      numbers.add(res);
+      double x = res.getReal();
+      double y = res.getImaginary();
+      Point2D nextPoint = new Point2D.Double(x, y);
+
+      drawPoint(nextPoint);
+    }
+  }
+
+  /**
+   * Draws Point on panel
+   * 
+   * @param point
+   * @param g
+   */
+  private void drawPointOnPanel(Point2D point, Graphics g)
+  {
+
+    Graphics2D gg = (Graphics2D) g;
+
+    gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    gg.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
+
+    double x = 0;
+    double y = 0;
+
+    final int pointDiameter = 5;
+    if (point.getX() > 0)
+    {
+      x = X_AXIS_FIRST_X_COORD + (point.getX() * xLength) - pointDiameter / 2;
+    }
+    else
+    {
+      // fill
+      x = NEG_X_AXIS_SECOND_X_COORD + (point.getX() * negXLength) - pointDiameter / 2;
+    }
+    if (point.getY() > 0)
+    {
+      y = Y_AXIS_SECOND_Y_COORD - (point.getY() * yLength) - pointDiameter / 2;
+    }
+    else
+    {
+      // fill
+      y = NEG_Y_AXIS_FIRST_Y_COORD - (point.getY() * negYLength) - pointDiameter / 2;
+    }
+
+    Ellipse2D.Double shape = new Ellipse2D.Double(x, y, pointDiameter, pointDiameter);
+    gg.fill(shape);
+    // g.fillOval((int) x, (int) y, pointDiameter, pointDiameter);
+
+  }
+
+  /**
+   * Paints Complex Plane
+   */
+  public void paintComponent(Graphics g)
   {
 
     super.paintComponent(g);
 
     Graphics2D g2 = (Graphics2D) g;
 
+    // save the current transformation matrix
+    // AffineTransform oldTransform = g2.getTransform();
+
+    // calculate the dimensions of the panel
+    panelWidth = getWidth();
+    panelHeight = getHeight();
+
+    // translate the graphics to the center of the panel
+    // if (isCalled)
+    // {
+    // g.translate(-panelWidth / 2 + 10, -panelHeight / 2 + 10);
+    // System.out.println(-panelWidth / 2);
+    // System.out.println(-panelHeight / 2);
+    // g.translate(panelWidth / 2 + 10, panelHeight / 2 + 10);
+    // }
+    // // g2.scale(scaleFactor, scaleFactor);
+    // g2.scale(scaleFactor, scaleFactor);
+
     g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-    // x-axis
+    // positive x-axis
     g2.drawLine(X_AXIS_FIRST_X_COORD, X_AXIS_Y_COORD, X_AXIS_SECOND_X_COORD, X_AXIS_Y_COORD);
-    // y-axis
+
+    // negative x-axis
+    g2.drawLine(NEG_X_AXIS_FIRST_X_COORD, NEG_X_AXIS_Y_COORD, NEG_X_AXIS_SECOND_X_COORD,
+        NEG_X_AXIS_Y_COORD);
+
+    // positive y-axis
     g2.drawLine(Y_AXIS_X_COORD, Y_AXIS_FIRST_Y_COORD, Y_AXIS_X_COORD, Y_AXIS_SECOND_Y_COORD);
 
-    // x-axis arrow
-    g2.drawLine(X_AXIS_SECOND_X_COORD - FIRST_LENGHT, X_AXIS_Y_COORD - SECOND_LENGHT,
-        X_AXIS_SECOND_X_COORD, X_AXIS_Y_COORD);
-    g2.drawLine(X_AXIS_SECOND_X_COORD - FIRST_LENGHT, X_AXIS_Y_COORD + SECOND_LENGHT,
-        X_AXIS_SECOND_X_COORD, X_AXIS_Y_COORD);
+    // negative y-axis
+    g2.drawLine(NEG_Y_AXIS_X_COORD, NEG_Y_AXIS_FIRST_Y_COORD, NEG_Y_AXIS_X_COORD,
+        NEG_Y_AXIS_SECOND_Y_COORD);
 
-    // y-axis arrow
-    g2.drawLine(Y_AXIS_X_COORD - SECOND_LENGHT, Y_AXIS_FIRST_Y_COORD + FIRST_LENGHT, Y_AXIS_X_COORD,
-        Y_AXIS_FIRST_Y_COORD);
-    g2.drawLine(Y_AXIS_X_COORD + SECOND_LENGHT, Y_AXIS_FIRST_Y_COORD + FIRST_LENGHT, Y_AXIS_X_COORD,
-        Y_AXIS_FIRST_Y_COORD);
+    // x-axis arrow
+    // g2.drawLine(X_AXIS_SECOND_X_COORD - FIRST_LENGHT, X_AXIS_Y_COORD - SECOND_LENGHT,
+    // X_AXIS_SECOND_X_COORD, X_AXIS_Y_COORD);
+    // g2.drawLine(X_AXIS_SECOND_X_COORD - FIRST_LENGHT, X_AXIS_Y_COORD + SECOND_LENGHT,
+    // X_AXIS_SECOND_X_COORD, X_AXIS_Y_COORD);
+    //
+    // // y-axis arrow
+    // g2.drawLine(Y_AXIS_X_COORD - SECOND_LENGHT, Y_AXIS_FIRST_Y_COORD + FIRST_LENGHT,
+    // Y_AXIS_X_COORD,
+    // Y_AXIS_FIRST_Y_COORD);
+    // g2.drawLine(Y_AXIS_X_COORD + SECOND_LENGHT, Y_AXIS_FIRST_Y_COORD + FIRST_LENGHT,
+    // Y_AXIS_X_COORD,
+    // Y_AXIS_FIRST_Y_COORD);
 
     // draw origin Point
     // g2.fillOval(
     // X_AXIS_FIRST_X_COORD - (ORIGIN_COORDINATE_LENGHT / 2),
     // Y_AXIS_SECOND_Y_COORD - (ORIGIN_COORDINATE_LENGHT / 2),
     // ORIGIN_COORDINATE_LENGHT, ORIGIN_COORDINATE_LENGHT);
-    g2.fillOval(347, 347, ORIGIN_COORDINATE_LENGHT, ORIGIN_COORDINATE_LENGHT);
+    // g2.fillOval(347, 347, ORIGIN_COORDINATE_LENGHT, ORIGIN_COORDINATE_LENGHT);
 
     // draw text "X" and draw text "Y"
     g2.drawString("X", X_AXIS_SECOND_X_COORD - AXIS_STRING_DISTANCE / 2,
@@ -110,50 +277,77 @@ class ComplexPanel extends JPanel
     // draw center point (0,0)
     // g2.drawString("(0, 0)", X_AXIS_FIRST_X_COORD - AXIS_STRING_DISTANCE,
     // Y_AXIS_SECOND_Y_COORD + AXIS_STRING_DISTANCE);
-    g2.drawString("(0, 0)", 352, 365);
-
-    // numerate axis
-    int xCoordNumbers = 12;
-    int yCoordNumbers = 12;
-    int xLength = (X_AXIS_SECOND_X_COORD - X_AXIS_FIRST_X_COORD) / xCoordNumbers;
-    int yLength = (Y_AXIS_SECOND_Y_COORD - Y_AXIS_FIRST_Y_COORD) / yCoordNumbers;
+    // g2.drawString("(0, 0)", 352, 365);
 
     // draw x-axis numbers
-    int xNum = -5;
+    int xNum = -9;
     for (int i = 1; i < xCoordNumbers; i++)
     {
 
-      if (xNum == 0)
-      {
-        xNum++;
-        continue;
-      }
+      // if (xNum == 0)
+      // {
+      // xNum++;
+      // continue;
+      // }
 
+      // positive x
       g2.drawLine(X_AXIS_FIRST_X_COORD + (i * xLength), X_AXIS_Y_COORD - SECOND_LENGHT,
           X_AXIS_FIRST_X_COORD + (i * xLength), X_AXIS_Y_COORD + SECOND_LENGHT);
 
-      g2.drawString(Integer.toString(xNum), X_AXIS_FIRST_X_COORD + (i * xLength) - 3,
+      g2.drawString(Integer.toString(i), X_AXIS_FIRST_X_COORD + (i * xLength) - 3,
           X_AXIS_Y_COORD + AXIS_STRING_DISTANCE);
+
+      // negative X
+      g2.drawLine(NEG_X_AXIS_FIRST_X_COORD + (i * xLength), NEG_X_AXIS_Y_COORD - SECOND_LENGHT,
+          NEG_X_AXIS_FIRST_X_COORD + (i * xLength), NEG_X_AXIS_Y_COORD + SECOND_LENGHT);
+
+      g2.drawString(Integer.toString(xNum), NEG_X_AXIS_FIRST_X_COORD + (i * xLength) - 3,
+          NEG_X_AXIS_Y_COORD + AXIS_STRING_DISTANCE);
+
       xNum++;
     }
 
     // draw y-axis numbers
-    int yNum = -5;
+    int yNum = -9;
     for (int i = 1; i < yCoordNumbers; i++)
     {
 
-      if (yNum == 0)
-      {
-        yNum++;
-        continue;
-      }
+      // if (yNum == 0)
+      // {
+      // yNum++;
+      // continue;
+      // }
 
-      String yAxis = yNum + "i";
+      // positive y axis
+      String yAxis = Integer.toString(i) + "i";
       g2.drawLine(Y_AXIS_X_COORD - SECOND_LENGHT, Y_AXIS_SECOND_Y_COORD - (i * yLength),
           Y_AXIS_X_COORD + SECOND_LENGHT, Y_AXIS_SECOND_Y_COORD - (i * yLength));
+
       g2.drawString(yAxis, Y_AXIS_X_COORD - AXIS_STRING_DISTANCE,
           Y_AXIS_SECOND_Y_COORD - (i * yLength));
+
+      // negative y axis
+      g2.drawLine(NEG_Y_AXIS_X_COORD - SECOND_LENGHT, NEG_Y_AXIS_SECOND_Y_COORD - (i * yLength),
+          NEG_Y_AXIS_X_COORD + SECOND_LENGHT, NEG_Y_AXIS_SECOND_Y_COORD - (i * yLength));
+
+      g2.drawString(yNum + "i", NEG_Y_AXIS_X_COORD - AXIS_STRING_DISTANCE,
+          NEG_Y_AXIS_SECOND_Y_COORD - (i * yLength));
       yNum++;
     }
+    // draw points
+    points.forEach(p -> drawPointOnPanel(p, g));
+
+  }
+
+  public void zoomIn()
+  {
+    scaleFactor *= 1.1;
+    repaint();
+  }
+
+  public void zoomOut()
+  {
+    scaleFactor *= 0.9;
+    repaint();
   }
 }
