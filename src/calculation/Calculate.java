@@ -490,7 +490,7 @@ public class Calculate
     Double polarMagnitude = Math.sqrt(Math.pow(op1.getReal(), 2) + Math.pow(op1.getImaginary(), 2));
     Double polarAngle = 0.0;
     polarAngle = Math.atan(op1.getImaginary() / op1.getReal());
-    if (polarAngle == Double.NaN) 
+    if (polarAngle.equals(Double.NaN)) 
     {
       polarAngle = 0.0;
     }
