@@ -25,7 +25,6 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.KeyStroke;
-import javax.swing.KeyStroke;
 import javax.swing.text.DefaultStyledDocument;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -33,10 +32,12 @@ import java.awt.Desktop;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.awt.print.PageFormat;
@@ -45,8 +46,6 @@ import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.Serial;
-import java.security.Key;
 import java.util.Objects;
 
 /**
@@ -85,11 +84,11 @@ public class ComplexCalc extends JFrame
   private final ComplexPlane complexPlane = new ComplexPlane();
   private final Color colorScheme = Color.CYAN;
   private final Settings settings;
-  private String pastResult = "";
-  private String printTitle, aboutTitle, aboutMessage;
   private final String onEnter = "onEnter";
   private final String openHistory = "openHistory";
   private final String openGraph = "openGraph";
+  private String pastResult = "";
+  private String printTitle, aboutTitle, aboutMessage;
   private JMenuBar menuBar;
   private JMenu fileMenu, help, helpPage;
   private JMenuItem pref, print, exit, about, newWindow, englishHelpPage, spanishHelpPage,
@@ -256,7 +255,7 @@ public class ComplexCalc extends JFrame
    * Main method.
    *
    * @param args
-   *          cmd line args
+   *     cmd line args
    */
   public static void main(final String[] args) throws FileNotFoundException
   {
@@ -298,8 +297,7 @@ public class ComplexCalc extends JFrame
     this.setJMenuBar(mb.createMenuBar());
   }
 
-  @Override
-  public void actionPerformed(final ActionEvent e)
+  @Override public void actionPerformed(final ActionEvent e)
   {
     for (int i = 0; i < 10; i++)
     {
@@ -483,8 +481,6 @@ public class ComplexCalc extends JFrame
         res = Calculate.convertRectangularToPolar(res);
       }
 
-      
-
       if (settings.getThousandsSeparatorMode() == Settings.ON)
       {
         res.setFormat("%,." + settings.getNumDecimals() + 'f');
@@ -518,8 +514,7 @@ public class ComplexCalc extends JFrame
     }
   }
 
-  @Override
-  public void changeLanguage()
+  @Override public void changeLanguage()
   {
     printTitle = settings.getLanguage().get("printTitle");
     aboutMessage = settings.getLanguage().get("aboutMessage");
@@ -547,22 +542,24 @@ public class ComplexCalc extends JFrame
     // newWindow.setText(settings.getLanguage().get("newWindow"));
   }
 
-  @Override public void keyTyped(final KeyEvent keyEvent)
+  @Override public void componentResized(final ComponentEvent componentEvent)
   {
-    System.out.print("test");
+
   }
 
-  @Override public void keyPressed(final KeyEvent keyEvent)
+  @Override public void componentMoved(final ComponentEvent componentEvent)
   {
-    if (/*keyEvent.getKeyCode() == KeyEvent.VK_ENTER && isFocused()*/true)
-    {
-      System.out.print("test");
-    }
+
   }
 
-  @Override public void keyReleased(final KeyEvent keyEvent)
+  @Override public void componentShown(final ComponentEvent componentEvent)
   {
-    System.out.print("test");
+
+  }
+
+  @Override public void componentHidden(final ComponentEvent componentEvent)
+  {
+
   }
 
   // Menu Bar Code
@@ -588,7 +585,8 @@ public class ComplexCalc extends JFrame
       hist = new JButton();
       hist.addActionListener(e ->
       {
-        his.createAndShowGUI();
+        Point corner = panel.getLocation();
+        his.createAndShowGUI(corner, panel.getWidth(), panel.getHeight());
         pack();
       });
 
@@ -646,7 +644,8 @@ public class ComplexCalc extends JFrame
       helpPage.add(frenchHelpPage);
 
       frenchHelpPage.addActionListener(this);
-      frenchHelpPage.addActionListener(e -> {
+      frenchHelpPage.addActionListener(e ->
+      {
         if (e.getSource() == frenchHelpPage)
         {
           try
@@ -665,7 +664,8 @@ public class ComplexCalc extends JFrame
       helpPage.add(germanHelpPage);
 
       germanHelpPage.addActionListener(this);
-      germanHelpPage.addActionListener(e -> {
+      germanHelpPage.addActionListener(e ->
+      {
         if (e.getSource() == germanHelpPage)
         {
           try
@@ -690,8 +690,7 @@ public class ComplexCalc extends JFrame
       newWindow.addActionListener(this);
       newWindow.addActionListener(new ActionListener()
       {
-        @Override
-        public void actionPerformed(final ActionEvent e)
+        @Override public void actionPerformed(final ActionEvent e)
         {
           try
           {
@@ -708,7 +707,8 @@ public class ComplexCalc extends JFrame
       pref = new JMenuItem();
       fileMenu.add(pref);
       pref.addActionListener(this);
-      pref.addActionListener(e -> {
+      pref.addActionListener(e ->
+      {
         prefWindow = new MenuItemWindow("", 900, 300);
 
         JPanel all = new JPanel();
@@ -731,7 +731,8 @@ public class ComplexCalc extends JFrame
         }
         polar.addActionListener(this);
 
-        polar.addActionListener(f -> {
+        polar.addActionListener(f ->
+        {
           if (settings.getComplexNumberMode() == Settings.RECTANGULAR)
           {
             settings.setComplexNumberMode(Settings.POLAR);
@@ -759,8 +760,7 @@ public class ComplexCalc extends JFrame
 
         thousands.addActionListener(new ActionListener()
         {
-          @Override
-          public void actionPerformed(final ActionEvent e)
+          @Override public void actionPerformed(final ActionEvent e)
           {
             if (settings.getThousandsSeparatorMode() == Settings.ON)
             {
@@ -789,7 +789,8 @@ public class ComplexCalc extends JFrame
           zeroes.setSelected(false);
         }
 
-        zeroes.addActionListener(f -> {
+        zeroes.addActionListener(f ->
+        {
           if (settings.getTrailingZerosMode() == Settings.ON)
           {
             settings.setTrailingZerosMode(Settings.OFF);
@@ -812,8 +813,7 @@ public class ComplexCalc extends JFrame
         up.addActionListener(this);
         up.addActionListener(new ActionListener()
         {
-          @Override
-          public void actionPerformed(final ActionEvent e)
+          @Override public void actionPerformed(final ActionEvent e)
           {
             settings.incrementNumDecimals();
             decimals.setText(settings.getNumDecimals() + "");
@@ -821,7 +821,8 @@ public class ComplexCalc extends JFrame
         });
         JButton down = new JButton("↓");
         down.addActionListener(this);
-        down.addActionListener(f -> {
+        down.addActionListener(f ->
+        {
           settings.decrementNumDecimals();
           decimals.setText("" + settings.getNumDecimals());
         });
@@ -859,10 +860,10 @@ public class ComplexCalc extends JFrame
 
         historyDropDown.addActionListener(new ActionListener()
         {
-          @Override
-          public void actionPerformed(ActionEvent e)
+          @Override public void actionPerformed(ActionEvent e)
           {
-            if(e.getSource() == hisShortcuts[0]){
+            if (e.getSource() == hisShortcuts[0])
+            {
               hist.setMnemonic(KeyEvent.VK_C);
             }
           }
@@ -902,7 +903,6 @@ public class ComplexCalc extends JFrame
         english.addActionListener(this);
 
         english.addActionListener(f ->
-
         {
 
           setSize(420, 480);
@@ -920,8 +920,7 @@ public class ComplexCalc extends JFrame
 
         spanish.addActionListener(new ActionListener()
         {
-          @Override
-          public void actionPerformed(final ActionEvent e)
+          @Override public void actionPerformed(final ActionEvent e)
           {
             setSize(460, 480);
 
@@ -939,8 +938,7 @@ public class ComplexCalc extends JFrame
 
         german.addActionListener(new ActionListener()
         {
-          @Override
-          public void actionPerformed(final ActionEvent e)
+          @Override public void actionPerformed(final ActionEvent e)
           {
             setSize(440, 480);
 
@@ -959,8 +957,7 @@ public class ComplexCalc extends JFrame
 
         french.addActionListener(new ActionListener()
         {
-          @Override
-          public void actionPerformed(final ActionEvent e)
+          @Override public void actionPerformed(final ActionEvent e)
           {
             setSize(430, 480);
             french.setBackground(Color.GRAY);
@@ -996,7 +993,8 @@ public class ComplexCalc extends JFrame
       fileMenu.add(print);
 
       print.addActionListener(this);
-      print.addActionListener(e -> {
+      print.addActionListener(e ->
+      {
         MenuItemWindow historyPrint = new MenuItemWindow("Print", 600, 300);
 
         JButton printButton = new JButton("Print");
@@ -1073,8 +1071,7 @@ public class ComplexCalc extends JFrame
       return menuBar;
     }
 
-    @Override
-    public void actionPerformed(final ActionEvent e)
+    @Override public void actionPerformed(final ActionEvent e)
     {
       // TODO Auto-generated method stub
 
@@ -1088,32 +1085,29 @@ public class ComplexCalc extends JFrame
       }
     }
 
-  @Override
-  public void componentResized(ComponentEvent e)
-  {
-    // TODO Auto-generated method stub
+    public void componentResized(ComponentEvent e)
+    {
+      // TODO Auto-generated method stub
+
+    }
+
+    public void componentMoved(ComponentEvent e)
+    {
+      // TODO Auto-generated method stub
+
+    }
+
+    public void componentShown(ComponentEvent e)
+    {
+      // TODO Auto-generated method stub
+
+    }
+
+    public void componentHidden(ComponentEvent e)
+    {
+      // TODO Auto-generated method stub
+
+    }
 
   }
-
-  @Override
-  public void componentMoved(ComponentEvent e)
-  {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
-  public void componentShown(ComponentEvent e)
-  {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
-  public void componentHidden(ComponentEvent e)
-  {
-    // TODO Auto-generated method stub
-
-  }
-
 }
