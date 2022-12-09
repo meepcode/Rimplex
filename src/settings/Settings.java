@@ -54,13 +54,14 @@ public class Settings implements Serializable
    */
   public static final int GERMAN = 3;
   private static final String saveFile = "complexCalc.pref";
-  private static Settings instance;
   private static final Set<LanguageChangeable> languageChangeables = new HashSet<>();
+  private static Settings instance;
   private int thousandsSeparatorMode;
   private int trailingZerosMode;
   private int complexNumberMode;
   private int numDecimals;
   private Language language;
+  private int languageNum;
 
   private Settings()
   {
@@ -197,6 +198,8 @@ public class Settings implements Serializable
    */
   public void setLanguage(final int languageNum)
   {
+    this.languageNum = languageNum;
+
     if (languageNum == ENGLISH)
     {
       language = new Language("English");
@@ -224,6 +227,7 @@ public class Settings implements Serializable
       language.put("decimalPlaces", "Decimal Places");
       language.put("historysc", "History Shortcut");
       language.put("graphsc", "Graph Shortcut");
+      language.put("complexPlaneTitle", "Complex Plane");
     }
     else if (languageNum == FRENCH)
     {
@@ -252,6 +256,8 @@ public class Settings implements Serializable
       language.put("decimalPlaces", "Décimales");
       language.put("historysc", "Raccourci Historique");
       language.put("graphsc", "Raccourci Graphique");
+      language.put("complexPlaneTitle", "Plan complexe");
+
     }
     else if (languageNum == SPANISH)
     {
@@ -280,6 +286,7 @@ public class Settings implements Serializable
       language.put("decimalPlaces", "Número de Decimales");
       language.put("historysc", "Acceso Directo al Historial");
       language.put("graphsc", "Acceso Directo de Gráfico");
+      language.put("complexPlaneTitle", "Plano complejo");
     }
     else if (languageNum == GERMAN)
     {
@@ -308,6 +315,7 @@ public class Settings implements Serializable
       language.put("decimalPlaces", "Dezimalstellen");
       language.put("historysc", "Verknüpfung Verlauf");
       language.put("graphsc", "Diagramm-Verknüpfung");
+      language.put("complexPlaneTitle", "Komplexe Ebene");
     }
     else
     {
@@ -318,6 +326,16 @@ public class Settings implements Serializable
     {
       languageChangeable.changeLanguage();
     }
+  }
+
+  /**
+   * Gets language num.
+   *
+   * @return the language num
+   */
+  public int getLanguageNum()
+  {
+    return languageNum;
   }
 
   /**
