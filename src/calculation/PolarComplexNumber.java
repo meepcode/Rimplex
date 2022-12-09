@@ -87,7 +87,7 @@ public class PolarComplexNumber extends ComplexNumber
       }
     }
     
-    return mag + COS + realStr + "Â°) + " + I + SIN + imag + END;
+    return mag + COS + realStr + "°) + " + I + SIN + imag + END;
   }
 
   /**
