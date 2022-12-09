@@ -220,6 +220,7 @@ public class Calculate
   }
 
   /**
+<<<<<<< HEAD
    * Calculate the log of a number. <<<<<<< HEAD
    * 
    * @param base
@@ -227,11 +228,18 @@ public class Calculate
    * @param operand
    *          the operand to calculate log for =======
    *
+=======
+   * Calculate the log of a number.
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @param base
    *          base to use for log calculation
    * @param operand
+<<<<<<< HEAD
    *          the operand to calculate log for >>>>>>> branch 'main' of
    *          https://github.com/bernstdh/F22TeamD
+=======
+   *     the operand to calculate log for
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the log as a complex number
    */
   public static ComplexNumber log(final Double base, final ComplexNumber operand)
@@ -342,13 +350,21 @@ public class Calculate
   }
 
   /**
+<<<<<<< HEAD
    * Calculate the square root of a number. <<<<<<< HEAD
+=======
+   * Calculate the square root of a number.
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * 
    * @param operand
+<<<<<<< HEAD
    *          the operand to use. =======
    *
    * @param operand
    *          the operand to use. >>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
+=======
+   *          the operand to use.
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the square root as a complex number.
    */
   public static ComplexNumber squareRoot(final ComplexNumber operand)
@@ -389,13 +405,21 @@ public class Calculate
   }
 
   /**
+<<<<<<< HEAD
    * Calculate the conjugate of a number. <<<<<<< HEAD
    * 
    * @param operand
    *          the operand to use =======
    *
+=======
+   * Calculate the conjugate of a number.
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @param operand
+<<<<<<< HEAD
    *          the operand to use >>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
+=======
+   *     the operand to use
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the conjugate as a complex number.
    */
   public static ComplexNumber conjugate(final ComplexNumber operand)
@@ -411,10 +435,14 @@ public class Calculate
   }
 
   /**
+<<<<<<< HEAD
    * Calculate the inverse of a number. <<<<<<< HEAD
    * 
    * @param operand
    *          complex number =======
+=======
+   * Calculate the inverse of a number.
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    *
    * @param operand
    *          complex number >>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
@@ -441,13 +469,21 @@ public class Calculate
   }
 
   /**
+<<<<<<< HEAD
    * Converts a polar complex number to rectangular complex number. <<<<<<< HEAD
    * 
    * @param operand
    *          polar complex number =======
    *
+=======
+   * Converts a polar complex number to rectangular complex number.
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @param operand
+<<<<<<< HEAD
    *          polar complex number >>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
+=======
+   *     polar complex number
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return a complex number
    */
   public static ComplexNumber convertPolarToRectangular(final ComplexNumber operand)
@@ -458,14 +494,22 @@ public class Calculate
   }
 
   /**
+<<<<<<< HEAD
    * Converts a rectangular complex number to polar complex number. <<<<<<< HEAD
    * 
    * @param operand
    *          rectangular complex number =======
+=======
+   * Converts a rectangular complex number to polar complex number.
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    *
    * @param operand
+<<<<<<< HEAD
    *          rectangular complex number >>>>>>> branch 'main' of
    *          https://github.com/bernstdh/F22TeamD
+=======
+   *     rectangular complex number
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return a complex number
    */
   public static PolarComplexNumber convertRectangularToPolar(final ComplexNumber operand)

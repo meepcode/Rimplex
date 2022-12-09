@@ -15,6 +15,8 @@ import settings.Language.LanguageException;
  */
 class LanguageTest
 {
+  private static final String ENGLISH = "English";
+  private static final String ABOUT = "aboutMessage";
   
   /**
    * Tests the constructor.
@@ -22,7 +24,7 @@ class LanguageTest
   @Test
   void testConstructor()
   {
-    Language test = new Language("English");
+    Language test = new Language(ENGLISH);
   }
   
   /**
@@ -31,9 +33,9 @@ class LanguageTest
   @Test
   void testGet()
   {
-    Language test = new Language("English");
-    test.put("English", "aboutMessage");
-    assertEquals("aboutMessage", test.get("English"));
+    Language test = new Language(ENGLISH);
+    test.put(ENGLISH, ABOUT);
+    assertEquals(ABOUT, test.get(ENGLISH));
   }
   
   /**
@@ -42,8 +44,8 @@ class LanguageTest
   @Test
   void testGetNull()
   {
-    Language test = new Language("English");
-    assertEquals("", test.get("aboutMessage"));
+    Language test = new Language(ENGLISH);
+    assertEquals("", test.get(ABOUT));
   }
   
   /**
@@ -52,7 +54,7 @@ class LanguageTest
   @Test
   void testLanguageException()
   {
-    LanguageException test = new LanguageException("English", "English");
+    LanguageException test = new LanguageException(ENGLISH, ENGLISH);
   }
   
 

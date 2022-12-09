@@ -20,6 +20,26 @@ import java.util.Set;
  */
 public class Settings implements Serializable
 {
+  public static final String GERMAN_TEXT = "Einstellungen";
+  public static final String UM = "Um";
+  public static final String DRUCKEN = "Drucken";
+  public static final String PREF = "Preferencias";
+  public static final String SOBRE = "Sobre";
+  public static final String IMPRESION = "Impresión";
+  public static final String PRINT_TITLE = "printTitle";
+  public static final String ABOUT_TITLE = "aboutTitle";
+  public static final String ABOUT_MESSAGE = "aboutMessage";
+  public static final String PREFERENCES ="Préférences";
+  public static final String SUR ="Sur";
+  public static final String IMPRIMER ="Imprimer";
+  public static final String ABOUT ="About";
+  public static final String PRINT ="Print";
+  public static final String CALCULATOR ="Calculator";
+  public static final String FILE ="File";
+  public static final String HELP ="Help";
+  public static final String HIST ="hist";
+  public static final String FILE_MENU ="fileMenu";
+  
   /**
    * The constant ON.
    */
@@ -54,8 +74,8 @@ public class Settings implements Serializable
    * The constant GERMAN.
    */
   public static final int GERMAN = 3;
-  private static final String saveFile = "complexCalc.pref";
-  private static final Set<LanguageChangeable> languageChangeables = new HashSet<>();
+  private static final String SAVE_FILE = "complexCalc.pref";
+  private static final Set<LanguageChangeable> LANGUAGE_CHANGEABLES = new HashSet<>();
   private static Settings instance;
   private int thousandsSeparatorMode;
   private int trailingZerosMode;
@@ -97,7 +117,7 @@ public class Settings implements Serializable
    */
   public static void saveSettings() throws IOException
   {
-    try (FileOutputStream fileOutputStream = new FileOutputStream(saveFile);
+    try (FileOutputStream fileOutputStream = new FileOutputStream(SAVE_FILE);
         BufferedOutputStream bufferedOutputStream = new BufferedOutputStream(fileOutputStream);
         ObjectOutputStream serializer = new ObjectOutputStream(bufferedOutputStream))
     {
@@ -107,10 +127,11 @@ public class Settings implements Serializable
 
   /**
    * Loads the settings file.
+   * @return the settings
    */
   private static Settings loadSettings()
   {
-    try (FileInputStream fileOutputStream = new FileInputStream(saveFile);
+    try (FileInputStream fileOutputStream = new FileInputStream(SAVE_FILE);
         BufferedInputStream bufferedOutputStream = new BufferedInputStream(fileOutputStream);
         ObjectInputStream serializer = new ObjectInputStream(bufferedOutputStream))
     {
@@ -118,11 +139,11 @@ public class Settings implements Serializable
     }
     catch (IOException e)
     {
-      System.out.println("Unable to load " + saveFile);
+      System.out.println("Unable to load " + SAVE_FILE);
     }
     catch (ClassNotFoundException e)
     {
-      System.out.println("Able to load " + saveFile + " but error in reading");
+      System.out.println("Able to load " + SAVE_FILE + " but error in reading");
     }
 
     return new Settings();
@@ -136,25 +157,41 @@ public class Settings implements Serializable
    */
   public static void addLanguageChangeable(final LanguageChangeable languageChangeable)
   {
-    languageChangeables.add(languageChangeable);
+    LANGUAGE_CHANGEABLES.add(languageChangeable);
   }
-
+  
+  /**
+   * Get open history.
+   * @return a keystroke.
+   */
   public KeyStroke getOpenHistory()
   {
     return null;
   }
-
-  public void setOpenHistory(char key)
+  
+  /**
+   * Set open history.
+   * @param key a key.
+   */
+  public void setOpenHistory(final char key)
   {
 
   }
 
+  /**
+   * Get open graph.
+   * @return a keystroke.
+   */
   public KeyStroke getOpenGraph()
   {
     return null;
   }
-
-  public void setOpenGraph(char key)
+  
+  /**
+   * Set open graph.
+   * @param key a key.
+   */
+  public void setOpenGraph(final char key)
   {
 
   }
@@ -214,28 +251,28 @@ public class Settings implements Serializable
   /**
    * Sets language.
    *
-   * @param languageNum
+   * @param languageNum1
    *     the language number
    */
-  public void setLanguage(final int languageNum)
+  public void setLanguage(final int languageNum1)
   {
-    this.languageNum = languageNum;
+    this.languageNum = languageNum1;
 
     if (languageNum == ENGLISH)
     {
       language = new Language("English");
-      language.put("printTitle", "Print");
+      language.put(PRINT_TITLE, "Print");
       language.put("aboutMessage", "This calculator performs calculations on the "
           + "given complex number operands. The equation can be graphed on a complex plane."
           + " A history of results from previous calculations from previous "
           + "calculations are stored in the history panel.");
-      language.put("aboutTitle", "About");
-      language.put("hist", "History");
-      language.put("title", "Calculator");
-      language.put("fileMenu", "File");
-      language.put("help", "Help");
-      language.put("about", "About");
-      language.put("print", "Print");
+      language.put(ABOUT_TITLE, "About");
+      language.put(HIST, "History");
+      language.put("title", CALCULATOR);
+      language.put(FILE_MENU, FILE);
+      language.put("help", HELP);
+      language.put("about", ABOUT);
+      language.put("print", PRINT);
       language.put("exit", "Exit");
       language.put("pref", "Preferences");
       language.put("prefWindow", "Preferences");
@@ -253,21 +290,21 @@ public class Settings implements Serializable
     else if (languageNum == FRENCH)
     {
       language = new Language("French");
-      language.put("printTitle", "Imprimer");
+      language.put("printTitle", IMPRIMER);
       language.put("aboutMessage", "Cette calculatrice effectue des calculs sur les opérandes"
           + " de nombres complexes donnés. L’équation peut être représentée graphiquement sur un"
           + " plan complexe. Un historique des résultats des calculs précédents des calculs"
           + " précédents est stocké dans le panneau Historique.");
-      language.put("aboutTitle", "Sur");
-      language.put("hist", "Histoire");
+      language.put("aboutTitle", SUR);
+      language.put(HIST, "Histoire");
       language.put("title", "Calculatrice");
-      language.put("fileMenu", "Dossier");
+      language.put(FILE_MENU, "Dossier");
       language.put("help", "Aider");
-      language.put("about", "Sur");
-      language.put("print", "Imprimer");
+      language.put("about", SUR);
+      language.put("print", IMPRIMER);
       language.put("exit", "Sortir");
-      language.put("pref", "Préférences");
-      language.put("prefWindow", "Préférences");
+      language.put("pref", PREFERENCES);
+      language.put("prefWindow", PREFERENCES);
       language.put("plot", "Complot");
       language.put("helpPage", "Page d’aide");
       language.put("newWindow", "Nouvelle fenêtre");
@@ -283,21 +320,21 @@ public class Settings implements Serializable
     else if (languageNum == SPANISH)
     {
       language = new Language("Spanish");
-      language.put("printTitle", "Impresión");
+      language.put("printTitle", IMPRESION);
       language.put("aboutMessage", "Esta calculadora realiza cálculos en los operandos de"
           + "números complejos dados. La ecuación se puede graficar en un plano complejo."
           + " En el panel Historial se almacena un historial de resultados de cálculos "
           + " anteriores de cálculos anteriores.");
-      language.put("aboutTitle", "Sobre");
+      language.put("aboutTitle", SOBRE);
       language.put("hist", "Historia");
       language.put("title", "Calculadora");
       language.put("fileMenu", "Expediente");
       language.put("help", "Ayuda");
-      language.put("about", "Sobre");
-      language.put("print", "Impresión");
+      language.put("about", SOBRE);
+      language.put("print", IMPRESION);
       language.put("exit", "Salida");
-      language.put("pref", "Preferencias");
-      language.put("prefWindow", "Preferencias");
+      language.put("pref", PREF);
+      language.put("prefWindow", PREF);
       language.put("plot", "Conspirar");
       language.put("helpPage", "Página de ayuda");
       language.put("newWindow", "Nueva ventana");
@@ -312,21 +349,21 @@ public class Settings implements Serializable
     else if (languageNum == GERMAN)
     {
       language = new Language("German");
-      language.put("printTitle", "Drucken");
+      language.put("printTitle", DRUCKEN);
       language.put("aboutMessage", "Dieser Rechner führt Berechnungen für die gegebenen"
           + " komplexen Zahlenoperanden durch. Die Gleichung kann auf einer komplexen"
           + " Ebene grafisch dargestellt werden. Ein Verlauf der Ergebnisse früherer"
           + " Berechnungen aus früheren Berechnungen wird im Bedienfeld \"Verlauf\" gespeichert.");
-      language.put("aboutTitle", "Um");
+      language.put("aboutTitle", UM);
       language.put("hist", "Geschichte");
       language.put("title", "Taschenrechner");
       language.put("fileMenu", "Datei");
       language.put("help", "Hilfe");
-      language.put("about", "Um");
-      language.put("print", "Drucken");
-      language.put("exit", "Drucken");
-      language.put("pref", "Einstellungen");
-      language.put("prefWindow", "Einstellungen");
+      language.put("about", UM);
+      language.put("print", DRUCKEN);
+      language.put("exit", DRUCKEN);
+      language.put("pref", GERMAN_TEXT);
+      language.put("prefWindow", GERMAN_TEXT);
       language.put("plot", "Handlung");
       language.put("helpPage", "Hilfeseite");
       language.put("newWindow", "Neues Fenster");
@@ -343,7 +380,7 @@ public class Settings implements Serializable
       throw new IllegalArgumentException();
     }
 
-    for (LanguageChangeable languageChangeable : languageChangeables)
+    for (LanguageChangeable languageChangeable : LANGUAGE_CHANGEABLES)
     {
       languageChangeable.changeLanguage();
     }
