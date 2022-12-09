@@ -26,7 +26,7 @@ public class Language extends HashMap<String, String>
     if (result == null)
     {
       result = "";
-      // throw new LanguageException((String) key, languageName);
+      throw new LanguageException((String) key, languageName);
     }
 
     return result;

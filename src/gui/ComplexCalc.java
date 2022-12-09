@@ -1,25 +1,45 @@
 package gui;
 
 import calculation.Calculate;
-
 import calculation.ComplexNumber;
 import parse.Evaluation;
 import parse.ExpressionEvaluationException;
 import settings.LanguageChangeable;
 import settings.Settings;
 
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JCheckBox;
+import javax.swing.JComboBox;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.JTextPane;
 import javax.swing.text.DefaultStyledDocument;
-import java.awt.*;
-import java.awt.event.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Desktop;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.awt.print.PageFormat;
+import java.awt.print.PrinterException;
+import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serial;
-import java.security.Key;
-import java.awt.print.PrinterJob;
-import java.awt.print.PageFormat;
-import java.awt.print.PrinterException;
+import java.util.Objects;
 
 /**
  * Calculator GUI.
@@ -30,18 +50,17 @@ import java.awt.print.PrinterException;
 
 public class ComplexCalc extends JFrame implements ActionListener, LanguageChangeable
 {
-  @Serial
-  private static final long serialVersionUID = 1L;
+  protected static String result = "";
+  protected static boolean isClicked = false;
+  @Serial private static final long serialVersionUID = 1L;
   private static final String SERIF = "Serif";
   private static final String MINUS = "-";
   private static final String PLUS = "+";
   private static final String ASTERISK = "*";
   private static final String SLASH = "/";
   private static final String DOT = ".";
-  protected static String result = "";
-  protected static boolean isClicked = false;
   private static int windowCount = 0; // close windows of all other windows when last window is
-                                      // closed
+  // closed
   private final JTextField textfield;
   private final JButton[] numberButtons = new JButton[10];
   private final JButton[] functionButtons = new JButton[19];
@@ -55,13 +74,13 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
   private final String calculatorStr = "Calculator";
   private final ComplexPlane complexPlane = new ComplexPlane();
   private final Color colorScheme = Color.CYAN;
-  private Settings settings;
-  private boolean isPolarActive = false;
+  private final Settings settings;
+  private final boolean thousandsSeparator = false;
+  private final boolean isPolarActive = false;
+  private final boolean trailingZeroes = false;
+  private final boolean doubleParenthesis = false;
+  private final int numDecimals = 2; // Default is 2, ask him if this is ok
   private String pastResult = "";
-  private boolean thousandsSeparator = false;
-  private boolean trailingZeroes = false;
-  private boolean doubleParenthesis = false;
-  private int numDecimals = 2; // Default is 2, ask him if this is ok
   private String printTitle, aboutTitle, aboutMessage;
   private JMenuBar menuBar;
   private JMenu fileMenu, help, helpPage;
@@ -72,6 +91,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
   private JCheckBox polar, thousands, zeroes, doubleParen;
   private JTextField decimalPlaces;
   private String helpPageStr;
+  private JTextPane historysc, graphsc;
 
   private ComplexCalc(final Settings settings) throws FileNotFoundException
   {
@@ -215,7 +235,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
    * Main method.
    *
    * @param args
-   *          cmd line args
+   *     cmd line args
    */
   public static void main(final String[] args) throws FileNotFoundException
   {
@@ -251,8 +271,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
     this.setJMenuBar(mb.createMenuBar());
   }
 
-  @Override
-  public void actionPerformed(final ActionEvent e)
+  @Override public void actionPerformed(final ActionEvent e)
   {
     for (int i = 0; i < 10; i++)
     {
@@ -474,68 +493,63 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
     }
   }
 
-
-  @Override
-  public void changeLanguage()
+  @Override public void changeLanguage()
   {
     printTitle = settings.getLanguage().get("printTitle");
     aboutMessage = settings.getLanguage().get("aboutMessage");
     aboutTitle = settings.getLanguage().get("aboutTitle");
-    hist.setText(settings.getLanguage().get("histTitle"));
+    hist.setText(settings.getLanguage().get("hist"));
     setTitle(settings.getLanguage().get("title"));
-    fileMenu.setText(settings.getLanguage().get("file"));
-    help.setText("Help");
-    about.setText("About");
-    print.setText("Print");
-    exit.setText("Exit");
-    pref.setText("Preferences");
+    fileMenu.setText(settings.getLanguage().get("fileMenu"));
+    help.setText(settings.getLanguage().get("help"));
+    about.setText(settings.getLanguage().get("about"));
+    print.setText(settings.getLanguage().get("print"));
+    exit.setText(settings.getLanguage().get("exit"));
+    pref.setText(settings.getLanguage().get("pref"));
     if (prefWindow != null)
     {
-      prefWindow.setTitle("Preferences");
-      polar.setText("Polar");
-      thousands.setText("Thounsands Separator");
-      zeroes.setText("Trailing Zeroes");
-      decimalPlaces.setText("Decimal Places");
-      doubleParen.setText("Double Parenthesis");
+      prefWindow.setTitle(settings.getLanguage().get("prefWindow"));
+      polar.setText(settings.getLanguage().get("polar"));
+      thousands.setText(settings.getLanguage().get("thousands"));
+      zeroes.setText(settings.getLanguage().get("zeroes"));
+      decimalPlaces.setText(settings.getLanguage().get("decimalPlaces"));
+      doubleParen.setText(settings.getLanguage().get("doubleParen"));
     }
-    plot.setText("Graph");
-    helpPage.setText("Help Page");
-    newWindow.setText("New Window");
+    plot.setText(settings.getLanguage().get("plot"));
+    helpPage.setText(settings.getLanguage().get("helpPage"));
+    newWindow.setText(settings.getLanguage().get("newWindow"));
   }
 
   // Menu Bar Code
   class MenuBar implements ActionListener
   {
-    String aboutMessage = "This calculator performs operations on the given complex number operands. "
-        + "A history of results from previosu calculations are stored in the history " + "panel.";
-    String aboutTitle = "About";
-    String printTitle = "Print";
-
     public JMenuBar createMenuBar() throws FileNotFoundException
     {
 
       menuBar = new JMenuBar();
 
-      ImageIcon icon = new ImageIcon(getClass().getResource("logo.png"));
+      ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("logo.png")));
       JLabel label = new JLabel(icon);
       menuBar.add(label);
 
-      plot = new JButton("Graph");
-      plot.addActionListener(e -> {
+      plot = new JButton();
+      plot.addActionListener(e ->
+      {
         // fill
         complexPlane.setVisible(true);
       });
 
-      hist = new JButton("History");
-      hist.addActionListener(e -> {
+      hist = new JButton();
+      hist.addActionListener(e ->
+      {
         his.createAndShowGUI();
         pack();
       });
 
       // help jmenuitem under Help menu
-      help = new JMenu("Help");
+      help = new JMenu();
 
-      about = new JMenuItem("About");
+      about = new JMenuItem();
       help.add(about);
       about.addActionListener(this);
       about.addActionListener(e -> JOptionPane.showMessageDialog(null, aboutMessage));
@@ -546,7 +560,8 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       helpPage.add(englishHelpPage);
 
       englishHelpPage.addActionListener(this);
-      englishHelpPage.addActionListener(e -> {
+      englishHelpPage.addActionListener(e ->
+      {
         if (e.getSource() == englishHelpPage)
         {
           try
@@ -565,7 +580,8 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       helpPage.add(spanishHelpPage);
 
       spanishHelpPage.addActionListener(this);
-      spanishHelpPage.addActionListener(e -> {
+      spanishHelpPage.addActionListener(e ->
+      {
         if (e.getSource() == spanishHelpPage)
         {
           try
@@ -584,7 +600,8 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       helpPage.add(frenchHelpPage);
 
       frenchHelpPage.addActionListener(this);
-      frenchHelpPage.addActionListener(e -> {
+      frenchHelpPage.addActionListener(e ->
+      {
         if (e.getSource() == frenchHelpPage)
         {
           try
@@ -603,7 +620,8 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       helpPage.add(germanHelpPage);
 
       germanHelpPage.addActionListener(this);
-      germanHelpPage.addActionListener(e -> {
+      germanHelpPage.addActionListener(e ->
+      {
         if (e.getSource() == germanHelpPage)
         {
           try
@@ -619,17 +637,16 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       });
 
       // file menu along menubar
-      fileMenu = new JMenu("File");
+      fileMenu = new JMenu();
       menuBar.add(fileMenu);
 
       // new window sub menu
-      newWindow = new JMenuItem("New Window");
+      newWindow = new JMenuItem();
       fileMenu.add(newWindow);
       newWindow.addActionListener(this);
       newWindow.addActionListener(new ActionListener()
       {
-        @Override
-        public void actionPerformed(ActionEvent e)
+        @Override public void actionPerformed(final ActionEvent e)
         {
           try
           {
@@ -643,11 +660,12 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       });
 
       // preference sub menu
-      pref = new JMenuItem("Preferences");
+      pref = new JMenuItem();
       fileMenu.add(pref);
       pref.addActionListener(this);
-      pref.addActionListener(e -> {
-        prefWindow = new MenuItemWindow("Preferences", 900, 300);
+      pref.addActionListener(e ->
+      {
+        prefWindow = new MenuItemWindow("", 900, 300);
 
         JPanel all = new JPanel();
         all.setLayout(new GridLayout(4, 1));
@@ -656,74 +674,76 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         modes.setLayout(new GridLayout(1, 3));
         all.add(modes);
 
-        JCheckBox polar = new JCheckBox("Polar");
+        polar = new JCheckBox();
         modes.add(polar);
         polar.addActionListener(this);
-        polar.addActionListener(new ActionListener()
+        polar.addActionListener(f ->
         {
-          @Override
-          public void actionPerformed(ActionEvent e)
+          if (settings.getComplexNumberMode() == Settings.RECTANGULAR)
           {
-            isPolarActive = !isPolarActive;
+            settings.setThousandsSeparatorMode(Settings.POLAR);
+          }
+          else if (settings.getThousandsSeparatorMode() == Settings.POLAR)
+          {
+            settings.setThousandsSeparatorMode(Settings.RECTANGULAR);
           }
         });
 
-        JCheckBox thousands = new JCheckBox("Thousands Separator");
+        thousands = new JCheckBox();
         modes.add(thousands);
         thousands.addActionListener(this);
         thousands.addActionListener(new ActionListener()
         {
-          @Override
-          public void actionPerformed(ActionEvent e)
+          @Override public void actionPerformed(final ActionEvent e)
           {
-            thousandsSeparator = !thousandsSeparator;
+            if (settings.getThousandsSeparatorMode() == Settings.ON)
+            {
+              settings.setThousandsSeparatorMode(Settings.OFF);
+            }
+            else if (settings.getThousandsSeparatorMode() == Settings.OFF)
+            {
+              settings.setThousandsSeparatorMode(Settings.ON);
+            }
           }
         });
 
-        JCheckBox zeroes = new JCheckBox("Trailing zeroes");
+        zeroes = new JCheckBox();
         modes.add(zeroes);
         zeroes.addActionListener(this);
-        zeroes.addActionListener(new ActionListener()
+        zeroes.addActionListener(f ->
         {
-          @Override
-          public void actionPerformed(ActionEvent e)
+          if (settings.getTrailingZerosMode() == Settings.ON)
           {
-            trailingZeroes = !trailingZeroes;
+            settings.setTrailingZerosMode(Settings.OFF);
+          }
+          else if (settings.getTrailingZerosMode() == Settings.OFF)
+          {
+            settings.setTrailingZerosMode(Settings.ON);
           }
         });
 
         JPanel decimalPanel = new JPanel();
         decimalPanel.setLayout(new FlowLayout());
-        DefaultStyledDocument doc = new DefaultStyledDocument();
-        JTextPane decimalPlaces = new JTextPane(doc);
-        decimalPlaces.setText("Decimal Places");
+        decimalPlaces = new JTextField();
         decimalPlaces.setEditable(false);
-        JTextArea decimals = new JTextArea("2");
+        JTextArea decimals = new JTextArea("" + settings.getNumDecimals());
         decimals.setEditable(false);
         JButton up = new JButton("↑");
         up.addActionListener(this);
         up.addActionListener(new ActionListener()
         {
-          @Override
-          public void actionPerformed(ActionEvent e)
+          @Override public void actionPerformed(final ActionEvent e)
           {
-            numDecimals++;
-            decimals.setText(String.valueOf(numDecimals));
+            settings.incrementNumDecimals();
+            decimals.setText(settings.getNumDecimals() + "");
           }
         });
         JButton down = new JButton("↓");
         down.addActionListener(this);
-        down.addActionListener(new ActionListener()
+        down.addActionListener(f ->
         {
-          @Override
-          public void actionPerformed(ActionEvent e)
-          {
-            if (numDecimals != 0)
-            {
-              numDecimals--;
-              decimals.setText(String.valueOf(numDecimals));
-            }
-          }
+          settings.decrementNumDecimals();
+          decimals.setText("" + settings.getTrailingZerosMode());
         });
 
         decimalPanel.add(decimalPlaces);
@@ -738,23 +758,11 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         JPanel shortcuts = new JPanel();
         shortcuts.setLayout(new GridLayout(1, 5));
         all.add(shortcuts);
-        JCheckBox doubleParen = new JCheckBox("Double Parenthesis");
-        shortcuts.add(doubleParen);
-        doubleParen.addActionListener(this);
-        doubleParen.addActionListener(new ActionListener()
-        {
-          @Override
-          public void actionPerformed(final ActionEvent e)
-          {
-            doubleParenthesis = !doubleParenthesis;
-          }
-        });
 
         // opening history using keyboard shortcut dropdown menu
 
         DefaultStyledDocument dsd = new DefaultStyledDocument();
-        JTextPane historysc = new JTextPane(dsd);
-        historysc.setText("History Shortcut");
+        historysc = new JTextPane(dsd);
         historysc.setEditable(false);
         shortcuts.add(historysc);
 
@@ -771,8 +779,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         // opening graph using keyboard shortcut dropdown menu
 
         DefaultStyledDocument dsd2 = new DefaultStyledDocument();
-        JTextPane graphsc = new JTextPane(dsd2);
-        graphsc.setText("Graph Shortcut");
+        graphsc = new JTextPane(dsd2);
         graphsc.setEditable(false);
         shortcuts.add(graphsc);
 
@@ -800,17 +807,15 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         langs.add(english);
         english.addActionListener(this);
 
-        english.addActionListener(new ActionListener()
+        english.addActionListener(f ->
         {
-          @Override
-          public void actionPerformed(final ActionEvent e)
-          {
-            setSize(420, 480);
-            english.setBackground(Color.GRAY);
-            french.setBackground(null);
-            german.setBackground(null);
-            spanish.setBackground(null);
-          }
+          setSize(420, 480);
+          english.setBackground(Color.GRAY);
+          french.setBackground(null);
+          german.setBackground(null);
+          spanish.setBackground(null);
+
+          settings.setLanguage(Settings.ENGLISH);
         });
 
         langs.add(spanish);
@@ -818,8 +823,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
 
         spanish.addActionListener(new ActionListener()
         {
-          @Override
-          public void actionPerformed(final ActionEvent e)
+          @Override public void actionPerformed(final ActionEvent e)
           {
             setSize(460, 480);
 
@@ -828,6 +832,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
             german.setBackground(null);
             french.setBackground(null);
 
+            settings.setLanguage(Settings.SPANISH);
           }
         });
 
@@ -836,8 +841,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
 
         german.addActionListener(new ActionListener()
         {
-          @Override
-          public void actionPerformed(final ActionEvent e)
+          @Override public void actionPerformed(final ActionEvent e)
           {
             setSize(440, 480);
 
@@ -845,7 +849,8 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
             english.setBackground(null);
             french.setBackground(null);
             spanish.setBackground(null);
-            
+
+            settings.setLanguage(Settings.GERMAN);
           }
         });
 
@@ -854,28 +859,46 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
 
         french.addActionListener(new ActionListener()
         {
-          @Override
-          public void actionPerformed(final ActionEvent e)
+          @Override public void actionPerformed(final ActionEvent e)
           {
             setSize(430, 480);
             french.setBackground(Color.GRAY);
             english.setBackground(null);
             german.setBackground(null);
             spanish.setBackground(null);
-            
+
+            settings.setLanguage(Settings.FRENCH);
           }
         });
+
+        prefWindow.addWindowListener(new WindowAdapter()
+        {
+          public void windowClosing(final WindowEvent e)
+          {
+            try
+            {
+              Settings.saveSettings();
+            }
+            catch (IOException ex)
+            {
+              System.out.println("Unable to save settings file");
+            }
+          }
+        });
+
+        changeLanguage();
       });
 
       // print file menu
-      print = new JMenuItem("Print");
+      print = new JMenuItem();
       fileMenu.add(print);
 
       print.addActionListener(this);
-      print.addActionListener(e -> {
-        MenuItemWindow historyPrint = new MenuItemWindow("Print", 600, 300);
+      print.addActionListener(e ->
+      {
+        MenuItemWindow historyPrint = new MenuItemWindow("", 600, 300);
 
-        JButton printButton = new JButton("Print");
+        JButton printButton = new JButton();
         historyPrint.add(printButton, BorderLayout.SOUTH);
         
         
@@ -892,7 +915,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
             pjob.setPrintable(null, pf);
             
             if (pjob.printDialog())
-            { 
+            {
               try
               {
                 pjob.print();
@@ -918,20 +941,20 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       });
 
       // exit sub menu
-      exit = new JMenuItem("Exit");
+      exit = new JMenuItem();
       fileMenu.add(exit);
       exit.addActionListener(this);
       exit.addActionListener(new ActionListener()
       {
         public void actionPerformed(final ActionEvent e)
         {
-          System.exit(0);
+          dispose();
         }
       });
 
       addWindowListener(new WindowAdapter()
       {
-        public void windowClosing(WindowEvent e)
+        public void windowClosing(final WindowEvent e)
         {
           windowCount--;
           if (windowCount == 0)
@@ -954,8 +977,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       return menuBar;
     }
 
-    @Override
-    public void actionPerformed(final ActionEvent e)
+    @Override public void actionPerformed(final ActionEvent e)
     {
       // TODO Auto-generated method stub
 
