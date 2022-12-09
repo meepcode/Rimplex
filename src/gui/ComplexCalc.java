@@ -98,7 +98,6 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
     super();
 
     this.settings = settings;
-
     windowCount++;
     setupFrame();
     setupMenuBar();
@@ -676,22 +675,42 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
 
         polar = new JCheckBox();
         modes.add(polar);
+        // Check box if previously saved.
+        if (settings.getComplexNumberMode() == Settings.POLAR)
+        {
+          polar.setSelected(true);
+        }
+        else if (settings.getComplexNumberMode() == Settings.RECTANGULAR)
+        {
+          polar.setSelected(false);
+        }
         polar.addActionListener(this);
+        
         polar.addActionListener(f ->
         {
           if (settings.getComplexNumberMode() == Settings.RECTANGULAR)
           {
-            settings.setThousandsSeparatorMode(Settings.POLAR);
+            settings.setComplexNumberMode(Settings.POLAR);
           }
           else if (settings.getThousandsSeparatorMode() == Settings.POLAR)
           {
-            settings.setThousandsSeparatorMode(Settings.RECTANGULAR);
+            settings.setComplexNumberMode(Settings.RECTANGULAR);
           }
         });
 
         thousands = new JCheckBox();
         modes.add(thousands);
         thousands.addActionListener(this);
+        // Check box if previously saved.
+        if (settings.getThousandsSeparatorMode() == Settings.ON)
+        {
+          thousands.setSelected(true);
+        }
+        else if (settings.getThousandsSeparatorMode() == Settings.OFF)
+        {
+          thousands.setSelected(false);
+        }
+        
         thousands.addActionListener(new ActionListener()
         {
           @Override public void actionPerformed(final ActionEvent e)
@@ -710,6 +729,17 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         zeroes = new JCheckBox();
         modes.add(zeroes);
         zeroes.addActionListener(this);
+        // Check box if previously saved.
+        if (settings.getTrailingZerosMode() == Settings.ON)
+        {
+          zeroes.setSelected(true);
+        }
+        else if (settings.getTrailingZerosMode() == Settings.OFF)
+        {
+          zeroes.setSelected(false);
+        }
+        
+        
         zeroes.addActionListener(f ->
         {
           if (settings.getTrailingZerosMode() == Settings.ON)
