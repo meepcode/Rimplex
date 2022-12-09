@@ -554,7 +554,8 @@ public class ComplexCalc extends JFrame
         complexPlane.setVisible(true);
       });
 
-      JButton hist = new JButton("History"); // HISTORY PANEL------------------------------------------------------------------------------------
+      JButton hist = new JButton("History"); // HISTORY
+                                             // PANEL------------------------------------------------------------------------------------
 
       // frame.addComponentListener((ComponentListener) frame);
       hist.addActionListener(e -> {
@@ -782,7 +783,7 @@ public class ComplexCalc extends JFrame
         decimalPlaces.setEditable(false);
         JTextArea decimals = new JTextArea("" + settings.getNumDecimals());
         numDecimals = settings.getNumDecimals();
-        decimals.setText(""+numDecimals);
+        decimals.setText("" + numDecimals);
         decimals.setEditable(false);
         JButton up = new JButton("â†‘");
         up.addActionListener(this);
@@ -840,7 +841,8 @@ public class ComplexCalc extends JFrame
           @Override
           public void actionPerformed(ActionEvent e)
           {
-            if(e.getSource() == hisShortcuts[0]){
+            if (e.getSource() == hisShortcuts[0])
+            {
               hist.setMnemonic(KeyEvent.VK_C);
             }
           }

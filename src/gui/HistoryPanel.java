@@ -39,6 +39,7 @@ import java.util.ArrayList;
 
 /**
  * HistoryPanel.
+ * 
  * @author Team D
  * @version 12/9/22
  */
@@ -202,8 +203,14 @@ public class HistoryPanel extends JFrame
     mainPanel.setLocation(x, y);
     JButton slideout = new JButton(">");
     area.setVisible(!visible);
+    slideout.setBackground(new Color(0, 255, 255));
     mainPanel.add(slideout);
-    slideout.setVisible(true);
+    slideout.addActionListener(new ActionListener()
+    {
+      public void actionPerformed(ActionEvent e)
+      {
+      }
+    });
     System.out.println(mainPanel.getLocation());
     System.out.println(mainPanel.getSize());
 
