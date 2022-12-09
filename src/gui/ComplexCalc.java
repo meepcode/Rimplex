@@ -444,7 +444,9 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       try
       {
         ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
+        isClicked = true;
         complexResult = res;
+        complexPlane.getPanel().update();
         if (settings.getComplexNumberMode() == Settings.POLAR)
         {
           res = Calculate.convertRectangularToPolar(res);
@@ -475,7 +477,6 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         textfield.setText(textfield.getText() + "=" + res);
         result = textfield.getText();
         pastResult = "(" + res + ")";
-        isClicked = true;
         his.add();
         // numZeroesToRemove = 0;
       }
