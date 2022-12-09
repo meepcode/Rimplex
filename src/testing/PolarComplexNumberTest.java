@@ -28,10 +28,10 @@ public class PolarComplexNumberTest
   {
     // covers the else
     test.setTrailingZeroes(true);
-    assertEquals("2.00(cos(120.00°) + isin(120.00°))", test.toString());
+    assertEquals("2.00(cos(6875.49°) + isin(6875.49°))", test.toString());
     // covers the if
     test2.setTrailingZeroes(true);
-    assertEquals("4.00(cos(120.00°) + isin(-120.00°))", test2.toString());
+    assertEquals("4.00(cos(6875.49°) + isin(-6875.49°))", test2.toString());
   }
   
   /**
@@ -49,7 +49,7 @@ public class PolarComplexNumberTest
   @Test public void testToStringRemoveTrailingZeroes()
   {
     PolarComplexNumber c = new PolarComplexNumber(1.10, 1.10, 1.10);
-    assertEquals("1.1(cos(1.1°) + isin(1.1°))", c.toString());
+    assertEquals("1.1(cos(63.03°) + isin(63.03°))", c.toString());
   }
   
   
