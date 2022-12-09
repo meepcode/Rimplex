@@ -276,6 +276,20 @@ class CalculateTest
         ((int) (temp.getPolarMagnitude() * 100)) / 100.0);
     assertEquals(res, test1);
   }
+  
+  /**
+   * Test add with polar number.
+   */
+  @Test void testAddPolar2()
+  {
+    ComplexNumber op1 = new PolarComplexNumber(2.0, 0.0, 0.0);
+    PolarComplexNumber res = new PolarComplexNumber(4.0, 0.0, 0.0);
+    ComplexNumber temp = Calculate.add(op1, op1);
+    //PolarComplexNumber test1 = new PolarComplexNumber(((int) (temp.getReal() * 100)) / 100.0,
+        //((int) (temp.getImaginary() * 100)) / 100.0,
+        //((int) (temp.getPolarMagnitude() * 100)) / 100.0);
+    assertEquals(res, temp);
+  }
 
   /**
    * Test subtract with polar number.
