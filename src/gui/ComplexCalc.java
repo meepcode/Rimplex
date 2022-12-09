@@ -46,6 +46,9 @@ import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.Serial;
+
+
 import java.util.Objects;
 
 /**
@@ -67,6 +70,9 @@ public class ComplexCalc extends JFrame
   private static final String ASTERISK = "*";
   private static final String SLASH = "/";
   private static final String DOT = ".";
+
+  private static final String EQUALS = "=";
+
   private static final ComplexNumber complexResult = null;
   private static int windowCount = 0; // close windows of all other windows when last window is
   // closed
@@ -112,12 +118,12 @@ public class ComplexCalc extends JFrame
     textfield = new CalcTextField(settings, myFont);
 
     resetButton = new JButton("R");
-    subButton = new JButton("-");
-    addButton = new JButton("+");
-    mulButton = new JButton("*");
-    divButton = new JButton("/");
-    decButton = new JButton(".");
-    equButton = new JButton("=");
+    subButton = new JButton(MINUS);
+    addButton = new JButton(PLUS);
+    mulButton = new JButton(ASTERISK);
+    divButton = new JButton(SLASH);
+    decButton = new JButton(DOT);
+    equButton = new JButton(EQUALS);
     clrButton = new JButton("\u2190");
     expButton = new JButton("^");
     leftParenth = new JButton("(");
@@ -582,7 +588,9 @@ public class ComplexCalc extends JFrame
         settings.setLanguage(settings.getLanguageNum());
       });
 
-      hist = new JButton();
+      JButton hist = new JButton("History"); // HISTORY PANEL------------------------------------------------------------------------------------
+
+      // frame.addComponentListener((ComponentListener) frame);
       hist.addActionListener(e ->
       {
         Point corner = panel.getLocation();
@@ -664,7 +672,7 @@ public class ComplexCalc extends JFrame
       helpPage.add(germanHelpPage);
 
       germanHelpPage.addActionListener(this);
-      germanHelpPage.addActionListener(e ->
+      germanHelpPage.addActionListener(e -> 
       {
         if (e.getSource() == germanHelpPage)
         {
@@ -707,7 +715,7 @@ public class ComplexCalc extends JFrame
       pref = new JMenuItem();
       fileMenu.add(pref);
       pref.addActionListener(this);
-      pref.addActionListener(e ->
+      pref.addActionListener(e -> 
       {
         prefWindow = new MenuItemWindow("", 900, 300);
 
@@ -731,7 +739,7 @@ public class ComplexCalc extends JFrame
         }
         polar.addActionListener(this);
 
-        polar.addActionListener(f ->
+        polar.addActionListener(f -> 
         {
           if (settings.getComplexNumberMode() == Settings.RECTANGULAR)
           {
@@ -788,6 +796,7 @@ public class ComplexCalc extends JFrame
         {
           zeroes.setSelected(false);
         }
+
 
         zeroes.addActionListener(f ->
         {
@@ -993,6 +1002,7 @@ public class ComplexCalc extends JFrame
       fileMenu.add(print);
 
       print.addActionListener(this);
+
       print.addActionListener(e ->
       {
         MenuItemWindow historyPrint = new MenuItemWindow("Print", 600, 300);
@@ -1070,7 +1080,11 @@ public class ComplexCalc extends JFrame
 
       return menuBar;
     }
-
+    
+    /**
+     * Action Performed.
+     * @param e event to use.
+     */
     @Override public void actionPerformed(final ActionEvent e)
     {
       // TODO Auto-generated method stub
@@ -1106,8 +1120,18 @@ public class ComplexCalc extends JFrame
     public void componentHidden(ComponentEvent e)
     {
       // TODO Auto-generated method stub
-
     }
 
+  
+  
+  /**
+   * Get the result of a complex operation.
+   * @return a complex number.
+   */
+  public static ComplexNumber getResult()
+  {
+    return complexResult;
   }
+
+}
 }
