@@ -3,14 +3,17 @@ package gui;
 import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.util.Scanner;
 
 public class ColorSchemeUtil
 {
-  static File file = new File("src/gui/colorScheme.txt");
+  static InputStream file = ColorSchemeUtil.class.getResourceAsStream("/gui/colorScheme.txt");
 
   public static Color menuBarColor() throws FileNotFoundException
   {
+    file = ColorSchemeUtil.class.getResourceAsStream("/gui/colorScheme.txt");
+
     Scanner scan = new Scanner(file);
     System.out.println(scan.next());
     System.out.println(scan.next());
@@ -23,6 +26,8 @@ public class ColorSchemeUtil
 
   public static Color backgroundColor() throws FileNotFoundException
   {
+    file = ColorSchemeUtil.class.getResourceAsStream("/gui/colorScheme.txt");
+
     Scanner scan = new Scanner(file);
     scan.nextLine();
 
@@ -38,6 +43,8 @@ public class ColorSchemeUtil
 
   public static Color numberButtonsColor() throws FileNotFoundException
   {
+    file = ColorSchemeUtil.class.getResourceAsStream("/gui/colorScheme.txt");
+
     Scanner scan = new Scanner(file);
     scan.nextLine();
     scan.nextLine();
@@ -52,6 +59,8 @@ public class ColorSchemeUtil
 
   public static Color functionButtonsColor() throws FileNotFoundException
   {
+    file = ColorSchemeUtil.class.getResourceAsStream("/gui/colorScheme.txt");
+
     Scanner scan = new Scanner(file);
     scan.nextLine();
     scan.nextLine();
