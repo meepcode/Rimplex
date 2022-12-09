@@ -1,8 +1,14 @@
 package gui;
 
 import javax.swing.BorderFactory;
+<<<<<<< HEAD
 import javax.swing.JButton;
 import javax.swing.JComponent;
+=======
+
+
+//import javax.swing.JComponent;
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,12 +18,16 @@ import javax.swing.JWindow;
 import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
+import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.DefaultStyledDocument;
+import javax.swing.text.Highlighter;
+import javax.swing.text.Highlighter.HighlightPainter;
 import javax.swing.text.Utilities;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.Color;
 //import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
@@ -45,7 +55,7 @@ public class HistoryPanel extends JFrame
   private final JScrollPane pane;
   private final JEditorPane area;
   private final Point curr;
-  private final Font myFont = new Font(SERIF, Font.BOLD, 20);
+  private final Font myFont = new Font(SERIF, Font.PLAIN, 20);
   private String word;
   private final DefaultStyledDocument document;
   private final ArrayList<String> list;
@@ -82,7 +92,7 @@ public class HistoryPanel extends JFrame
     area.setFont(myFont);
     area.setPreferredSize(new Dimension(400, 240));
     word = null;
-    copyExpression();
+    //copyExpression();
 
     list = new ArrayList<>();
   }
@@ -133,17 +143,25 @@ public class HistoryPanel extends JFrame
       {
         try
         {
-
+          
           int point = area.viewToModel2D(e.getPoint());
           int startPoint = Utilities.getRowStart(area, point);
           int endPoint = Utilities.getRowEnd(area, point);
 
           word = area.getText(startPoint, endPoint - startPoint);
           // System.out.println("word: " + word);
-
-          StringSelection selection = new StringSelection(word);
+          String[] words = word.split("=");
+          StringSelection selection = new StringSelection(words[0]);
           Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
           clipboard.setContents(selection, selection);
+          
+          /*Highlight text to copy*/
+          Highlighter highlighter = area.getHighlighter();
+          HighlightPainter painter = 
+                 new DefaultHighlighter.DefaultHighlightPainter(Color.cyan);
+          //int p0 = word.indexOf(startPoint);
+          //int p1 = p0 + "world".length();
+          highlighter.addHighlight(startPoint, endPoint - words[1].length() - 1, painter );
 
         }
         catch (BadLocationException ex)
@@ -160,6 +178,14 @@ public class HistoryPanel extends JFrame
       }
     });
 
+  }
+  
+  /**
+   * Getter method for historyList.
+   * @return String historyList
+   */
+  public String getHistoryList() {
+    return historyList;
   }
 
   /**

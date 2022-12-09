@@ -6,23 +6,23 @@ import java.util.Objects;
  * Polar Complex number.
  *
  * @author TeamD
- * @version 11/18/22 This work complies with the JMU Honor Code.
+ * @version 12/9/22 This work complies with the JMU Honor Code.
  */
 public class PolarComplexNumber extends ComplexNumber
 {
   private static final String COS = "(cos(";
   private static final String SIN = "sin(";
-  private static final String END = "\u00B0))";
+  private static final String END = "Â°))";
 
-  private final Double r; // The polar magnitude
+  private Double r; // The polar magnitude
 
   /**
-   * Constructor.
+   * Constructor (theta is in radians).
    * 
    * @param realPart
-   *          real
+   *          real number (in radians)
    * @param imaginaryPart
-   *          imaginary
+   *          imaginary (in radians)
    * @param r
    *          polar magnitude: a new part used for polar form
    */
@@ -50,10 +50,8 @@ public class PolarComplexNumber extends ComplexNumber
    */
   public String toString()
   {
-    // if (getImaginary() < 0)
-    // {
-    Double real = getReal();
-    Double imaginary = getImaginary();
+    Double real = getReal() * (180.0 / Math.PI);
+    Double imaginary = getImaginary() * (180.0 / Math.PI);
     if (Math.abs(real-0) < ComplexNumber.EPSILON) 
     {
       real = 0.0;
@@ -63,6 +61,7 @@ public class PolarComplexNumber extends ComplexNumber
       imaginary = 0.0;
     }
     
+<<<<<<< HEAD
     return String.format(getFormat(), r) + COS 
           + String.format(getFormat(), real)
           + "°) + " + I + SIN 
@@ -71,12 +70,51 @@ public class PolarComplexNumber extends ComplexNumber
     // }
     /*}
     else
+=======
+    String mag = String.format(getFormat(), r);
+    String realStr = String.format(getFormat(), real);
+    String imag = String.format(getFormat(), imaginary);
+    
+    
+    if (!getTrailingZeroes()) 
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
     {
+<<<<<<< HEAD
       return String.format(FORMAT_TEXT, r) + COS 
           + String.format(FORMAT_TEXT, getReal() * (180/Math.PI))
           + "°) + " - I + SIN 
           + String.format(FORMAT_TEXT, Math.abs(getImaginary() * (180/Math.PI))) + END;
     }*/
+=======
+      while (mag.charAt(mag.length() - 1) == '0')
+      {
+        mag = mag.substring(0, mag.length() - 1);
+      }
+      while (realStr.charAt(realStr.length() - 1) == '0')
+      {
+        realStr = realStr.substring(0, realStr.length() - 1);
+      }
+      while (imag.charAt(imag.length() - 1) == '0')
+      {
+        imag = imag.substring(0, imag.length() - 1);
+      }
+      if (realStr.charAt(realStr.length() - 1) == '.') 
+      {
+        realStr = realStr.substring(0, realStr.length() - 1);
+      }
+      if (imag.charAt(imag.length() - 1) == '.') 
+      {
+        imag = imag.substring(0, imag.length() - 1);
+      }
+      if (mag.charAt(mag.length() - 1) == '.') 
+      {
+        mag = mag.substring(0, mag.length() - 1);
+      }
+    }
+    
+    return mag + COS + realStr + "Â°) + " + I + SIN + imag + END;
+  }
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
   /**
    * Compares two complex numbers.

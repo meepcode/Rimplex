@@ -4,7 +4,7 @@ package calculation;
  * Complex number methods for calculations.
  *
  * @author TeamD
- * @version 11/18/22 This work complies with the JMU Honor Code.
+ * @version 12/9/22 This work complies with the JMU Honor Code.
  */
 public class Calculate
 {
@@ -488,8 +488,12 @@ public class Calculate
   {
     ComplexNumber op1 = operand;
     Double polarMagnitude = Math.sqrt(Math.pow(op1.getReal(), 2) + Math.pow(op1.getImaginary(), 2));
-    Double polarAngle = Math.atan(op1.getImaginary() / op1.getReal());
-
+    Double polarAngle = 0.0;
+    polarAngle = Math.atan(op1.getImaginary() / op1.getReal());
+    if (polarAngle == Double.NaN) 
+    {
+      polarAngle = 0.0;
+    }
     return new PolarComplexNumber(polarAngle, polarAngle, polarMagnitude);
   }
 }

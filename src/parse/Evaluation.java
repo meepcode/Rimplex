@@ -13,6 +13,9 @@ import java.util.regex.Matcher;
 
 /**
  * A class with utilities for parsing strings into complex numbers.
+ *
+ * @author TeamD
+ * @version 12/9/22 This work complies with the JMU Honor Code.
  */
 public class Evaluation
 {
@@ -112,9 +115,10 @@ public class Evaluation
 
         if (parts.length == 1)
         {
-          if (parts[0].charAt(parts[0].length() - 1) == 'i')
+          if (parts[0].length() > 2
+              && parts[0].charAt(parts[0].length() - 2) == ComplexNumber.I.charAt(0))
           {
-            parts[0] = parts[0].replaceAll('i' + "", "");
+            parts[0] = parts[0].replaceAll(ComplexNumber.I, "");
             imaginaryPart = Double.parseDouble(parts[0]);
           }
           else
@@ -124,7 +128,7 @@ public class Evaluation
         }
         else
         {
-          parts[1] = parts[1].replaceAll('i' + "", "");
+          parts[1] = parts[1].replaceAll(ComplexNumber.I + "", "");
           imaginaryPart = Double.parseDouble(parts[1]);
           realPart = Double.parseDouble(parts[0]);
         }
@@ -135,12 +139,12 @@ public class Evaluation
       {
         String sequence = token.sequence.substring(1, token.sequence.length() - 1);
 
-        String[] parts = sequence.split("(\\(cos\\()|(°?\\)[+]isin\\()|(°?\\))");
+        String[] parts = sequence.split("(\\(cos\\()|(°?\\)[+]𝘪sin\\()|(°?\\))");
 
         if (!Objects.equals(parts[1], parts[2]))
         {
           throw new ExpressionEvaluationException(
-              String.format("Theta must be equal in cos(%s) and isin(%s)", parts[1], parts[2]));
+              String.format("Theta must be equal in cos(%s) and 𝘪sin(%s)", parts[1], parts[2]));
         }
 
         result = Calculate.convertPolarToRectangular(
@@ -171,8 +175,8 @@ public class Evaluation
       }
       else if (type == TokenType.EXP)
       {
-        ComplexNumber power = evaluate(expression);
         ComplexNumber base = evaluate(expression);
+        ComplexNumber power = evaluate(expression);
 
         if (Math.abs(base.getImaginary() - 0.0) > ComplexNumber.EPSILON)
         {
