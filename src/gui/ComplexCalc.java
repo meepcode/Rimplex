@@ -1015,6 +1015,12 @@ public class ComplexCalc extends JFrame
 
         JButton printButton = new JButton("Print");
         historyPrint.add(printButton, BorderLayout.SOUTH);
+        
+        DefaultStyledDocument doc = new DefaultStyledDocument();
+        JTextPane copiedHistory = new JTextPane(doc);
+        copiedHistory.setEditable(false);
+        copiedHistory.setText(his.getHistoryList());
+        historyPrint.add(copiedHistory);
 
         // action listener for print button
         printButton.addActionListener(this);
@@ -1022,13 +1028,7 @@ public class ComplexCalc extends JFrame
         {
           public void actionPerformed(final ActionEvent e)
           {
-            
-            DefaultStyledDocument doc = new DefaultStyledDocument();
-            JTextPane copiedHistory = new JTextPane(doc);
-            copiedHistory.setEditable(false);
-            copiedHistory.setText(his.getHistoryList());
-            historyPrint.add(copiedHistory);
-
+                     
             PrinterJob pjob = PrinterJob.getPrinterJob();
             PrintRequestAttributeSet aset = new HashPrintRequestAttributeSet();
             PageFormat pf = pjob.pageDialog(aset);
@@ -1038,7 +1038,7 @@ public class ComplexCalc extends JFrame
               {
                 if (page > 0) { /* We have only one page, and 'page' is zero-based */
                   return NO_SUCH_PAGE;
-              }
+                }
 
               /* User (0,0) is typically outside the imageable area, so we must
                * translate by the X and Y values in the PageFormat to avoid clipping
