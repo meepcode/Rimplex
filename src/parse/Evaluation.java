@@ -115,7 +115,7 @@ public class Evaluation
 
         if (parts.length == 1)
         {
-          if (parts[0].substring(parts[0].length() - 1, parts[0].length()).equals(ComplexNumber.I))
+          if (parts[0].charAt(parts[0].length() - 1) == 'i')
           {
             parts[0] = parts[0].replaceAll(ComplexNumber.I + "", "");
             imaginaryPart = Double.parseDouble(parts[0]);
@@ -138,12 +138,12 @@ public class Evaluation
       {
         String sequence = token.sequence.substring(1, token.sequence.length() - 1);
 
-        String[] parts = sequence.split("(\\(cos\\()|(°?\\)[+]𝘪sin\\()|(°?\\))");
+        String[] parts = sequence.split("(\\(cos\\()|(°?\\)[+]isin\\()|(°?\\))");
 
         if (!Objects.equals(parts[1], parts[2]))
         {
           throw new ExpressionEvaluationException(
-              String.format("Theta must be equal in cos(%s) and 𝘪sin(%s)", parts[1], parts[2]));
+              String.format("Theta must be equal in cos(%s) and isin(%s)", parts[1], parts[2]));
         }
 
         result = Calculate.convertPolarToRectangular(
