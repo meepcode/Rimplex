@@ -25,6 +25,7 @@ import calculation.ComplexNumber;
  * Complex Plane class that displays Complex Plane
  * 
  * @author Team D
+ * @version 12/9/22
  *
  */
 public class ComplexPlane extends JFrame implements LanguageChangeable

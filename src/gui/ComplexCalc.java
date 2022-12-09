@@ -79,7 +79,7 @@ public class ComplexCalc extends JFrame
 
   private static final String EQUALS = "=";
 
-  private static final ComplexNumber complexResult = null;
+  private static ComplexNumber complexResult;
   private static int windowCount = 0; // close windows of all other windows when last window is
   // closed
   private final JTextField textfield;
@@ -489,6 +489,10 @@ public class ComplexCalc extends JFrame
     try
     {
       ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
+      isClicked = true;
+      complexResult = res;
+      complexPlane.getPanel().update();
+      
       if (settings.getComplexNumberMode() == Settings.ON)
       {
         res = Calculate.convertRectangularToPolar(res);
@@ -516,7 +520,6 @@ public class ComplexCalc extends JFrame
       textfield.setText(textfield.getText() + '=' + res);
       result = textfield.getText();
       pastResult = '(' + res.toString() + ')';
-      isClicked = true;
       his.add();
       // numZeroesToRemove = 0;
     }
