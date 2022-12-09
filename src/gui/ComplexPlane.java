@@ -125,11 +125,7 @@ class ComplexPanel extends JPanel
   private ArrayList<Point2D> points = new ArrayList<>();
   private ArrayList<ComplexNumber> numbers = new ArrayList<>();
 
-  private double scaleFactor = 1.0;
-  private int panelWidth;
-  private int panelHeight;
-
-  boolean isCalled = false;
+  
 
   /**
    * Repaints graph with new complex point.
@@ -139,15 +135,7 @@ class ComplexPanel extends JPanel
   public void drawPoint(Point2D point)
   {
     points.add(point);
-    if (point.getX() > 10 || point.getY() > 10)
-    {
-      zoomOut();
-      isCalled = !isCalled;
-    }
-    else
-    {
-      repaint();
-    }
+    repaint();
   }
 
   /**
@@ -159,6 +147,7 @@ class ComplexPanel extends JPanel
     if (ComplexCalc.isClicked)
     {
       ComplexNumber res = ComplexCalc.getResult();
+      System.out.println(res.toString());
       numbers.add(res);
       double x = res.getReal();
       double y = res.getImaginary();
@@ -225,8 +214,7 @@ class ComplexPanel extends JPanel
     // AffineTransform oldTransform = g2.getTransform();
 
     // calculate the dimensions of the panel
-    panelWidth = getWidth();
-    panelHeight = getHeight();
+  
 
     // translate the graphics to the center of the panel
     // if (isCalled)
@@ -346,15 +334,4 @@ class ComplexPanel extends JPanel
 
   }
 
-  public void zoomIn()
-  {
-    scaleFactor *= 1.1;
-    repaint();
-  }
-
-  public void zoomOut()
-  {
-    scaleFactor *= 0.9;
-    repaint();
-  }
 }
