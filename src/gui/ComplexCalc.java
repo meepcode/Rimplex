@@ -375,7 +375,7 @@ public class ComplexCalc extends JFrame
     }
     if (e.getSource() == imaginaryNum)
     {
-      textfield.setText(textfield.getText() + "ð�˜ª");
+      textfield.setText(textfield.getText() + "𝘪");
     }
     if (e.getSource() == leftParenth)
     {
@@ -463,17 +463,6 @@ public class ComplexCalc extends JFrame
         {
           res = Calculate.convertRectangularToPolar(res);
         }
-
-        /* String formatting */
-        // numDecimals = Integer.parseInt();
-
-        /*
-         * if (thousandsSeparator && trailingZeroes) { res.setTrailingZeroes(true);
-         * res.setFormat("%,." + numDecimals + "f"); } else if (thousandsSeparator) {
-         * res.setTrailingZeroes(false); res.setFormat("%,." + numDecimals + "f"); } else if
-         * (trailingZeroes) { res.setTrailingZeroes(true); res.setFormat("%." + numDecimals + "f");
-         * } else { res.setTrailingZeroes(false); res.setFormat("%." + numDecimals + "f"); }
-         */
 
         if (settings.getThousandsSeparatorMode() == settings.ON)
         {
@@ -714,8 +703,10 @@ public class ComplexCalc extends JFrame
             isPolarActive = false;
           }
         });
-
-        JButton thousands = new JButton("Thousands Separator");
+        JTextField thousandsText = new JTextField("Thousands Separator");
+        JCheckBox thousands = new JCheckBox();
+        thousandsText.setEditable(false);
+        modes.add(thousandsText);
         modes.add(thousands);
         thousands.addActionListener(this);
         // Check box if previously saved.
@@ -748,7 +739,10 @@ public class ComplexCalc extends JFrame
           }
         });
 
-        JButton zeroes = new JButton("Trailing zeroes");
+        JCheckBox zeroes = new JCheckBox();
+        JTextField zero = new JTextField("Trailing Zeroes");
+        zero.setEditable(false);
+        modes.add(zero);
         modes.add(zeroes);
         zeroes.addActionListener(this);
         // Check box if previously saved.
@@ -778,13 +772,13 @@ public class ComplexCalc extends JFrame
 
         JPanel decimalPanel = new JPanel();
         decimalPanel.setLayout(new FlowLayout());
-        decimalPlaces = new JTextField();
+        decimalPlaces = new JTextField("Decimal Number");
         decimalPlaces.setEditable(false);
         JTextArea decimals = new JTextArea("" + settings.getNumDecimals());
         numDecimals = settings.getNumDecimals();
         decimals.setText(""+numDecimals);
         decimals.setEditable(false);
-        JButton up = new JButton("â†‘");
+        JButton up = new JButton("↑");
         up.addActionListener(this);
         up.addActionListener(new ActionListener()
         {
@@ -796,7 +790,7 @@ public class ComplexCalc extends JFrame
             decimals.setText(settings.getNumDecimals() + "");
           }
         });
-        JButton down = new JButton("â†“");
+        JButton down = new JButton("↓");
         down.addActionListener(this);
         down.addActionListener(f -> {
           settings.decrementNumDecimals();
