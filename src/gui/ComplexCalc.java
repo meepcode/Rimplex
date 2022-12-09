@@ -454,7 +454,7 @@ public class ComplexCalc extends JFrame
       {
         ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
         complexResult = res;
-        if (settings.getComplexNumberMode() == Settings.ON)
+        if (settings.getComplexNumberMode() == Settings.POLAR)
         {
           res = Calculate.convertRectangularToPolar(res);
         }
@@ -470,16 +470,16 @@ public class ComplexCalc extends JFrame
          * } else { res.setTrailingZeroes(false); res.setFormat("%." + numDecimals + "f"); }
          */
 
-        if (thousandsSeparator)
+        if (settings.getThousandsSeparatorMode() == settings.ON)
         {
-          res.setFormat("%,." + numDecimals + "f");
+          res.setFormat("%,." + settings.getNumDecimals() + "f");
         }
         else
         {
-          res.setFormat("%." + numDecimals + "f");
+          res.setFormat("%." + settings.getNumDecimals() + "f");
         }
 
-        res.setTrailingZeroes(trailingZeroes);
+        res.setTrailingZeroes(settings.getTrailingZerosMode() == settings.ON);
 
         textfield.setText(textfield.getText() + "=" + res);
         result = textfield.getText();
@@ -778,6 +778,7 @@ public class ComplexCalc extends JFrame
         decimalPlaces.setEditable(false);
         JTextArea decimals = new JTextArea("" + settings.getNumDecimals());
         numDecimals = settings.getNumDecimals();
+        decimals.setText(""+numDecimals);
         decimals.setEditable(false);
         JButton up = new JButton("â†‘");
         up.addActionListener(this);
@@ -796,7 +797,7 @@ public class ComplexCalc extends JFrame
         down.addActionListener(f -> {
           settings.decrementNumDecimals();
           numDecimals--;
-          decimals.setText("" + settings.getTrailingZerosMode());
+          decimals.setText("" + settings.getNumDecimals());
         });
 
         decimalPanel.add(decimalPlaces);
