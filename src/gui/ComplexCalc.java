@@ -115,6 +115,7 @@ public class ComplexCalc extends JFrame
     setupFrame();
     setupMenuBar();
     his = new HistoryPanel();
+    hist = new JButton();
     textfield = new CalcTextField(settings, myFont);
 
     resetButton = new JButton("R");
@@ -1099,25 +1100,25 @@ public class ComplexCalc extends JFrame
       }
     }
 
-    public void componentResized(ComponentEvent e)
+    public void componentResized(final ComponentEvent e)
     {
       // TODO Auto-generated method stub
 
     }
 
-    public void componentMoved(ComponentEvent e)
+    public void componentMoved(final ComponentEvent e)
     {
       // TODO Auto-generated method stub
 
     }
 
-    public void componentShown(ComponentEvent e)
+    public void componentShown(final ComponentEvent e)
     {
       // TODO Auto-generated method stub
 
     }
 
-    public void componentHidden(ComponentEvent e)
+    public void componentHidden(final ComponentEvent e)
     {
       // TODO Auto-generated method stub
     }
@@ -1128,10 +1129,10 @@ public class ComplexCalc extends JFrame
    * Get the result of a complex operation.
    * @return a complex number.
    */
-  public static ComplexNumber getResult()
-  {
-    return complexResult;
-  }
+    public static ComplexNumber getResult()
+    {
+      return complexResult;
+    }
 
-}
+  }
 }

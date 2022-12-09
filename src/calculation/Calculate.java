@@ -221,19 +221,10 @@ public class Calculate
 
   /**
    * Calculate the log of a number.
-<<<<<<< HEAD
-   * 
-   * @param base
-   *          base to use for log calculation
-   * @param operand
-   *          the operand to calculate log for
-=======
-   *
    * @param base
    *     base to use for log calculation
    * @param operand
    *     the operand to calculate log for
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the log as a complex number
    */
   public static ComplexNumber log(final Double base, final ComplexNumber operand)
@@ -345,15 +336,9 @@ public class Calculate
 
   /**
    * Calculate the square root of a number.
-<<<<<<< HEAD
    * 
    * @param operand
    *          the operand to use.
-=======
-   *
-   * @param operand
-   *     the operand to use.
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the square root as a complex number.
    */
   public static ComplexNumber squareRoot(final ComplexNumber operand)
@@ -395,15 +380,8 @@ public class Calculate
 
   /**
    * Calculate the conjugate of a number.
-<<<<<<< HEAD
-   * 
-   * @param operand
-   *          the operand to use
-=======
-   *
    * @param operand
    *     the operand to use
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the conjugate as a complex number.
    */
   public static ComplexNumber conjugate(final ComplexNumber operand)
@@ -420,11 +398,6 @@ public class Calculate
 
   /**
    * Calculate the inverse of a number.
-<<<<<<< HEAD
-   * 
-   * @param operand
-   *          complex number
-=======
    *
    * @param operand
    *     complex number
@@ -453,15 +426,8 @@ public class Calculate
 
   /**
    * Converts a polar complex number to rectangular complex number.
-<<<<<<< HEAD
-   * 
-   * @param operand
-   *          polar complex number
-=======
-   *
    * @param operand
    *     polar complex number
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return a complex number
    */
   public static ComplexNumber convertPolarToRectangular(final ComplexNumber operand)
@@ -473,15 +439,9 @@ public class Calculate
 
   /**
    * Converts a rectangular complex number to polar complex number.
-<<<<<<< HEAD
-   * 
-   * @param operand
-   *          rectangular complex number
-=======
    *
    * @param operand
    *     rectangular complex number
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return a complex number
    */
   public static PolarComplexNumber convertRectangularToPolar(final ComplexNumber operand)
