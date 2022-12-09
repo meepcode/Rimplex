@@ -67,6 +67,7 @@ public class ComplexCalc extends JFrame
     implements ActionListener, ComponentListener, LanguageChangeable
 {
 
+  private static final long serialVersionUID = 1L;
   protected static String result = "";
   protected static boolean isClicked = false;
   private static final String SERIF = "Serif";
@@ -1021,19 +1022,45 @@ public class ComplexCalc extends JFrame
         {
           public void actionPerformed(final ActionEvent e)
           {
+            
+            DefaultStyledDocument doc = new DefaultStyledDocument();
+            JTextPane copiedHistory = new JTextPane(doc);
+            copiedHistory.setEditable(false);
+            copiedHistory.setText(his.getHistoryList());
+            historyPrint.add(copiedHistory);
 
             PrinterJob pjob = PrinterJob.getPrinterJob();
             PrintRequestAttributeSet aset = new HashPrintRequestAttributeSet();
             PageFormat pf = pjob.pageDialog(aset);
-            pjob.setPrintable(new PrintDialogExample(), pf);
-            boolean ok = pjob.printDialog(aset);
-            if (ok) {
-                try {
-                     pjob.print(aset);
-                } catch (PrinterException ex) {
-                 /* The job did not successfully complete */
-                }
-            }
+            pjob.setPrintable(new Printable() {
+              @Override
+              public int print(Graphics g, PageFormat pf, int page) throws PrinterException
+              {
+                if (page > 0) { /* We have only one page, and 'page' is zero-based */
+                  return NO_SUCH_PAGE;
+              }
+
+              /* User (0,0) is typically outside the imageable area, so we must
+               * translate by the X and Y values in the PageFormat to avoid clipping
+               */
+              Graphics2D g2d = (Graphics2D)g;
+              g2d.translate(pf.getImageableX(), pf.getImageableY());
+
+              /* Now print the window and its visible contents */
+              copiedHistory.printAll(g);
+
+              /* tell the caller that this page is part of the printed document */
+              return PAGE_EXISTS;
+              }
+            }, pf);
+//            boolean ok = pjob.printDialog(aset);
+//            if (ok) {
+//                try {
+//                     pjob.print(aset);
+//                } catch (PrinterException ex) {
+//                 /* The job did not successfully complete */
+//                }
+//            }
 
             if (pjob.printDialog())
             {
@@ -1051,12 +1078,7 @@ public class ComplexCalc extends JFrame
 
           }
         });
-
-        DefaultStyledDocument doc = new DefaultStyledDocument();
-        JTextPane copiedHistory = new JTextPane(doc);
-        copiedHistory.setEditable(false);
-        copiedHistory.setText(his.getHistoryList());
-        historyPrint.add(copiedHistory);
+        
       });
 
       // exit sub menu
@@ -1146,33 +1168,6 @@ public class ComplexCalc extends JFrame
   public static ComplexNumber getResult()
   {
     return complexResult;
-  }
-
-  public class PrintDialogExample implements Printable {
-    
-    
-    private static final int NO_SUCH_PAGE = 0;
-    private static final int PAGE_EXISTS = 0;
-
-    public int print(Graphics g, PageFormat pf, int page) throws
-                                                        PrinterException {
- 
-        if (page > 0) { /* We have only one page, and 'page' is zero-based */
-            return NO_SUCH_PAGE;
-        }
- 
-        /* User (0,0) is typically outside the imageable area, so we must
-         * translate by the X and Y values in the PageFormat to avoid clipping
-         */
-        Graphics2D g2d = (Graphics2D)g;
-        g2d.translate(pf.getImageableX(), pf.getImageableY());
- 
-        /* Now we perform our rendering */
-        g.drawString("Test the print dialog!", 100, 100);
- 
-        /* tell the caller that this page is part of the printed document */
-        return PAGE_EXISTS;
-    }
   }
  
 }
