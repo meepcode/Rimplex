@@ -9,7 +9,7 @@ package calculation;
 public class ComplexNumber
 {
   // public static final String I = "\uD835\uDE2A";
-  public static final String I = "i";
+  public static final String I = "\uD835\uDE2A";
   public static final double EPSILON = 0.000000000001;
 
   // These will be doubles representing the parts of a complex number.

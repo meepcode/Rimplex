@@ -13,9 +13,9 @@ import java.util.Set;
 
 /**
  * Represents the settings of this program.
- * 
+ *
  * @author TeamD
- * @version 12/9/22 This work complies with the JMU Honor Code.
+ * @version 12 /9/22 This work complies with the JMU Honor Code.
  */
 public class Settings implements Serializable
 {
@@ -57,13 +57,17 @@ public class Settings implements Serializable
   private static Settings instance;
   private static Set<LanguageChangeable> languageChangeables;
   private int thousandsSeparatorMode;
+  private int trailingZerosMode;
   private int complexNumberMode;
+  private int numDecimals;
   private Language language;
 
   private Settings()
   {
     thousandsSeparatorMode = OFF;
+    trailingZerosMode = OFF;
     complexNumberMode = RECTANGULAR;
+    numDecimals = 2;
     languageChangeables = new HashSet<>();
     language = null;
     setLanguage(ENGLISH);
@@ -198,7 +202,7 @@ public class Settings implements Serializable
     {
       language = new Language("English");
       language.put("printTitle", "Print");
-      language.put("aboutMessage", "This calculator performs calculations on the " 
+      language.put("aboutMessage", "This calculator performs calculations on the "
           + "given complex number operands. The equation can be graphed on a complex plane."
           + " A history of results from previous calculations from previous "
           + "calculations are stored in the history panel.");
@@ -256,10 +260,10 @@ public class Settings implements Serializable
     {
       language = new Language("Spanish");
       language.put("printTitle", "Impresión");
-      language.put("aboutMessage", "Esta calculadora realiza cálculos en los operandos de" 
+      language.put("aboutMessage", "Esta calculadora realiza cálculos en los operandos de"
           + "números complejos dados. La ecuación se puede graficar en un plano complejo."
           + " En el panel Historial se almacena un historial de resultados de cálculos "
-          +" anteriores de cálculos anteriores.");
+          + " anteriores de cálculos anteriores.");
       language.put("aboutTitle", "Sobre");
       language.put("hist", "Historia");
       language.put("title", "Calculadora");
@@ -285,8 +289,8 @@ public class Settings implements Serializable
     {
       language = new Language("German");
       language.put("printTitle", "Drucken");
-      language.put("aboutMessage", "Dieser Rechner führt Berechnungen für die gegebenen" 
-          + " komplexen Zahlenoperanden durch. Die Gleichung kann auf einer komplexen" 
+      language.put("aboutMessage", "Dieser Rechner führt Berechnungen für die gegebenen"
+          + " komplexen Zahlenoperanden durch. Die Gleichung kann auf einer komplexen"
           + " Ebene grafisch dargestellt werden. Ein Verlauf der Ergebnisse früherer"
           + " Berechnungen aus früheren Berechnungen wird im Bedienfeld \"Verlauf\" gespeichert.");
       language.put("aboutTitle", "Um");
@@ -318,6 +322,56 @@ public class Settings implements Serializable
     for (LanguageChangeable languageChangeable : languageChangeables)
     {
       languageChangeable.changeLanguage();
+    }
+  }
+
+  /**
+   * Gets trailing zeros mode.
+   *
+   * @return the trailing zeros mode
+   */
+  public int getTrailingZerosMode()
+  {
+    return trailingZerosMode;
+  }
+
+  /**
+   * Sets trailing zeros mode.
+   *
+   * @param trailingZerosMode
+   *     the trailing zeros mode
+   */
+  public void setTrailingZerosMode(final int trailingZerosMode)
+  {
+    this.trailingZerosMode = trailingZerosMode;
+  }
+
+  /**
+   * Gets num decimals.
+   *
+   * @return the num decimals
+   */
+  public int getNumDecimals()
+  {
+    return numDecimals;
+  }
+
+  /**
+   * Increment num decimals.
+   */
+  public void incrementNumDecimals()
+  {
+    numDecimals++;
+  }
+
+  /**
+   * Decrement num decimals.
+   */
+  public void decrementNumDecimals()
+  {
+    if (numDecimals > 0)
+    {
+      numDecimals--;
     }
   }
 }
