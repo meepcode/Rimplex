@@ -47,7 +47,7 @@ public class HistoryPanel extends JFrame
   private final JScrollPane pane;
   private final JEditorPane area;
   private final Point curr;
-  private final Font myFont = new Font(SERIF, Font.BOLD, 20);
+  private final Font myFont = new Font(SERIF, Font.PLAIN, 20);
   private String word;
   private final DefaultStyledDocument document;
   private final ArrayList<String> list;

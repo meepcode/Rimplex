@@ -51,7 +51,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       conjugate, imaginaryPart;
   private final JPanel panel;
   private final HistoryPanel his;
-  private final Font myFont = new Font(SERIF, Font.BOLD, 30);
+  private final Font myFont = new Font(SERIF, Font.PLAIN, 30);
   private final String calculatorStr = "Calculator";
   private final ComplexPlane complexPlane = new ComplexPlane();
   private final Color colorScheme = Color.CYAN;
@@ -344,7 +344,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
     }
     if (e.getSource() == imaginaryNum)
     {
-      textfield.setText(textfield.getText() + "i");
+      textfield.setText(textfield.getText() + "𝘪");
     }
     if (e.getSource() == leftParenth)
     {
