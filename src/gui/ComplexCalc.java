@@ -445,7 +445,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       {
         ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
         complexResult = res;
-        if (settings.getComplexNumberMode() == Settings.ON)
+        if (settings.getComplexNumberMode() == Settings.POLAR)
         {
           res = Calculate.convertRectangularToPolar(res);
         }
@@ -461,16 +461,16 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
          * } else { res.setTrailingZeroes(false); res.setFormat("%." + numDecimals + "f"); }
          */
 
-        if (thousandsSeparator)
+        if (settings.getThousandsSeparatorMode() == settings.ON)
         {
-          res.setFormat("%,." + numDecimals + "f");
+          res.setFormat("%,." + settings.getNumDecimals() + "f");
         }
         else
         {
-          res.setFormat("%." + numDecimals + "f");
+          res.setFormat("%." + settings.getNumDecimals() + "f");
         }
 
-        res.setTrailingZeroes(trailingZeroes);
+        res.setTrailingZeroes(settings.getTrailingZerosMode() == settings.ON);
 
         textfield.setText(textfield.getText() + "=" + res);
         result = textfield.getText();
