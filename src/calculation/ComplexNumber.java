@@ -78,10 +78,6 @@ public class ComplexNumber
   {
     if (imaginaryPart < 0)
     {
-<<<<<<< HEAD
-      return String.format(formatText, realPart) + "-"
-          + String.format(formatText, Math.abs(imaginaryPart)) + I;
-=======
       String real = String.format(formatText, realPart);
       String imag = String.format(formatText, Math.abs(imaginaryPart));
       if (!trailingZeroes) 
@@ -105,7 +101,6 @@ public class ComplexNumber
       }
       return real
           + "-" + imag + I;
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
     }
     else
     {

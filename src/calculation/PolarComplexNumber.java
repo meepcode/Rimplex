@@ -61,31 +61,6 @@ public class PolarComplexNumber extends ComplexNumber
       imaginary = 0.0;
     }
     
-<<<<<<< HEAD
-    return String.format(getFormat(), r) + COS 
-          + String.format(getFormat(), real)
-          + "°) + " + I + SIN 
-          + String.format(getFormat(), imaginary) + END;
-  }
-    // }
-    /*}
-    else
-=======
-    String mag = String.format(getFormat(), r);
-    String realStr = String.format(getFormat(), real);
-    String imag = String.format(getFormat(), imaginary);
-    
-    
-    if (!getTrailingZeroes()) 
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
-    {
-<<<<<<< HEAD
-      return String.format(FORMAT_TEXT, r) + COS 
-          + String.format(FORMAT_TEXT, getReal() * (180/Math.PI))
-          + "°) + " - I + SIN 
-          + String.format(FORMAT_TEXT, Math.abs(getImaginary() * (180/Math.PI))) + END;
-    }*/
-=======
       while (mag.charAt(mag.length() - 1) == '0')
       {
         mag = mag.substring(0, mag.length() - 1);
@@ -114,7 +89,6 @@ public class PolarComplexNumber extends ComplexNumber
     
     return mag + COS + realStr + "Â°) + " + I + SIN + imag + END;
   }
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 
   /**
    * Compares two complex numbers.
