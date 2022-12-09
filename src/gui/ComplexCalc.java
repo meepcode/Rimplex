@@ -502,14 +502,14 @@ public class ComplexCalc extends JFrame
     printTitle = settings.getLanguage().get("printTitle");
     aboutMessage = settings.getLanguage().get("aboutMessage");
     aboutTitle = settings.getLanguage().get("aboutTitle");
-    hist.setText(settings.getLanguage().get("hist"));
+    // hist.setText(settings.getLanguage().get("hist"));
     setTitle(settings.getLanguage().get("title"));
-    fileMenu.setText(settings.getLanguage().get("fileMenu"));
-    help.setText(settings.getLanguage().get("help"));
-    about.setText(settings.getLanguage().get("about"));
-    print.setText(settings.getLanguage().get("print"));
-    exit.setText(settings.getLanguage().get("exit"));
-    pref.setText(settings.getLanguage().get("pref"));
+    // fileMenu.setText(settings.getLanguage().get("fileMenu"));
+    // help.setText(settings.getLanguage().get("help"));
+    // about.setText(settings.getLanguage().get("about"));
+    // print.setText(settings.getLanguage().get("print"));
+    // exit.setText(settings.getLanguage().get("exit"));
+    // pref.setText(settings.getLanguage().get("pref"));
     if (prefWindow != null)
     {
       prefWindow.setTitle(settings.getLanguage().get("prefWindow"));
@@ -520,9 +520,9 @@ public class ComplexCalc extends JFrame
       historysc.setText(settings.getLanguage().get("historysc"));
       graphsc.setText(settings.getLanguage().get("graphsc"));
     }
-    plot.setText(settings.getLanguage().get("plot"));
-    helpPage.setText(settings.getLanguage().get("helpPage"));
-    newWindow.setText(settings.getLanguage().get("newWindow"));
+    // plot.setText(settings.getLanguage().get("plot"));
+    // helpPage.setText(settings.getLanguage().get("helpPage"));
+    // newWindow.setText(settings.getLanguage().get("newWindow"));
   }
 
   // Menu Bar Code
