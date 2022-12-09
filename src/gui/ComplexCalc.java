@@ -826,28 +826,6 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
             english.setBackground(null);
             german.setBackground(null);
             french.setBackground(null);
-            printTitle = "Impresión";
-            aboutMessage = "Esta calculadora realiza operaciones en los operandos de números "
-                + "complejos dados. Un historial de resultados de cálculos anteriores se almacena "
-                + "en el panel de historial.";
-            aboutTitle = "Sobre";
-            hist.setText("Historia");
-            setTitle("Calculadora");
-            fileMenu.setText("Expediente");
-            help.setText("Ayuda");
-            about.setText("Sobre");
-            print.setText("Impresión");
-            exit.setText("Salida");
-            pref.setText("Preferencias");
-            prefWindow.setTitle("Preferencias");
-            plot.setText("Conspirar");
-            helpPage.setText("Página de ayuda");
-            newWindow.setText("Nueva ventana");
-            polar.setText("MultiPolar");
-            thousands.setText("Separador de Miles");
-            zeroes.setText("Ceros Finales");
-            decimalPlaces.setText("Número de Decimales");
-            doubleParen.setText("Doble Paréntesis");
 
           }
         });
@@ -866,30 +844,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
             english.setBackground(null);
             french.setBackground(null);
             spanish.setBackground(null);
-            printTitle = "Drucken";
-            aboutMessage = "Dieser Rechner führt Operationen an den gegebenen Operanden für "
-                + "komplexe Zahlen aus. Ein Verlauf der Ergebnisse früherer Berechnungen wird im "
-                + "Verlaufsfeld gespeichert.";
-            aboutTitle = "Um";
-            hist.setText("Geschichte");
-            setTitle("Taschenrechner");
-            fileMenu.setText("Datei");
-            help.setText("Hilfe");
-            about.setText("Um");
-            print.setText("Drucken");
-            exit.setText("Ausfahrt");
-            pref.setText("Einstellungen");
-            prefWindow.setTitle("Einstellungen");
-            plot.setText("Handlung");
-            helpPage.setText("Hilfeseite");
-            newWindow.setText("Neues Fenster");
-            polar.setText("Polar");
-            thousands.setText("Tausendertrennzeichen");
-            zeroes.setText("Nachgestellte Nullen");
-            decimalPlaces.setText("Dezimalstellen");
-            doubleParen.setText("Doppelte Klammern");
-
-            int test = new java.awt.Point(4, 5).hashCode();
+            
           }
         });
 
@@ -906,29 +861,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
             english.setBackground(null);
             german.setBackground(null);
             spanish.setBackground(null);
-            printTitle = "Imprimer";
-            aboutMessage = "Cette calculatrice effectue des opérations sur les opérandes de nombres"
-                + " complexes donnés. Un historique des résultats des calculs précédents est stocké"
-                + " dans le panneau d'historique.";
-            aboutTitle = "Sur";
-            hist.setText("Histoire");
-            setTitle("Calculatrice");
-            fileMenu.setText("Dossier");
-            help.setText("Aider");
-            about.setText("Sur");
-            print.setText("Imprimer");
-            exit.setText("Sortir");
-            pref.setText("Préférences");
-            prefWindow.setTitle("Préférences");
-            plot.setText("Complot");
-            helpPage.setText("Page d’aide");
-            newWindow.setText("Nouvelle fenêtre");
-            polar.setText("Polaire");
-            thousands.setText("Séparateur de Milliers");
-            zeroes.setText("Zéros à Droite");
-            decimalPlaces.setText("Décimales");
-            doubleParen.setText("Double parenthèse");
-
+            
           }
         });
       });
