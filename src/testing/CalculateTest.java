@@ -11,7 +11,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Tests for complex number calculation methods.
- * These tests 
  *
  * @author TeamD
  * @version 12/9/22 This work complies with the JMU Honor Code.
@@ -284,20 +283,6 @@ class CalculateTest
   {
     ComplexNumber op1 = new PolarComplexNumber(0.0, 0.0, 2.0);
     ComplexNumber res = new PolarComplexNumber(0.0, 0.0, 4.0);
-    ComplexNumber temp = Calculate.add(op1, op1);
-    //PolarComplexNumber test1 = new PolarComplexNumber(((int) (temp.getReal() * 100)) / 100.0,
-        //((int) (temp.getImaginary() * 100)) / 100.0,
-        //((int) (temp.getPolarMagnitude() * 100)) / 100.0);
-    assertEquals(res, temp);
-  }
-  
-  /**
-   * Test add with polar number.
-   */
-  @Test void testAddPolar3()
-  {
-    ComplexNumber op1 = new PolarComplexNumber(1.5708, 1.5708, 2.0);
-    ComplexNumber res = new PolarComplexNumber(1.5708, 1.5708, 4.0);
     ComplexNumber temp = Calculate.add(op1, op1);
     //PolarComplexNumber test1 = new PolarComplexNumber(((int) (temp.getReal() * 100)) / 100.0,
         //((int) (temp.getImaginary() * 100)) / 100.0,

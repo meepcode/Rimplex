@@ -474,6 +474,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
     }
   }
 
+
   @Override
   public void changeLanguage()
   {
@@ -876,6 +877,9 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
 
         JButton printButton = new JButton("Print");
         historyPrint.add(printButton, BorderLayout.SOUTH);
+        
+        
+        
         // action listener for print button
         printButton.addActionListener(this);
         printButton.addActionListener(new ActionListener()
@@ -886,7 +890,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
             PrinterJob pjob = PrinterJob.getPrinterJob();
             PageFormat pf = pjob.defaultPage();
             pjob.setPrintable(null, pf);
-
+            
             if (pjob.printDialog())
             { 
               try
@@ -899,8 +903,12 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
                 e1.printStackTrace();
               }
             }
+            
           }
         });
+        
+     
+
 
         DefaultStyledDocument doc = new DefaultStyledDocument();
         JTextPane copiedHistory = new JTextPane(doc);
