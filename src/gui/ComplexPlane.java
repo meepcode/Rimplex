@@ -50,12 +50,13 @@ public class ComplexPlane extends JFrame
     setSize(700, 700);
     setVisible(false);
   }
-  
+
   /**
    * 
    * @return
    */
-  public ComplexPanel getPanel() {
+  public ComplexPanel getPanel()
+  {
     return panel;
   }
 }
@@ -108,7 +109,7 @@ class ComplexPanel extends JPanel
   // numerate axis
   int xCoordNumbers = 10;
   int yCoordNumbers = 10;
-  
+
   double negXLength = (NEG_X_AXIS_SECOND_X_COORD - NEG_X_AXIS_FIRST_X_COORD) / xCoordNumbers;
   double negYLength = (NEG_Y_AXIS_SECOND_Y_COORD - NEG_Y_AXIS_FIRST_Y_COORD) / yCoordNumbers;
   int xLength = (X_AXIS_SECOND_X_COORD - X_AXIS_FIRST_X_COORD) / xCoordNumbers;
@@ -116,8 +117,13 @@ class ComplexPanel extends JPanel
 
   private ArrayList<Point2D> points = new ArrayList<>();
   private ArrayList<ComplexNumber> numbers = new ArrayList<>();
- 
-  
+
+  private double scaleFactor = 1.0;
+  private int panelWidth;
+  private int panelHeight;
+
+  boolean isCalled = false;
+
   /**
    * Repaints graph with new complex point.
    * 
@@ -126,21 +132,31 @@ class ComplexPanel extends JPanel
   public void drawPoint(Point2D point)
   {
     points.add(point);
-    repaint();
+    if (point.getX() > 10 || point.getY() > 10)
+    {
+      zoomOut();
+      isCalled = !isCalled;
+    }
+    else
+    {
+      repaint();
+    }
   }
-  
+
   /**
    * updates the GUI with the new point
    */
-  public void update() {
-    
-    if (ComplexCalc.isClicked) {
+  public void update()
+  {
+
+    if (ComplexCalc.isClicked)
+    {
       ComplexNumber res = ComplexCalc.getResult();
       numbers.add(res);
       double x = res.getReal();
       double y = res.getImaginary();
       Point2D nextPoint = new Point2D.Double(x, y);
-      
+
       drawPoint(nextPoint);
     }
   }
@@ -153,15 +169,14 @@ class ComplexPanel extends JPanel
    */
   private void drawPointOnPanel(Point2D point, Graphics g)
   {
-    
+
     Graphics2D gg = (Graphics2D) g;
-    
+
     gg.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
     gg.setRenderingHint(RenderingHints.KEY_STROKE_CONTROL, RenderingHints.VALUE_STROKE_PURE);
 
     double x = 0;
     double y = 0;
-    
 
     final int pointDiameter = 5;
     if (point.getX() > 0)
@@ -182,13 +197,12 @@ class ComplexPanel extends JPanel
       // fill
       y = NEG_Y_AXIS_FIRST_Y_COORD - (point.getY() * negYLength) - pointDiameter / 2;
     }
-    
+
     Ellipse2D.Double shape = new Ellipse2D.Double(x, y, pointDiameter, pointDiameter);
     gg.fill(shape);
     // g.fillOval((int) x, (int) y, pointDiameter, pointDiameter);
-    
+
   }
-  
 
   /**
    * Paints Complex Plane
@@ -199,7 +213,24 @@ class ComplexPanel extends JPanel
     super.paintComponent(g);
 
     Graphics2D g2 = (Graphics2D) g;
-    
+
+    // save the current transformation matrix
+    // AffineTransform oldTransform = g2.getTransform();
+
+    // calculate the dimensions of the panel
+    panelWidth = getWidth();
+    panelHeight = getHeight();
+
+    // translate the graphics to the center of the panel
+    // if (isCalled)
+    // {
+    // g.translate(-panelWidth / 2 + 10, -panelHeight / 2 + 10);
+    // System.out.println(-panelWidth / 2);
+    // System.out.println(-panelHeight / 2);
+    // g.translate(panelWidth / 2 + 10, panelHeight / 2 + 10);
+    // }
+    // // g2.scale(scaleFactor, scaleFactor);
+    // g2.scale(scaleFactor, scaleFactor);
 
     g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
@@ -216,7 +247,6 @@ class ComplexPanel extends JPanel
     // negative y-axis
     g2.drawLine(NEG_Y_AXIS_X_COORD, NEG_Y_AXIS_FIRST_Y_COORD, NEG_Y_AXIS_X_COORD,
         NEG_Y_AXIS_SECOND_Y_COORD);
-    
 
     // x-axis arrow
     // g2.drawLine(X_AXIS_SECOND_X_COORD - FIRST_LENGHT, X_AXIS_Y_COORD - SECOND_LENGHT,
@@ -306,5 +336,18 @@ class ComplexPanel extends JPanel
     }
     // draw points
     points.forEach(p -> drawPointOnPanel(p, g));
+
+  }
+
+  public void zoomIn()
+  {
+    scaleFactor *= 1.1;
+    repaint();
+  }
+
+  public void zoomOut()
+  {
+    scaleFactor *= 0.9;
+    repaint();
   }
 }

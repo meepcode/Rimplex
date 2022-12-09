@@ -11,6 +11,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 /**
  * Tests for complex number calculation methods.
+ * These tests 
  *
  * @author TeamD
  * @version 12/9/22 This work complies with the JMU Honor Code.
@@ -361,7 +362,7 @@ class CalculateTest
   }
 
   /**
-   * Test square root wiht polar number.
+   * Test square root with polar number.
    */
   @Test void testSquareRootPolar()
   {

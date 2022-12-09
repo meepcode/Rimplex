@@ -133,7 +133,7 @@ class EvaluationTest
 
   @Test void testMultiplyInFrontOfAdd() throws ExpressionEvaluationException
   {
-    assertEquals(new ComplexNumber(44.0, 16.0), evaluateExpression("(5+4i)*(6-2i)+(6+2i)"));
+    assertEquals(new ComplexNumber(44.0, 16.0), evaluateExpression("(5+4i)*(6-i)+(6+2i)"));
   }
 
   @Test void testDivideInFrontOfAdd() throws ExpressionEvaluationException
@@ -169,7 +169,7 @@ class EvaluationTest
 
   @Test void testParensAddInFrontOfDivide() throws ExpressionEvaluationException
   {
-    assertEquals(new ComplexNumber(1.75, -0.25), evaluateExpression("((5+4i)+(6-2i))/(6+2i)"));
+    assertEquals(new ComplexNumber(1.75, -0.25), evaluateExpression("((5+4i)+(6-i))/(6+2i)"));
   }
 
   @Test void testParensSubtractInFrontOfMultiply() throws ExpressionEvaluationException
@@ -184,7 +184,7 @@ class EvaluationTest
 
   @Test void testParensMultiplyInFrontOfAdd() throws ExpressionEvaluationException
   {
-    assertEquals(new ComplexNumber(44.0, 16.0), evaluateExpression("((5+4i)*(6-2i))+(6+2i)"));
+    assertEquals(new ComplexNumber(44.0, 16.0), evaluateExpression("((5+i)*(6-i))+(6+2i)"));
   }
 
   @Test void testParensDivideInFrontOfAdd() throws ExpressionEvaluationException
