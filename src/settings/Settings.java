@@ -222,7 +222,6 @@ public class Settings implements Serializable
       language.put("thousands", "Thousands Place");
       language.put("zeroes", "Trailing Zeroes");
       language.put("decimalPlaces", "Decimal Places");
-      language.put("doubleParen", "Double Parenthesis");
       language.put("historysc", "History Shortcut");
       language.put("graphsc", "Graph Shortcut");
     }
@@ -251,7 +250,6 @@ public class Settings implements Serializable
       language.put("thousands", "Séparateur de Milliers");
       language.put("zeroes", "\"Zéros à Droite");
       language.put("decimalPlaces", "Décimales");
-      language.put("doubleParen", "Double parenthèse");
       language.put("historysc", "Raccourci Historique");
       language.put("graphsc", "Raccourci Graphique");
     }
@@ -280,7 +278,6 @@ public class Settings implements Serializable
       language.put("thousands", "Separador de Miles");
       language.put("zeroes", "Ceros Finales");
       language.put("decimalPlaces", "Número de Decimales");
-      language.put("doubleParen", "Doble Paréntesis");
       language.put("historysc", "Acceso Directo al Historial");
       language.put("graphsc", "Acceso Directo de Gráfico");
     }
@@ -309,7 +306,6 @@ public class Settings implements Serializable
       language.put("thousands", "Tausendertrennzeichen");
       language.put("zeroes", "Nachgestellte Nullen");
       language.put("decimalPlaces", "Dezimalstellen");
-      language.put("doubleParen", "Doppelte Klammern");
       language.put("historysc", "Verknüpfung Verlauf");
       language.put("graphsc", "Diagramm-Verknüpfung");
     }
