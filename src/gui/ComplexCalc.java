@@ -896,9 +896,9 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       print.addActionListener(this);
       print.addActionListener(e ->
       {
-        MenuItemWindow historyPrint = new MenuItemWindow("", 600, 300);
+        MenuItemWindow historyPrint = new MenuItemWindow("Print", 600, 300);
 
-        JButton printButton = new JButton();
+        JButton printButton = new JButton("Print");
         historyPrint.add(printButton, BorderLayout.SOUTH);
         
         
