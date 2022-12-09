@@ -1,5 +1,10 @@
 package gui;
 
+import settings.LanguageChangeable;
+import settings.Settings;
+
+import javax.swing.JFrame;
+import javax.swing.JPanel;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -22,14 +27,8 @@ import calculation.ComplexNumber;
  * @author Team D
  *
  */
-public class ComplexPlane extends JFrame
+public class ComplexPlane extends JFrame implements LanguageChangeable
 {
-  // testing
-  public static void main(String[] args)
-  {
-    ComplexPlane plane = new ComplexPlane();
-    plane.setVisible(false);
-  }
 
   /**
    * attributes
@@ -48,20 +47,30 @@ public class ComplexPlane extends JFrame
   }
 
   /**
-   * Set plane frame
+   * Set plane frame.
    */
   public void createUI()
   {
     setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-    setTitle("Complex Plane");
     setSize(700, 700);
     setVisible(false);
+    Settings.addLanguageChangeable(this);
   }
 
   /**
    * Getter for complex panel
    * 
-   * @return complexPanel
+   * @return complexPanel Change the set language.
+   */
+  @Override
+  public void changeLanguage()
+  {
+    setTitle(Settings.getInstance().getLanguage().get("complexPlaneTitle"));
+  }
+
+  /**
+   *
+   * @return
    */
   public ComplexPanel getPanel()
   {
@@ -71,7 +80,7 @@ public class ComplexPlane extends JFrame
 
 /**
  * helper class to paint plane
- * 
+ *
  * @author jaxco
  *
  */
@@ -128,7 +137,7 @@ class ComplexPanel extends JPanel
 
   /**
    * Repaints graph with new complex point.
-   * 
+   *
    * @param point
    */
   public void drawPoint(Point2D point)
@@ -157,7 +166,7 @@ class ComplexPanel extends JPanel
 
   /**
    * Draws Point on panel
-   * 
+   *
    * @param point
    * @param g
    */
