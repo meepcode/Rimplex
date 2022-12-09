@@ -38,15 +38,15 @@ import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 /**
+ * HistoryPanel.
  * @author Team D
+ * @version 12/9/22
  */
 public class HistoryPanel extends JFrame
 {
 
   private static final String SERIF = "Serif";
-  /**
-   *
-   */
+
   private static final long serialVersionUID = 1L;
   private final JWindow mainPanel; // changed from JPanel
   private final JScrollPane pane;

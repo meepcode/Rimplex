@@ -12,11 +12,16 @@ import javax.swing.JFrame;
  * Menu Item Window.
  *
  * @author TeamD
+<<<<<<< HEAD
  * @version 11/18/22 This work complies with the JMU Honor Code.
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
+=======
+ * @version 12/9/22 This work complies with the JMU Honor Code.
 >>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
  */
 public class MenuItemWindow extends JFrame
 {
+<<<<<<< HEAD
   /**
 <<<<<<< HEAD
    * MenuItemWindow.
@@ -30,6 +35,8 @@ public class MenuItemWindow extends JFrame
 =======
    * 
    */
+=======
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
   private static final long serialVersionUID = 1L;
   
   /**
