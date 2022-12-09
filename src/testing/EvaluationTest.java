@@ -16,7 +16,9 @@ import static parse.Evaluation.evaluateExpression;
  */
 class EvaluationTest
 {
-
+  
+  private String str = "\uDE2A)*(6+2\uD835\uDE2A)";
+  
   @Test void testComplexNumber() throws ExpressionEvaluationException
   {
     assertEquals(new ComplexNumber(15.0, 4.0), evaluateExpression("(15+4\uD835\uDE2A)"));
@@ -123,7 +125,7 @@ class EvaluationTest
   @Test void testAddInFrontOfMultiply() throws ExpressionEvaluationException
   {
     assertEquals(new ComplexNumber(45.0, 4.0),
-        evaluateExpression("(5+4\uD835\uDE2A)+(6-2\uD835" + "\uDE2A)*(6+2\uD835\uDE2A)"));
+        evaluateExpression("(5+4\uD835\uDE2A)+(6-2\uD835" + str));
   }
 
   @Test void testAddInFrontOfDivide() throws ExpressionEvaluationException
@@ -135,7 +137,7 @@ class EvaluationTest
   @Test void testSubtractInFrontOfMultiply() throws ExpressionEvaluationException
   {
     assertEquals(new ComplexNumber(-35.0, +4.0),
-        evaluateExpression("(5+4\uD835\uDE2A)-(6-2\uD835" + "\uDE2A)*(6+2\uD835\uDE2A)"));
+        evaluateExpression("(5+4\uD835\uDE2A)-(6-2\uD835" + str));
   }
 
   @Test void testSubtractInFrontOfDivide() throws ExpressionEvaluationException

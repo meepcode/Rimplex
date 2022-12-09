@@ -1,4 +1,3 @@
-
 package gui;
 
 import calculation.Calculate;
@@ -8,7 +7,12 @@ import parse.ExpressionEvaluationException;
 import settings.LanguageChangeable;
 import settings.Settings;
 
+import javax.print.attribute.HashPrintRequestAttributeSet;
+import javax.print.attribute.PrintRequestAttributeSet;
+import javax.swing.AbstractAction;
+import javax.swing.ActionMap;
 import javax.swing.ImageIcon;
+import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JComboBox;
@@ -22,31 +26,34 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
+import javax.swing.KeyStroke;
 import javax.swing.text.DefaultStyledDocument;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Desktop;
 import java.awt.FlowLayout;
 import java.awt.Font;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.GridLayout;
-//import java.awt.Point;
-//import java.awt.event.ActionEvent;
-//import java.awt.event.ActionListener;
-//import java.awt.event.ComponentAdapter;
-//import java.awt.event.ComponentEvent;
-//import java.awt.event.ComponentListener;
-//import java.awt.event.WindowAdapter;
-//import java.awt.event.WindowEvent;
 import java.awt.Point;
-import java.awt.event.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.print.PageFormat;
+import java.awt.print.Printable;
 import java.awt.print.PrinterException;
 import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serial;
-import java.security.Key;
+
+
 import java.util.Objects;
 
 /**
@@ -59,16 +66,20 @@ import java.util.Objects;
 public class ComplexCalc extends JFrame
     implements ActionListener, ComponentListener, LanguageChangeable
 {
+
+  private static final long serialVersionUID = 1L;
   protected static String result = "";
   protected static boolean isClicked = false;
-  @Serial
-  private static final long serialVersionUID = 1L;
   private static final String SERIF = "Serif";
   private static final String MINUS = "-";
   private static final String PLUS = "+";
   private static final String ASTERISK = "*";
   private static final String SLASH = "/";
   private static final String DOT = ".";
+
+  private static final String EQUALS = "=";
+
+  private static final ComplexNumber complexResult = null;
   private static int windowCount = 0; // close windows of all other windows when last window is
   // closed
   private final JTextField textfield;
@@ -85,13 +96,10 @@ public class ComplexCalc extends JFrame
   private final ComplexPlane complexPlane = new ComplexPlane();
   private final Color colorScheme = Color.CYAN;
   private final Settings settings;
-  public boolean thousandsSeparator = false;
-  public boolean isPolarActive = false;
-  public boolean trailingZeroes = false;
-  public boolean doubleParenthesis = false;
-  public int numDecimals = 2;
+  private final String onEnter = "onEnter";
+  private final String openHistory = "openHistory";
+  private final String openGraph = "openGraph";
   private String pastResult = "";
-  private static ComplexNumber complexResult = null;
   private String printTitle, aboutTitle, aboutMessage;
   private JMenuBar menuBar;
   private JMenu fileMenu, help, helpPage;
@@ -116,12 +124,12 @@ public class ComplexCalc extends JFrame
     textfield = new CalcTextField(settings, myFont);
 
     resetButton = new JButton("R");
-    subButton = new JButton("-");
-    addButton = new JButton("+");
-    mulButton = new JButton("*");
-    divButton = new JButton("/");
-    decButton = new JButton(".");
-    equButton = new JButton("=");
+    subButton = new JButton(MINUS);
+    addButton = new JButton(PLUS);
+    mulButton = new JButton(ASTERISK);
+    divButton = new JButton(SLASH);
+    decButton = new JButton(DOT);
+    equButton = new JButton(EQUALS);
     clrButton = new JButton("\u2190");
     expButton = new JButton("^");
     leftParenth = new JButton("(");
@@ -236,6 +244,19 @@ public class ComplexCalc extends JFrame
       numberButtons[i].setBackground(ColorSchemeUtil.numberButtonsColor());
     }
 
+    InputMap im = menuBar.getInputMap();
+    ActionMap am = menuBar.getActionMap();
+
+    im.put(KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0), onEnter);
+
+    am.put(onEnter, new AbstractAction()
+    {
+      @Override public void actionPerformed(final ActionEvent e)
+      {
+        evaluate();
+      }
+    });
+
     changeLanguage();
 
     this.setVisible(true);
@@ -246,7 +267,7 @@ public class ComplexCalc extends JFrame
    * Main method.
    *
    * @param args
-   *          cmd line args
+   *     cmd line args
    */
   public static void main(final String[] args) throws FileNotFoundException
   {
@@ -260,6 +281,12 @@ public class ComplexCalc extends JFrame
   public static void setClick()
   {
     isClicked = !isClicked;
+  }
+
+  public static ComplexNumber getResult()
+  {
+    // TODO Auto-generated method stub
+    return complexResult;
   }
 
   private void setupHistoryPanel()
@@ -282,8 +309,7 @@ public class ComplexCalc extends JFrame
     this.setJMenuBar(mb.createMenuBar());
   }
 
-  @Override
-  public void actionPerformed(final ActionEvent e)
+  @Override public void actionPerformed(final ActionEvent e)
   {
     for (int i = 0; i < 10; i++)
     {
@@ -375,7 +401,7 @@ public class ComplexCalc extends JFrame
     }
     if (e.getSource() == imaginaryNum)
     {
-      textfield.setText(textfield.getText() + "ð�˜ª");
+      textfield.setText(textfield.getText() + "𝘪");
     }
     if (e.getSource() == leftParenth)
     {
@@ -453,67 +479,66 @@ public class ComplexCalc extends JFrame
     }
     if (e.getSource() == equButton)
     {
-      try
-      {
-        ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
-        isClicked = true;
-        complexResult = res;
-        complexPlane.getPanel().update();
-        if (settings.getComplexNumberMode() == Settings.POLAR)
-        {
-          res = Calculate.convertRectangularToPolar(res);
-        }
-
-        /* String formatting */
-        // numDecimals = Integer.parseInt();
-
-        /*
-         * if (thousandsSeparator && trailingZeroes) { res.setTrailingZeroes(true);
-         * res.setFormat("%,." + numDecimals + "f"); } else if (thousandsSeparator) {
-         * res.setTrailingZeroes(false); res.setFormat("%,." + numDecimals + "f"); } else if
-         * (trailingZeroes) { res.setTrailingZeroes(true); res.setFormat("%." + numDecimals + "f");
-         * } else { res.setTrailingZeroes(false); res.setFormat("%." + numDecimals + "f"); }
-         */
-
-        if (settings.getThousandsSeparatorMode() == settings.ON)
-        {
-          res.setFormat("%,." + settings.getNumDecimals() + "f");
-        }
-        else
-        {
-          res.setFormat("%." + settings.getNumDecimals() + "f");
-        }
-
-        res.setTrailingZeroes(settings.getTrailingZerosMode() == settings.ON);
-
-        textfield.setText(textfield.getText() + "=" + res);
-        result = textfield.getText();
-        pastResult = "(" + res + ")";
-        his.add();
-        // numZeroesToRemove = 0;
-      }
-      catch (ExpressionEvaluationException ex)
-      {
-        JOptionPane.showMessageDialog(null, "ERROR: Invalid Expression Format.", "ERROR",
-            JOptionPane.ERROR_MESSAGE);
-      }
+      evaluate();
     }
   }
 
-  @Override
-  public void changeLanguage()
+  private void evaluate()
+  {
+    try
+    {
+      ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
+      if (settings.getComplexNumberMode() == Settings.ON)
+      {
+        res = Calculate.convertRectangularToPolar(res);
+      }
+
+      if (settings.getThousandsSeparatorMode() == Settings.ON)
+      {
+        res.setFormat("%,." + settings.getNumDecimals() + 'f');
+      }
+      else
+      {
+        res.setFormat("%." + settings.getNumDecimals() + 'f');
+      }
+      if (settings.getThousandsSeparatorMode() == Settings.ON)
+      {
+        res.setFormat("%,." + settings.getNumDecimals() + "f");
+      }
+      else
+      {
+        res.setFormat("%." + settings.getNumDecimals() + "f");
+      }
+
+      res.setTrailingZeroes(settings.getTrailingZerosMode() == Settings.ON);
+
+      textfield.setText(textfield.getText() + '=' + res);
+      result = textfield.getText();
+      pastResult = '(' + res.toString() + ')';
+      isClicked = true;
+      his.add();
+      // numZeroesToRemove = 0;
+    }
+    catch (ExpressionEvaluationException ex)
+    {
+      JOptionPane.showMessageDialog(null, "ERROR: Invalid Expression Format.", "ERROR",
+          JOptionPane.ERROR_MESSAGE);
+    }
+  }
+
+  @Override public void changeLanguage()
   {
     printTitle = settings.getLanguage().get("printTitle");
     aboutMessage = settings.getLanguage().get("aboutMessage");
     aboutTitle = settings.getLanguage().get("aboutTitle");
-    // hist.setText(settings.getLanguage().get("hist"));
+    hist.setText(settings.getLanguage().get("hist"));
     setTitle(settings.getLanguage().get("title"));
-    // fileMenu.setText(settings.getLanguage().get("fileMenu"));
-    // help.setText(settings.getLanguage().get("help"));
-    // about.setText(settings.getLanguage().get("about"));
-    // print.setText(settings.getLanguage().get("print"));
-    // exit.setText(settings.getLanguage().get("exit"));
-    // pref.setText(settings.getLanguage().get("pref"));
+    fileMenu.setText(settings.getLanguage().get("fileMenu"));
+    help.setText(settings.getLanguage().get("help"));
+    about.setText(settings.getLanguage().get("about"));
+    print.setText(settings.getLanguage().get("print"));
+    exit.setText(settings.getLanguage().get("exit"));
+    pref.setText(settings.getLanguage().get("pref"));
     if (prefWindow != null)
     {
       prefWindow.setTitle(settings.getLanguage().get("prefWindow"));
@@ -524,41 +549,58 @@ public class ComplexCalc extends JFrame
       historysc.setText(settings.getLanguage().get("historysc"));
       graphsc.setText(settings.getLanguage().get("graphsc"));
     }
-    // plot.setText(settings.getLanguage().get("plot"));
-    // helpPage.setText(settings.getLanguage().get("helpPage"));
-    // newWindow.setText(settings.getLanguage().get("newWindow"));
+     plot.setText(settings.getLanguage().get("plot"));
+     helpPage.setText(settings.getLanguage().get("helpPage"));
+     newWindow.setText(settings.getLanguage().get("newWindow"));
+  }
+
+  @Override public void componentResized(final ComponentEvent componentEvent)
+  {
+
+  }
+
+  @Override public void componentMoved(final ComponentEvent componentEvent)
+  {
+
+  }
+
+  @Override public void componentShown(final ComponentEvent componentEvent)
+  {
+
+  }
+
+  @Override public void componentHidden(final ComponentEvent componentEvent)
+  {
+
   }
 
   // Menu Bar Code
   class MenuBar implements ActionListener
   {
-    String aboutMessage = "This calculator performs operations on the given complex number operands. "
-        + "A history of results from previosu calculations are stored in the history " + "panel.";
-    String aboutTitle = "About";
-    String printTitle = "Print";
-    JMenuBar menuBar;
-    JMenu fileMenu, help;
-    JMenuItem pref, print, exit, about, newWindow, helpPage;
-
     public JMenuBar createMenuBar() throws FileNotFoundException
     {
 
       menuBar = new JMenuBar();
-      ImageIcon icon = new ImageIcon(getClass().getResource("logo.png"));
+
+      ImageIcon icon = new ImageIcon(Objects.requireNonNull(getClass().getResource("logo.png")));
       JLabel label = new JLabel(icon);
       menuBar.add(label);
-      JButton plot = new JButton("Graph");
-      plot.addActionListener(e -> {
 
+      plot = new JButton();
+      plot.addActionListener(e ->
+      {
         // fill
         complexPlane.setVisible(true);
+        settings.setLanguage(settings.getLanguageNum());
       });
 
-      JButton hist = new JButton("History"); // HISTORY
-                                             // PANEL------------------------------------------------------------------------------------
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------
+      // JButton hist = new JButton("History");
+       hist = new JButton("History");
 
       // frame.addComponentListener((ComponentListener) frame);
-      hist.addActionListener(e -> {
+      hist.addActionListener(e ->
+      {
         Point corner = panel.getLocation();
         his.createAndShowGUI(corner, panel.getWidth(), panel.getHeight());        
         // frame.pack();
@@ -579,7 +621,8 @@ public class ComplexCalc extends JFrame
       helpPage.add(englishHelpPage);
 
       englishHelpPage.addActionListener(this);
-      englishHelpPage.addActionListener(e -> {
+      englishHelpPage.addActionListener(e ->
+      {
         if (e.getSource() == englishHelpPage)
         {
           try
@@ -594,11 +637,12 @@ public class ComplexCalc extends JFrame
         }
       });
 
-      spanishHelpPage = new JMenuItem("Ayuda en EspaÃ±ol");
+      spanishHelpPage = new JMenuItem("Ayuda en Español");
       helpPage.add(spanishHelpPage);
 
       spanishHelpPage.addActionListener(this);
-      spanishHelpPage.addActionListener(e -> {
+      spanishHelpPage.addActionListener(e ->
+      {
         if (e.getSource() == spanishHelpPage)
         {
           try
@@ -617,7 +661,8 @@ public class ComplexCalc extends JFrame
       helpPage.add(frenchHelpPage);
 
       frenchHelpPage.addActionListener(this);
-      frenchHelpPage.addActionListener(e -> {
+      frenchHelpPage.addActionListener(e ->
+      {
         if (e.getSource() == frenchHelpPage)
         {
           try
@@ -636,7 +681,8 @@ public class ComplexCalc extends JFrame
       helpPage.add(germanHelpPage);
 
       germanHelpPage.addActionListener(this);
-      germanHelpPage.addActionListener(e -> {
+      germanHelpPage.addActionListener(e -> 
+      {
         if (e.getSource() == germanHelpPage)
         {
           try
@@ -661,8 +707,7 @@ public class ComplexCalc extends JFrame
       newWindow.addActionListener(this);
       newWindow.addActionListener(new ActionListener()
       {
-        @Override
-        public void actionPerformed(final ActionEvent e)
+        @Override public void actionPerformed(final ActionEvent e)
         {
           try
           {
@@ -679,7 +724,8 @@ public class ComplexCalc extends JFrame
       pref = new JMenuItem();
       fileMenu.add(pref);
       pref.addActionListener(this);
-      pref.addActionListener(e -> {
+      pref.addActionListener(e -> 
+      {
         prefWindow = new MenuItemWindow("", 900, 300);
 
         JPanel all = new JPanel();
@@ -695,114 +741,108 @@ public class ComplexCalc extends JFrame
         if (settings.getComplexNumberMode() == Settings.POLAR)
         {
           polar.setSelected(true);
-          isPolarActive = true;
         }
         else if (settings.getComplexNumberMode() == Settings.RECTANGULAR)
         {
           polar.setSelected(false);
-          isPolarActive = false;
         }
         polar.addActionListener(this);
 
-        polar.addActionListener(f -> {
+        polar.addActionListener(f -> 
+        {
           if (settings.getComplexNumberMode() == Settings.RECTANGULAR)
           {
             settings.setComplexNumberMode(Settings.POLAR);
-            isPolarActive = true;
           }
           else if (settings.getThousandsSeparatorMode() == Settings.POLAR)
           {
             settings.setComplexNumberMode(Settings.RECTANGULAR);
-            isPolarActive = false;
           }
         });
-
-        JButton thousands = new JButton("Thousands Separator");
+        JTextField thousandsText = new JTextField("Thousands Separator");
+        JCheckBox thousands = new JCheckBox();
+        thousandsText.setEditable(false);
+        modes.add(thousandsText);
         modes.add(thousands);
         thousands.addActionListener(this);
         // Check box if previously saved.
         if (settings.getThousandsSeparatorMode() == Settings.ON)
         {
           thousands.setSelected(true);
-          thousandsSeparator = true;
         }
         else if (settings.getThousandsSeparatorMode() == Settings.OFF)
         {
           thousands.setSelected(false);
-          thousandsSeparator = false;
         }
 
         thousands.addActionListener(new ActionListener()
         {
-          @Override
-          public void actionPerformed(final ActionEvent e)
+          @Override public void actionPerformed(final ActionEvent e)
           {
             if (settings.getThousandsSeparatorMode() == Settings.ON)
             {
               settings.setThousandsSeparatorMode(Settings.OFF);
-              thousandsSeparator = false;
             }
             else if (settings.getThousandsSeparatorMode() == Settings.OFF)
             {
               settings.setThousandsSeparatorMode(Settings.ON);
-              thousandsSeparator = true;
             }
           }
         });
 
-        JButton zeroes = new JButton("Trailing zeroes");
+        JCheckBox zeroes = new JCheckBox();
+        JTextField zero = new JTextField("Trailing Zeroes");
+        zero.setEditable(false);
+        modes.add(zero);
         modes.add(zeroes);
         zeroes.addActionListener(this);
         // Check box if previously saved.
         if (settings.getTrailingZerosMode() == Settings.ON)
         {
           zeroes.setSelected(true);
-          trailingZeroes = true;
         }
         else if (settings.getTrailingZerosMode() == Settings.OFF)
         {
           zeroes.setSelected(false);
-          trailingZeroes = false;
         }
 
-        zeroes.addActionListener(f -> {
+
+        zeroes.addActionListener(f ->
+        {
           if (settings.getTrailingZerosMode() == Settings.ON)
           {
             settings.setTrailingZerosMode(Settings.OFF);
-            trailingZeroes = false;
           }
           else if (settings.getTrailingZerosMode() == Settings.OFF)
           {
             settings.setTrailingZerosMode(Settings.ON);
-            trailingZeroes = true;
           }
         });
 
         JPanel decimalPanel = new JPanel();
         decimalPanel.setLayout(new FlowLayout());
-        decimalPlaces = new JTextField();
+        decimalPlaces = new JTextField("Decimal Number");
         decimalPlaces.setEditable(false);
         JTextArea decimals = new JTextArea("" + settings.getNumDecimals());
-        numDecimals = settings.getNumDecimals();
+        int numDecimals = settings.getNumDecimals();
+
         decimals.setText("" + numDecimals);
         decimals.setEditable(false);
-        JButton up = new JButton("â†‘");
+        JButton up = new JButton("↑");
         up.addActionListener(this);
         up.addActionListener(new ActionListener()
         {
-          @Override
-          public void actionPerformed(final ActionEvent e)
+          @Override public void actionPerformed(final ActionEvent e)
           {
             settings.incrementNumDecimals();
-            numDecimals++;
             decimals.setText(settings.getNumDecimals() + "");
           }
         });
-        JButton down = new JButton("â†“");
+        JButton down = new JButton("↓");
         down.addActionListener(this);
-        down.addActionListener(f -> {
+        down.addActionListener(f ->
+        {
           settings.decrementNumDecimals();
-          numDecimals--;
           decimals.setText("" + settings.getNumDecimals());
         });
 
@@ -839,8 +879,7 @@ public class ComplexCalc extends JFrame
 
         historyDropDown.addActionListener(new ActionListener()
         {
-          @Override
-          public void actionPerformed(ActionEvent e)
+          @Override public void actionPerformed(ActionEvent e)
           {
             if (e.getSource() == hisShortcuts[0])
             {
@@ -883,7 +922,6 @@ public class ComplexCalc extends JFrame
         english.addActionListener(this);
 
         english.addActionListener(f ->
-
         {
 
           setSize(420, 480);
@@ -901,8 +939,7 @@ public class ComplexCalc extends JFrame
 
         spanish.addActionListener(new ActionListener()
         {
-          @Override
-          public void actionPerformed(final ActionEvent e)
+          @Override public void actionPerformed(final ActionEvent e)
           {
             setSize(460, 480);
 
@@ -920,8 +957,7 @@ public class ComplexCalc extends JFrame
 
         german.addActionListener(new ActionListener()
         {
-          @Override
-          public void actionPerformed(final ActionEvent e)
+          @Override public void actionPerformed(final ActionEvent e)
           {
             setSize(440, 480);
 
@@ -940,8 +976,7 @@ public class ComplexCalc extends JFrame
 
         french.addActionListener(new ActionListener()
         {
-          @Override
-          public void actionPerformed(final ActionEvent e)
+          @Override public void actionPerformed(final ActionEvent e)
           {
             setSize(430, 480);
             french.setBackground(Color.GRAY);
@@ -977,7 +1012,9 @@ public class ComplexCalc extends JFrame
       fileMenu.add(print);
 
       print.addActionListener(this);
-      print.addActionListener(e -> {
+
+      print.addActionListener(e ->
+      {
         MenuItemWindow historyPrint = new MenuItemWindow("Print", 600, 300);
 
         JButton printButton = new JButton("Print");
@@ -989,15 +1026,51 @@ public class ComplexCalc extends JFrame
         {
           public void actionPerformed(final ActionEvent e)
           {
+            
+            DefaultStyledDocument doc = new DefaultStyledDocument();
+            JTextPane copiedHistory = new JTextPane(doc);
+            copiedHistory.setEditable(false);
+            copiedHistory.setText(his.getHistoryList());
+            historyPrint.add(copiedHistory);
 
             PrinterJob pjob = PrinterJob.getPrinterJob();
-            PageFormat pf = pjob.defaultPage();
-            pjob.setPrintable(null, pf);
+            PrintRequestAttributeSet aset = new HashPrintRequestAttributeSet();
+            PageFormat pf = pjob.pageDialog(aset);
+            pjob.setPrintable(new Printable() {
+              @Override
+              public int print(Graphics g, PageFormat pf, int page) throws PrinterException
+              {
+                if (page > 0) { /* We have only one page, and 'page' is zero-based */
+                  return NO_SUCH_PAGE;
+              }
+
+              /* User (0,0) is typically outside the imageable area, so we must
+               * translate by the X and Y values in the PageFormat to avoid clipping
+               */
+              Graphics2D g2d = (Graphics2D)g;
+              g2d.translate(pf.getImageableX(), pf.getImageableY());
+
+              /* Now print the window and its visible contents */
+              copiedHistory.printAll(g);
+
+              /* tell the caller that this page is part of the printed document */
+              return PAGE_EXISTS;
+              }
+            }, pf);
+//            boolean ok = pjob.printDialog(aset);
+//            if (ok) {
+//                try {
+//                     pjob.print(aset);
+//                } catch (PrinterException ex) {
+//                 /* The job did not successfully complete */
+//                }
+//            }
 
             if (pjob.printDialog())
             {
               try
               {
+                Graphics g = his.getArea().getGraphics();
                 pjob.print();
               }
               catch (PrinterException e1)
@@ -1009,12 +1082,7 @@ public class ComplexCalc extends JFrame
 
           }
         });
-
-        DefaultStyledDocument doc = new DefaultStyledDocument();
-        JTextPane copiedHistory = new JTextPane(doc);
-        copiedHistory.setEditable(false);
-        copiedHistory.setText(his.getHistoryList());
-        historyPrint.add(copiedHistory);
+        
       });
 
       // exit sub menu
@@ -1053,48 +1121,58 @@ public class ComplexCalc extends JFrame
 
       return menuBar;
     }
-
-    @Override
-    public void actionPerformed(final ActionEvent e)
+    
+    /**
+     * Action Performed.
+     * @param e event to use.
+     */
+    @Override public void actionPerformed(final ActionEvent e)
     {
       // TODO Auto-generated method stub
 
     }
 
-  }
+    public void keyPressed(final KeyEvent e)
+    {
+      if (e.getKeyCode() == KeyEvent.VK_ENTER && isFocused())
+      {
+        evaluate();
+      }
+    }
 
+    public void componentResized(ComponentEvent e)
+    {
+      // TODO Auto-generated method stub
+
+    }
+
+    public void componentMoved(ComponentEvent e)
+    {
+      // TODO Auto-generated method stub
+
+    }
+
+    public void componentShown(ComponentEvent e)
+    {
+      // TODO Auto-generated method stub
+
+    }
+
+    public void componentHidden(ComponentEvent e)
+    {
+      // TODO Auto-generated method stub
+    }
+
+  
+  
+  /**
+   * Get the result of a complex operation.
+   * @return a complex number.
+   */
   public static ComplexNumber getResult()
   {
-    // TODO Auto-generated method stub
     return complexResult;
   }
-
-  @Override
-  public void componentResized(ComponentEvent e)
-  {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
-  public void componentMoved(ComponentEvent e)
-  {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
-  public void componentShown(ComponentEvent e)
-  {
-    // TODO Auto-generated method stub
-
-  }
-
-  @Override
-  public void componentHidden(ComponentEvent e)
-  {
-    // TODO Auto-generated method stub
-
-  }
-
+ 
+}
 }
