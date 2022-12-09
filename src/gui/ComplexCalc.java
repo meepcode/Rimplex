@@ -646,7 +646,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       fileMenu.add(pref);
       pref.addActionListener(this);
       pref.addActionListener(e -> {
-        prefWindow = new MenuItemWindow("Preferences", 700, 300);
+        prefWindow = new MenuItemWindow("Preferences", 900, 300);
 
         JPanel all = new JPanel();
         all.setLayout(new GridLayout(4, 1));
@@ -955,7 +955,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
             pjob.setPrintable(null, pf);
 
             if (pjob.printDialog())
-            {
+            { 
               try
               {
                 pjob.print();
