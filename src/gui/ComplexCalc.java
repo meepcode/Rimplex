@@ -60,7 +60,7 @@ import java.util.Objects;
  * Calculator GUI.
  *
  * @author TeamD
- * @version 11/4/22 This work complies with the JMU Honor Code.
+ * @version 12/9/22 This work complies with the JMU Honor Code.
  */
 
 public class ComplexCalc extends JFrame
@@ -111,6 +111,11 @@ public class ComplexCalc extends JFrame
   private JTextField decimalPlaces;
   private String helpPageStr;
   private JTextPane historysc, graphsc;
+  
+  public boolean isPolarActive;
+  public boolean trailingZeroes;
+  public boolean thousandsSeparator;
+  public int numDecimals;
 
   private ComplexCalc(final Settings settings) throws FileNotFoundException
   {
@@ -494,6 +499,7 @@ public class ComplexCalc extends JFrame
       complexPlane.getPanel().update();
       
       if (settings.getComplexNumberMode() == Settings.ON)
+      if (settings.getComplexNumberMode() == Settings.POLAR)
       {
         res = Calculate.convertRectangularToPolar(res);
       }
@@ -505,14 +511,6 @@ public class ComplexCalc extends JFrame
       else
       {
         res.setFormat("%." + settings.getNumDecimals() + 'f');
-      }
-      if (settings.getThousandsSeparatorMode() == Settings.ON)
-      {
-        res.setFormat("%,." + settings.getNumDecimals() + "f");
-      }
-      else
-      {
-        res.setFormat("%." + settings.getNumDecimals() + "f");
       }
 
       res.setTrailingZeroes(settings.getTrailingZerosMode() == Settings.ON);
@@ -745,10 +743,12 @@ public class ComplexCalc extends JFrame
         if (settings.getComplexNumberMode() == Settings.POLAR)
         {
           polar.setSelected(true);
+          isPolarActive = true;
         }
         else if (settings.getComplexNumberMode() == Settings.RECTANGULAR)
         {
           polar.setSelected(false);
+          isPolarActive = false;
         }
         polar.addActionListener(this);
 
@@ -757,10 +757,12 @@ public class ComplexCalc extends JFrame
           if (settings.getComplexNumberMode() == Settings.RECTANGULAR)
           {
             settings.setComplexNumberMode(Settings.POLAR);
+            isPolarActive = true;
           }
           else if (settings.getThousandsSeparatorMode() == Settings.POLAR)
           {
             settings.setComplexNumberMode(Settings.RECTANGULAR);
+            isPolarActive = false;
           }
         });
         JTextField thousandsText = new JTextField("Thousands Separator");
@@ -773,10 +775,12 @@ public class ComplexCalc extends JFrame
         if (settings.getThousandsSeparatorMode() == Settings.ON)
         {
           thousands.setSelected(true);
+          thousandsSeparator = true;
         }
         else if (settings.getThousandsSeparatorMode() == Settings.OFF)
         {
           thousands.setSelected(false);
+          thousandsSeparator = false;
         }
 
         thousands.addActionListener(new ActionListener()
@@ -786,10 +790,12 @@ public class ComplexCalc extends JFrame
             if (settings.getThousandsSeparatorMode() == Settings.ON)
             {
               settings.setThousandsSeparatorMode(Settings.OFF);
+              thousandsSeparator = false;
             }
             else if (settings.getThousandsSeparatorMode() == Settings.OFF)
             {
               settings.setThousandsSeparatorMode(Settings.ON);
+              thousandsSeparator = true;
             }
           }
         });
@@ -804,10 +810,12 @@ public class ComplexCalc extends JFrame
         if (settings.getTrailingZerosMode() == Settings.ON)
         {
           zeroes.setSelected(true);
+          trailingZeroes = true;
         }
         else if (settings.getTrailingZerosMode() == Settings.OFF)
         {
           zeroes.setSelected(false);
+          trailingZeroes = false;
         }
 
 
@@ -816,10 +824,12 @@ public class ComplexCalc extends JFrame
           if (settings.getTrailingZerosMode() == Settings.ON)
           {
             settings.setTrailingZerosMode(Settings.OFF);
+            trailingZeroes = false;
           }
           else if (settings.getTrailingZerosMode() == Settings.OFF)
           {
             settings.setTrailingZerosMode(Settings.ON);
+            trailingZeroes = true;
           }
         });
 
@@ -828,7 +838,7 @@ public class ComplexCalc extends JFrame
         decimalPlaces = new JTextField("Decimal Number");
         decimalPlaces.setEditable(false);
         JTextArea decimals = new JTextArea("" + settings.getNumDecimals());
-        int numDecimals = settings.getNumDecimals();
+        numDecimals = settings.getNumDecimals();
 
         decimals.setText("" + numDecimals);
         decimals.setEditable(false);
@@ -840,6 +850,7 @@ public class ComplexCalc extends JFrame
           {
             settings.incrementNumDecimals();
             decimals.setText(settings.getNumDecimals() + "");
+            numDecimals++;
           }
         });
         JButton down = new JButton("↓");
@@ -848,6 +859,7 @@ public class ComplexCalc extends JFrame
         {
           settings.decrementNumDecimals();
           decimals.setText("" + settings.getNumDecimals());
+          numDecimals--;
         });
 
         decimalPanel.add(decimalPlaces);

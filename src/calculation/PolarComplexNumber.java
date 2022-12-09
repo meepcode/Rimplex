@@ -13,7 +13,7 @@ public class PolarComplexNumber extends ComplexNumber
 {
   private static final String COS = "(cos(";
   private static final String SIN = "sin(";
-  private static final String END = "°))";
+  private static final String END = "Â°))";
 
   private Double r; // The polar magnitude
 
@@ -94,7 +94,7 @@ public class PolarComplexNumber extends ComplexNumber
       }
     }
 
-    return mag + COS + realStr + "°) + " + I + SIN + imag + END;
+    return mag + COS + realStr + "Â°) + " + I + SIN + imag + END;
   }
 
   /**
