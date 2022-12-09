@@ -1,5 +1,6 @@
 package settings;
 
+import javax.swing.KeyStroke;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
@@ -136,6 +137,26 @@ public class Settings implements Serializable
   public static void addLanguageChangeable(final LanguageChangeable languageChangeable)
   {
     languageChangeables.add(languageChangeable);
+  }
+
+  public KeyStroke getOpenHistory()
+  {
+    return null;
+  }
+
+  public void setOpenHistory(char key)
+  {
+
+  }
+
+  public KeyStroke getOpenGraph()
+  {
+    return null;
+  }
+
+  public void setOpenGraph(char key)
+  {
+
   }
 
   /**
