@@ -59,6 +59,8 @@ public class HistoryPanel extends JFrame
   private final ArrayList<String> list;
   private String historyList = "";
   private int index = 0;
+  private int wid = 0;
+  private Timer tim;
 
   /**
    * Constructor.
@@ -69,8 +71,9 @@ public class HistoryPanel extends JFrame
     // mainPanel = new JPanel();
     mainPanel = new JWindow();
     mainPanel.setLayout(new BorderLayout());
-    mainPanel.setBounds(50, 100, 300, 300); // setting the bounds else where
+    mainPanel.setBounds(50, 100, 30, 300); // setting the bounds else where
     mainPanel.setVisible(false);
+    wid = mainPanel.getWidth();
     curr = mainPanel.getLocation();
 
     // Border b1 = BorderFactory.createEmptyBorder(20, 20, 20, 20);
@@ -83,6 +86,7 @@ public class HistoryPanel extends JFrame
     mainPanel.add(pane, BorderLayout.CENTER);
 
     mainPanel.add(area);
+    mainPanel.add(pane);
 
     area.setText(historyList);
     // area.setBorder(b1);
@@ -203,12 +207,15 @@ public class HistoryPanel extends JFrame
     mainPanel.setLocation(x, y);
     JButton slideout = new JButton(">");
     area.setVisible(!visible);
-    slideout.setBackground(new Color(0, 255, 255));
-    mainPanel.add(slideout);
+    slideout.setBackground(new Color(115, 147, 179));
+    slideout.setBounds(x + width, y + height, 10, 300);
+    //area.add(slideout);
+    mainPanel.add(slideout, BorderLayout.EAST);
     slideout.addActionListener(new ActionListener()
     {
       public void actionPerformed(ActionEvent e)
-      {
+      { 
+        animate();
       }
     });
     System.out.println(mainPanel.getLocation());
@@ -233,15 +240,22 @@ public class HistoryPanel extends JFrame
   {
     // a timer, swing packge
     // construct a timer
-    int delay = 1000; // milliseconds
+    int delay = 100; // milliseconds
     ActionListener taskPerformer = new ActionListener()
     {
       public void actionPerformed(ActionEvent evt)
       {
-        // ...Perform a task...
+        wid += 10;
+        mainPanel.setSize(wid, 300);
+        System.out.print("the curr width" + wid);
+        if (wid == 300) {
+          tim.stop();
+        }
       }
     };
-    new Timer(delay, taskPerformer).start();
+    tim = new Timer(delay, taskPerformer);
+    tim.start(); 
+    
   }
 
 }

@@ -559,10 +559,12 @@ public class ComplexCalc extends JFrame
 
       // frame.addComponentListener((ComponentListener) frame);
       hist.addActionListener(e -> {
+
         Point corner = panel.getLocation();
-        his.createAndShowGUI(corner, panel.getWidth(), panel.getHeight());
+        his.createAndShowGUI(corner, panel.getWidth(), panel.getHeight());        
         // frame.pack();
       });
+      
 
       // help jmenuitem under Help menu
       help = new JMenu();
