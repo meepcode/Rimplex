@@ -10,6 +10,7 @@ import javax.swing.JFrame;
  */
 public class MenuItemWindow extends JFrame
 {
+
   private static final long serialVersionUID = 1L;
   
   /**

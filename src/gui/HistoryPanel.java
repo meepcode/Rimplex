@@ -1,15 +1,18 @@
 package gui;
 
 import javax.swing.BorderFactory;
-
+import javax.swing.JButton;
+import javax.swing.JComponent;
 
 //import javax.swing.JComponent;
+
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
-//import javax.swing.Timer;
+import javax.swing.JWindow;
+import javax.swing.Timer;
 import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
@@ -26,6 +29,8 @@ import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 //import java.awt.event.ActionEvent;
 //import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -43,7 +48,7 @@ public class HistoryPanel extends JFrame
   private static final String SERIF = "Serif";
 
   private static final long serialVersionUID = 1L;
-  private final JPanel mainPanel;
+  private final JWindow mainPanel; // changed from JPanel
   private final JScrollPane pane;
   private final JEditorPane area;
   private final Point curr;
@@ -53,23 +58,22 @@ public class HistoryPanel extends JFrame
   private final ArrayList<String> list;
   private String historyList = "";
   private int index = 0;
-  
-  
+
   /**
    * Constructor.
    */
   public HistoryPanel()
   {
 
-    mainPanel = new JPanel();
+    // mainPanel = new JPanel();
+    mainPanel = new JWindow();
     mainPanel.setLayout(new BorderLayout());
-    mainPanel.setBounds(50, 100, 300, 300);
+    mainPanel.setBounds(50, 100, 300, 300); // setting the bounds else where
     mainPanel.setVisible(false);
-
     curr = mainPanel.getLocation();
 
-    Border b1 = BorderFactory.createEmptyBorder(20, 20, 20, 20);
-    mainPanel.setBorder(b1);
+    // Border b1 = BorderFactory.createEmptyBorder(20, 20, 20, 20);
+    // mainPanel.setBorder(b1);
 
     document = new DefaultStyledDocument();
     area = new JTextPane(document);
@@ -80,11 +84,11 @@ public class HistoryPanel extends JFrame
     mainPanel.add(area);
 
     area.setText(historyList);
-    area.setBorder(b1);
+    // area.setBorder(b1);
     area.setFont(myFont);
     area.setPreferredSize(new Dimension(400, 240));
     word = null;
-    //copyExpression();
+    // copyExpression();
 
     list = new ArrayList<>();
   }
@@ -135,7 +139,7 @@ public class HistoryPanel extends JFrame
       {
         try
         {
-          
+
           int point = area.viewToModel2D(e.getPoint());
           int startPoint = Utilities.getRowStart(area, point);
           int endPoint = Utilities.getRowEnd(area, point);
@@ -146,14 +150,13 @@ public class HistoryPanel extends JFrame
           StringSelection selection = new StringSelection(words[0]);
           Clipboard clipboard = Toolkit.getDefaultToolkit().getSystemClipboard();
           clipboard.setContents(selection, selection);
-          
-          /*Highlight text to copy*/
+
+          /* Highlight text to copy */
           Highlighter highlighter = area.getHighlighter();
-          HighlightPainter painter = 
-                 new DefaultHighlighter.DefaultHighlightPainter(Color.cyan);
-          //int p0 = word.indexOf(startPoint);
-          //int p1 = p0 + "world".length();
-          highlighter.addHighlight(startPoint, endPoint - words[1].length() - 1, painter );
+          HighlightPainter painter = new DefaultHighlighter.DefaultHighlightPainter(Color.cyan);
+          // int p0 = word.indexOf(startPoint);
+          // int p1 = p0 + "world".length();
+          highlighter.addHighlight(startPoint, endPoint - words[1].length() - 1, painter);
 
         }
         catch (BadLocationException ex)
@@ -171,31 +174,39 @@ public class HistoryPanel extends JFrame
     });
 
   }
-  
+
   /**
    * Getter method for historyList.
+   * 
    * @return String historyList
    */
-  public String getHistoryList() {
+  public String getHistoryList()
+  {
     return historyList;
   }
 
   /**
    * Generates History panel.
    */
-  public void createAndShowGUI()
+  public void createAndShowGUI(Point p, int width, int height)
   {
+    System.out.println(p);
+    System.out.println("The panel width:" + width + "----The panel height:" + height);
+    // values to add x + 843 , y + 180
+    int x = p.x + 843; // - (width / 50);//- 10; had to change it to an random value bc we switch to
+                       // panel from frame
+    int y = p.y + 180;
+    System.out.print("x:" + x + "y:" + y);
     boolean visible = mainPanel.isVisible();
     mainPanel.setVisible(!visible);
+    mainPanel.setLocation(x, y);
+    JButton slideout = new JButton(">");
     area.setVisible(!visible);
-    //    if (!visible)
-    //    {
-    //      animate(mainPanel, new Point(308, 35), 15, 10);
-    //    }
-    //    else
-    //    {
-    //      mainPanel.setLocation(curr);
-    //    }
+    mainPanel.add(slideout);
+    slideout.setVisible(true);
+    System.out.println(mainPanel.getLocation());
+    System.out.println(mainPanel.getSize());
+
   }
 
   /**
@@ -203,46 +214,27 @@ public class HistoryPanel extends JFrame
    *
    * @return main panel.
    */
-  public JPanel getPanel()
+  public JWindow getWindow() // changed to window
   {
     return mainPanel;
   }
 
   /**
    * Helper to animate history panel.
-   *
-   * @param component
-   * @param newPoint
-   * @param frames
-   * @param interval
    */
-  /*private void animate(final JComponent component, final Point newPoint, 
-      final int frames, final int interval)
+  private void animate()
   {
-    Rectangle compBounds = component.getBounds();
-
-    Point oldPoint = new Point(compBounds.x, compBounds.y), animFrame = new Point(
-        (newPoint.x - oldPoint.x) / frames, (newPoint.y - oldPoint.y) / frames);
-
-    new Timer(interval, new ActionListener()
+    // a timer, swing packge
+    // construct a timer
+    int delay = 1000; // milliseconds
+    ActionListener taskPerformer = new ActionListener()
     {
-      int currentFrame = 0;
-
-      public void actionPerformed(final ActionEvent e)
+      public void actionPerformed(ActionEvent evt)
       {
-        component.setBounds(oldPoint.x + (animFrame.x * currentFrame),
-            oldPoint.y + (animFrame.y * currentFrame), compBounds.width, compBounds.height);
-
-        if (currentFrame != frames)
-        {
-          currentFrame++;
-        }
-        else
-        {
-          ((Timer) e.getSource()).stop();
-        }
+        // ...Perform a task...
       }
-    }).start();
-  }*/
+    };
+    new Timer(delay, taskPerformer).start();
+  }
 
 }

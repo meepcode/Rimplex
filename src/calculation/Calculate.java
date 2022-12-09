@@ -142,8 +142,8 @@ public class Calculate
     }
 
     Double realResult = op1.getReal() * op2.getReal() - op1.getImaginary() * op2.getImaginary();
-    Double imaginaryResult =
-        op1.getReal() * op2.getImaginary() + op1.getImaginary() * op2.getReal();
+    Double imaginaryResult = op1.getReal() * op2.getImaginary()
+        + op1.getImaginary() * op2.getReal();
     ComplexNumber ret = new ComplexNumber(realResult, imaginaryResult);
     if (polar)
     {
@@ -221,11 +221,19 @@ public class Calculate
 
   /**
    * Calculate the log of a number.
+<<<<<<< HEAD
+   * 
+   * @param base
+   *          base to use for log calculation
+   * @param operand
+   *          the operand to calculate log for
+=======
    *
    * @param base
    *     base to use for log calculation
    * @param operand
    *     the operand to calculate log for
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the log as a complex number
    */
   public static ComplexNumber log(final Double base, final ComplexNumber operand)
@@ -337,9 +345,15 @@ public class Calculate
 
   /**
    * Calculate the square root of a number.
+<<<<<<< HEAD
+   * 
+   * @param operand
+   *          the operand to use.
+=======
    *
    * @param operand
    *     the operand to use.
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the square root as a complex number.
    */
   public static ComplexNumber squareRoot(final ComplexNumber operand)
@@ -363,7 +377,7 @@ public class Calculate
     }
     else
     { // If operand is a full complex number.
-      //√(a + ib) = ± (√{     [√(a^2 + b^2) + a]    /2} + ib/|b| √{[√(a^2 + b^2) - a]/2})
+      // √(a + ib) = ± (√{ [√(a^2 + b^2) + a] /2} + ib/|b| √{[√(a^2 + b^2) - a]/2})
 
       Double a = op1.getReal();
       Double b = op1.getImaginary();
@@ -381,9 +395,15 @@ public class Calculate
 
   /**
    * Calculate the conjugate of a number.
+<<<<<<< HEAD
+   * 
+   * @param operand
+   *          the operand to use
+=======
    *
    * @param operand
    *     the operand to use
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the conjugate as a complex number.
    */
   public static ComplexNumber conjugate(final ComplexNumber operand)
@@ -400,9 +420,15 @@ public class Calculate
 
   /**
    * Calculate the inverse of a number.
+<<<<<<< HEAD
+   * 
+   * @param operand
+   *          complex number
+=======
    *
    * @param operand
    *     complex number
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return the inverse as a complex number.
    */
   public static ComplexNumber invert(final ComplexNumber operand)
@@ -427,9 +453,15 @@ public class Calculate
 
   /**
    * Converts a polar complex number to rectangular complex number.
+<<<<<<< HEAD
+   * 
+   * @param operand
+   *          polar complex number
+=======
    *
    * @param operand
    *     polar complex number
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return a complex number
    */
   public static ComplexNumber convertPolarToRectangular(final ComplexNumber operand)
@@ -441,9 +473,15 @@ public class Calculate
 
   /**
    * Converts a rectangular complex number to polar complex number.
+<<<<<<< HEAD
+   * 
+   * @param operand
+   *          rectangular complex number
+=======
    *
    * @param operand
    *     rectangular complex number
+>>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
    * @return a complex number
    */
   public static PolarComplexNumber convertRectangularToPolar(final ComplexNumber operand)
