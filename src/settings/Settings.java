@@ -55,7 +55,7 @@ public class Settings implements Serializable
   public static final int GERMAN = 3;
   private static final String saveFile = "complexCalc.pref";
   private static Settings instance;
-  private static Set<LanguageChangeable> languageChangeables;
+  private static final Set<LanguageChangeable> languageChangeables = new HashSet<>();
   private int thousandsSeparatorMode;
   private int trailingZerosMode;
   private int complexNumberMode;
@@ -68,7 +68,6 @@ public class Settings implements Serializable
     trailingZerosMode = OFF;
     complexNumberMode = RECTANGULAR;
     numDecimals = 2;
-    languageChangeables = new HashSet<>();
     language = null;
     setLanguage(ENGLISH);
   }

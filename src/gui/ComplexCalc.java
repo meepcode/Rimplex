@@ -444,7 +444,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       try
       {
         ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
-        if (isPolarActive)
+        if (settings.getComplexNumberMode() == Settings.ON)
         {
           res = Calculate.convertRectangularToPolar(res);
         }
