@@ -766,6 +766,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         decimalPlaces.setEditable(false);
         JTextArea decimals = new JTextArea("" + settings.getNumDecimals());
         numDecimals = settings.getNumDecimals();
+        decimals.setText(""+numDecimals);
         decimals.setEditable(false);
         JButton up = new JButton("↑");
         up.addActionListener(this);
@@ -784,7 +785,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         {
           settings.decrementNumDecimals();
           numDecimals--;
-          decimals.setText("" + settings.getTrailingZerosMode());
+          decimals.setText("" + settings.getNumDecimals());
         });
 
         decimalPanel.add(decimalPlaces);
