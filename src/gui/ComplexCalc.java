@@ -73,12 +73,13 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
   private final ComplexPlane complexPlane = new ComplexPlane();
   private final Color colorScheme = Color.CYAN;
   private final Settings settings;
-  private final boolean thousandsSeparator = false;
-  private final boolean isPolarActive = false;
-  private final boolean trailingZeroes = false;
-  private final boolean doubleParenthesis = false;
-  private final int numDecimals = 2; // Default is 2, ask him if this is ok
+  public boolean thousandsSeparator = false;
+  public boolean isPolarActive = false;
+  public boolean trailingZeroes = false;
+  public boolean doubleParenthesis = false;
+  public int numDecimals = 2; 
   private String pastResult = "";
+  private static ComplexNumber complexResult = null;
   private String printTitle, aboutTitle, aboutMessage;
   private JMenuBar menuBar;
   private JMenu fileMenu, help, helpPage;
@@ -86,7 +87,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       frenchHelpPage, germanHelpPage;
   private JButton hist, plot;
   private MenuItemWindow prefWindow;
-  private JCheckBox polar, thousands, zeroes, doubleParen;
+  private JCheckBox polar, thousands, zeroes;
   private JTextField decimalPlaces;
   private String helpPageStr;
   private JTextPane historysc, graphsc;
@@ -441,16 +442,10 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       try
       {
         ComplexNumber res = Evaluation.evaluateExpression(textfield.getText());
-        if (settings.getComplexNumberMode() == Settings.ON)
+        complexResult = res;
+        if (settings.getComplexNumberMode() == Settings.POLAR)
         {
           res = Calculate.convertRectangularToPolar(res);
-        }
-        if (doubleParenthesis)
-        {
-          if (e.getSource() == leftParenth)
-          {
-            textfield.setText(textfield.getText() + "()");
-          }
         }
 
         /* String formatting */
@@ -464,16 +459,16 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
          * } else { res.setTrailingZeroes(false); res.setFormat("%." + numDecimals + "f"); }
          */
 
-        if (thousandsSeparator)
+        if (settings.getThousandsSeparatorMode() == settings.ON)
         {
-          res.setFormat("%,." + numDecimals + "f");
+          res.setFormat("%,." + settings.getNumDecimals() + "f");
         }
         else
         {
-          res.setFormat("%." + numDecimals + "f");
+          res.setFormat("%." + settings.getNumDecimals() + "f");
         }
 
-        res.setTrailingZeroes(trailingZeroes);
+        res.setTrailingZeroes(settings.getTrailingZerosMode() == settings.ON);
 
         textfield.setText(textfield.getText() + "=" + res);
         result = textfield.getText();
@@ -510,7 +505,8 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       thousands.setText(settings.getLanguage().get("thousands"));
       zeroes.setText(settings.getLanguage().get("zeroes"));
       decimalPlaces.setText(settings.getLanguage().get("decimalPlaces"));
-      doubleParen.setText(settings.getLanguage().get("doubleParen"));
+      historysc.setText(settings.getLanguage().get("historysc"));
+      graphsc.setText(settings.getLanguage().get("graphsc"));
     }
     plot.setText(settings.getLanguage().get("plot"));
     helpPage.setText(settings.getLanguage().get("helpPage"));
@@ -677,10 +673,12 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         if (settings.getComplexNumberMode() == Settings.POLAR)
         {
           polar.setSelected(true);
+          isPolarActive = true;
         }
         else if (settings.getComplexNumberMode() == Settings.RECTANGULAR)
         {
           polar.setSelected(false);
+          isPolarActive = false;
         }
         polar.addActionListener(this);
         
@@ -689,10 +687,12 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
           if (settings.getComplexNumberMode() == Settings.RECTANGULAR)
           {
             settings.setComplexNumberMode(Settings.POLAR);
+            isPolarActive = true;
           }
           else if (settings.getThousandsSeparatorMode() == Settings.POLAR)
           {
             settings.setComplexNumberMode(Settings.RECTANGULAR);
+            isPolarActive = false;
           }
         });
 
@@ -703,10 +703,12 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         if (settings.getThousandsSeparatorMode() == Settings.ON)
         {
           thousands.setSelected(true);
+          thousandsSeparator = true;
         }
         else if (settings.getThousandsSeparatorMode() == Settings.OFF)
         {
           thousands.setSelected(false);
+          thousandsSeparator = false;
         }
         
         thousands.addActionListener(new ActionListener()
@@ -716,10 +718,12 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
             if (settings.getThousandsSeparatorMode() == Settings.ON)
             {
               settings.setThousandsSeparatorMode(Settings.OFF);
+              thousandsSeparator = false;
             }
             else if (settings.getThousandsSeparatorMode() == Settings.OFF)
             {
               settings.setThousandsSeparatorMode(Settings.ON);
+              thousandsSeparator = true;
             }
           }
         });
@@ -731,10 +735,12 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         if (settings.getTrailingZerosMode() == Settings.ON)
         {
           zeroes.setSelected(true);
+          trailingZeroes = true;
         }
         else if (settings.getTrailingZerosMode() == Settings.OFF)
         {
           zeroes.setSelected(false);
+          trailingZeroes = false;
         }
         
         
@@ -743,10 +749,12 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
           if (settings.getTrailingZerosMode() == Settings.ON)
           {
             settings.setTrailingZerosMode(Settings.OFF);
+            trailingZeroes = false;
           }
           else if (settings.getTrailingZerosMode() == Settings.OFF)
           {
             settings.setTrailingZerosMode(Settings.ON);
+            trailingZeroes = true;
           }
         });
 
@@ -755,6 +763,8 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         decimalPlaces = new JTextField();
         decimalPlaces.setEditable(false);
         JTextArea decimals = new JTextArea("" + settings.getNumDecimals());
+        numDecimals = settings.getNumDecimals();
+        decimals.setText(""+numDecimals);
         decimals.setEditable(false);
         JButton up = new JButton("↑");
         up.addActionListener(this);
@@ -763,6 +773,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
           @Override public void actionPerformed(final ActionEvent e)
           {
             settings.incrementNumDecimals();
+            numDecimals++;
             decimals.setText(settings.getNumDecimals() + "");
           }
         });
@@ -771,7 +782,8 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         down.addActionListener(f ->
         {
           settings.decrementNumDecimals();
-          decimals.setText("" + settings.getTrailingZerosMode());
+          numDecimals--;
+          decimals.setText("" + settings.getNumDecimals());
         });
 
         decimalPanel.add(decimalPlaces);
@@ -791,6 +803,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
 
         DefaultStyledDocument dsd = new DefaultStyledDocument();
         historysc = new JTextPane(dsd);
+        historysc.setText("History Shortcut");
         historysc.setEditable(false);
         shortcuts.add(historysc);
 
@@ -819,6 +832,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
 
         DefaultStyledDocument dsd2 = new DefaultStyledDocument();
         graphsc = new JTextPane(dsd2);
+        graphsc.setText("Graph Shortcut");
         graphsc.setEditable(false);
         shortcuts.add(graphsc);
 
@@ -935,9 +949,9 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       print.addActionListener(this);
       print.addActionListener(e ->
       {
-        MenuItemWindow historyPrint = new MenuItemWindow("", 600, 300);
+        MenuItemWindow historyPrint = new MenuItemWindow("Print", 600, 300);
 
-        JButton printButton = new JButton();
+        JButton printButton = new JButton("Print");
         historyPrint.add(printButton, BorderLayout.SOUTH);
         
         
@@ -1023,5 +1037,12 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
     }
 
   }
+  public static ComplexNumber getResult()
+  {
+    // TODO Auto-generated method stub
+    return complexResult;
+  }
 
+ 
 }
+
