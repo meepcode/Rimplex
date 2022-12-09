@@ -13,7 +13,7 @@ import java.util.regex.Matcher;
 
 /**
  * A class with utilities for parsing strings into complex numbers.
- * 
+ *
  * @author TeamD
  * @version 12/9/22 This work complies with the JMU Honor Code.
  */
@@ -115,9 +115,10 @@ public class Evaluation
 
         if (parts.length == 1)
         {
-          if (parts[0].substring(parts[0].length() - 1, parts[0].length()).equals(ComplexNumber.I))
+          if (parts[0].length() > 2
+              && parts[0].charAt(parts[0].length() - 2) == ComplexNumber.I.charAt(0))
           {
-            parts[0] = parts[0].replaceAll(ComplexNumber.I + "", "");
+            parts[0] = parts[0].replaceAll(ComplexNumber.I, "");
             imaginaryPart = Double.parseDouble(parts[0]);
           }
           else
