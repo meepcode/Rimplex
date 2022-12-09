@@ -7,8 +7,19 @@ import java.awt.Font;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
+/**
+ * CalcTextField.
+ *
+ * @author TeamD
+ * @version 12/9/22 This work complies with the JMU Honor Code.
+ */
 public class CalcTextField extends JTextField
 {
+  /**
+   * CalcTextField Constructor.
+   * @param settings saved preferences.
+   * @param font font to use.
+   */
   public CalcTextField(final Settings settings, final Font font)
   {
     super();
