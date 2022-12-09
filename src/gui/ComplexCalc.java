@@ -513,6 +513,8 @@ public class ComplexCalc extends JFrame implements ActionListener, ComponentList
       thousands.setText(settings.getLanguage().get("thousands"));
       zeroes.setText(settings.getLanguage().get("zeroes"));
       decimalPlaces.setText(settings.getLanguage().get("decimalPlaces"));
+      historysc.setText(settings.getLanguage().get("historysc"));
+      graphsc.setText(settings.getLanguage().get("graphsc"));
     }
     plot.setText(settings.getLanguage().get("plot"));
     helpPage.setText(settings.getLanguage().get("helpPage"));
@@ -818,6 +820,7 @@ public class ComplexCalc extends JFrame implements ActionListener, ComponentList
 
         DefaultStyledDocument dsd = new DefaultStyledDocument();
         historysc = new JTextPane(dsd);
+        historysc.setText("History Shortcut");
         historysc.setEditable(false);
         shortcuts.add(historysc);
 
@@ -835,6 +838,7 @@ public class ComplexCalc extends JFrame implements ActionListener, ComponentList
 
         DefaultStyledDocument dsd2 = new DefaultStyledDocument();
         graphsc = new JTextPane(dsd2);
+        graphsc.setText("Graph Shortcut");
         graphsc.setEditable(false);
         shortcuts.add(graphsc);
 
