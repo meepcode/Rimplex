@@ -80,10 +80,11 @@ public class ComplexCalc extends JFrame implements ActionListener, ComponentList
   private final ComplexPlane complexPlane = new ComplexPlane();
   private final Color colorScheme = Color.CYAN;
   private final Settings settings;
-  private final boolean thousandsSeparator = false;
-  private final boolean isPolarActive = false;
-  private final boolean trailingZeroes = false;
-  private final int numDecimals = 2; // Default is 2, ask him if this is ok
+  public boolean thousandsSeparator = false;
+  public boolean isPolarActive = false;
+  public boolean trailingZeroes = false;
+  public boolean doubleParenthesis = false;
+  public int numDecimals = 2; 
   private String pastResult = "";
   private static ComplexNumber complexResult = null;
   private String printTitle, aboutTitle, aboutMessage;
@@ -688,10 +689,12 @@ public class ComplexCalc extends JFrame implements ActionListener, ComponentList
         if (settings.getComplexNumberMode() == Settings.POLAR)
         {
           polar.setSelected(true);
+          isPolarActive = true;
         }
         else if (settings.getComplexNumberMode() == Settings.RECTANGULAR)
         {
           polar.setSelected(false);
+          isPolarActive = false;
         }
         polar.addActionListener(this);
         
@@ -700,10 +703,12 @@ public class ComplexCalc extends JFrame implements ActionListener, ComponentList
           if (settings.getComplexNumberMode() == Settings.RECTANGULAR)
           {
             settings.setComplexNumberMode(Settings.POLAR);
+            isPolarActive = true;
           }
           else if (settings.getThousandsSeparatorMode() == Settings.POLAR)
           {
             settings.setComplexNumberMode(Settings.RECTANGULAR);
+            isPolarActive = false;
           }
         });
 
@@ -714,10 +719,12 @@ public class ComplexCalc extends JFrame implements ActionListener, ComponentList
         if (settings.getThousandsSeparatorMode() == Settings.ON)
         {
           thousands.setSelected(true);
+          thousandsSeparator = true;
         }
         else if (settings.getThousandsSeparatorMode() == Settings.OFF)
         {
           thousands.setSelected(false);
+          thousandsSeparator = false;
         }
         
         thousands.addActionListener(new ActionListener()
@@ -727,10 +734,12 @@ public class ComplexCalc extends JFrame implements ActionListener, ComponentList
             if (settings.getThousandsSeparatorMode() == Settings.ON)
             {
               settings.setThousandsSeparatorMode(Settings.OFF);
+              thousandsSeparator = false;
             }
             else if (settings.getThousandsSeparatorMode() == Settings.OFF)
             {
               settings.setThousandsSeparatorMode(Settings.ON);
+              thousandsSeparator = true;
             }
           }
         });
@@ -742,10 +751,12 @@ public class ComplexCalc extends JFrame implements ActionListener, ComponentList
         if (settings.getTrailingZerosMode() == Settings.ON)
         {
           zeroes.setSelected(true);
+          trailingZeroes = true;
         }
         else if (settings.getTrailingZerosMode() == Settings.OFF)
         {
           zeroes.setSelected(false);
+          trailingZeroes = false;
         }
         
         
@@ -754,10 +765,12 @@ public class ComplexCalc extends JFrame implements ActionListener, ComponentList
           if (settings.getTrailingZerosMode() == Settings.ON)
           {
             settings.setTrailingZerosMode(Settings.OFF);
+            trailingZeroes = false;
           }
           else if (settings.getTrailingZerosMode() == Settings.OFF)
           {
             settings.setTrailingZerosMode(Settings.ON);
+            trailingZeroes = true;
           }
         });
 
@@ -766,6 +779,7 @@ public class ComplexCalc extends JFrame implements ActionListener, ComponentList
         decimalPlaces = new JTextField();
         decimalPlaces.setEditable(false);
         JTextArea decimals = new JTextArea("" + settings.getNumDecimals());
+        numDecimals = settings.getNumDecimals();
         decimals.setEditable(false);
         JButton up = new JButton("â†‘");
         up.addActionListener(this);
@@ -774,6 +788,7 @@ public class ComplexCalc extends JFrame implements ActionListener, ComponentList
           @Override public void actionPerformed(final ActionEvent e)
           {
             settings.incrementNumDecimals();
+            numDecimals++;
             decimals.setText(settings.getNumDecimals() + "");
           }
         });
@@ -782,6 +797,7 @@ public class ComplexCalc extends JFrame implements ActionListener, ComponentList
         down.addActionListener(f ->
         {
           settings.decrementNumDecimals();
+          numDecimals--;
           decimals.setText("" + settings.getTrailingZerosMode());
         });
 
