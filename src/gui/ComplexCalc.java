@@ -51,9 +51,8 @@ import java.awt.print.PrinterJob;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.Serial;
-
-
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.Objects;
 
 /**
@@ -67,9 +66,9 @@ public class ComplexCalc extends JFrame
     implements ActionListener, ComponentListener, LanguageChangeable
 {
 
-  private static final long serialVersionUID = 1L;
   protected static String result = "";
   protected static boolean isClicked = false;
+  private static final long serialVersionUID = 1L;
   private static final String SERIF = "Serif";
   private static final String MINUS = "-";
   private static final String PLUS = "+";
@@ -111,11 +110,11 @@ public class ComplexCalc extends JFrame
   private JTextField decimalPlaces;
   private String helpPageStr;
   private JTextPane historysc, graphsc;
-  
-  public boolean isPolarActive;
-  public boolean trailingZeroes;
-  public boolean thousandsSeparator;
-  public int numDecimals;
+
+  private boolean isPolarActive;
+  private boolean trailingZeroes;
+  private boolean thousandsSeparator;
+  private int numDecimals;
 
   private ComplexCalc(final Settings settings) throws FileNotFoundException
   {
@@ -497,11 +496,13 @@ public class ComplexCalc extends JFrame
       isClicked = true;
       complexResult = res;
       complexPlane.getPanel().update();
-      
-      if (settings.getComplexNumberMode() == Settings.ON)
+
       if (settings.getComplexNumberMode() == Settings.POLAR)
       {
-        res = Calculate.convertRectangularToPolar(res);
+        if (settings.getComplexNumberMode() == Settings.POLAR)
+        {
+          res = Calculate.convertRectangularToPolar(res);
+        }
       }
 
       if (settings.getThousandsSeparatorMode() == Settings.ON)
@@ -551,9 +552,9 @@ public class ComplexCalc extends JFrame
       historysc.setText(settings.getLanguage().get("historysc"));
       graphsc.setText(settings.getLanguage().get("graphsc"));
     }
-     plot.setText(settings.getLanguage().get("plot"));
-     helpPage.setText(settings.getLanguage().get("helpPage"));
-     newWindow.setText(settings.getLanguage().get("newWindow"));
+    plot.setText(settings.getLanguage().get("plot"));
+    helpPage.setText(settings.getLanguage().get("helpPage"));
+    newWindow.setText(settings.getLanguage().get("newWindow"));
   }
 
   @Override public void componentResized(final ComponentEvent componentEvent)
@@ -579,6 +580,16 @@ public class ComplexCalc extends JFrame
   // Menu Bar Code
   class MenuBar implements ActionListener
   {
+    /**
+     * Get the result of a complex operation.
+     *
+     * @return a complex number.
+     */
+    public static ComplexNumber getResult()
+    {
+      return complexResult;
+    }
+
     public JMenuBar createMenuBar() throws FileNotFoundException
     {
 
@@ -596,18 +607,17 @@ public class ComplexCalc extends JFrame
         settings.setLanguage(settings.getLanguageNum());
       });
 
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------
+      //----------------------------------------------------------------------------------------------------------------------------------------------------------------
       // JButton hist = new JButton("History");
-       hist = new JButton("History");
+      hist = new JButton("History");
 
       // frame.addComponentListener((ComponentListener) frame);
       hist.addActionListener(e ->
       {
         Point corner = panel.getLocation();
-        his.createAndShowGUI(corner, panel.getWidth(), panel.getHeight());        
+        his.createAndShowGUI(corner, panel.getWidth(), panel.getHeight());
         // frame.pack();
       });
-      
 
       // help jmenuitem under Help menu
       help = new JMenu();
@@ -629,12 +639,18 @@ public class ComplexCalc extends JFrame
         {
           try
           {
-            File file = new File("src/helpfile/helpPage.html").getAbsoluteFile();
+            URL url = getClass().getResource("/helpfile/helpPage.html");
+            assert url != null;
+            File file = new File(url.toURI());
             Desktop.getDesktop().open(file);
           }
           catch (IOException e1)
           {
             e1.printStackTrace();
+          }
+          catch (URISyntaxException ex)
+          {
+            throw new RuntimeException(ex);
           }
         }
       });
@@ -649,12 +665,18 @@ public class ComplexCalc extends JFrame
         {
           try
           {
-            File file = new File("src/helpfile/helpPageSpanish.html").getAbsoluteFile();
+            URL url = getClass().getResource("/helpfile/helpPageSpanish.html");
+            assert url != null;
+            File file = new File(url.toURI());
             Desktop.getDesktop().open(file);
           }
           catch (IOException e1)
           {
             e1.printStackTrace();
+          }
+          catch (URISyntaxException ex)
+          {
+            throw new RuntimeException(ex);
           }
         }
       });
@@ -683,7 +705,7 @@ public class ComplexCalc extends JFrame
       helpPage.add(germanHelpPage);
 
       germanHelpPage.addActionListener(this);
-      germanHelpPage.addActionListener(e -> 
+      germanHelpPage.addActionListener(e ->
       {
         if (e.getSource() == germanHelpPage)
         {
@@ -726,7 +748,7 @@ public class ComplexCalc extends JFrame
       pref = new JMenuItem();
       fileMenu.add(pref);
       pref.addActionListener(this);
-      pref.addActionListener(e -> 
+      pref.addActionListener(e ->
       {
         prefWindow = new MenuItemWindow("", 900, 300);
 
@@ -752,7 +774,7 @@ public class ComplexCalc extends JFrame
         }
         polar.addActionListener(this);
 
-        polar.addActionListener(f -> 
+        polar.addActionListener(f ->
         {
           if (settings.getComplexNumberMode() == Settings.RECTANGULAR)
           {
@@ -765,10 +787,7 @@ public class ComplexCalc extends JFrame
             isPolarActive = false;
           }
         });
-        JTextField thousandsText = new JTextField("Thousands Separator");
-        JCheckBox thousands = new JCheckBox();
-        thousandsText.setEditable(false);
-        modes.add(thousandsText);
+        thousands = new JCheckBox();
         modes.add(thousands);
         thousands.addActionListener(this);
         // Check box if previously saved.
@@ -817,7 +836,6 @@ public class ComplexCalc extends JFrame
           zeroes.setSelected(false);
           trailingZeroes = false;
         }
-
 
         zeroes.addActionListener(f ->
         {
@@ -1035,7 +1053,7 @@ public class ComplexCalc extends JFrame
 
         JButton printButton = new JButton("Print");
         historyPrint.add(printButton, BorderLayout.SOUTH);
-        
+
         DefaultStyledDocument doc = new DefaultStyledDocument();
         JTextPane copiedHistory = new JTextPane(doc);
         copiedHistory.setEditable(false);
@@ -1048,39 +1066,41 @@ public class ComplexCalc extends JFrame
         {
           public void actionPerformed(final ActionEvent e)
           {
-                     
+
             PrinterJob pjob = PrinterJob.getPrinterJob();
             PrintRequestAttributeSet aset = new HashPrintRequestAttributeSet();
             PageFormat pf = pjob.pageDialog(aset);
-            pjob.setPrintable(new Printable() {
-              @Override
-              public int print(Graphics g, PageFormat pf, int page) throws PrinterException
+            pjob.setPrintable(new Printable()
+            {
+              @Override public int print(Graphics g, PageFormat pf, int page)
+                  throws PrinterException
               {
-                if (page > 0) { /* We have only one page, and 'page' is zero-based */
+                if (page > 0)
+                { /* We have only one page, and 'page' is zero-based */
                   return NO_SUCH_PAGE;
                 }
 
-              /* User (0,0) is typically outside the imageable area, so we must
-               * translate by the X and Y values in the PageFormat to avoid clipping
-               */
-              Graphics2D g2d = (Graphics2D)g;
-              g2d.translate(pf.getImageableX(), pf.getImageableY());
+                /* User (0,0) is typically outside the imageable area, so we must
+                 * translate by the X and Y values in the PageFormat to avoid clipping
+                 */
+                Graphics2D g2d = (Graphics2D) g;
+                g2d.translate(pf.getImageableX(), pf.getImageableY());
 
-              /* Now print the window and its visible contents */
-              copiedHistory.printAll(g);
+                /* Now print the window and its visible contents */
+                copiedHistory.printAll(g);
 
-              /* tell the caller that this page is part of the printed document */
-              return PAGE_EXISTS;
+                /* tell the caller that this page is part of the printed document */
+                return PAGE_EXISTS;
               }
             }, pf);
-//            boolean ok = pjob.printDialog(aset);
-//            if (ok) {
-//                try {
-//                     pjob.print(aset);
-//                } catch (PrinterException ex) {
-//                 /* The job did not successfully complete */
-//                }
-//            }
+            //            boolean ok = pjob.printDialog(aset);
+            //            if (ok) {
+            //                try {
+            //                     pjob.print(aset);
+            //                } catch (PrinterException ex) {
+            //                 /* The job did not successfully complete */
+            //                }
+            //            }
 
             if (pjob.printDialog())
             {
@@ -1098,7 +1118,7 @@ public class ComplexCalc extends JFrame
 
           }
         });
-        
+
       });
 
       // exit sub menu
@@ -1137,10 +1157,12 @@ public class ComplexCalc extends JFrame
 
       return menuBar;
     }
-    
+
     /**
      * Action Performed.
-     * @param e event to use.
+     *
+     * @param e
+     *     event to use.
      */
     @Override public void actionPerformed(final ActionEvent e)
     {
@@ -1179,16 +1201,5 @@ public class ComplexCalc extends JFrame
       // TODO Auto-generated method stub
     }
 
-  
-  
-  /**
-   * Get the result of a complex operation.
-   * @return a complex number.
-   */
-  public static ComplexNumber getResult()
-  {
-    return complexResult;
   }
- 
-}
 }

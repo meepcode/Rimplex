@@ -1,6 +1,7 @@
 package settings;
 
 import javax.swing.KeyStroke;
+import java.awt.event.KeyEvent;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
@@ -43,11 +44,11 @@ public class Settings implements Serializable
   /**
    * The constant ON.
    */
-  public static final int ON = 0;
+  public static final int ON = 1;
   /**
    * The constant OFF.
    */
-  public static final int OFF = 1;
+  public static final int OFF = 0;
 
   /**
    * The constant RECTANGULAR.
@@ -83,6 +84,8 @@ public class Settings implements Serializable
   private int numDecimals;
   private Language language;
   private int languageNum;
+  private KeyStroke openHistory;
+  private KeyStroke openGraph;
 
   private Settings()
   {
@@ -92,6 +95,8 @@ public class Settings implements Serializable
     numDecimals = 2;
     language = null;
     setLanguage(ENGLISH);
+    openHistory = KeyStroke.getKeyStroke('A', KeyEvent.CTRL_DOWN_MASK);
+    openGraph = KeyStroke.getKeyStroke('J', KeyEvent.CTRL_DOWN_MASK);
   }
 
   /**
