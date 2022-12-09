@@ -17,7 +17,7 @@ public class PolarComplexNumber extends ComplexNumber
   private Double r; // The polar magnitude
 
   /**
-   * Constructor.
+   * Constructor (theta is in radians).
    * 
    * @param realPart
    *          real number (in radians)
