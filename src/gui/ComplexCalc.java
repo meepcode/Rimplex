@@ -10,6 +10,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
 import java.io.File;
 import java.io.IOException;
 import java.io.Serial;
@@ -21,7 +24,7 @@ import java.io.Serial;
  * @version 11/4/22 This work complies with the JMU Honor Code.
  */
 
-public class ComplexCalc extends JFrame implements ActionListener
+public class ComplexCalc extends JFrame implements ActionListener, ComponentListener
 {
   @Serial
   private static final long serialVersionUID = 1L;
@@ -183,8 +186,9 @@ public class ComplexCalc extends JFrame implements ActionListener
     panel.add(clrButton);
     frame.add(textfield, BorderLayout.NORTH);
     frame.add(panel, BorderLayout.CENTER);
-    // frame.add(his.getWindow());//, BorderLayout.EAST); // changed to getWindow 
-    
+    // frame.add(his.getWindow());//, BorderLayout.EAST); // changed to getWindow
+    // frame.addComponentListener();
+
     frame.setVisible(true);
   }
 
@@ -431,11 +435,14 @@ public class ComplexCalc extends JFrame implements ActionListener
       });
 
       JButton hist = new JButton("History"); // HISTORY PANEL------------------------------------------------------------------------------------
+      // frame.addComponentListener((ComponentListener) frame);
       hist.addActionListener(e -> {
         Point corner = frame.getLocation();
         his.createAndShowGUI(corner, frame.getWidth(), frame.getHeight());
-        frame.pack();
+        // frame.pack();
       });
+      
+      
 
       // help jmenuitem under Help menu
       help = new JMenu("Help");
@@ -715,6 +722,34 @@ public class ComplexCalc extends JFrame implements ActionListener
       // TODO Auto-generated method stub
 
     }
+  }
+
+  @Override
+  public void componentResized(ComponentEvent e)
+  {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void componentMoved(ComponentEvent e)
+  {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void componentShown(ComponentEvent e)
+  {
+    // TODO Auto-generated method stub
+    
+  }
+
+  @Override
+  public void componentHidden(ComponentEvent e)
+  {
+    // TODO Auto-generated method stub
+    
   }
 
 }

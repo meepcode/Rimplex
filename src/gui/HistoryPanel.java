@@ -1,6 +1,7 @@
 package gui;
 
 import javax.swing.BorderFactory;
+import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
@@ -61,7 +62,7 @@ public class HistoryPanel extends JFrame
     // mainPanel = new JPanel(); 
     mainPanel = new JWindow();
     mainPanel.setLayout(new BorderLayout());
-    // mainPanel.setBounds(50, 100, 300, 300); setting the bounds else where 
+    mainPanel.setBounds(50, 100, 300, 300); // setting the bounds else where 
     mainPanel.setVisible(false);
     curr = mainPanel.getLocation();
 
@@ -166,20 +167,20 @@ public class HistoryPanel extends JFrame
    */
   public void createAndShowGUI(Point p, int width, int height )
   {
-    int x = p.x + width;
-    int y = p.y + height / 2;
+    System.out.println(p);
+    System.out.println("The width:" + width + "----The height:" + height);
+    int x = p.x + width - (width / 50);//- 10;
+    int y = p.y + height / 4;
     boolean visible = mainPanel.isVisible();
     mainPanel.setVisible(!visible);
     mainPanel.setLocation(x, y);
+    JButton slideout = new JButton(">");
     area.setVisible(!visible);
-    //    if (!visible)
-    //    {
-    //      animate(mainPanel, new Point(308, 35), 15, 10);
-    //    }
-    //    else
-    //    {
-    //      mainPanel.setLocation(curr);
-    //    }
+    mainPanel.add(slideout);
+    slideout.setVisible(true);
+    System.out.println(mainPanel.getLocation());
+    System.out.println(mainPanel.getSize());
+    
   }
 
   /**
