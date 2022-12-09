@@ -85,11 +85,7 @@ public class ComplexCalc extends JFrame implements ActionListener, ComponentList
   private final boolean trailingZeroes = false;
   private final int numDecimals = 2; // Default is 2, ask him if this is ok
   private String pastResult = "";
-<<<<<<< HEAD
-
-=======
   private static ComplexNumber complexResult = null;
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
   private String printTitle, aboutTitle, aboutMessage;
   private JMenuBar menuBar;
   private JMenu fileMenu, help, helpPage;
@@ -1043,7 +1039,7 @@ public class ComplexCalc extends JFrame implements ActionListener, ComponentList
     return complexResult;
   }
 
-<<<<<<< HEAD
+
   @Override
   public void componentResized(ComponentEvent e)
   {
@@ -1072,8 +1068,5 @@ public class ComplexCalc extends JFrame implements ActionListener, ComponentList
     
   }
 
-=======
- 
->>>>>>> branch 'main' of https://github.com/bernstdh/F22TeamD
 }
 
