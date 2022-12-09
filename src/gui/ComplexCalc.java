@@ -1,6 +1,7 @@
 package gui;
 
 import calculation.Calculate;
+
 import calculation.ComplexNumber;
 import parse.Evaluation;
 import parse.ExpressionEvaluationException;
@@ -16,6 +17,9 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.Serial;
 import java.security.Key;
+import java.awt.print.PrinterJob;
+import java.awt.print.PageFormat;
+import java.awt.print.PrinterException;
 
 /**
  * Calculator GUI.
@@ -922,6 +926,24 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         //                  }
         //                });
         //
+        
+        PrinterJob pjob = PrinterJob.getPrinterJob();
+        PageFormat pf = pjob.defaultPage();
+        pjob.setPrintable(null, pf);
+
+        if (pjob.printDialog()) {
+          try
+          {
+            pjob.print();
+          }
+          catch (PrinterException e1)
+          {
+            // TODO Auto-generated catch block
+            e1.printStackTrace();
+          }
+        }
+
+      
         DefaultStyledDocument doc = new DefaultStyledDocument();
         JTextPane copiedHistory = new JTextPane(doc);
         copiedHistory.setEditable(false);
