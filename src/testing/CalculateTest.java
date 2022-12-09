@@ -282,8 +282,22 @@ class CalculateTest
    */
   @Test void testAddPolar2()
   {
-    ComplexNumber op1 = new PolarComplexNumber(2.0, 0.0, 0.0);
-    PolarComplexNumber res = new PolarComplexNumber(4.0, 0.0, 0.0);
+    ComplexNumber op1 = new PolarComplexNumber(0.0, 0.0, 2.0);
+    ComplexNumber res = new PolarComplexNumber(0.0, 0.0, 4.0);
+    ComplexNumber temp = Calculate.add(op1, op1);
+    //PolarComplexNumber test1 = new PolarComplexNumber(((int) (temp.getReal() * 100)) / 100.0,
+        //((int) (temp.getImaginary() * 100)) / 100.0,
+        //((int) (temp.getPolarMagnitude() * 100)) / 100.0);
+    assertEquals(res, temp);
+  }
+  
+  /**
+   * Test add with polar number.
+   */
+  @Test void testAddPolar3()
+  {
+    ComplexNumber op1 = new PolarComplexNumber(1.5708, 1.5708, 2.0);
+    ComplexNumber res = new PolarComplexNumber(1.5708, 1.5708, 4.0);
     ComplexNumber temp = Calculate.add(op1, op1);
     //PolarComplexNumber test1 = new PolarComplexNumber(((int) (temp.getReal() * 100)) / 100.0,
         //((int) (temp.getImaginary() * 100)) / 100.0,
@@ -465,7 +479,7 @@ class CalculateTest
   {
     ComplexNumber op = new ComplexNumber(0.0, 0.0);
     ComplexNumber temp = Calculate.log(2.0, op);
-    assertEquals("-Infinity+0i", temp.toString());
+    assertEquals("-Infinity+0𝘪", temp.toString());
   }
   
   /**
