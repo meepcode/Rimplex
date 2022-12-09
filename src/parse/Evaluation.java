@@ -13,6 +13,9 @@ import java.util.regex.Matcher;
 
 /**
  * A class with utilities for parsing strings into complex numbers.
+ * 
+ * @author TeamD
+ * @version 12/9/22 This work complies with the JMU Honor Code.
  */
 public class Evaluation
 {
@@ -171,8 +174,8 @@ public class Evaluation
       }
       else if (type == TokenType.EXP)
       {
-        ComplexNumber power = evaluate(expression);
         ComplexNumber base = evaluate(expression);
+        ComplexNumber power = evaluate(expression);
 
         if (Math.abs(base.getImaginary() - 0.0) > ComplexNumber.EPSILON)
         {

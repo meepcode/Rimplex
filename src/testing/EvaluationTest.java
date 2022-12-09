@@ -10,6 +10,9 @@ import static parse.Evaluation.evaluateExpression;
 
 /**
  * Tests the Evaluation class.
+ * 
+ * @author TeamD
+ * @version 12/9/22 This work complies with the JMU Honor Code.
  */
 class EvaluationTest
 {

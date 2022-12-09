@@ -1,19 +1,21 @@
-package gui;
+package settings;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInput;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
-import java.util.Map;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * Represents the settings of this program.
+ * 
+ * @author TeamD
+ * @version 12/9/22 This work complies with the JMU Honor Code.
  */
 public class Settings implements Serializable
 {
@@ -53,15 +55,18 @@ public class Settings implements Serializable
   public static final int GERMAN = 3;
   private static final String saveFile = "complexCalc.pref";
   private static Settings instance;
+  private static Set<LanguageChangeable> languageChangeables;
   private int thousandsSeparatorMode;
   private int complexNumberMode;
-  private Map<String, String> language;
+  private Language language;
 
   private Settings()
   {
     thousandsSeparatorMode = OFF;
     complexNumberMode = RECTANGULAR;
+    languageChangeables = new HashSet<>();
     language = null;
+    setLanguage(ENGLISH);
   }
 
   /**
@@ -82,7 +87,8 @@ public class Settings implements Serializable
   /**
    * Serialize instance variable and save it.
    *
-   * @throws IOException if something goes wrong saving the file.
+   * @throws IOException
+   *     if something goes wrong saving the file.
    */
   public static void saveSettings() throws IOException
   {
@@ -115,6 +121,17 @@ public class Settings implements Serializable
     }
 
     return new Settings();
+  }
+
+  /**
+   * Adds a new language changeable to be changed when the language is updated.
+   *
+   * @param languageChangeable
+   *     the language changeable
+   */
+  public static void addLanguageChangeable(final LanguageChangeable languageChangeable)
+  {
+    languageChangeables.add(languageChangeable);
   }
 
   /**
@@ -164,7 +181,7 @@ public class Settings implements Serializable
    *
    * @return the language
    */
-  public Map<String, String> getLanguage()
+  public Language getLanguage()
   {
     return language;
   }
@@ -172,11 +189,35 @@ public class Settings implements Serializable
   /**
    * Sets language.
    *
-   * @param language
-   *     the language
+   * @param languageNum
+   *     the language number
    */
-  public void setLanguage(final int language)
+  public void setLanguage(final int languageNum)
   {
-    this.language = null;
+    if (languageNum == ENGLISH)
+    {
+      language = new Language("English");
+    }
+    else if (languageNum == FRENCH)
+    {
+      language = new Language("French");
+    }
+    else if (languageNum == SPANISH)
+    {
+      language = new Language("Spanish");
+    }
+    else if (languageNum == GERMAN)
+    {
+      language = new Language("German");
+    }
+    else
+    {
+      throw new IllegalArgumentException();
+    }
+
+    for (LanguageChangeable languageChangeable : languageChangeables)
+    {
+      languageChangeable.changeLanguage();
+    }
   }
 }
