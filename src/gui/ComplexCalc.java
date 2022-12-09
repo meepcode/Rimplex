@@ -78,7 +78,6 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
   private final boolean thousandsSeparator = false;
   private final boolean isPolarActive = false;
   private final boolean trailingZeroes = false;
-  private final boolean doubleParenthesis = false;
   private final int numDecimals = 2; // Default is 2, ask him if this is ok
   private String pastResult = "";
   private String printTitle, aboutTitle, aboutMessage;
@@ -88,7 +87,7 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       frenchHelpPage, germanHelpPage;
   private JButton hist, plot;
   private MenuItemWindow prefWindow;
-  private JCheckBox polar, thousands, zeroes, doubleParen;
+  private JCheckBox polar, thousands, zeroes;
   private JTextField decimalPlaces;
   private String helpPageStr;
   private JTextPane historysc, graphsc;
@@ -447,13 +446,6 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
         {
           res = Calculate.convertRectangularToPolar(res);
         }
-        if (doubleParenthesis)
-        {
-          if (e.getSource() == leftParenth)
-          {
-            textfield.setText(textfield.getText() + "()");
-          }
-        }
 
         /* String formatting */
         // numDecimals = Integer.parseInt();
@@ -512,7 +504,6 @@ public class ComplexCalc extends JFrame implements ActionListener, LanguageChang
       thousands.setText(settings.getLanguage().get("thousands"));
       zeroes.setText(settings.getLanguage().get("zeroes"));
       decimalPlaces.setText(settings.getLanguage().get("decimalPlaces"));
-      doubleParen.setText(settings.getLanguage().get("doubleParen"));
     }
     plot.setText(settings.getLanguage().get("plot"));
     helpPage.setText(settings.getLanguage().get("helpPage"));
