@@ -1,11 +1,11 @@
-package gui;
+package rimplex.gui;
 
-import calculation.Calculate;
-import calculation.ComplexNumber;
-import parse.Evaluation;
-import parse.ExpressionEvaluationException;
-import settings.LanguageChangeable;
-import settings.Settings;
+import rimplex.calculation.Calculate;
+import rimplex.calculation.ComplexNumber;
+import rimplex.parse.Evaluation;
+import rimplex.parse.ExpressionEvaluationException;
+import rimplex.settings.LanguageChangeable;
+import rimplex.settings.Settings;
 
 import javax.print.attribute.HashPrintRequestAttributeSet;
 import javax.print.attribute.PrintRequestAttributeSet;
@@ -116,7 +116,7 @@ public class ComplexCalc extends JFrame
   private boolean thousandsSeparator;
   private int numDecimals;
 
-  private ComplexCalc(final Settings settings) throws FileNotFoundException
+  public ComplexCalc(final Settings settings) throws FileNotFoundException
   {
     super();
 
@@ -274,10 +274,13 @@ public class ComplexCalc extends JFrame
    * @param args
    *     cmd line args
    */
-  public static void main(final String[] args) throws FileNotFoundException
-  {
+  public static void main(String[] args) {
     Settings settings = Settings.getInstance();
-    ComplexCalc calc = new ComplexCalc(settings);
+      try {
+          ComplexCalc calc = new ComplexCalc(settings);
+      } catch (FileNotFoundException e) {
+          throw new RuntimeException(e);
+      }
   }
 
   /**
@@ -639,7 +642,7 @@ public class ComplexCalc extends JFrame
         {
           try
           {
-            URL url = getClass().getResource("/helpfile/helpPage.html");
+            URL url = getClass().getResource("/rimplex/rimplex.helpfile/helpPage.html");
             assert url != null;
             File file = new File(url.toURI());
             Desktop.getDesktop().open(file);
@@ -665,7 +668,8 @@ public class ComplexCalc extends JFrame
         {
           try
           {
-            URL url = getClass().getResource("/helpfile/helpPageSpanish.html");
+            URL url = getClass().getResource(
+                    "/rimplex/rimplex.helpfile/helpPageSpanish.html");
             assert url != null;
             File file = new File(url.toURI());
             Desktop.getDesktop().open(file);
@@ -691,7 +695,7 @@ public class ComplexCalc extends JFrame
         {
           try
           {
-            File file = new File("src/helpfile/helpPageFrench.html").getAbsoluteFile();
+            File file = new File("src/rimplex.helpfile/helpPageFrench.html").getAbsoluteFile();
             Desktop.getDesktop().open(file);
           }
           catch (IOException e1)
@@ -711,7 +715,7 @@ public class ComplexCalc extends JFrame
         {
           try
           {
-            File file = new File("src/helpfile/helpPageGerman.html").getAbsoluteFile();
+            File file = new File("src/rimplex.helpfile/helpPageGerman.html").getAbsoluteFile();
             Desktop.getDesktop().open(file);
           }
           catch (IOException e1)
@@ -1033,7 +1037,7 @@ public class ComplexCalc extends JFrame
             }
             catch (IOException ex)
             {
-              System.out.println("Unable to save settings file");
+              System.out.println("Unable to save rimplex.settings file");
             }
           }
         });

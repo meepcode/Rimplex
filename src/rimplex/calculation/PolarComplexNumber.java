@@ -1,5 +1,5 @@
 
-package calculation;
+package rimplex.calculation;
 
 import java.util.Objects;
 

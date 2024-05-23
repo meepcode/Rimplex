@@ -1,4 +1,4 @@
-package settings;
+package rimplex.settings;
 
 import javax.swing.KeyStroke;
 import java.awt.event.KeyEvent;
@@ -14,7 +14,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * Represents the settings of this program.
+ * Represents the rimplex.settings of this program.
  *
  * @author TeamD
  * @version 12 /9/22 This work complies with the JMU Honor Code.
@@ -100,9 +100,9 @@ public class Settings implements Serializable
   }
 
   /**
-   * Returns the singleton settings instance.
+   * Returns the singleton rimplex.settings instance.
    *
-   * @return the singleton settings instance
+   * @return the singleton rimplex.settings instance
    */
   public static Settings getInstance()
   {
@@ -131,8 +131,8 @@ public class Settings implements Serializable
   }
 
   /**
-   * Loads the settings file.
-   * @return the settings
+   * Loads the rimplex.settings file.
+   * @return the rimplex.settings
    */
   private static Settings loadSettings()
   {

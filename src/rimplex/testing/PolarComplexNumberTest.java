@@ -1,6 +1,6 @@
-package testing;
+package rimplex.testing;
 
-import calculation.PolarComplexNumber;
+import rimplex.calculation.PolarComplexNumber;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;

@@ -1,4 +1,4 @@
-package gui;
+package rimplex.gui;
 
 import javax.swing.JFrame;
 

@@ -1,12 +1,12 @@
-package testing;
+package rimplex.testing;
 
-import calculation.Calculate;
-import calculation.ComplexNumber;
+import rimplex.calculation.Calculate;
+import rimplex.calculation.ComplexNumber;
 import org.junit.jupiter.api.Test;
-import parse.ExpressionEvaluationException;
+import rimplex.parse.ExpressionEvaluationException;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static parse.Evaluation.evaluateExpression;
+import static rimplex.parse.Evaluation.evaluateExpression;
 
 /**
  * Tests the Evaluation class.

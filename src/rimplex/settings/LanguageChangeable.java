@@ -1,4 +1,4 @@
-package settings;
+package rimplex.settings;
 
 /**
  * Language changeable.

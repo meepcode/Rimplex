@@ -1,8 +1,8 @@
-package testing;
+package rimplex.testing;
 
-import calculation.Calculate;
-import calculation.ComplexNumber;
-import calculation.PolarComplexNumber;
+import rimplex.calculation.Calculate;
+import rimplex.calculation.ComplexNumber;
+import rimplex.calculation.PolarComplexNumber;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 /**
- * Tests for complex number calculation methods.
+ * Tests for complex number rimplex.calculation methods.
  *
  * @author TeamD
  * @version 12/9/22 This work complies with the JMU Honor Code.

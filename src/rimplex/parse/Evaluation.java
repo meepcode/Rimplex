@@ -1,8 +1,8 @@
-package parse;
+package rimplex.parse;
 
-import calculation.Calculate;
-import calculation.ComplexNumber;
-import calculation.PolarComplexNumber;
+import rimplex.calculation.Calculate;
+import rimplex.calculation.ComplexNumber;
+import rimplex.calculation.PolarComplexNumber;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;

@@ -1,11 +1,11 @@
-package testing;
+package rimplex.testing;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 
 import org.junit.jupiter.api.Test;
 
-import calculation.ComplexNumber;
+import rimplex.calculation.ComplexNumber;
 /**
  * Complex number tests.
  *

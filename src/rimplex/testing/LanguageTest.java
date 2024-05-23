@@ -1,11 +1,11 @@
-package testing;
+package rimplex.testing;
 
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-import settings.Language;
-import settings.Language.LanguageException;
+import rimplex.settings.Language;
+import rimplex.settings.Language.LanguageException;
 
 /**
  * Language test cases.

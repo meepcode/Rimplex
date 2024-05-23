@@ -1,6 +1,6 @@
-package gui;
+package rimplex.gui;
 
-import settings.Settings;
+import rimplex.settings.Settings;
 
 import javax.swing.JTextField;
 import java.awt.Font;

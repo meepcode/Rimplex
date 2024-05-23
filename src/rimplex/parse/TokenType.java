@@ -1,4 +1,4 @@
-package parse;
+package rimplex.parse;
 
 import java.util.regex.Pattern;
 

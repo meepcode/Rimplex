@@ -1,4 +1,4 @@
-package parse;
+package rimplex.parse;
 
 /**
  * Throws when an expression is formatted improperly.

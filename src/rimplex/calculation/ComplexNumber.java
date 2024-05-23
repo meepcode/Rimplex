@@ -1,4 +1,4 @@
-package calculation;
+package rimplex.calculation;
 
 /**
  * Complex number.

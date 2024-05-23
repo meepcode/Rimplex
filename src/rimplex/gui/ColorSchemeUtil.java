@@ -1,7 +1,6 @@
-package gui;
+package rimplex.gui;
 
 import java.awt.*;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Scanner;
@@ -14,7 +13,7 @@ import java.util.Scanner;
  */
 public class ColorSchemeUtil
 {
-  public static String TEXT = "/gui/colorScheme.txt";
+  public static String TEXT = "/rimplex/rimplex.gui/colorScheme.txt";
   
   static InputStream file = ColorSchemeUtil.class.getResourceAsStream(TEXT);
 

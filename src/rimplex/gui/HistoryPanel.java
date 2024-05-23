@@ -1,19 +1,15 @@
-package gui;
+package rimplex.gui;
 
-import javax.swing.BorderFactory;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 
 //import javax.swing.JComponent;
 
 import javax.swing.JEditorPane;
 import javax.swing.JFrame;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextPane;
 import javax.swing.JWindow;
 import javax.swing.Timer;
-import javax.swing.border.Border;
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultHighlighter;
 import javax.swing.text.DefaultStyledDocument;
@@ -226,7 +222,7 @@ public class HistoryPanel extends JFrame
   /**
    * Get History panel.
    *
-   * @return main panel.
+   * @return rimplex.main panel.
    */
   public JWindow getWindow() // changed to window
   {
