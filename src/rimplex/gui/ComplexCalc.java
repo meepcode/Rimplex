@@ -274,14 +274,6 @@ public class ComplexCalc extends JFrame
    * @param args
    *     cmd line args
    */
-  public static void main(String[] args) {
-    Settings settings = Settings.getInstance();
-      try {
-          ComplexCalc calc = new ComplexCalc(settings);
-      } catch (FileNotFoundException e) {
-          throw new RuntimeException(e);
-      }
-  }
 
   /**
    * Sets boolean click.
